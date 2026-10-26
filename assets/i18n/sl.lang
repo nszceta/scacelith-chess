@@ -1098,6 +1098,8 @@ coach.note.fallible = Trener ni nezmotljiv: včasih lahko kakšno potezo napačn
 coach.colour = Vaša barva
 coach.colour.help = Barva, s katero igrate proti trenerju. Izmenično: od partije do partije najprej z belimi, nato s črnimi. Lekcija o pravilih se vedno igra z belimi.
 coach.colour.alternate = Izmenično
+coach.take_time = Opomnik »Vzemite si čas«
+coach.take_time.help = Po minuti razmišljanja vam trener reče, da se vam ne mudi. Samo na ravneh od 1 do 3.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Trenerjev glas ni nameščen ali je izklopljen (Možnosti > Zvok): njegove besede bodo izpisane na zaslonu.
 # At the table

@@ -1082,6 +1082,8 @@ coach.note.fallible = De coach is niet onfeilbaar: hij kan een zet soms verkeerd
 coach.colour = Jouw kleur
 coach.colour.help = De kleur waarmee je tegen de coach speelt. Afwisselend: wit, daarna zwart, van partij tot partij. De les over de regels speel je altijd met wit.
 coach.colour.alternate = Afwisselend
+coach.take_time = Herinnering ‘Neem je tijd’
+coach.take_time.help = Na een minuut nadenken zegt de coach dat je geen haast hebt. Alleen niveau 1 tot 3.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = De stem van de coach is niet geïnstalleerd of staat uit (Opties > Audio): wat hij zegt, verschijnt op het scherm.
 # At the table

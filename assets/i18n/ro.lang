@@ -1092,6 +1092,8 @@ coach.note.fallible = Antrenorul nu este infailibil: uneori poate judeca greșit
 coach.colour = Culoarea dvs.
 coach.colour.help = Culoarea cu care jucați împotriva antrenorului. Pe rând: cu albele, apoi cu negrele, de la o partidă la alta. Lecția despre reguli se joacă întotdeauna cu albele.
 coach.colour.alternate = Pe rând
+coach.take_time = Mesajul „Nu vă grăbiți”
+coach.take_time.help = După un minut de gândire, antrenorul vă spune că nu vă grăbește nimeni. Doar la nivelurile 1–3.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Vocea antrenorului nu este instalată sau este dezactivată (Opțiuni > Audio): cuvintele lui vor fi scrise pe ecran.
 # At the table

@@ -247,6 +247,7 @@ struct CoachSetup {
     int colour = 2;              // the player's colour: 0 White, 1 Black, 2 alternate (the rules
                                  // lesson is always played with White: Settings::coachPlayerColour)
     std::string challenge;       // the challenge selected (coach::Challenge::id)
+    bool takeYourTime = true;    // the coach's "Take your time." reminder (levels 1-3)
     // Set by the game before mainMenu(): false when the coach's voice files (tts::modelFolder(),
     // <application data>/coach/) are missing or failed to load. The page then says in one line that
     // the coach will speak through subtitles only.

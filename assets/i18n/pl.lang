@@ -1095,6 +1095,8 @@ coach.note.fallible = Trener nie jest nieomylny: czasem może źle ocenić ruch.
 coach.colour = Twój kolor
 coach.colour.help = Kolor, którym grasz przeciwko trenerowi. Na zmianę: białe, potem czarne, w kolejnych partiach. Lekcję zasad zawsze gra się białymi.
 coach.colour.alternate = Na zmianę
+coach.take_time = Przypomnienie „Nie spiesz się”
+coach.take_time.help = Po minucie namysłu trener mówi, że nie ma pośpiechu. Tylko poziomy od 1 do 3.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Głos trenera nie jest zainstalowany lub jest wyłączony (Opcje > Dźwięk): jego słowa będą wyświetlane na ekranie.
 # At the table

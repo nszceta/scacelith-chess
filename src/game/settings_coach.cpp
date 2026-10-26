@@ -80,6 +80,7 @@ void readCoachSettings(const IniFile& ini, Settings& s) {
     s.coachRulesDone = ini.getBool("coach.rules_done", s.coachRulesDone);
     if (ini.has("coach.history")) s.coachHistory = decodeCoachHistory(ini.getString("coach.history"));
     s.coachAccuracyExplained = ini.getBool("coach.accuracy_explained", s.coachAccuracyExplained);
+    s.coachTakeYourTime = ini.getBool("coach.take_your_time", s.coachTakeYourTime);
     s.coachLessonChapter = std::max(0, ini.getInt("coach.lesson_chapter", s.coachLessonChapter));
     s.coachTab = std::clamp(ini.getInt("coach.tab", s.coachTab), 0, 1);
     s.coachChallenge = ini.getString("coach.challenge", s.coachChallenge);
@@ -104,6 +105,7 @@ void writeCoachSettings(IniFile& ini, const Settings& s) {
     ini.setBool("coach.rules_done", s.coachRulesDone);
     ini.set("coach.history", encodeCoachHistory(s.coachHistory));
     ini.setBool("coach.accuracy_explained", s.coachAccuracyExplained);
+    ini.setBool("coach.take_your_time", s.coachTakeYourTime);
     ini.setInt("coach.lesson_chapter", s.coachLessonChapter);
     ini.setInt("coach.tab", s.coachTab);
     ini.set("coach.challenge", s.coachChallenge);

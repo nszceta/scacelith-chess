@@ -740,6 +740,7 @@ void GameScene::startCoachGame() {
     c.offersEnabled = true;
     for (const Settings::CoachGame& g : s.coachHistory) c.history.push_back({g.level, g.result, g.accuracy});
     c.accuracyExplained = s.coachAccuracyExplained;
+    c.takeYourTime = s.coachTakeYourTime;
     c.lessonChapter = s.coachLessonChapter;
     rt.stage->ensureWorker();
     // Every glyph the coach's lines can show in this language, once (subtitles never wait).

@@ -1087,6 +1087,8 @@ coach.note.fallible = Treneris nėra neklystantis: kartais jis gali klaidingai �
 coach.colour = Jūsų spalva
 coach.colour.help = Kokiomis figūromis žaidžiate prieš trenerį. Pakaitomis: vieną partiją baltosiomis, kitą – juodosiomis. Pamoka apie taisykles visada žaidžiama baltosiomis.
 coach.colour.alternate = Pakaitomis
+coach.take_time = Priminimas „Neskubėkite“
+coach.take_time.help = Po minutės mąstymo treneris pasako, kad skubėti nereikia. Tik 1–3 lygiuose.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Trenerio balsas neįdiegtas arba išjungtas (Nustatymai > Garsas): jo žodžiai bus rodomi ekrane.
 # At the table

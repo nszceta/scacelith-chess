@@ -1069,6 +1069,8 @@ coach.note.fallible = コーチも完璧ではありません：手の評価を�
 coach.colour = あなたの色
 coach.colour.help = コーチと対局するときの色。交互：対局ごとに白と黒が入れ替わります。ルールのレッスンは常に白番です。
 coach.colour.alternate = 交互
+coach.take_time = 「ゆっくり考えて」の声かけ
+coach.take_time.help = 1分間考えると、コーチが急がなくてよいと声をかけます。レベル1〜3のみ。
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = コーチの音声がインストールされていないか、オフになっています（設定 > サウンド）。コーチの言葉は画面に表示されます。
 # At the table

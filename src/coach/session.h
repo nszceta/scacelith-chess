@@ -30,6 +30,7 @@ struct SessionConfig {
     DirectorConfig director;
     bool introduceLevel = false;          // first game at this level (or the level changed)
     bool offersEnabled = true;            // takeback offers after blunders
+    bool takeYourTime = true;             // "Take your time." after a minute without a move (levels 1-3)
     std::vector<GameRecord> history;      // earlier coach games, oldest first (suggestLevel)
     bool accuracyExplained = false;       // the appraisal has already explained what accuracy is
     int lessonChapter = 0;                // level 0: resume at this chapter (0 = from the start)

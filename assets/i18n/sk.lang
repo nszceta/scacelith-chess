@@ -1109,6 +1109,8 @@ coach.note.fallible = Tréner nie je neomylný: niekedy môže ťah posúdiť ne
 coach.colour = Vaša farba
 coach.colour.help = Farba, ktorou hráte proti trénerovi. Striedavo: z partie na partiu raz biele, raz čierne figúry. Lekciu o pravidlách hráte vždy bielymi.
 coach.colour.alternate = Striedavo
+coach.take_time = Pripomienka „Neponáhľajte sa“
+coach.take_time.help = Po minúte premýšľania vám tréner povie, že sa nemusíte ponáhľať. Len pre úrovne 1 až 3.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Hlas trénera nie je nainštalovaný alebo je vypnutý (Možnosti > Zvuk): jeho slová sa vypíšu na obrazovke.
 # At the table

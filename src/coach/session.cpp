@@ -617,7 +617,7 @@ struct Session::Impl {
         // Turn-taking lines.
         if (!g.over && humanTurn && g.turnPly == int(n)) {
             g.turnTime += dt;
-            if (g.level <= 3 && !g.tookTime && g.turnTime >= kTakeYourTime && director.idle()) {
+            if (g.level <= 3 && config.takeYourTime && !g.tookTime && g.turnTime >= kTakeYourTime && director.idle()) {
                 play(takeYourTimeScript(int(n) - 1));
                 g.tookTime = true;
             }

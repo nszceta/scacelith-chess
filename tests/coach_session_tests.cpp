@@ -504,6 +504,22 @@ TEST(coach_session_openings_and_turn_taking) {
     checkRenders(u.lines);
 }
 
+// The Coach page's switch: no "Take your time." when it is off.
+TEST(coach_session_take_your_time_switched_off) {
+    Table t;
+    SessionConfig c = levelConfig(1);
+    c.takeYourTime = false;
+    t.start(c);
+    CHECK(t.quiet());
+    CHECK(t.until([&] { return t.session.playerMayMove(t.game); }, 10.0f));
+    t.move("e2e4");
+    CHECK(t.reply("e7e5"));
+    CHECK(t.quiet());
+    t.run(61.0f);
+    CHECK(t.quiet());
+    CHECK(!t.said("event.take_time"));
+}
+
 TEST(coach_session_background_evaluations) {
     // A review without its analysis leaves the evaluation after the move unknown: the appraisal's
     // evaluation is asked in the background, when the analyst is idle, at a low priority.

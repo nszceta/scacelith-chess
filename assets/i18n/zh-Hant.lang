@@ -1068,6 +1068,8 @@ coach.note.fallible = 教練並非萬無一失：有時也會誤判一步棋。
 coach.colour = 你的顏色
 coach.colour.help = 你與教練對局時所執的顏色。輪流：每局交替執白、執黑。規則課程一律執白。
 coach.colour.alternate = 輪流
+coach.take_time = 「慢慢想」提醒
+coach.take_time.help = 思考一分鐘後，教練會告訴你不必著急。僅限 1 至 3 級。
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = 教練語音未安裝或已關閉（選項 > 聲音）：教練的話將以文字顯示在畫面上。
 # At the table

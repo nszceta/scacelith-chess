@@ -160,6 +160,8 @@ struct Settings {
     std::vector<CoachGame> coachHistory;
     bool coachAccuracyExplained = false;
     int coachLessonChapter = 0;
+    // The coach's "Take your time." after a minute without a move (levels 1-3): the Coach page's switch.
+    bool coachTakeYourTime = true;
     // The Coach page's tab (0 Training, 1 Challenges) and the challenge last chosen on it
     // (coach::Challenge::id, "" = none yet), stored when the player presses Start.
     int coachTab = 0;

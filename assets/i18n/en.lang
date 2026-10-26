@@ -1083,6 +1083,8 @@ coach.note.fallible = The coach is not infallible: it may sometimes misjudge a m
 coach.colour = Your colour
 coach.colour.help = The colour you play against the coach. Alternate: White, then Black, from one game to the next. The lesson on the rules is always played with White.
 coach.colour.alternate = Alternate
+coach.take_time = "Take your time" reminder
+coach.take_time.help = After a minute of thinking, the coach says there is no hurry. Levels 1 to 3 only.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = The coach's voice is not installed or is switched off (Options > Audio): its words will be written on screen.
 # At the table

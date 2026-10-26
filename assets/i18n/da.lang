@@ -1081,6 +1081,8 @@ coach.note.fallible = Træneren er ikke ufejlbarlig: han kan af og til bedømme 
 coach.colour = Din farve
 coach.colour.help = Den farve, du spiller med mod træneren. Skiftevis: hvid og derefter sort, fra det ene parti til det næste. Lektionen om reglerne spilles altid med hvid.
 coach.colour.alternate = Skiftevis
+coach.take_time = Påmindelsen „Tag dig god tid“
+coach.take_time.help = Efter et minuts betænkningstid siger træneren, at der ikke er nogen hast. Kun niveau 1 til 3.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Trænerens stemme er ikke installeret eller er slået fra (Indstillinger > Lyd): hans ord bliver skrevet på skærmen.
 # At the table

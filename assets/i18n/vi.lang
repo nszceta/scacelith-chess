@@ -1082,6 +1082,8 @@ coach.note.fallible = Huấn luyện viên không phải lúc nào cũng đúng:
 coach.colour = Màu quân của bạn
 coach.colour.help = Màu quân bạn chơi khi đấu với huấn luyện viên. Luân phiên: Trắng, rồi Đen, từ ván này sang ván sau. Bài học về luật cờ luôn được chơi bên Trắng.
 coach.colour.alternate = Luân phiên
+coach.take_time = Nhắc "Cứ từ từ"
+coach.take_time.help = Sau một phút suy nghĩ, huấn luyện viên sẽ nói rằng bạn không cần vội. Chỉ áp dụng cho cấp độ 1 đến 3.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Giọng nói của huấn luyện viên chưa được cài đặt hoặc đang tắt (Tùy chọn > Âm thanh): lời của huấn luyện viên sẽ được hiển thị trên màn hình.
 # At the table

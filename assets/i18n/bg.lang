@@ -1089,6 +1089,8 @@ coach.note.fallible = Треньорът не е непогрешим: поня�
 coach.colour = Вашият цвят
 coach.colour.help = Цветът, с който играете срещу треньора. Редуване: с белите, после с черните, от партия на партия. Урокът по правилата винаги се играе с белите.
 coach.colour.alternate = Редуване
+coach.take_time = Напомняне „Не бързайте“
+coach.take_time.help = След минута размисъл треньорът ви казва, че няма за къде да бързате. Само за нива от 1 до 3.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Гласът на треньора не е инсталиран или е изключен (Настройки > Звук): думите му ще се изписват на екрана.
 # At the table

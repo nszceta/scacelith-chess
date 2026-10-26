@@ -68,6 +68,7 @@ void loadCoach(CoachSetup& c) {
     c.level = std::clamp(g.coachLevel, 0, std::max(0, levelCount() - 1));
     c.colour = std::clamp(g.coachColour, 0, 2);
     c.challenge = g.coachChallenge;
+    c.takeYourTime = g.coachTakeYourTime;
 }
 void storeCoach(const CoachSetup& c) {
     game::Settings& g = game::settings();
@@ -75,6 +76,7 @@ void storeCoach(const CoachSetup& c) {
     g.coachLevel = c.level;
     g.coachColour = c.colour;
     g.coachChallenge = c.challenge;
+    g.coachTakeYourTime = c.takeYourTime;
     g.save();
 }
 
@@ -353,6 +355,16 @@ void trainingTab(CoachSetup& setup, float lx, float rx, float colW, float top) {
     y += note(T("coach.note.unrated"), rcol, rx, y, colW, ivoryDim);
     // The coach judges the player's moves in games (the lesson has none): it can misjudge one.
     if (!lessonNow) y += note(T("coach.note.fallible"), rcol, rx, y, colW, ivoryDim);
+    // The "Take your time." reminder: said at levels 1-3 only.
+    {
+        const bool reminds = setup.level >= 1 && setup.level <= 3;
+        int on = setup.takeYourTime ? 1 : 0;
+        if (im::selectorRow(L("coach.take_time"), on, {T("common.off"), T("common.on")}, Rect(rx, y, colW, 50.0f), reminds) &&
+            reminds)
+            setup.takeYourTime = on == 1;
+        im::tooltip(T("coach.take_time.help"));
+        y += 50.0f + 14.0f;
+    }
     y += 12.0f;
     // Colour: White in the lesson; else White, Black or alternating (the next colour is shown).
     {

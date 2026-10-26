@@ -1069,6 +1069,8 @@ coach.note.fallible = Тренер не безупречен: иногда он 
 coach.colour = Ваш цвет
 coach.colour.help = Цвет, которым вы играете против тренера. Поочерёдно: белые и чёрные сменяются от партии к партии. Урок о правилах всегда играется белыми.
 coach.colour.alternate = Поочерёдно
+coach.take_time = Напоминание «Не спешите»
+coach.take_time.help = После минуты раздумий тренер скажет, что спешить некуда. Только на уровнях 1–3.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Голос тренера не установлен или выключен (Настройки > Звук): его слова будут показаны на экране.
 # At the table

@@ -1087,6 +1087,8 @@ coach.note.fallible = Ο προπονητής δεν είναι αλάνθαστ
 coach.colour = Το χρώμα σας
 coach.colour.help = Το χρώμα με το οποίο παίζετε απέναντι στον προπονητή. Εναλλάξ: λευκά, μετά μαύρα, από παρτίδα σε παρτίδα. Το μάθημα των κανόνων παίζεται πάντα με τα λευκά.
 coach.colour.alternate = Εναλλάξ
+coach.take_time = Υπενθύμιση «Μη βιάζεστε»
+coach.take_time.help = Μετά από ένα λεπτό σκέψης, ο προπονητής σάς λέει ότι δεν υπάρχει βιασύνη. Μόνο για τα επίπεδα 1 έως 3.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Η φωνή του προπονητή δεν είναι εγκατεστημένη ή είναι απενεργοποιημένη (Επιλογές > Ήχος): τα λόγια του θα εμφανίζονται γραμμένα στην οθόνη.
 # At the table

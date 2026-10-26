@@ -1082,6 +1082,8 @@ coach.note.fallible = Pelatih tidak selalu benar: terkadang ia bisa salah menila
 coach.colour = Warna Anda
 coach.colour.help = Warna yang Anda mainkan melawan pelatih. Bergantian: Putih, lalu Hitam, dari satu permainan ke permainan berikutnya. Pelajaran tentang aturan selalu dimainkan dengan Putih.
 coach.colour.alternate = Bergantian
+coach.take_time = Pengingat "Santai saja"
+coach.take_time.help = Setelah satu menit berpikir, pelatih mengatakan bahwa Anda tidak perlu terburu-buru. Hanya tingkat 1 sampai 3.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Suara pelatih belum terpasang atau dinonaktifkan (Opsi > Audio): ucapannya akan ditulis di layar.
 # At the table

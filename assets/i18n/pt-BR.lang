@@ -1086,6 +1086,8 @@ coach.note.fallible = O treinador não é infalível: às vezes ele pode avaliar
 coach.colour = Sua cor
 coach.colour.help = A cor com que você joga contra o treinador. Alternada: Brancas e depois Pretas, de uma partida para a outra. A lição sobre as regras é sempre jogada com as Brancas.
 coach.colour.alternate = Alternada
+coach.take_time = Lembrete “Sem pressa”
+coach.take_time.help = Depois de um minuto pensando, o treinador diz que não há pressa. Só nos níveis 1 a 3.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = A voz do treinador não está instalada ou está desativada (Opções > Áudio): as falas dele vão aparecer escritas na tela.
 # At the table

@@ -1068,6 +1068,8 @@ coach.note.fallible = Der Trainer ist nicht unfehlbar: Er kann einen Zug manchma
 coach.colour = Ihre Farbe
 coach.colour.help = Die Farbe, mit der Sie gegen den Trainer spielen. Abwechselnd: erst Weiß, dann Schwarz, von Partie zu Partie. Die Lektion über die Regeln wird immer mit Weiß gespielt.
 coach.colour.alternate = Abwechselnd
+coach.take_time = Hinweis „Lassen Sie sich Zeit“
+coach.take_time.help = Nach einer Minute Bedenkzeit sagt der Trainer, dass es keine Eile hat. Nur Stufen 1 bis 3.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Die Stimme des Trainers ist nicht installiert oder ausgeschaltet (Optionen > Ton): Seine Worte werden auf dem Bildschirm angezeigt.
 # At the table

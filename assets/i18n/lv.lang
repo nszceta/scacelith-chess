@@ -1098,6 +1098,8 @@ coach.note.fallible = Treneris nav nekļūdīgs: reizēm viņš var nepareizi no
 coach.colour = Jūsu krāsa
 coach.colour.help = Krāsa, ar kuru spēlējat pret treneri. Pārmaiņus: vienā partijā ar baltajiem, nākamajā ar melnajiem. Nodarbību par noteikumiem vienmēr spēlē ar baltajiem.
 coach.colour.alternate = Pārmaiņus
+coach.take_time = Atgādinājums “Nesteidzieties”
+coach.take_time.help = Pēc minūtes domāšanas treneris saka, ka nav jāsteidzas. Tikai 1.–3. līmenī.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Trenera balss nav instalēta vai ir izslēgta (Opcijas > Skaņa): viņa vārdi tiks rakstīti ekrānā.
 # At the table

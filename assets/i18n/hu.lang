@@ -1089,6 +1089,8 @@ coach.note.fallible = Az edző nem tévedhetetlen: néha rosszul ítélhet meg e
 coach.colour = Az Ön színe
 coach.colour.help = A szín, amellyel az edző ellen játszik. Váltakozó: játszmáról játszmára világos, majd sötét. A szabályokról szóló leckét mindig világossal játssza.
 coach.colour.alternate = Váltakozó
+coach.take_time = „Nyugodtan gondolkodjon” emlékeztető
+coach.take_time.help = Egy perc gondolkodás után az edző jelzi, hogy nem kell sietni. Csak az 1–3. szinten.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Az edző hangja nincs telepítve vagy ki van kapcsolva (Beállítások > Hang): a szavai a képernyőn jelennek meg.
 # At the table

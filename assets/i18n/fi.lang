@@ -1082,6 +1082,8 @@ coach.note.fallible = Valmentaja ei ole erehtymätön, vaan saattaa joskus arvio
 coach.colour = Värisi
 coach.colour.help = Väri, jolla pelaat valmentajaa vastaan. Vuorotellen: ensin valkeilla, sitten mustilla, pelistä toiseen. Sääntöjen oppitunti pelataan aina valkeilla.
 coach.colour.alternate = Vuorotellen
+coach.take_time = Muistutus ”Ei kiirettä”
+coach.take_time.help = Kun olet miettinyt minuutin, valmentaja sanoo, ettei ole kiire. Vain tasoilla 1–3.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Valmentajan ääntä ei ole asennettu tai se on pois päältä (Asetukset > Ääni): valmentajan sanat näytetään tekstinä näytöllä.
 # At the table

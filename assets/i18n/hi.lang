@@ -1092,6 +1092,8 @@ coach.note.fallible = कोच अचूक नहीं है: कभी-क�
 coach.colour = आपका रंग
 coach.colour.help = कोच के ख़िलाफ़ आपके मोहरों का रंग। बारी-बारी: एक बाज़ी में सफ़ेद, अगली में काला। नियमों का पाठ हमेशा सफ़ेद मोहरों से खेला जाता है।
 coach.colour.alternate = बारी-बारी
+coach.take_time = "आराम से सोचिए" याद दिलाना
+coach.take_time.help = एक मिनट सोचने के बाद कोच कहता है कि कोई जल्दी नहीं है। केवल स्तर 1 से 3 तक।
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = कोच की आवाज़ इंस्टॉल नहीं है या बंद है (विकल्प > ऑडियो): उसकी बातें स्क्रीन पर लिखी जाएँगी।
 # At the table

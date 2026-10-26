@@ -1082,6 +1082,8 @@ coach.note.fallible = Tränaren är inte ofelbar: han kan ibland bedöma ett dra
 coach.colour = Din färg
 coach.colour.help = Färgen du spelar med mot tränaren. Växla: vit, sedan svart, från parti till parti. Lektionen om reglerna spelas alltid med vit.
 coach.colour.alternate = Växla
+coach.take_time = Påminnelsen ”Ta god tid”
+coach.take_time.help = Efter en minuts betänketid säger tränaren att det inte är bråttom. Endast nivå 1 till 3.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Tränarens röst är inte installerad eller är avstängd (Inställningar > Ljud): hans ord skrivs ut på skärmen.
 # At the table

@@ -1093,6 +1093,8 @@ coach.note.fallible = Eğitmen yanılmaz değildir: bazen bir hamleyi yanlış d
 coach.colour = Renginiz
 coach.colour.help = Eğitmene karşı oynadığınız renk. Sırayla: bir oyunda beyaz, sonrakinde siyah. Kurallar dersi her zaman beyaz taşlarla oynanır.
 coach.colour.alternate = Sırayla
+coach.take_time = "Acele etmeyin" hatırlatması
+coach.take_time.help = Bir dakika düşündükten sonra eğitmen acele etmenize gerek olmadığını söyler. Yalnızca 1–3. seviyeler.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Eğitmenin sesi yüklü değil ya da kapalı (Seçenekler > Ses): sözleri ekranda yazılacak.
 # At the table

@@ -1091,6 +1091,8 @@ coach.note.fallible = 코치도 완벽하지 않습니다. 가끔 수를 잘못 
 coach.colour = 내 색
 coach.colour.help = 코치를 상대로 둘 색입니다. 번갈아: 백으로 시작해 게임마다 백과 흑을 번갈아 둡니다. 규칙 레슨은 항상 백으로 둡니다.
 coach.colour.alternate = 번갈아
+coach.take_time = "천천히 생각하세요" 알림
+coach.take_time.help = 1분 동안 생각하면 코치가 서두를 필요 없다고 말해 줍니다. 레벨 1~3에서만 적용됩니다.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = 코치 음성이 설치되지 않았거나 꺼져 있습니다(설정 > 오디오). 코치의 말은 화면에 글로 표시됩니다.
 # At the table

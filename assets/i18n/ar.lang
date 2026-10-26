@@ -1073,6 +1073,8 @@ coach.note.fallible = المدرّب ليس معصومًا من الخطأ: قد
 coach.colour = لونك
 coach.colour.help = اللون الذي تلعب به ضد المدرّب. بالتناوب: الأبيض ثم الأسود من مباراة إلى أخرى. يُلعب درس القواعد دائمًا بالقطع البيضاء.
 coach.colour.alternate = بالتناوب
+coach.take_time = تذكير «خذ وقتك»
+coach.take_time.help = بعد دقيقة من التفكير، يقول لك المدرّب إنه لا داعي للعجلة. للمستويات من 1 إلى 3 فقط.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = صوت المدرّب غير مثبّت أو متوقف (الخيارات > الصوت): ستظهر كلماته مكتوبةً على الشاشة.
 # At the table
