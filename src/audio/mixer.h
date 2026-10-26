@@ -1,10 +1,10 @@
 // Real-time mixer: 32 voices playing bank variants with per-trigger randomisation, 2 speech voices
 // streaming caller-supplied PCM (their own pool: never stolen), 3D spatialisation, four buses
 // (effects, UI, ambience, voice; UI currently shares the effects volume), ambience ducking under
-// speech, hall reverb, master volume, DC blocker and a look-ahead peak limiter. Single-threaded
-// object: every method is called from the thread that renders (the device thread live, the
-// caller's thread offline). No allocation in process(), nor in the speech methods (chunks arrive
-// allocated and leave through the retired list).
+// speech, hall reverb (derived from the hall's acoustics, reverb.h), master volume, DC blocker and a
+// look-ahead peak limiter. Single-threaded object: every method is called from the thread that
+// renders (the device thread live, the caller's thread offline). No allocation in process(), nor in
+// the speech methods (chunks arrive allocated and leave through the retired list).
 #pragma once
 #include "ambience.h"
 #include "audio.h"
@@ -43,7 +43,7 @@ struct SpeechParams {
     m::vec3 facing{0.0f, 0.0f, 0.0f};  // unit talker forward, zero = omnidirectional
     float srcRate = 44100.0f;
     float gain = 1.0f;
-    float send = 0.13f;                // hall send relative to the direct gain
+    float q = kTalkerQ;                // directivity factor in the hall (0 = not in the hall)
     float duckGain = 0.5f;             // ambience gain while this voice sounds
     bool spatial = true;
 };
@@ -139,6 +139,7 @@ private:
     void renderVoice(Voice& v, int n, float busGain);
     void releaseVoice(Voice& v);
     void renderSpeech(Speech& s, int n);
+    void updateHall();
     float speechSample(Speech& s, double step);
     void advanceChunk(Speech& s);
     void endSpeech(Speech& s, VoiceState st);
@@ -174,7 +175,10 @@ private:
     Ambience ambience_;
     Limiter limiter_;
     dsp::DcBlock dcL_, dcR_;
-    float L_[kMaxBlock], R_[kMaxBlock], room_[kMaxBlock];
+    // Hall sends of the block: early reflections and late field, of the effects bank (voices,
+    // ambience) and of the speech bank (talkers).
+    float L_[kMaxBlock], R_[kMaxBlock];
+    float erFx_[kMaxBlock], lateFx_[kMaxBlock], erSp_[kMaxBlock], lateSp_[kMaxBlock];
 };
 
 }  // namespace audio

@@ -15,7 +15,7 @@ public:
     struct Event { m::vec3 pos; float gain, pitch; };
 
     void prepare(float sampleRate, uint32_t seed);
-    // Adds the ambience (scaled by 'gain') into L/R and its hall send into 'room'.
+    // Adds the ambience (scaled by 'gain') into L/R and its designed late-field send into 'room'.
     void process(float* L, float* R, float* room, int n, const Basis& lis, float gain);
     // True once when a distant creak should be triggered by the mixer.
     bool popCreak(Event& e);

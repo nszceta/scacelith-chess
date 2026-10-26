@@ -812,27 +812,31 @@ std::vector<float> pageFlap(Rng& r) {
 }  // namespace
 
 const SfxInfo& sfxInfo(Sfx s) {
-    //                      name            level(dB)         send   pitchJ  lvlJ  ui
+    // Hall: q = directivity factor of the source (physical hall send, room.h): 2 for what lies on or
+    // strikes the table or floor (a half space), 1 for free-standing sources (robot hands and servos,
+    // chairs, paper in the air). q = 0: not in the hall (non-diegetic UI tones and the singing bowls),
+    // with their designed late-field send 'uiSend' instead.
+    //                      name            level(dB)         q     uiSend pitchJ  lvlJ  ui
     static const SfxInfo table[int(Sfx::Count)] = {
-        {"piece_pickup", dbToGain(-19.0f), 0.25f, 0.03f, 1.5f, false},
-        {"piece_place", dbToGain(-9.0f), 0.22f, 0.03f, 1.5f, false},
-        {"capture", dbToGain(-9.5f), 0.22f, 0.03f, 1.5f, false},
-        {"clock_press", dbToGain(-11.0f), 0.22f, 0.03f, 1.5f, false},
-        {"handshake", dbToGain(-13.0f), 0.22f, 0.03f, 1.5f, false},
-        {"servo_short", dbToGain(-30.0f), 0.2f, 0.03f, 2.0f, false},
-        {"chair_creak", dbToGain(-19.0f), 0.3f, 0.03f, 2.0f, false},
-        {"ui_hover", dbToGain(-33.0f), 0.0f, 0.02f, 1.0f, true},
-        {"ui_click", dbToGain(-25.0f), 0.0f, 0.02f, 1.0f, true},
-        {"game_start", dbToGain(-22.0f), 0.35f, 0.004f, 0.5f, true},
-        {"game_end", dbToGain(-21.0f), 0.4f, 0.004f, 0.5f, true},
-        {"capture_click", dbToGain(-10.0f), 0.22f, 0.03f, 1.5f, false},
-        {"table_place", dbToGain(-10.0f), 0.22f, 0.03f, 1.5f, false},
-        {"pen_write", dbToGain(-24.0f), 0.18f, 0.04f, 1.5f, false},
-        {"pen_tap", dbToGain(-30.0f), 0.18f, 0.05f, 2.0f, false},
-        {"page_turn", dbToGain(-20.0f), 0.25f, 0.04f, 1.5f, false},
-        {"page_flap", dbToGain(-19.0f), 0.25f, 0.04f, 1.5f, false},
-        {"footstep", dbToGain(-21.0f), 0.3f, 0.05f, 2.0f, false},
-        {"chair_slide", dbToGain(-21.0f), 0.3f, 0.04f, 1.5f, false},
+        {"piece_pickup", dbToGain(-19.0f), 2.0f, 0.0f, 0.03f, 1.5f, false},
+        {"piece_place", dbToGain(-9.0f), 2.0f, 0.0f, 0.03f, 1.5f, false},
+        {"capture", dbToGain(-9.5f), 2.0f, 0.0f, 0.03f, 1.5f, false},
+        {"clock_press", dbToGain(-11.0f), 2.0f, 0.0f, 0.03f, 1.5f, false},
+        {"handshake", dbToGain(-13.0f), 1.0f, 0.0f, 0.03f, 1.5f, false},
+        {"servo_short", dbToGain(-30.0f), 1.0f, 0.0f, 0.03f, 2.0f, false},
+        {"chair_creak", dbToGain(-19.0f), 1.0f, 0.0f, 0.03f, 2.0f, false},
+        {"ui_hover", dbToGain(-33.0f), 0.0f, 0.0f, 0.02f, 1.0f, true},
+        {"ui_click", dbToGain(-25.0f), 0.0f, 0.0f, 0.02f, 1.0f, true},
+        {"game_start", dbToGain(-22.0f), 0.0f, 0.35f, 0.004f, 0.5f, true},
+        {"game_end", dbToGain(-21.0f), 0.0f, 0.40f, 0.004f, 0.5f, true},
+        {"capture_click", dbToGain(-10.0f), 2.0f, 0.0f, 0.03f, 1.5f, false},
+        {"table_place", dbToGain(-10.0f), 2.0f, 0.0f, 0.03f, 1.5f, false},
+        {"pen_write", dbToGain(-24.0f), 2.0f, 0.0f, 0.04f, 1.5f, false},
+        {"pen_tap", dbToGain(-30.0f), 2.0f, 0.0f, 0.05f, 2.0f, false},
+        {"page_turn", dbToGain(-20.0f), 2.0f, 0.0f, 0.04f, 1.5f, false},
+        {"page_flap", dbToGain(-19.0f), 1.0f, 0.0f, 0.04f, 1.5f, false},
+        {"footstep", dbToGain(-21.0f), 2.0f, 0.0f, 0.05f, 2.0f, false},
+        {"chair_slide", dbToGain(-21.0f), 2.0f, 0.0f, 0.04f, 1.5f, false},
     };
     int i = int(s);
     if (i < 0 || i >= int(Sfx::Count)) i = 0;

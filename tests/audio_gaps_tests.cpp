@@ -74,7 +74,7 @@ TEST(audio_gaps_listener_pen_strokes_and_voice_parameters) {
     CHECK(refused([](audio::VoiceParams& p) { p.position = m::vec3(0, NAN, 0); }));
     CHECK(refused([](audio::VoiceParams& p) { p.facing = m::vec3(0, 0, INFINITY); }));
     CHECK(refused([](audio::VoiceParams& p) { p.gain = NAN; }));
-    CHECK(refused([](audio::VoiceParams& p) { p.roomSend = INFINITY; }));
+    CHECK(refused([](audio::VoiceParams& p) { p.q = INFINITY; }));
     CHECK(refused([](audio::VoiceParams& p) { p.duckDb = -INFINITY; }));
     CHECK_EQ(audio::stats().activeSpeech, 0);
     if (audio::stats().running) {

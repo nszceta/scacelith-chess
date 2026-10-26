@@ -14,6 +14,7 @@
 #include "audio/queue.h"
 #include "audio/reverb.h"
 #include "audio/synth.h"
+#include "game/layout.h"
 #include <atomic>
 #include <chrono>
 #include <cfloat>
@@ -342,62 +343,130 @@ TEST(audio_ambience_30s) {
     std::remove((dir + "/ambience_api_check.wav").c_str());
 }
 
-TEST(audio_reverb_rt60_and_predelay) {
-    audio::HallReverb rv;
-    rv.prepare(kFs);
-    const int n = int(5.0f * kFs);
-    std::vector<float> in(size_t(n), 0.0f), L(size_t(n), 0.0f), R(size_t(n), 0.0f);
-    in[0] = 1.0f;
-    rv.earlyGain = 0.0f;
-    rv.process(in.data(), L.data(), R.data(), n);
-    // Energy decay curve (Schroeder backward integration) on L+R.
-    auto rt60 = [&](const std::vector<float>& l, const std::vector<float>& r) {
-        std::vector<double> edc(size_t(n) + 1, 0.0);
-        for (int i = n - 1; i >= 0; --i) edc[size_t(i)] = edc[size_t(i) + 1] + double(l[size_t(i)]) * l[size_t(i)] + double(r[size_t(i)]) * r[size_t(i)];
-        double e0 = edc[0];
-        int i5 = -1, i35 = -1;
-        for (int i = 0; i < n; ++i) {
-            double d = 10.0 * std::log10(edc[size_t(i)] / e0 + 1e-30);
-            if (i5 < 0 && d <= -5.0) i5 = i;
-            if (i35 < 0 && d <= -35.0) { i35 = i; break; }
+// Reverberation time of one octave band of a stereo impulse response: Schroeder backward
+// integration of the (4th-order) band-passed left + right energy, T20 (-5 to -25 dB) extrapolated to 60 dB.
+float bandRt60(const std::vector<float>& l, const std::vector<float>& r, float fc) {
+    const size_t n = l.size();
+    // Two cascaded band-passes: the skirts of one would let the longer decays of the lower bands
+    // leak into the upper ones.
+    audio::dsp::Svf fl[2], fr[2];
+    for (int k = 0; k < 2; ++k) {
+        fl[k].set(fc, 1.41421356f, kFs);
+        fr[k].set(fc, 1.41421356f, kFs);
+    }
+    std::vector<double> edc(n + 1, 0.0);
+    std::vector<float> bl(n), br(n);
+    for (size_t i = 0; i < n; ++i) {
+        bl[i] = fl[1].bpNorm(fl[0].bpNorm(l[i]));
+        br[i] = fr[1].bpNorm(fr[0].bpNorm(r[i]));
+    }
+    for (size_t i = n; i-- > 0;) edc[i] = edc[i + 1] + double(bl[i]) * bl[i] + double(br[i]) * br[i];
+    int i5 = -1, i25 = -1;
+    for (size_t i = 0; i < n; ++i) {
+        const double d = 10.0 * std::log10(edc[i] / edc[0] + 1e-30);
+        if (i5 < 0 && d <= -5.0) i5 = int(i);
+        if (i25 < 0 && d <= -25.0) {
+            i25 = int(i);
+            break;
         }
-        if (i5 < 0 || i35 < 0) return 99.0f;
-        return float(i35 - i5) / kFs * 2.0f;  // 30 dB span -> 60 dB
-    };
-    double energy = 0.0;
+    }
+    if (i5 < 0 || i25 < 0) return 99.0f;
+    return float(i25 - i5) / kFs * 3.0f;
+}
+
+// The hall's late field: the reverberation time in every octave band is the room's (room.h), the
+// field starts at the first first-order wall reflection of the listener's seat, it is decorrelated
+// between the ears and finite.
+TEST(audio_hall_rt60_per_band_and_predelay) {
+    using namespace audio;
+    HallReverb rv;
+    rv.prepare(kFs);
+    const ListenerPose lis = whiteSeatListener();
+    rv.setListener(makeBasis(lis));
+    const int n = int(10.0f * kFs);
+    std::vector<float> in(size_t(n), 0.0f), zero(size_t(n), 0.0f), L(size_t(n), 0.0f), R(size_t(n), 0.0f);
+    in[0] = 1.0f;
+    const float* er[2] = {zero.data(), zero.data()};
+    const float* late[2] = {in.data(), zero.data()};
+    rv.process(er, late, L.data(), R.data(), n);
+    const RoomAcoustics& room = hallAcoustics();
+    std::fprintf(stderr, "  hall RT60 (rendered / room.h):");
+    float worst = 0.0f;
+    for (int b = 0; b < kRoomBands; ++b) {
+        const float t = bandRt60(L, R, kRoomBandHz[b]);
+        const float err = t / room.rt60[size_t(b)] - 1.0f;
+        std::fprintf(stderr, "  %.0f Hz %.2f/%.2f s (%+.0f %%)", kRoomBandHz[b], t, room.rt60[size_t(b)], 100.0f * err);
+        if (b >= 2 && b <= 5) worst = std::max(worst, std::fabs(err));  // 500 Hz .. 4 kHz: the asked bands (+ 2 kHz)
+        CHECK(std::fabs(err) < 0.25f);  // 125 Hz and 8 kHz: fitted like the rest, but an octave band of the impulse response is less clean there (the 8 kHz one is half above the rate-limited shape)
+    }
+    std::fprintf(stderr, "\n");
+    CHECK(worst < 0.15f);
+    // Pre-delay: the first first-order wall reflection of the effects bank's source (the board centre).
+    const m::vec3 src(0.0f, layout::BOARD_TOP_Y, 0.0f);
+    const ReflectionSet rs = earlyReflections(src, lis.pos);
+    float firstWall = -1.0f;
+    for (int i = 0; i < rs.count; ++i)
+        if (!rs.r[size_t(i)].table && rs.r[size_t(i)].order == 1) {
+            firstWall = rs.r[size_t(i)].delay;
+            break;
+        }
+    CHECK(firstWall > 0.0f);
+    CHECK(std::fabs(rv.lateDelay(HallReverb::Effects) - firstWall) < 1.5f / kFs);
     int onset = -1;
+    double energy = 0.0, lr2 = 0.0, l2 = 0.0, r2 = 0.0;
     for (int i = 0; i < n; ++i) {
         energy += double(L[size_t(i)]) * L[size_t(i)] + double(R[size_t(i)]) * R[size_t(i)];
         if (onset < 0 && (std::fabs(L[size_t(i)]) > 1e-4f || std::fabs(R[size_t(i)]) > 1e-4f)) onset = i;
+        if (i >= int(0.1f * kFs)) {
+            lr2 += double(L[size_t(i)]) * R[size_t(i)];
+            l2 += double(L[size_t(i)]) * L[size_t(i)];
+            r2 += double(R[size_t(i)]) * R[size_t(i)];
+        }
     }
-    float t60 = rt60(L, R);
-    // Band-split: high band (> 5 kHz) must decay faster than the low band (< 1 kHz).
-    std::vector<float> hl(L), hr(R), ll(L), lr(R);
-    audio::dsp::Svf f1, f2, f3, f4;
-    f1.set(5000, 0.7f, kFs); f2.set(5000, 0.7f, kFs); f3.set(1000, 0.7f, kFs); f4.set(1000, 0.7f, kFs);
-    for (int i = 0; i < n; ++i) {
-        hl[size_t(i)] = f1.hp(L[size_t(i)]);
-        hr[size_t(i)] = f2.hp(R[size_t(i)]);
-        ll[size_t(i)] = f3.lp(L[size_t(i)]);
-        lr[size_t(i)] = f4.lp(R[size_t(i)]);
-    }
-    float tHigh = rt60(hl, hr), tLow = rt60(ll, lr);
-    // Stereo decorrelation of the tail.
-    double lr2 = 0, l2 = 0, r2 = 0;
-    for (int i = int(0.1f * kFs); i < n; ++i) {
-        lr2 += double(L[size_t(i)]) * R[size_t(i)];
-        l2 += double(L[size_t(i)]) * L[size_t(i)];
-        r2 += double(R[size_t(i)]) * R[size_t(i)];
-    }
-    float corr = float(lr2 / std::sqrt(l2 * r2 + 1e-30));
-    std::fprintf(stderr, "  RT60 %.2f s (low %.2f s, high %.2f s), onset %.1f ms, IR energy %.3f, L/R corr %.2f\n", t60, tLow,
-                 tHigh, onset * 1000.0f / kFs, energy, corr);
-    CHECK(t60 > 2.0f && t60 < 2.7f);
-    CHECK(tHigh < tLow * 0.8f);
-    CHECK(onset >= int(0.018f * kFs) && onset <= int(0.032f * kFs));
-    CHECK(energy > 0.5 && energy < 2.0);
+    const float corr = float(lr2 / std::sqrt(l2 * r2 + 1e-30));
+    std::fprintf(stderr, "  late field: onset %.1f ms (first wall reflection %.1f ms), energy gain %.2f (1 kHz band %.2f), L/R corr %.2f\n",
+                 onset * 1000.0f / kFs, firstWall * 1000.0f, energy, rv.lateEnergyGain(), corr);
+    CHECK(onset >= int((firstWall - 0.0005f) * kFs) && onset <= int((firstWall + 0.003f) * kFs));
+    CHECK(rv.lateEnergyGain() > 0.0f);
     CHECK(std::fabs(corr) < 0.3f);
     for (float x : L) CHECK(std::isfinite(x));
+}
+
+// Switching a bank's tap set (the listener moves) cross-fades: a steady tone through the reflections
+// and the late field shows no step at the switch.
+TEST(audio_hall_tap_switch_is_seamless) {
+    using namespace audio;
+    HallReverb rv;
+    rv.prepare(kFs);
+    ListenerPose lis = whiteSeatListener();
+    rv.setListener(makeBasis(lis));
+    const int block = 256, blocks = 400, switchAt = 300;
+    const size_t bn = size_t(block);
+    std::vector<float> in(bn, 0.0f), L(bn, 0.0f), R(bn, 0.0f), zero(bn, 0.0f);
+    float maxBefore = 0.0f, maxAround = 0.0f, last = 0.0f;
+    int phase = 0;
+    for (int b = 0; b < blocks; ++b) {
+        if (b == switchAt) {
+            lis.pos = m::vec3(0.35f, 1.15f, 0.7f);
+            lis.fwd = m::normalize(m::vec3(-0.4f, -0.5f, -0.8f));
+            rv.setListener(makeBasis(lis));
+        }
+        for (int k = 0; k < block; ++k) in[size_t(k)] = 0.3f * std::sin(0.0409f * float(phase++));
+        std::fill(L.begin(), L.end(), 0.0f);
+        std::fill(R.begin(), R.end(), 0.0f);
+        const float* er[2] = {in.data(), zero.data()};
+        const float* late[2] = {in.data(), zero.data()};
+        rv.process(er, late, L.data(), R.data(), block);
+        for (int k = 0; k < block; ++k) {
+            const float step = std::fabs(L[size_t(k)] - last);
+            last = L[size_t(k)];
+            if (b > 200 && b < switchAt) maxBefore = std::max(maxBefore, step);
+            if (b >= switchAt && b < switchAt + 2) maxAround = std::max(maxAround, step);
+        }
+    }
+    std::fprintf(stderr, "  tap switch: largest sample step %.5f before, %.5f across the switch\n", maxBefore, maxAround);
+    CHECK(maxBefore > 0.0f);
+    CHECK(maxAround < 1.3f * maxBefore);
 }
 
 TEST(audio_spatial_pan_itd_behind_distance) {
@@ -465,8 +534,8 @@ TEST(audio_spatial_itd_at_high_device_rates) {
     chain.begin(t, 512);
     double sum = 0.0, moment = 0.0;
     for (int i = 0; i < 512; ++i) {
-        float l = 0.0f, r = 0.0f, room = 0.0f;
-        chain.tick(i == 0 ? 1.0f : 0.0f, l, r, room);
+        float l = 0.0f, r = 0.0f, er = 0.0f, late = 0.0f;
+        chain.tick(i == 0 ? 1.0f : 0.0f, l, r, er, late);
         sum += l;
         moment += double(i) * l;
     }
@@ -1381,6 +1450,209 @@ TEST(audio_voice_starve_resume) {
     }
 }
 
+// An impulse of the coach's voice (a 48 kHz source: no resampling) heard from White's seat, facing
+// 'facing', through the hall or dry. It sits kIrAt samples in, after the voice's 4 ms fade-in.
+constexpr size_t kIrAt = 1000;
+std::vector<float> coachImpulse(m::vec3 facing, bool room, float seconds) {
+    std::vector<float> mono(kIrAt + 2, 0.0f);
+    mono[kIrAt] = 1.0f;
+    return audio::renderVoiceOffline(mono, 48000, seconds, audio::coachMouthDefault(), audio::whiteSeatListener(), false,
+                                     nullptr, facing, room);
+}
+
+// Energy of the octave band around fc (left + right) of an interleaved stereo signal, frames [from, to).
+double bandEnergy(const std::vector<float>& st, size_t from, size_t to, float fc) {
+    audio::dsp::Svf a, b;
+    a.set(fc, 1.41421356f, kFs);
+    b.set(fc, 1.41421356f, kFs);
+    double e = 0.0;
+    for (size_t i = 0; i < to && 2 * i + 1 < st.size(); ++i) {
+        const double l = a.bpNorm(st[2 * i]), r = b.bpNorm(st[2 * i + 1]);
+        if (i >= from) e += l * l + r * r;
+    }
+    return e;
+}
+
+std::vector<float> subtract(const std::vector<float>& a, const std::vector<float>& b) {
+    std::vector<float> d(a.size());
+    for (size_t i = 0; i < a.size(); ++i) d[i] = a[i] - b[i];
+    return d;
+}
+
+// The reverberant level is the room's: in each octave band the energy that arrives after the table
+// top's bounce (the early wall images and the late field) over the direct energy is the room
+// constant's 16 pi r^2 / (q R_b) for the talker's directivity factor, as measured from an impulse.
+TEST(audio_hall_reverberant_level_is_the_room_constant) {
+    using namespace audio;
+    const ListenerPose lis = whiteSeatListener();
+    const m::vec3 mouth = coachMouthDefault();
+    const m::vec3 toPlayer = m::normalize(lis.pos - mouth);
+    const float r = m::length(lis.pos - mouth);
+    const float seconds = 9.0f;
+    const std::vector<float> wet = coachImpulse(toPlayer, true, seconds), dry = coachImpulse(toPlayer, false, seconds);
+    const std::vector<float> rev = subtract(wet, dry);
+    const size_t end = wet.size() / 2, from = kIrAt + size_t(0.030f * kFs);
+    std::fprintf(stderr, "  reverberant / direct energy, r = %.2f m, q = %.2f (measured / room constant):", r, kTalkerQ);
+    for (int b = 2; b <= 5; ++b) {  // 500 Hz .. 4 kHz
+        const double ratio = bandEnergy(rev, from, end, kRoomBandHz[b]) / bandEnergy(dry, 0, end, kRoomBandHz[b]);
+        const double expect = diffuseToDirect(r, kTalkerQ, b);
+        const double dev = 10.0 * std::log10(ratio / expect);
+        std::fprintf(stderr, "  %.0f Hz %+.1f / %+.1f dB (%+.2f)", kRoomBandHz[b], 10.0 * std::log10(ratio), 10.0 * std::log10(expect), dev);
+        CHECK(std::fabs(dev) < 1.5);
+    }
+    std::fprintf(stderr, "\n");
+}
+
+// What the hall hears is the power the talker radiates, not the level in front of her: the energy
+// after the first wall reflections is the same whichever way the coach faces (the directivity moves
+// energy between the images and the late field, not the total).
+TEST(audio_hall_diffuse_level_independent_of_facing) {
+    using namespace audio;
+    const ListenerPose lis = whiteSeatListener();
+    const m::vec3 mouth = coachMouthDefault();
+    const m::vec3 toPlayer = m::normalize(lis.pos - mouth);
+    const m::vec3 toBoard = m::normalize(m::vec3(0.0f, layout::BOARD_TOP_Y, 0.0f) - mouth);
+    const m::vec3 facings[] = {toPlayer, toBoard, m::vec3(1.0f, 0.0f, 0.0f), m::vec3(-1.0f, 0.0f, 0.0f), toPlayer * -1.0f};
+    const char* names[] = {"player", "board", "right", "left", "away"};
+    const float seconds = 8.0f;
+    const size_t from = kIrAt + size_t(0.030f * kFs);
+    double lo = 1e9, hi = -1e9;
+    std::fprintf(stderr, "  late energy by facing:");
+    for (int k = 0; k < 5; ++k) {
+        const std::vector<float> wet = coachImpulse(facings[k], true, seconds), dry = coachImpulse(facings[k], false, seconds);
+        const std::vector<float> rev = subtract(wet, dry);
+        const size_t end = rev.size() / 2;
+        const double e = 10.0 * std::log10(channelEnergy(rev, from, end, 0) + channelEnergy(rev, from, end, 1));
+        std::fprintf(stderr, " %s %.2f dB", names[k], e);
+        lo = std::min(lo, e);
+        hi = std::max(hi, e);
+    }
+    std::fprintf(stderr, " (spread %.2f dB)\n", hi - lo);
+    CHECK(hi - lo < 0.5);
+}
+
+// The first reflection after the direct sound of the coach's voice is the table top's: it arrives
+// at the computed delay.
+TEST(audio_hall_first_reflection_is_the_table_top) {
+    using namespace audio;
+    const ListenerPose lis = whiteSeatListener();
+    const m::vec3 mouth = coachMouthDefault();
+    const m::vec3 toPlayer = m::normalize(lis.pos - mouth);
+    const ReflectionSet rs = earlyReflections(mouth, lis.pos, toPlayer);
+    REQUIRE(rs.count > 0);
+    CHECK(rs.r[0].table);
+    const std::vector<float> wet = coachImpulse(toPlayer, true, 0.5f), dry = coachImpulse(toPlayer, false, 0.5f);
+    const std::vector<float> rev = subtract(wet, dry);
+    size_t peak = 0;
+    float pk = 0.0f;
+    for (size_t i = 0; i < dry.size(); ++i)
+        if (std::fabs(dry[i]) > pk) {
+            pk = std::fabs(dry[i]);
+            peak = i / 2;
+        }
+    size_t first = 0;
+    for (size_t i = 0; i < rev.size(); ++i)
+        if (std::fabs(rev[i]) > 0.05f * pk) {
+            first = i / 2;
+            break;
+        }
+    const float measured = (float(first) - float(peak)) / kFs, expected = rs.r[0].delay;
+    std::fprintf(stderr, "  first reflection %.3f ms after the direct sound (table top: %.3f ms, gain %.2f)\n", measured * 1000.0f,
+                 expected * 1000.0f, rs.r[0].gain);
+    CHECK(std::fabs(measured - expected) < 0.0002f);
+    // The next ones are the hall's walls, from the first wall reflection on: nothing between.
+    float firstWall = -1.0f;
+    for (int i = 0; i < rs.count; ++i)
+        if (!rs.r[size_t(i)].table) {
+            firstWall = rs.r[size_t(i)].delay;
+            break;
+        }
+    size_t second = 0;
+    for (size_t i = 2 * (first + 40); i < rev.size(); ++i)
+        if (std::fabs(rev[i]) > 0.005f * pk) {
+            second = i / 2;
+            break;
+        }
+    CHECK(std::fabs((float(second) - float(peak)) / kFs - firstWall) < 0.002f);
+}
+
+// The hall's response to a click on both banks' sends, rendered in blocks of 'block' frames: 'gap'
+// seconds of silence first (the reverb has gone idle by then), then the click, then 'seconds' of tail.
+namespace {
+std::vector<float> hallClick(audio::HallReverb& rv, int block, float gap, float seconds) {
+    const size_t gapN = size_t(gap * kFs), n = size_t(seconds * kFs);
+    std::vector<float> in(gapN + n, 0.0f), zero(gapN + n, 0.0f), L(gapN + n, 0.0f), R(gapN + n, 0.0f);
+    in[gapN] = 1.0f;
+    for (size_t at = 0; at < in.size(); at += size_t(block)) {
+        const int m = int(std::min(size_t(block), in.size() - at));
+        const float* er[2] = {in.data() + at, zero.data()};
+        const float* late[2] = {in.data() + at, zero.data()};
+        rv.process(er, late, L.data() + at, R.data() + at, m);
+    }
+    std::vector<float> out;
+    for (size_t i = gapN; i < in.size(); ++i) {
+        out.push_back(L[i]);
+        out.push_back(R[i]);
+    }
+    return out;
+}
+double hallEnergy(const std::vector<float>& v) {
+    double e = 0.0;
+    for (float x : v) e += double(x) * x;
+    return e;
+}
+}  // namespace
+
+// The hall goes idle once its tail has decayed (nothing is computed for silence) and wakes with
+// the same response: the early reflections exactly, the late field at the same level; the tail
+// is not cut short on the way down.
+TEST(audio_hall_idle_and_wake) {
+    using namespace audio;
+    HallReverb rv;
+    rv.prepare(kFs);
+    rv.setListener(makeBasis(whiteSeatListener()));
+    const std::vector<float> first = hallClick(rv, 256, 0.0f, 8.0f);
+    // 40 s of nothing: the tail is long gone by the end and its last seconds are digital silence.
+    const std::vector<float> idle = hallClick(rv, 480, 0.0f, 40.0f);
+    float lateTail = 0.0f;
+    for (size_t i = size_t(2 * 25.0f * kFs); i < idle.size(); ++i) lateTail = std::max(lateTail, std::fabs(idle[i]));
+    CHECK(lateTail < 1e-4f);
+    const std::vector<float> second = hallClick(rv, 256, 0.0f, 8.0f);
+    const size_t early = size_t(2 * 0.030f * kFs);  // before the late field begins (38 ms): early reflections only
+    float worst = 0.0f;
+    for (size_t i = 0; i < early; ++i) worst = std::max(worst, std::fabs(first[i] - second[i]));
+    CHECK(worst < 1e-6f);
+    const double dB = 10.0 * std::log10(hallEnergy(second) / hallEnergy(first));
+    std::fprintf(stderr, "  hall idle -> wake: response energy %+.3f dB, early part differs by %.1e\n", dB, double(worst));
+    CHECK(std::fabs(dB) < 0.3);
+}
+
+// A response does not depend on how the host chops the stream into blocks (the mixer's blocks are
+// any length up to 256): same level, same early reflections, in blocks of 256, 100 and 37 frames
+// (lengths that are not multiples of the vector width).
+TEST(audio_hall_response_independent_of_block_size) {
+    using namespace audio;
+    const int blocks[] = {256, 100, 37};
+    std::vector<float> ref;
+    for (int b : blocks) {
+        HallReverb rv;
+        rv.prepare(kFs);
+        rv.setListener(makeBasis(whiteSeatListener()));
+        const std::vector<float> r = hallClick(rv, b, 0.0f, 6.0f);
+        if (ref.empty()) {
+            ref = r;
+            continue;
+        }
+        const size_t early = size_t(2 * 0.030f * kFs);
+        float worst = 0.0f;
+        for (size_t i = 0; i < early; ++i) worst = std::max(worst, std::fabs(ref[i] - r[i]));
+        const double dB = 10.0 * std::log10(hallEnergy(r) / hallEnergy(ref));
+        std::fprintf(stderr, "  hall blocks of %d vs 256: energy %+.3f dB, early part differs by %.1e\n", b, dB, double(worst));
+        CHECK(worst < 1e-6f);
+        CHECK(std::fabs(dB) < 0.2);
+    }
+}
+
 // The designed level: TTS-level speech at the coach's mouth, heard from White's seat.
 TEST(audio_voice_level_from_coach) {
     using namespace audio;
@@ -1418,7 +1690,23 @@ TEST(audio_voice_level_from_coach) {
     CHECK(db(a.peak) > db(place.peak) - 6.0f && db(a.peak) < db(place.peak) + 8.0f);  // level with the board
     CHECK(st.limiterMinGain > 0.9f);
     CHECK(std::fabs(lr) < 0.5);
-    CHECK(drr > 0.0 && drr < 6.0);
+    // The reverberant energy (every band's share of the speech times the room constant's ratio there,
+    // plus the table top's bounce, a reflection the hall's constant does not count) over the direct.
+    {
+        const float r = m::length(lis.pos - mouth);
+        const size_t frames = dry.size() / 2;
+        double ew[audio::kRoomBands], sum = 0.0;
+        for (int b = 0; b < audio::kRoomBands; ++b) sum += ew[b] = bandEnergy(dry, 0, frames, audio::kRoomBandHz[b]);
+        double ratio = 0.0;
+        for (int b = 0; b < audio::kRoomBands; ++b) ratio += ew[b] / sum * diffuseToDirect(r, kTalkerQ, b);
+        const ReflectionSet rs = earlyReflections(mouth, lis.pos, toPlayer);
+        for (int i = 0; i < rs.count; ++i)
+            if (rs.r[size_t(i)].table) ratio += double(rs.r[size_t(i)].gain) * rs.r[size_t(i)].gain;
+        const double expected = -10.0 * std::log10(ratio);
+        std::fprintf(stderr, "  DRR expected from the room constant (r = %.2f m, q = %.2f, table bounce included): %+.1f dB\n", r,
+                     kTalkerQ, expected);
+        CHECK(std::fabs(drr - expected) < 1.5);
+    }
     CHECK(std::fabs(a.dcL) < 2e-4f && std::fabs(a.dcR) < 2e-4f);
     CHECK(writeWav16((outDir() + "/coach_voice.wav").c_str(), wet.data(), wet.size() / 2, 2, 48000));
 }

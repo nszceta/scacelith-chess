@@ -10,14 +10,15 @@
 // Signal flow (mixer thread, 48 kHz or the device rate, float stereo):
 //   voices (32, 3D: inverse distance with 0.15 m min distance, equal-power pan, ITD, head
 //   shadow, behind/air low-pass) + speech (2, same 3D chain, talker directivity) + ambience
-//   (ducked under speech) -> hall (early reflections + 16-line FDN,
-//   RT60 ~2.3 s, 24 ms pre-delay) -> master volume -> DC blocker -> look-ahead limiter (threshold
-//   -1.4 dBFS, soft ceiling below -1.0 dBFS).
+//   (ducked under speech) -> hall (image-source early reflections + 16-line FDN, both derived
+//   from the hall's geometry and materials: room.h, reverb.h) -> master volume -> DC blocker ->
+//   look-ahead limiter (threshold -1.4 dBFS, soft ceiling below -1.0 dBFS).
 // Every one-shot is synthesised (modal/noise models) by a low-priority builder thread into a
 // small pool of variants per Sfx; each trigger additionally randomises pitch (+-3 %), level and
 // tone, and the variant just played is re-synthesised with a new seed, so no two plays match.
 #pragma once
 #include "../math/math.h"
+#include "room.h"
 #include <cstdint>
 #include <vector>
 
@@ -115,8 +116,9 @@ struct VoiceParams {
     m::vec3 facing{0.0f, 0.0f, 0.0f};    // talker's forward (head +Z); zero = omnidirectional
     int sampleRate = 44100;              // source rate of the appended PCM (8000..192000)
     float gain = 1.0f;                   // on top of the voice bus volume (0..4)
-    float roomSend = 0.13f;              // hall send relative to the direct gain (0..1)
-    bool spatial = true;                 // false: centred (narrator), still reverberated
+    float q = kTalkerQ;                  // directivity factor of the talker in the hall (room.h): sets the
+                                         // reverberant level from the room constant; 0 = not in the hall
+    bool spatial = true;                 // false: centred (narrator; no early reflections: needs a position)
     float duckDb = -6.0f;                // ambience ducking while this voice sounds (0 = none, >= -40)
 };
 struct VoiceStatus {

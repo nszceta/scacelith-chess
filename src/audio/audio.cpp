@@ -449,7 +449,7 @@ VoiceId openVoice(const VoiceParams& p) {
     Engine* e = g_engine.load(std::memory_order_acquire);
     if (!e) return {};
     if (!finiteVec(p.position) || !finiteVec(p.facing) || p.sampleRate < 8000 || p.sampleRate > 192000 ||
-        !std::isfinite(p.gain) || !std::isfinite(p.roomSend) || !std::isfinite(p.duckDb)) {
+        !std::isfinite(p.gain) || !std::isfinite(p.q) || !std::isfinite(p.duckDb)) {
         LOGW("audio: openVoice: invalid parameters");
         return {};
     }

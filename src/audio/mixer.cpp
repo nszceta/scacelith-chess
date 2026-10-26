@@ -15,7 +15,8 @@ struct Mixer::Voice {
     double pos = 0.0;
     float rate = 1.0f;   // playback ratio relative to kBankRate
     float gain = 1.0f;   // level * user gain * jitter
-    float send = 0.0f;   // hall send relative to gain
+    float q = 0.0f;      // directivity factor in the hall (0 = not in the hall)
+    float uiSend = 0.0f; // late-field send relative to gain of a sound that is not in the hall
     m::vec3 position;
     float tilt = 0.0f, tiltZ = 0.0f;
     SpatialChain chain;  // current (per-sample ramped) 3D parameters and filter/ITD state
@@ -74,7 +75,7 @@ SpeechParams speechParams(const VoiceParams& v) {
     p.facing = m::length2(v.facing) > 1e-8f ? m::normalize(v.facing) : m::vec3(0.0f);
     p.srcRate = float(std::min(192000, std::max(8000, v.sampleRate)));
     p.gain = std::isfinite(v.gain) ? clampf(v.gain, 0.0f, 4.0f) : 1.0f;
-    p.send = std::isfinite(v.roomSend) ? clampf(v.roomSend, 0.0f, 1.0f) : 0.13f;
+    p.q = std::isfinite(v.q) ? clampf(v.q, 0.0f, 16.0f) : kTalkerQ;
     p.duckGain = dbToGain(std::isfinite(v.duckDb) ? clampf(v.duckDb, -40.0f, 0.0f) : 0.0f);
     p.spatial = v.spatial;
     return p;
@@ -291,7 +292,8 @@ bool Mixer::play(const PlayRequest& r) {
         v->winEnd = std::min(len, start + win);
     }
     v->gain = info.level * std::max(0.0f, r.gain) * dbToGain(info.levelJitterDb * rng_.bi());
-    v->send = info.roomSend;
+    v->q = info.q;
+    v->uiSend = info.uiSend;
     v->position = r.pos;
     v->tilt = 0.3f * rng_.bi();
     v->tiltZ = 0.0f;
@@ -306,8 +308,11 @@ bool Mixer::play(const PlayRequest& r) {
 }
 
 void Mixer::renderVoice(Voice& v, int n, float bg) {
-    // Non-spatial voices (UI bus) are centred and still feed the hall through the send.
-    v.chain.begin(spatialTarget(basis_, v.spatial, v.position, fs_, v.gain * bg, v.send), n);
+    // In the hall (q > 0): the physical late send and the early reflections of the effects bank. Not
+    // in the hall (UI tones, the bowls): their designed late-field send, no reflections.
+    const bool inHall = v.q > 0.0f;
+    const float late = inHall ? reverb_.lateSend(v.q, HallReverb::Effects) : v.uiSend;
+    v.chain.begin(spatialTarget(basis_, v.spatial, v.position, fs_, v.gain * bg, late, inHall), n);
     const double step = double(v.rate) * double(kBankRate) / double(fs_);
     const float tiltA = OnePole::coefFor(2500.0f, fs_);
     const float* d = v.data;
@@ -336,7 +341,7 @@ void Mixer::renderVoice(Voice& v, int n, float bg) {
         v.pos += step;
         v.tiltZ = s + tiltA * (v.tiltZ - s);
         s += v.tilt * (s - v.tiltZ);
-        v.chain.tick(s, L_[i], R_[i], room_[i]);
+        v.chain.tick(s, L_[i], R_[i], erFx_[i], lateFx_[i]);
     }
 }
 
@@ -521,20 +526,26 @@ float Mixer::speechSample(Speech& s, double step) {
 }
 
 void Mixer::renderSpeech(Speech& s, int n) {
-    // Talker directivity: speech radiates its highs forward. A coach turned towards the board or
-    // aside sounds a little softer and duller from the player's seat; the hall send is unchanged.
+    // Talker directivity: speech radiates its highs forward (talkerDirectivity). A coach turned
+    // towards the board or aside sounds a little softer and duller from the player's seat. The hall
+    // does not care: its diffuse field is fed by the power the talker radiates in every direction,
+    // which the directivity factor q accounts for whichever way the talker faces (an omnidirectional
+    // source, no facing, radiates q = 1).
+    const bool facing = s.p.spatial && m::length2(s.p.facing) > 0.5f;
     float dirGain = 1.0f, dirLp = 0.0f;
-    if (s.p.spatial && m::length2(s.p.facing) > 0.5f) {
+    if (facing) {
         const m::vec3 d = basis_.pos - s.p.pos;
         const float len = m::length(d);
         if (len > 1e-4f) {
-            const float w = 0.5f + 0.5f * clampf(m::dot(s.p.facing, d / len), -1.0f, 1.0f);
-            dirGain = 0.55f + 0.45f * w;
-            dirLp = (1.0f - w) * OnePole::coefFor(3000.0f, fs_);
+            const float c = clampf(m::dot(s.p.facing, d / len), -1.0f, 1.0f);
+            dirGain = talkerDirectivity(c);
+            dirLp = (0.5f - 0.5f * c) * OnePole::coefFor(3000.0f, fs_);
         }
     }
+    const float q = (s.p.q > 0.0f && !facing) ? 1.0f : s.p.q;
     const float g = kSpeechLevel * s.p.gain * busGain(Bus::Voice);
-    s.chain.begin(spatialTarget(basis_, s.p.spatial, s.p.pos, fs_, g * dirGain, s.p.send / dirGain, dirLp), n);
+    const float late = reverb_.lateSend(q, HallReverb::Speech);
+    s.chain.begin(spatialTarget(basis_, s.p.spatial, s.p.pos, fs_, g, late, q > 0.0f, dirGain, dirLp), n);
     const double step = double(s.p.srcRate) / double(fs_);
     const float tailK = std::exp(-1.0f / (0.0012f * fs_));
     for (int i = 0; i < n; ++i) {
@@ -543,7 +554,7 @@ void Mixer::renderSpeech(Speech& s, int n) {
         else if (s.flush > 0) --s.flush;
         y += s.tail;
         s.tail *= tailK;
-        s.chain.tick(y, L_[i], R_[i], room_[i]);
+        s.chain.tick(y, L_[i], R_[i], erSp_[i], lateSp_[i]);
     }
     if (s.open) s.played = std::max(s.played, s.clock());
     else if (s.flush <= 0) s.tail = 0.0f;
@@ -571,6 +582,21 @@ void Mixer::updateDuck(float blockSec) {
     duck_ += (target - duck_) * (1.0f - std::exp(-blockSec / tau));
 }
 
+// The hall's early reflections follow the listener and the talker: the Speech bank's source is the
+// talker now speaking (a voice being stopped only when nothing else sounds), at its pose.
+void Mixer::updateHall() {
+    reverb_.setListener(basis_);
+    const Speech* pick = nullptr;
+    for (int pass = 0; pass < 3 && !pick; ++pass)
+        for (int k = 0; k < kMaxSpeech && !pick; ++k) {
+            const Speech& s = speech_[k];
+            if (!s.p.spatial || !(s.p.q > 0.0f)) continue;
+            const bool ok = pass == 0 ? (s.open && !s.stopping) : (pass == 1 ? s.open : s.flush > 0);
+            if (ok) pick = &s;
+        }
+    reverb_.setSpeechSource(pick != nullptr, pick ? pick->p.pos : m::vec3(0.0f), pick ? pick->p.facing : m::vec3(0.0f));
+}
+
 void Mixer::block(float* out, int n) {
     const float blockSec = float(n) / fs_;
     const float kv = first_ ? 1.0f : 1.0f - std::exp(-blockSec / 0.05f);
@@ -585,11 +611,15 @@ void Mixer::block(float* out, int n) {
 
     std::memset(L_, 0, sizeof(float) * size_t(n));
     std::memset(R_, 0, sizeof(float) * size_t(n));
-    std::memset(room_, 0, sizeof(float) * size_t(n));
+    std::memset(erFx_, 0, sizeof(float) * size_t(n));
+    std::memset(lateFx_, 0, sizeof(float) * size_t(n));
+    std::memset(erSp_, 0, sizeof(float) * size_t(n));
+    std::memset(lateSp_, 0, sizeof(float) * size_t(n));
+    if (roomOn_) updateHall();
 
     float ambGain = busGain(Bus::Ambience);
     if (ambGain > 1e-6f) {
-        ambience_.process(L_, R_, room_, n, basis_, ambGain);
+        ambience_.process(L_, R_, lateFx_, n, basis_, ambGain);
         Ambience::Event e;
         if (ambience_.popCreak(e)) {
             PlayRequest r;
@@ -609,7 +639,11 @@ void Mixer::block(float* out, int n) {
         Speech& s = speech_[k];
         if (s.open || s.flush > 0) renderSpeech(s, n);
     }
-    if (roomOn_) reverb_.process(room_, L_, R_, n);
+    if (roomOn_) {
+        const float* er[HallReverb::kBanks] = {erFx_, erSp_};
+        const float* late[HallReverb::kBanks] = {lateFx_, lateSp_};
+        reverb_.process(er, late, L_, R_, n);
+    }
 
     const float mg = master_;
     for (int i = 0; i < n; ++i) {

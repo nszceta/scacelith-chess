@@ -77,40 +77,45 @@ inline SpatialParams computeSpatial(const Basis& b, m::vec3 src, float fs, bool 
 }
 
 // Block targets of a SpatialChain: per-ear gains (distance included), ITD, head shadow, low-pass
-// and the hall send level.
+// and the two hall sends: 'er' feeds the early reflections (the direct sound as heard at the
+// listener: the reflections are relative to it), 'late' the late field (the source's amplitude
+// times the late-field send, independent of distance and directivity: a diffuse field).
 struct SpatialTarget {
-    float gL = 0.0f, gR = 0.0f, itd = 0.0f, shL = 0.0f, shR = 0.0f, lp = 0.0f, send = 0.0f;
+    float gL = 0.0f, gR = 0.0f, itd = 0.0f, shL = 0.0f, shR = 0.0f, lp = 0.0f, er = 0.0f, late = 0.0f;
 };
 
-// Targets for a source of gain 'g' at 'src' (spatial) or centred (non-spatial, still sent to the
-// hall). 'extraLp' is a further low-pass coefficient (talker directivity), merged with the
-// behind/air one.
-inline SpatialTarget spatialTarget(const Basis& b, bool spatial, m::vec3 src, float fs, float g, float send,
-                                   float extraLp = 0.0f) {
+// Targets for a source of gain 'g' at 'src' (spatial) or centred (non-spatial). 'dirGain' is the
+// source's directivity towards the listener (a gain on the direct sound and the reflections),
+// 'lateSend' the late-field send relative to 'g' (0 = none), 'earlyOn' feeds the early reflections
+// (spatial sources only: they need the listener's distance). 'extraLp' is a further low-pass
+// coefficient (talker directivity), merged with the behind/air one.
+inline SpatialTarget spatialTarget(const Basis& b, bool spatial, m::vec3 src, float fs, float g, float lateSend,
+                                   bool earlyOn, float dirGain = 1.0f, float extraLp = 0.0f) {
     SpatialTarget t;
     if (spatial) {
         SpatialParams sp = computeSpatial(b, src, fs);
-        t.gL = sp.gL * g;
-        t.gR = sp.gR * g;
+        t.gL = sp.gL * g * dirGain;
+        t.gR = sp.gR * g * dirGain;
         t.itd = sp.itd;
         t.shL = sp.shadowL;
         t.shR = sp.shadowR;
         t.lp = std::max(sp.lp, extraLp);
+        if (earlyOn) t.er = sp.distGain * g * dirGain;
     } else {
-        t.gL = t.gR = 0.70710678f * g;
+        t.gL = t.gR = 0.70710678f * g * dirGain;
         t.lp = extraLp;
     }
-    t.send = g * send;
+    t.late = g * lateSend;
     return t;
 }
 
 // Per-voice state of the spatial chain shared by the effect voices and the speech voices: the
-// block targets are ramped linearly per sample; the hall send is taken pre-filter and pre-pan, then
+// block targets are ramped linearly per sample; the hall sends are taken pre-filter and pre-pan, then
 // behind/air low-pass, ITD (256-sample ring, clamped to 252 samples: the full Woodworth range, 251.8
 // samples at most, up to the 384 kHz device rate limit), far-ear head shadow and the per-ear gains.
 struct SpatialChain {
-    float gL = 0, gR = 0, itd = 0, shL = 0, shR = 0, lp = 0, sendG = 0;
-    float dgL = 0, dgR = 0, dItd = 0, dShL = 0, dShR = 0, dLp = 0, dSend = 0;
+    float gL = 0, gR = 0, itd = 0, shL = 0, shR = 0, lp = 0, erG = 0, lateG = 0;
+    float dgL = 0, dgR = 0, dItd = 0, dShL = 0, dShR = 0, dLp = 0, dEr = 0, dLate = 0;
     float lpZ = 0, zL = 0, zR = 0;
     float ring[256] = {};
     uint32_t w = 0;
@@ -120,18 +125,19 @@ struct SpatialChain {
     // Sets up the ramps of a block of n samples towards 't'.
     void begin(const SpatialTarget& t, int n) {
         if (fresh) {
-            gL = t.gL; gR = t.gR; itd = t.itd; shL = t.shL; shR = t.shR; lp = t.lp; sendG = t.send;
+            gL = t.gL; gR = t.gR; itd = t.itd; shL = t.shL; shR = t.shR; lp = t.lp; erG = t.er; lateG = t.late;
             fresh = false;
         }
         const float inv = 1.0f / float(n);
         dgL = (t.gL - gL) * inv; dgR = (t.gR - gR) * inv; dItd = (t.itd - itd) * inv;
         dShL = (t.shL - shL) * inv; dShR = (t.shR - shR) * inv; dLp = (t.lp - lp) * inv;
-        dSend = (t.send - sendG) * inv;
+        dEr = (t.er - erG) * inv; dLate = (t.late - lateG) * inv;
     }
-    // One source sample: adds the ears into l/r and the hall send into room.
-    void tick(float s, float& l, float& r, float& room) {
-        gL += dgL; gR += dgR; itd += dItd; shL += dShL; shR += dShR; lp += dLp; sendG += dSend;
-        room += s * sendG;
+    // One source sample: adds the ears into l/r and the hall sends into er / late.
+    void tick(float s, float& l, float& r, float& er, float& late) {
+        gL += dgL; gR += dgR; itd += dItd; shL += dShL; shR += dShR; lp += dLp; erG += dEr; lateG += dLate;
+        er += s * erG;
+        late += s * lateG;
         lpZ = s + lp * (lpZ - s);
         ring[w & 255u] = lpZ;
         ++w;

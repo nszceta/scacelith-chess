@@ -14,10 +14,11 @@ constexpr int kBankVariants = 6;  // synthesised variants per Sfx kept in the ba
 struct SfxInfo {
     const char* name;
     float level;        // linear peak level at the 0.5 m reference distance (before volumes)
-    float roomSend;     // hall send, relative to level (distance independent: diffuse field)
+    float q;            // directivity factor of the source in the hall (0: not in the hall, see uiSend)
+    float uiSend;       // designed late-field send, relative to level, of a sound that is not in the hall
     float pitchJitter;  // +- relative pitch randomisation per trigger
     float levelJitterDb;
-    bool ui;            // UI bus (playUI renders it centred; the hall send still applies)
+    bool ui;            // UI bus (playUI renders it centred; not in the hall: only uiSend applies)
 };
 const SfxInfo& sfxInfo(Sfx s);
 
