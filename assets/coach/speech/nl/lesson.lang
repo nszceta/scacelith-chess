@@ -20,6 +20,8 @@ lesson.title.castling = de rokade
 lesson.title.en_passant = en passant slaan
 lesson.title.promotion = promotie
 lesson.title.draws = pat en remise
+lesson.title.before_move = kijken voor je zet
+lesson.title.opening = de opening
 lesson.title.etiquette = echte partijen: rating, klok en omgangsvormen
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -241,7 +243,52 @@ lesson.draws.kings = Andere remises: als niemand nog mat kan zetten, zoals bij t
 lesson.draws.agree = Spelers kunnen ook samen remise afspreken.
 lesson.draws.repeat = Ook bij drie keer dezelfde stelling, of na vijftig zetten zonder slaan of pionzet, is remise mogelijk.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Sta voor elke zet even stil en kijk. Sterke spelers doen dat elke keer.
+lesson.before.last = Eerste vraag: wat deed mijn laatste zet? Kijk maar.
+lesson.before.threat = {my} valt {your} aan. Dat is een dreiging.
+lesson.before.safe = Wegzetten is niet genoeg. Het nieuwe veld moet ook veilig zijn.
+lesson.before.dodge.ask = Zet je paard op een veilig veld.
+lesson.before.dodge.still = Je paard wordt nog steeds aangevallen. Kijk maar.
+lesson.before.dodge.hint = Mijn pionnen bewaken {sq} en {sq2}. Kies een ander veld.
+lesson.before.dodge.ok = Veilig! Je zag de dreiging en je controleerde het veld.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Niet naar {to}, want {my} bewaakt dat veld. Kijk maar.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = {your} is verloren. Eerst kijken, dan zetten.
+lesson.before.again = Nog een keer, eerst mijn zet. Kijk maar.
+lesson.before.free.ask = Kijk naar mijn laatste zet. Kun je iets gratis slaan?
+lesson.before.free.missed = Kijk nog eens naar {my}. Wat kan {my:obj} slaan?
+lesson.before.free.hint = {my} heeft geen verdediger. Je {@}pion kan {my:obj} slaan.
+lesson.before.free.ok = Ja! Mijn loper stond vrij. Kijk altijd naar mijn laatste zet.
+lesson.before.check.ask = Geef schaak, op een veld waar ik niet kan slaan.
+lesson.before.check.wrong = Dat is geen schaak. Zoek een schaak vanaf een veilig veld.
+lesson.before.check.hint = {my} bewaakt {sq}. Geef schaak vanaf een veilig veld.
+lesson.before.check.ok = Mooi schaak! Je dame staat daar veilig.
+lesson.before.done = Maak er een gewoonte van: eerst kijken, dan zetten.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = De opening is het begin van de partij. Een paar simpele regels helpen.
+lesson.opening.goals = {@}Neem het centrum, {@2}breng paarden en lopers in het spel en {@3}rokeer vroeg.
+lesson.opening.centre = De vier velden in het {@}midden vormen het centrum.
+lesson.opening.pawn.ask = Zet een pion in het centrum: twee velden vooruit.
+lesson.opening.pawn.one = Niet slecht, maar twee velden pakken meer van het centrum.
+lesson.opening.pawn.knight = De paarden komen zo. Eerst een pion in het centrum.
+lesson.opening.pawn.wrong = Gebruik de pion voor je koning of voor je dame.
+lesson.opening.pawn.ok = Goed! Je pion neemt ruimte in het centrum.
+lesson.opening.queen = Breng je dame niet te vroeg in het spel: mijn stukken zouden haar jagen.
+lesson.opening.knight.ask = Breng een paard in het spel, richting het centrum.
+lesson.opening.rim = Een paard op de rand bereikt weinig velden. Spring richting het centrum.
+lesson.opening.bishop = Ontwikkelen, goed! Maar nu een paard.
+lesson.opening.knight.ok = Goed! Vanaf daar houdt je paard het centrum in de gaten.
+lesson.opening.later = Een paar zetten later: je paard en je {@}loper staan in het spel.
+lesson.opening.twice = Zet niet twee keer met hetzelfde stuk zonder goede reden.
+lesson.opening.castle.ask = De weg is vrij. Rokeer en breng je koning in veiligheid.
+lesson.opening.castle.wrong = Je koning is klaar. Rokeer nu, zolang de weg vrij is.
+lesson.opening.castle.ok = Gerokeerd! Je koning staat veilig en je toren doet mee.
+lesson.opening.done = Centrum, stukken, rokade: zo begin je elke partij goed.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Je kent nu alle schaakregels. Goed gedaan!
 lesson.talk.real = Ik vertel je hoe echte partijen gespeeld worden.
 lesson.talk.elo = Spelers hebben een rating, die Elo heet. Die gaat omhoog als je wint en omlaag als je verliest.

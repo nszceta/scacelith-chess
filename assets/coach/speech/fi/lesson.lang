@@ -20,6 +20,8 @@ lesson.title.castling = linnoittautuminen
 lesson.title.en_passant = ohestalyönti
 lesson.title.promotion = sotilaan korotus
 lesson.title.draws = patti ja tasapelit
+lesson.title.before_move = katso ennen siirtoa
+lesson.title.opening = avaus
 lesson.title.etiquette = vahvuusluku, kello ja käytöstavat oikeissa peleissä
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -242,7 +244,52 @@ lesson.draws.kings = Muita tasapelejä: kun kumpikaan ei pysty tekemään mattia
 lesson.draws.agree = Pelaajat voivat myös sopia tasapelistä.
 lesson.draws.repeat = Tasapelin voi saada myös, kun sama asema toistuu kolme kertaa tai kun viiteenkymmeneen siirtoon ei ole tehty lyöntiä eikä sotilaan siirtoa.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Pysähdy ja katso ennen jokaista siirtoa. Vahvat pelaajat tekevät niin joka kerta.
+lesson.before.last = Ensimmäinen kysymys: mitä viimeisin siirtoni teki? Katso.
+lesson.before.threat = {my} uhkaa {your:part}. Se on uhka.
+lesson.before.safe = Pois siirtäminen ei riitä. Uuden ruudun pitää olla myös turvallinen.
+lesson.before.dodge.ask = Siirrä ratsusi turvalliseen ruutuun.
+lesson.before.dodge.still = Ratsuasi uhataan yhä. Katso.
+lesson.before.dodge.hint = Sotilaani valvovat ruutuja {sq} ja {sq2}. Valitse toinen ruutu.
+lesson.before.dodge.ok = Turvallinen! Näit uhan ja tarkistit ruudun.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Ei ruutuun {to}, {my} valvoo sitä. Katso.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = {your} on menetetty. Katso ensin, siirrä sitten.
+lesson.before.again = Vielä kerran, ensin minun siirtoni. Katso.
+lesson.before.free.ask = Katso viimeisintä siirtoani. Voitko lyödä jotain ilmaiseksi?
+lesson.before.free.missed = Katso {my:part} vielä kerran. Mikä voi lyödä sen?
+lesson.before.free.hint = {my:ade} ei ole puolustajaa. {@}Sotilaasi voi lyödä sen.
+lesson.before.free.ok = Kyllä! Lähettini oli vapaa. Katso aina viimeisintä siirtoani.
+lesson.before.check.ask = Anna shakki sellaisesta ruudusta, jossa en voi lyödä sinua.
+lesson.before.check.wrong = Se ei ole shakki. Etsi shakki turvallisesta ruudusta.
+lesson.before.check.hint = {my} valvoo ruutua {sq}. Anna shakki turvallisesta ruudusta.
+lesson.before.check.ok = Hyvä shakki! Kuningattaresi on siellä turvassa.
+lesson.before.done = Tee siitä tapa: katso ensin, siirrä sitten.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Avaus on pelin alku. Muutama yksinkertainen sääntö auttaa.
+lesson.opening.goals = {@}Valtaa keskusta, {@2}kehitä ratsut ja lähetit ja {@3}linnoittaudu ajoissa.
+lesson.opening.centre = Neljä ruutua {@}keskellä ovat keskusta.
+lesson.opening.pawn.ask = Vie sotilas keskustaan: kaksi ruutua eteenpäin.
+lesson.opening.pawn.one = Ei huono, mutta kaksi ruutua valtaa enemmän keskustaa.
+lesson.opening.pawn.knight = Ratsut tulevat pian. Ensin sotilas keskustaan.
+lesson.opening.pawn.wrong = Käytä kuninkaasi tai kuningattaresi edessä olevaa sotilasta.
+lesson.opening.pawn.ok = Hyvä! Sotilaasi ottaa tilaa keskustassa.
+lesson.opening.queen = Älä tuo kuningatarta ulos liian aikaisin: nappulani ajaisivat sitä takaa.
+lesson.opening.knight.ask = Tuo ratsu ulos kohti keskustaa.
+lesson.opening.rim = Laidalla ratsu yltää vain harvoihin ruutuihin. Hyppää kohti keskustaa.
+lesson.opening.bishop = Kehittäminen on hyvä! Mutta nyt ratsu.
+lesson.opening.knight.ok = Hyvä! Sieltä ratsusi vartioi keskustaa.
+lesson.opening.later = Muutaman siirron päästä: ratsusi ja {@}lähettisi ovat ulkona.
+lesson.opening.twice = Älä siirrä samaa nappulaa kahdesti ilman hyvää syytä.
+lesson.opening.castle.ask = Tie on vapaa. Linnoittaudu ja vie kuninkaasi turvaan.
+lesson.opening.castle.wrong = Kuninkaasi on valmis. Linnoittaudu nyt, kun tie on vapaa.
+lesson.opening.castle.ok = Linnoittauduit! Kuninkaasi on turvassa, ja tornisi pääsee peliin.
+lesson.opening.done = Keskusta, nappulat, linnoitus: näin jokainen peli alkaa hyvin.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Osaat nyt kaikki shakin säännöt. Hienoa!
 lesson.talk.real = Kerron sinulle, miten oikeita pelejä pelataan.
 lesson.talk.elo = Pelaajilla on vahvuusluku, jota kutsutaan Elo-luvuksi. Se nousee, kun voitat, ja laskee, kun häviät.

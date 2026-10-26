@@ -26,7 +26,7 @@ namespace coach {
 struct DirectorConfig {
     std::string uiLanguage = "en";   // i18n::language(): the subtitles' language
     int subtitles = 0;               // SubtitleMode of game/settings.h: 0 Automatic, 1 On, 2 Off
-    float speed = 1.0f;              // TTS speed (the rules lesson: kLessonSpeechSpeed)
+    float speed = 1.0f;              // TTS speed (Session: SessionConfig::speeds for the level)
 };
 
 // A mark as it is drawn this frame: World::submitCoachMarks for Square/Arrow, a PieceHighlight

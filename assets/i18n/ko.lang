@@ -1093,6 +1093,8 @@ coach.colour.help = 코치를 상대로 둘 색입니다. 번갈아: 백으로 �
 coach.colour.alternate = 번갈아
 coach.take_time = "천천히 생각하세요" 알림
 coach.take_time.help = 1분 동안 생각하면 코치가 서두를 필요 없다고 말해 줍니다. 레벨 1~3에서만 적용됩니다.
+coach.danger_markers = 위험한 기물 표시
+coach.danger_markers.help = 레벨 1과 2에서, 내 차례에 코치가 지금 잡을 수 있는 내 기물 아래에 색깔 칸이 나타납니다.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = 코치 음성이 설치되지 않았거나 꺼져 있습니다(설정 > 오디오). 코치의 말은 화면에 글로 표시됩니다.
 # At the table
@@ -1113,6 +1115,7 @@ coach.confirm.resign_draw = 이 게임을 기권하시겠습니까? 코치가 �
 coach.confirm.leave = 메인 메뉴로 돌아가시겠습니까? 코치와의 이 게임은 포기하게 됩니다.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = 다시 두기
+coach.gameover.practise = 연습하기: {0}
 coach.gameover.unrated = 코치와의 이 게임은 레이팅에 반영되지 않습니다.
 coach.lesson.done = 잘하셨습니다
 coach.lesson.done.line = 이제 체스 규칙을 알게 되었습니다.
@@ -1245,6 +1248,10 @@ options.voice_quality.high = 높음
 options.voice_quality.very_high = 매우 높음
 options.voice_quality.ultra = 울트라
 options.voice_quality.max = 최대
+options.voice_speed_lesson = 음성 속도: 규칙 레슨
+options.voice_speed_beginner = 음성 속도: 레벨 1-2
+options.voice_speed = 음성 속도: 그 외 레벨
+options.voice_speed.help = 코치가 말하는 속도입니다. 100%가 기본 속도입니다. 규칙 레슨과 레벨 1, 2는 초보자를 위해 기본적으로 더 느립니다(85%). 그 외 레벨에는 챌린지도 포함됩니다. 변경 사항은 코치의 다음 대사부터 적용됩니다.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = 코치의 목소리
 coach.download.text = 코치의 목소리는 Supertone이 만든 음성 합성 모델 Supertonic 3에서 나옵니다. 이 모델은 Scacelith에 포함되어 있지 않으며, 지금 Hugging Face에서 다운로드할 수 있습니다({0} MB, 한 번만). 모델이 없으면 코치의 말은 화면에 글로 표시됩니다.

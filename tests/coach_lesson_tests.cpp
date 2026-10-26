@@ -150,7 +150,14 @@ std::string renderEn(const Line& l, bool spoken = false) { return catalog().rend
 // exercises (each position matches its expectation), demonstrations and rewinds.
 TEST(coach_lesson_chapters_replay) {
     Lesson lesson;
-    CHECK_EQ(lesson.chapters().size(), size_t(10));
+    CHECK_EQ(lesson.chapters().size(), size_t(12));
+    // The chapters of earlier versions keep their ids: a chapter saved by its old index is resumed
+    // through them (game/settings_coach.cpp).
+    for (const char* id : {"welcome", "pieces", "safety", "check", "mate", "castling", "en_passant", "promotion", "draws",
+                           "etiquette"})
+        CHECK(lesson.chapterIndex(id) >= 0);
+    CHECK_EQ(lesson.chapterIndex("before_move"), 9);
+    CHECK_EQ(lesson.chapterIndex("nope"), -1);
     int says = 0, waits = 0, demos = 0;
     std::set<int> expects;
     for (size_t c = 0; c < lesson.chapters().size(); ++c) {

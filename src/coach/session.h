@@ -24,10 +24,20 @@
 
 namespace coach {
 
+// The TTS speed of a session's lines (Options > Audio, Settings::ttsSpeed*): by default slower for
+// new players, in the rules lesson and at levels 1-2; normal from level 3 on and in the challenges.
+struct SpeechSpeeds {
+    float lesson = 0.85f;     // level 0
+    float beginner = 0.85f;   // levels 1-2
+    float normal = 1.0f;      // levels 3-6, the challenges
+    float forLevel(int level) const { return level == 0 ? lesson : level <= 2 ? beginner : normal; }
+};
+
 struct SessionConfig {
     int level = 1;                        // 0 = the rules lesson, 1..6 = the coach levels
     chess::Color human = chess::White;    // the lesson: always White
     DirectorConfig director;
+    SpeechSpeeds speeds;                  // the director's speed, by level (Session::start)
     bool introduceLevel = false;          // first game at this level (or the level changed)
     bool offersEnabled = true;            // takeback offers after blunders
     bool takeYourTime = true;             // "Take your time." after a minute without a move (levels 1-3)
@@ -55,6 +65,9 @@ public:
     // Every frame while the game runs (not while paused).
     void update(const chess::Game& game, float dt);
     void setPaused(bool paused);
+    // Options > Audio changed the speeds: from the next line on (the lines already synthesised at
+    // the old speed are synthesised again).
+    void setSpeechSpeeds(const SpeechSpeeds& speeds);
 
     // ---- Events from the scene --------------------------------------------------------------------
     void onMove(const chess::Game& game);          // a move was completed (either side; lesson moves too)
@@ -97,6 +110,9 @@ public:
     const std::vector<GameRecord>& history() const;   // with the game just finished appended
     bool accuracyExplained() const;
     int suggestedLevel() const;                    // 0 = no suggestion
+    // Levels 1-3 of a game: the challenge set (id) that practises the theme the appraisal named as
+    // the one improvement; "" when it named none or no set practises it. Not persisted: the end card.
+    const std::string& suggestedChallenge() const;
     int lessonChapter() const;                     // the chapter to resume at
     bool lessonCompleted() const;
 

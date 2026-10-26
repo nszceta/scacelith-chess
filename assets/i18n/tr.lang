@@ -1095,6 +1095,8 @@ coach.colour.help = Eğitmene karşı oynadığınız renk. Sırayla: bir oyunda
 coach.colour.alternate = Sırayla
 coach.take_time = "Acele etmeyin" hatırlatması
 coach.take_time.help = Bir dakika düşündükten sonra eğitmen acele etmenize gerek olmadığını söyler. Yalnızca 1–3. seviyeler.
+coach.danger_markers = Tehlikedeki taşları göster
+coach.danger_markers.help = 1. ve 2. seviyelerde, sıra sizdeyken, eğitmenin hemen alabileceği her taşınızın altında renkli bir kare belirir.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Eğitmenin sesi yüklü değil ya da kapalı (Seçenekler > Ses): sözleri ekranda yazılacak.
 # At the table
@@ -1115,6 +1117,7 @@ coach.confirm.resign_draw = Bu oyunu terk etmek istiyor musunuz? Eğitmen artık
 coach.confirm.leave = Ana menüye dönülsün mü? Eğitmenle oynadığınız bu oyun yarıda bırakılacak.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Yeniden oyna
+coach.gameover.practise = Alıştırma: {0}
 coach.gameover.unrated = Eğitmenle oynanan bu oyun puanlı değil.
 coach.lesson.done = TEBRİKLER
 coach.lesson.done.line = Artık satranç kurallarını biliyorsunuz.
@@ -1248,6 +1251,10 @@ options.voice_quality.high = Yüksek
 options.voice_quality.very_high = Çok yüksek
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Maksimum
+options.voice_speed_lesson = Konuşma hızı: kurallar dersi
+options.voice_speed_beginner = Konuşma hızı: seviye 1-2
+options.voice_speed = Konuşma hızı: diğer seviyeler
+options.voice_speed.help = Eğitmenin ne kadar hızlı konuştuğu: %100 normal hızıdır. Kurallar dersi ile 1. ve 2. seviye, yeni oyuncular için varsayılan olarak daha yavaştır (%85). Diğer seviyeler meydan okumaları da kapsar. Değişiklik eğitmenin bir sonraki cümlesinden itibaren geçerli olur.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = Eğitmenin Sesi
 coach.download.text = Eğitmen, Supertone'un bir konuşma sentezi modeli olan Supertonic 3 ile konuşur. Model Scacelith'e dahil değildir: oyun onu şimdi Hugging Face'ten indirebilir ({0} MB, bir kez). Model olmadan eğitmen sözlerini ekrana yazar.

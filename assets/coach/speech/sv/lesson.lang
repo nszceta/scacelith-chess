@@ -23,6 +23,8 @@ lesson.title.castling = rockad
 lesson.title.en_passant = en passant
 lesson.title.promotion = förvandling
 lesson.title.draws = patt och remi
+lesson.title.before_move = titta innan du drar
+lesson.title.opening = öppningen
 lesson.title.etiquette = riktiga partier: rating, klocka och etikett
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -241,7 +243,52 @@ lesson.draws.kings = Andra sätt att få remi: när ingen kan sätta matt, till 
 lesson.draws.agree = Spelarna kan också komma överens om remi.
 lesson.draws.repeat = Om samma ställning upprepas tre gånger, eller om det går femtio drag utan slag eller bondedrag, kan det också bli remi.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Stanna och titta innan varje drag. Starka spelare gör det varje gång.
+lesson.before.last = Första frågan: vad gjorde mitt senaste drag? Titta.
+lesson.before.threat = {my} angriper {your}. Det är ett hot.
+lesson.before.safe = Det räcker inte att flytta undan. Den nya rutan måste också vara säker.
+lesson.before.dodge.ask = Flytta din springare till en säker ruta.
+lesson.before.dodge.still = Din springare är fortfarande angripen. Titta.
+lesson.before.dodge.hint = Mina bönder bevakar {sq} och {sq2}. Välj en annan ruta.
+lesson.before.dodge.ok = Säkert! Du såg hotet, och du kollade rutan.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Inte {to}, för {my} bevakar den rutan. Titta.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = Du har förlorat {your}. Titta först, dra sedan.
+lesson.before.again = Igen, mitt drag först. Titta.
+lesson.before.free.ask = Titta på mitt senaste drag. Kan du ta något gratis?
+lesson.before.free.missed = Titta på {my} igen. Vad kan ta {my:den}?
+lesson.before.free.hint = {my} saknar skydd. Din {@}bonde kan ta {my:den}.
+lesson.before.free.ok = Ja! Min löpare stod oskyddad. Titta alltid på mitt senaste drag.
+lesson.before.check.ask = Ge mig schack på en ruta där jag inte kan ta.
+lesson.before.check.wrong = Det är inte schack. Hitta ett schack från en säker ruta.
+lesson.before.check.hint = {my} bevakar {sq}. Ge schack från en säker ruta.
+lesson.before.check.ok = Bra schack! Din dam står säkert där.
+lesson.before.done = Gör det till en vana: titta först, dra sedan.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Öppningen är början av partiet. Några enkla regler hjälper.
+lesson.opening.goals = {@}Ta centrum, {@2}få ut springare och löpare och {@3}rockera tidigt.
+lesson.opening.centre = De fyra rutorna i {@}mitten är centrum.
+lesson.opening.pawn.ask = Sätt en bonde i centrum: två rutor framåt.
+lesson.opening.pawn.one = Inte illa, men två rutor tar mer av centrum.
+lesson.opening.pawn.knight = Springarna kommer snart. Först en bonde i centrum.
+lesson.opening.pawn.wrong = Använd bonden framför din kung eller din dam.
+lesson.opening.pawn.ok = Bra! Din bonde tar plats i centrum.
+lesson.opening.queen = Ta inte ut damen för tidigt: mina pjäser skulle jaga henne.
+lesson.opening.knight.ask = Ta ut en springare, mot centrum.
+lesson.opening.rim = En springare i kanten når få rutor. Hoppa mot centrum.
+lesson.opening.bishop = Bra att utveckla! Men den här gången en springare.
+lesson.opening.knight.ok = Bra! Därifrån bevakar din springare centrum.
+lesson.opening.later = Några drag senare: din springare och din {@}löpare är ute.
+lesson.opening.twice = Flytta inte samma pjäs två gånger utan goda skäl.
+lesson.opening.castle.ask = Vägen är fri. Rockera och för din kung i säkerhet.
+lesson.opening.castle.wrong = Din kung är redo. Rockera nu, medan vägen är fri.
+lesson.opening.castle.ok = Rockerat! Din kung står säkert, och ditt torn är med i spelet.
+lesson.opening.done = Centrum, pjäser, rockad: så börjar du varje parti bra.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Nu kan du alla schackregler. Bra jobbat!
 lesson.talk.real = Nu ska jag berätta hur riktiga partier går till.
 lesson.talk.elo = Spelare har en rating, som kallas Elo. Den stiger när du vinner och sjunker när du förlorar.

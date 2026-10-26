@@ -23,6 +23,8 @@ lesson.title.castling = rokada
 lesson.title.en_passant = uzimanje u prolazu
 lesson.title.promotion = promocija pješaka
 lesson.title.draws = pat i remi
+lesson.title.before_move = prije poteza
+lesson.title.opening = otvaranje
 lesson.title.etiquette = rejting, sat i ponašanje u pravim partijama
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -241,7 +243,52 @@ lesson.draws.kings = Drugi remiji: kad nitko ne može dati mat, na primjer kad o
 lesson.draws.agree = Igrači mogu i dogovoriti remi.
 lesson.draws.repeat = Remi omogućuje i trostruko ponavljanje pozicije ili pedeset poteza bez uzimanja i bez poteza pješakom.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Prije svakog poteza zastani i pogledaj. Jaki igrači to rade svaki put.
+lesson.before.last = Prvo pitanje: što je napravio moj zadnji potez? Gledaj.
+lesson.before.threat = {my} napada {your:acc}. To je prijetnja.
+lesson.before.safe = Nije dovoljno pobjeći. I novo polje mora biti sigurno.
+lesson.before.dodge.ask = Pomakni svog skakača na sigurno polje.
+lesson.before.dodge.still = Tvoj skakač je i dalje napadnut. Gledaj.
+lesson.before.dodge.hint = Moji pješaci brane polja {sq} i {sq2}. Odaberi drugo polje.
+lesson.before.dodge.ok = Sigurno! Primijetiš prijetnju i provjeriš polje.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Ne na {to}: {my} brani to polje. Gledaj.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = {your} je izgubljen{your:ag}. Prvo pogledaj, onda igraj.
+lesson.before.again = Opet, prvo moj potez. Gledaj.
+lesson.before.free.ask = Pogledaj moj zadnji potez. Možeš li uzeti nešto besplatno?
+lesson.before.free.missed = Pogledaj {my:acc} ponovno. Što može uzeti tu figuru?
+lesson.before.free.hint = {my} nema branitelja. Tvoj {@}pješak {my:pron_acc} može uzeti.
+lesson.before.free.ok = Tako je! Moj lovac je bio slobodan. Uvijek pogledaj moj zadnji potez.
+lesson.before.check.ask = Daj mi šah s polja koje ne mogu uzeti.
+lesson.before.check.wrong = To nije šah. Nađi šah sa sigurnog polja.
+lesson.before.check.hint = {my} brani polje {sq}. Daj šah sa sigurnog polja.
+lesson.before.check.ok = Dobar šah! Tvoja dama je tamo sigurna.
+lesson.before.done = Neka ti to postane navika: prvo pogledaj, onda igraj.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Otvaranje je početak partije. Pomaže nekoliko jednostavnih pravila.
+lesson.opening.goals = {@}Osvoji centar, {@2}izvedi skakače i lovce, i {@3}rano rokiraj.
+lesson.opening.centre = Četiri polja u {@}sredini čine centar.
+lesson.opening.pawn.ask = Stavi pješaka u centar: dva polja naprijed.
+lesson.opening.pawn.one = Nije loše, ali dva polja zauzimaju više centra.
+lesson.opening.pawn.knight = Skakači dolaze uskoro. Prvo pješak u centar.
+lesson.opening.pawn.wrong = Igraj pješakom ispred kralja ili dame.
+lesson.opening.pawn.ok = Dobro! Tvoj pješak zauzima prostor u centru.
+lesson.opening.queen = Ne izvodi damu rano: moje bi je figure tjerale.
+lesson.opening.knight.ask = Izvedi skakača prema centru.
+lesson.opening.rim = Skakač na rubu stiže na malo polja. Skoči prema centru.
+lesson.opening.bishop = Razvijanje, dobro! Ali ovaj put skakač.
+lesson.opening.knight.ok = Dobro! Odande tvoj skakač nadzire centar.
+lesson.opening.later = Nekoliko poteza kasnije: tvoj skakač i {@}lovac su vani.
+lesson.opening.twice = Ne igraj istom figurom dvaput bez dobrog razloga.
+lesson.opening.castle.ask = Put je slobodan. Rokiraj kralja na sigurno.
+lesson.opening.castle.wrong = Tvoj kralj je spreman. Rokiraj sada, dok je put slobodan.
+lesson.opening.castle.ok = Rokirano! Tvoj kralj je siguran, a top ulazi u igru.
+lesson.opening.done = Centar, figure, rokada: to je dobar početak svake partije.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Sad znaš sva pravila šaha. Bravo!
 lesson.talk.real = Da ti ispričam kako se igraju prave partije.
 lesson.talk.elo = Igrači imaju rejting, koji se zove Elo. Raste kad pobjeđuješ, a pada kad gubiš.

@@ -452,6 +452,8 @@ private:
     void endChallenge();                      // a challenge is over (every position solved)
     void saveChallengeDone();                 // its completion, once (Settings::coachChallengesDone)
     void nextChallenge();                     // "Next challenge" on its end card: the one to play next
+    void chainChallenge(const std::string& id);   // the next coach game is the challenge 'id', from its start
+    std::string practiseChallenge() const;    // a game's end card: the set the appraisal suggests ("" = none)
     bool coachEndCardReady() const;           // GameOver: the coach has said everything
     bool coachHandshakeWanted() const;        // GameOver: the closing words are said
     bool coachHoldsMove() const;              // updateAi: the coach's move waits (review, hands, draw offer)
@@ -462,6 +464,9 @@ private:
     void coachGazeTarget(m::vec3& target);    // updateGaze: where the coach looks while it talks
     // render(): the pieces the coach designates and its marks on the board, this frame.
     void coachMarks(std::vector<PieceHighlight>& highlights, std::vector<CoachMark>& marks);
+    // render(): levels 1-2, the player's pieces the coach could win (coach::hangingPieces), a tint
+    // under each on the player's turn (Settings::coachDangerMarkers; kept up to date in updateCoach).
+    void coachDangerMarks(std::vector<AnalysisMark>& marks) const;
     void drawCoachSubtitles();                // renderOverlay()
     void persistCoachResults();               // Settings [coach] from the session (once per game)
     bool coachCanTakeBack() const;            // the Esc menu's "Take back" (session and scoresheets)

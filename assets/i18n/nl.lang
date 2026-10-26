@@ -1084,6 +1084,8 @@ coach.colour.help = De kleur waarmee je tegen de coach speelt. Afwisselend: wit,
 coach.colour.alternate = Afwisselend
 coach.take_time = Herinnering ‘Neem je tijd’
 coach.take_time.help = Na een minuut nadenken zegt de coach dat je geen haast hebt. Alleen niveau 1 tot 3.
+coach.danger_markers = Stukken in gevaar tonen
+coach.danger_markers.help = Op niveau 1 en 2 verschijnt op jouw beurt een gekleurd veld onder elk van je stukken dat de coach nu zou kunnen winnen.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = De stem van de coach is niet geïnstalleerd of staat uit (Opties > Audio): wat hij zegt, verschijnt op het scherm.
 # At the table
@@ -1104,6 +1106,7 @@ coach.confirm.resign_draw = Deze partij opgeven? De coach kan niet meer mat zett
 coach.confirm.leave = Terug naar het hoofdmenu? Deze partij met de coach wordt afgebroken.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Opnieuw spelen
+coach.gameover.practise = Oefenen: {0}
 coach.gameover.unrated = Deze partij met de coach telt niet voor de rating.
 coach.lesson.done = GOED GEDAAN
 coach.lesson.done.line = Je kent nu de schaakregels.
@@ -1236,6 +1239,10 @@ options.voice_quality.high = Hoog
 options.voice_quality.very_high = Zeer hoog
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Maximaal
+options.voice_speed_lesson = Spreeksnelheid: regelles
+options.voice_speed_beginner = Spreeksnelheid: niveau 1-2
+options.voice_speed = Spreeksnelheid: overige niveaus
+options.voice_speed.help = Hoe snel de coach praat: 100% is de normale snelheid. De regelles en niveau 1 en 2 zijn standaard langzamer (85%), voor nieuwe spelers. Overige niveaus omvat ook de uitdagingen. Een wijziging gaat in vanaf de volgende zin van de coach.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = De stem van de coach
 coach.download.text = De coach spreekt met Supertonic 3, een spraaksynthesemodel van Supertone. Het zit niet bij Scacelith: het spel kan het nu downloaden van Hugging Face ({0} MB, eenmalig). Zonder dit model schrijft de coach zijn woorden op het scherm.

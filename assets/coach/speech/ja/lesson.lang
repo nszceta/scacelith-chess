@@ -19,6 +19,8 @@ lesson.title.castling = キャスリング
 lesson.title.en_passant = アンパッサン
 lesson.title.promotion = プロモーション
 lesson.title.draws = ステイルメイトと引き分け
+lesson.title.before_move = 指す前に
+lesson.title.opening = オープニング
 lesson.title.etiquette = 実戦のレーティング、時計、マナー
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -270,7 +272,52 @@ lesson.draws.agree = 両者の合意で、引き分けにすることもでき�
 lesson.draws.repeat = 同じ局面が3回、または駒取りもポーンの移動もない50手で、引き分けにできます。
 lesson.draws.repeat.spoken = 同じ局面がさんかい、または駒取りもポーンの移動もないごじゅってで、引き分けにできます。
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = 指す前に、止まってよく見ましょう。強い人は毎回そうしています。
+lesson.before.last = 最初の質問です。私の今の手は、何をしたでしょう？見ていてください。
+lesson.before.threat = {my}が{your}を狙っています。これが脅威です。
+lesson.before.safe = 逃げるだけでは足りません。移動先のマスも安全でなければなりません。
+lesson.before.dodge.ask = ナイトを安全なマスへ動かしてください。
+lesson.before.dodge.still = ナイトはまだ狙われています。見ていてください。
+lesson.before.dodge.hint = 私のポーンが{sq}と{sq2}を守っています。ほかのマスを選びましょう。
+lesson.before.dodge.ok = 安全です！脅威に気づいて、マスも確かめましたね。
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = {to}はだめです。{my}がそのマスを守っています。見ていてください。
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = {your}を取られました。まず見て、それから指しましょう。
+lesson.before.again = もう一度。まず私が指します。見ていてください。
+lesson.before.free.ask = 私の今の手を見てください。ただで取れる駒はありますか？
+lesson.before.free.missed = もう一度{my}を見てください。何で取れるでしょう？
+lesson.before.free.hint = {my}には守りがありません。あなたの{@}ポーンで取れます。
+lesson.before.free.ok = そのとおり！私のビショップはただでした。いつも私の最後の手を見ましょう。
+lesson.before.check.ask = 私が取れないマスから、チェックをかけてください。
+lesson.before.check.wrong = それはチェックではありません。安全なマスからのチェックを探しましょう。
+lesson.before.check.hint = {my}が{sq}を守っています。安全なマスからチェックしましょう。
+lesson.before.check.ok = いいチェックです！そこならクイーンは安全です。
+lesson.before.done = 習慣にしましょう。まず見て、それから指す。
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = オープニングは対局の始まりです。簡単なルールがいくつか役に立ちます。
+lesson.opening.goals = {@}センターを取る、{@2}ナイトとビショップを出す、{@3}早めにキャスリングする。
+lesson.opening.centre = {@}真ん中の四マスがセンターです。
+lesson.opening.pawn.ask = センターにポーンを置きましょう。二マス進めます。
+lesson.opening.pawn.one = 悪くありませんが、二マス進むほうがセンターを広く取れます。
+lesson.opening.pawn.knight = ナイトはもうすぐです。まずはセンターのポーンです。
+lesson.opening.pawn.wrong = キングの前か、クイーンの前のポーンを使いましょう。
+lesson.opening.pawn.ok = いいですね！あなたのポーンがセンターで場所を取っています。
+lesson.opening.queen = クイーンを早く出してはいけません。私の駒に追い回されます。
+lesson.opening.knight.ask = ナイトを、センターへ向けて出しましょう。
+lesson.opening.rim = 端のナイトは動けるマスが少ないです。センターへ向かって跳びましょう。
+lesson.opening.bishop = 駒を出すのはいいことです！でも今回はナイトです。
+lesson.opening.knight.ok = いいですね！そこからナイトはセンターを見張っています。
+lesson.opening.later = 数手あと。ナイトと{@}ビショップが出ました。
+lesson.opening.twice = 理由がなければ、同じ駒を二回動かさないようにしましょう。
+lesson.opening.castle.ask = 道があいています。キャスリングで、キングを安全にしましょう。
+lesson.opening.castle.wrong = キングの準備はできています。道があいている今、キャスリングしましょう。
+lesson.opening.castle.ok = キャスリング完了！キングは安全で、ルークも参加します。
+lesson.opening.done = センター、駒を出す、キャスリング。どの対局でも、これが良い始まりです。
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = これでチェスのルールは全部覚えました。よくできました！
 lesson.talk.real = では、実際の対局がどう行われるかお話しします。
 lesson.talk.elo = Eloというレーティングがあり、勝てば上がり、負ければ下がります。

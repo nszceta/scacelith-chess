@@ -24,6 +24,8 @@ lesson.title.castling = Rokāde
 lesson.title.en_passant = Ņemšana garāmejot
 lesson.title.promotion = Bandinieka pārvēršana
 lesson.title.draws = Pats un neizšķirts
+lesson.title.before_move = Pirms gājiena
+lesson.title.opening = Atklātne
 lesson.title.etiquette = Īstas partijas: reitings, pulkstenis un pieklājība
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -243,7 +245,52 @@ lesson.draws.kings = Citi neizšķirti: kad neviens nevar pieteikt matu, piemēr
 lesson.draws.agree = Spēlētāji var arī vienoties par neizšķirtu.
 lesson.draws.repeat = Neizšķirtu var panākt arī tad, ja pozīcija atkārtojas trīs reizes vai ja piecdesmit gājienos nav bijis nevienas ņemšanas un neviena bandinieka gājiena.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Pirms katra gājiena apstājies un paskaties. Stipri spēlētāji tā dara katru reizi.
+lesson.before.last = Pirmais jautājums: ko izdarīja mans pēdējais gājiens? Skaties.
+lesson.before.threat = {my} uzbrūk {your:dat}. Tas ir drauds.
+lesson.before.safe = Ar aiziešanu nepietiek. Arī jaunajam lauciņam jābūt drošam.
+lesson.before.dodge.ask = Pārvieto savu zirgu uz drošu lauciņu.
+lesson.before.dodge.still = Tavam zirgam joprojām uzbrūk. Skaties.
+lesson.before.dodge.hint = Mani bandinieki sargā lauciņus {sq} un {sq2}. Izvēlies citu lauciņu.
+lesson.before.dodge.ok = Droši! Tu pamanīji draudu un pārbaudīji lauciņu.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Nē, ne uz {to}: {my} sargā to lauciņu. Skaties.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = Tu zaudēji {your:acc}. Vispirms paskaties, tad ej.
+lesson.before.again = Vēlreiz, vispirms mans gājiens. Skaties.
+lesson.before.free.ask = Paskaties uz manu pēdējo gājienu. Vai vari kaut ko paņemt par velti?
+lesson.before.free.missed = Vēlreiz paskaties uz {my:acc}. Kas var paņemt {my:pron_acc}?
+lesson.before.free.hint = {my} nav aizsarga. Tavs {@}bandinieks var paņemt {my:pron_acc}.
+lesson.before.free.ok = Jā! Mans laidnis bija brīvs. Vienmēr skaties uz manu pēdējo gājienu.
+lesson.before.check.ask = Pieteic man šahu no lauciņa, ko es nevaru ņemt.
+lesson.before.check.wrong = Tas nav šahs. Atrodi šahu no droša lauciņa.
+lesson.before.check.hint = {my} sargā lauciņu {sq}. Pieteic šahu no droša lauciņa.
+lesson.before.check.ok = Labs šahs! Tava dāma tur ir droša.
+lesson.before.done = Pieradini: vispirms paskaties, tad ej.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Atklātne ir partijas sākums. Palīdz daži vienkārši noteikumi.
+lesson.opening.goals = {@}Ieņem centru, {@2}attīsti zirgus un laidņus un {@3}agri veic rokādi.
+lesson.opening.centre = Četri lauciņi {@}vidū ir centrs.
+lesson.opening.pawn.ask = Novieto bandinieku centrā: divus lauciņus uz priekšu.
+lesson.opening.pawn.one = Nav slikti, bet divi lauciņi ieņem vairāk centra.
+lesson.opening.pawn.knight = Zirgi nāks drīz. Vispirms bandinieks centrā.
+lesson.opening.pawn.wrong = Ej ar bandinieku, kas stāv pirms karaļa vai pirms dāmas.
+lesson.opening.pawn.ok = Labi! Tavs bandinieks ieņem vietu centrā.
+lesson.opening.queen = Dāmu neizved par agru: manas figūras to dzītu.
+lesson.opening.knight.ask = Izved zirgu uz centra pusi.
+lesson.opening.rim = Zirgs malā sasniedz maz lauciņu. Lec uz centra pusi.
+lesson.opening.bishop = Attīstība, labi! Bet šoreiz zirgs.
+lesson.opening.knight.ok = Labi! No turienes tavs zirgs vēro centru.
+lesson.opening.later = Pēc dažiem gājieniem: tavs zirgs un {@}laidnis ir ārā.
+lesson.opening.twice = Bez laba iemesla nevirzi to pašu figūru divreiz.
+lesson.opening.castle.ask = Ceļš ir brīvs. Veic rokādi un noved karali drošībā.
+lesson.opening.castle.wrong = Tavs karalis ir gatavs. Veic rokādi tagad, kamēr ceļš ir brīvs.
+lesson.opening.castle.ok = Rokāde veikta! Tavs karalis ir drošībā, un tornis iesaistās spēlē.
+lesson.opening.done = Centrs, figūras, rokāde: tas ir labs sākums katrai partijai.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 # Time controls as assets/i18n/lv.lang (tc.*): zibspēle (blitz), ātrspēle (rapid), klasiskais šahs.
 lesson.talk.rules = Tagad tu zini visus šaha noteikumus. Labi padarīts!
 lesson.talk.real = Ļauj man pastāstīt, kā notiek īstas partijas.

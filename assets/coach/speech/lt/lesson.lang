@@ -24,6 +24,8 @@ lesson.title.castling = rokiruotė
 lesson.title.en_passant = kirtimas prasilenkiant
 lesson.title.promotion = pėstininko virsmas
 lesson.title.draws = patas ir lygiosios
+lesson.title.before_move = prieš ėjimą
+lesson.title.opening = debiutas
 lesson.title.etiquette = reitingas, laikrodis ir etiketas tikrose partijose
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -243,7 +245,52 @@ lesson.draws.kings = Kitos lygiosios: kai niekas negali paskelbti mato, pavyzdž
 lesson.draws.agree = Žaidėjai taip pat gali susitarti dėl lygiųjų.
 lesson.draws.repeat = Lygiosios galimos ir tada, kai ta pati pozicija pasikartoja tris kartus arba kai penkiasdešimt ėjimų nebuvo nei kirtimų, nei pėstininkų ėjimų.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Prieš kiekvieną ėjimą sustok ir pažiūrėk. Stiprūs žaidėjai taip daro kaskart.
+lesson.before.last = Pirmas klausimas: ką padarė mano paskutinis ėjimas? Žiūrėk.
+lesson.before.threat = {my} puola {your:acc}. Tai grėsmė.
+lesson.before.safe = Atsitraukti nepakanka. Naujas langelis taip pat turi būti saugus.
+lesson.before.dodge.ask = Perkelk savo žirgą į saugų langelį.
+lesson.before.dodge.still = Tavo žirgas vis dar puolamas. Žiūrėk.
+lesson.before.dodge.hint = Mano pėstininkai gina langelius {sq} ir {sq2}. Pasirink kitą langelį.
+lesson.before.dodge.ok = Saugu! Pamatei grėsmę ir patikrinai langelį.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Ne į {to}: {my} gina tą langelį. Žiūrėk.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = Praradai {your:acc}. Pirma pažiūrėk, paskui eik.
+lesson.before.again = Dar kartą, pirmas mano ėjimas. Žiūrėk.
+lesson.before.free.ask = Pažiūrėk į mano paskutinį ėjimą. Gali ką nors kirsti veltui?
+lesson.before.free.missed = Dar kartą pažiūrėk į {my:acc}. Kas gali {my:pron_acc} kirsti?
+lesson.before.free.hint = {my} neturi gynėjo. Tavo {@}pėstininkas gali {my:pron_acc} kirsti.
+lesson.before.free.ok = Taip! Mano rikis buvo laisvas. Visada žiūrėk į mano paskutinį ėjimą.
+lesson.before.check.ask = Skelbk man šachą iš langelio, kurio negaliu kirsti.
+lesson.before.check.wrong = Tai ne šachas. Rask šachą iš saugaus langelio.
+lesson.before.check.hint = {my} gina langelį {sq}. Skelbk šachą iš saugaus langelio.
+lesson.before.check.ok = Geras šachas! Tavo valdovė ten saugi.
+lesson.before.done = Įprask: pirma pažiūrėk, paskui eik.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Debiutas – partijos pradžia. Padeda kelios paprastos taisyklės.
+lesson.opening.goals = {@}Užimk centrą, {@2}išvesk žirgus ir rikius ir {@3}anksti rokiruokis.
+lesson.opening.centre = Keturi langeliai {@}viduryje yra centras.
+lesson.opening.pawn.ask = Pastatyk pėstininką į centrą: du langeliai į priekį.
+lesson.opening.pawn.one = Neblogai, bet du langeliai užima daugiau centro.
+lesson.opening.pawn.knight = Žirgai ateis netrukus. Pirma pėstininkas į centrą.
+lesson.opening.pawn.wrong = Eik pėstininku prieš karalių arba prieš valdovę.
+lesson.opening.pawn.ok = Gerai! Tavo pėstininkas užima erdvę centre.
+lesson.opening.queen = Valdovės neišvesk anksti: mano figūros ją vaikytų.
+lesson.opening.knight.ask = Išvesk žirgą link centro.
+lesson.opening.rim = Žirgas krašte pasiekia mažai langelių. Šok link centro.
+lesson.opening.bishop = Figūrų išvedimas – gerai! Bet šį kartą žirgas.
+lesson.opening.knight.ok = Gerai! Iš ten tavo žirgas stebi centrą.
+lesson.opening.later = Po kelių ėjimų: tavo žirgas ir {@}rikis jau išvesti.
+lesson.opening.twice = Be gero pagrindo neik ta pačia figūra du kartus.
+lesson.opening.castle.ask = Kelias laisvas. Rokiruokis: karalius bus saugus.
+lesson.opening.castle.wrong = Karalius gali rokiruotis. Rokiruokis dabar, kol kelias laisvas.
+lesson.opening.castle.ok = Rokiruota! Tavo karalius saugus, o bokštas įsijungia į žaidimą.
+lesson.opening.done = Centras, figūros, rokiruotė – tai geras kiekvienos partijos startas.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Dabar žinai visas šachmatų taisykles. Šaunu!
 lesson.talk.real = Papasakosiu, kaip žaidžiamos tikros partijos.
 lesson.talk.elo = Žaidėjai turi reitingą, vadinamą Elo. Kai laimi, jis kyla, o kai pralaimi, krinta.

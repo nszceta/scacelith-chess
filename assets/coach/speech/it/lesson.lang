@@ -22,6 +22,8 @@ lesson.title.castling = l’arrocco
 lesson.title.en_passant = la presa en passant
 lesson.title.promotion = la promozione
 lesson.title.draws = lo stallo e la patta
+lesson.title.before_move = il controllo prima di muovere
+lesson.title.opening = l’apertura
 lesson.title.etiquette = le partite vere: punteggio, orologio e buone maniere
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -242,7 +244,52 @@ lesson.draws.kings = Altre patte: quando nessuno può dare scacco matto, come co
 lesson.draws.agree = I giocatori possono anche accordarsi per la patta.
 lesson.draws.repeat = Anche ripetere tre volte la stessa posizione, o fare cinquanta mosse senza catture né mosse di pedone, permette la patta.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ----------------------------------------
+lesson.before.habit = Prima di ogni mossa, fermati e guarda. I giocatori forti lo fanno sempre.
+lesson.before.last = Prima domanda: che cosa ha fatto la mia ultima mossa? Guarda.
+lesson.before.threat = {my} attacca {your}. È una minaccia.
+lesson.before.safe = Allontanarsi non basta. Anche la nuova casa deve essere sicura.
+lesson.before.dodge.ask = Porta il tuo cavallo su una casa sicura.
+lesson.before.dodge.still = Il tuo cavallo è ancora attaccato. Guarda.
+lesson.before.dodge.hint = I miei pedoni proteggono {sq} e {sq2}. Scegli un’altra casa.
+lesson.before.dodge.ok = Sicura! Hai visto la minaccia e hai controllato la casa.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Non su {to}: {my} protegge quella casa. Guarda.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = Hai perso {your}. Prima guarda, poi muovi.
+lesson.before.again = Ancora una volta, prima muovo io. Guarda.
+lesson.before.free.ask = Guarda la mia ultima mossa. Puoi catturare qualcosa gratis?
+lesson.before.free.missed = Guarda ancora {my}. Chi può catturar{my:lo}?
+lesson.before.free.hint = {my} non ha difensori. Il tuo {@}pedone può catturar{my:lo}.
+lesson.before.free.ok = Sì! Il mio alfiere era libero. Guarda sempre la mia ultima mossa.
+lesson.before.check.ask = Dammi scacco da una casa dove non posso catturarti.
+lesson.before.check.wrong = Non è scacco. Trova uno scacco da una casa sicura.
+lesson.before.check.hint = {my} protegge {sq}. Dai scacco da una casa sicura.
+lesson.before.check.ok = Bello scacco! La tua donna è al sicuro lì.
+lesson.before.done = Fanne un’abitudine: prima guarda, poi muovi.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------
+lesson.opening.what = L’apertura è l’inizio della partita. Poche regole semplici aiutano.
+lesson.opening.goals = {@}Prendi il centro, {@2}sviluppa cavalli e alfieri e {@3}arrocca presto.
+lesson.opening.centre = Le quattro case nel {@}mezzo formano il centro.
+lesson.opening.pawn.ask = Metti un pedone al centro: due case avanti.
+lesson.opening.pawn.one = Non male, ma due case prendono più centro.
+lesson.opening.pawn.knight = I cavalli arriveranno presto. Prima, un pedone al centro.
+lesson.opening.pawn.wrong = Usa il pedone davanti al tuo re o alla tua donna.
+lesson.opening.pawn.ok = Bene! Il tuo pedone prende spazio al centro.
+lesson.opening.queen = Non portare fuori la donna troppo presto: i miei pezzi la inseguirebbero.
+lesson.opening.knight.ask = Sviluppa un cavallo, verso il centro.
+lesson.opening.rim = Un cavallo sul bordo raggiunge poche case. Salta verso il centro.
+lesson.opening.bishop = Sviluppare è giusto! Ma stavolta, un cavallo.
+lesson.opening.knight.ok = Bene! Da lì il tuo cavallo controlla il centro.
+lesson.opening.later = Qualche mossa dopo: il tuo cavallo e il tuo {@}alfiere sono in gioco.
+lesson.opening.twice = Non muovere due volte lo stesso pezzo senza un buon motivo.
+lesson.opening.castle.ask = La via è libera. Arrocca per mettere il re al sicuro.
+lesson.opening.castle.wrong = Il tuo re è pronto. Arrocca adesso, finché la via è libera.
+lesson.opening.castle.ok = Arrocco fatto! Il tuo re è al sicuro e la torre entra in gioco.
+lesson.opening.done = Centro, pezzi, arrocco: è un buon inizio per ogni partita.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Ora conosci tutte le regole degli scacchi. Ben fatto!
 lesson.talk.real = Lascia che ti racconti come si giocano le partite vere.
 lesson.talk.elo = I giocatori hanno un punteggio, chiamato Elo. Sale quando vinci e scende quando perdi.

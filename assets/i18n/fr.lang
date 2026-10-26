@@ -1071,6 +1071,8 @@ coach.colour.help = La couleur que vous jouez contre le coach. Alternée : les 
 coach.colour.alternate = Alternée
 coach.take_time = Rappel « Prenez votre temps »
 coach.take_time.help = Après une minute de réflexion, le coach vous dit que rien ne presse. Niveaux 1 à 3 uniquement.
+coach.danger_markers = Montrer les pièces en danger
+coach.danger_markers.help = Aux niveaux 1 et 2, à votre tour, une case colorée apparaît sous chacune de vos pièces que le coach pourrait gagner tout de suite.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = La voix du coach n’est pas installée ou est désactivée (Options > Son) : ses paroles seront écrites à l’écran.
 # At the table
@@ -1091,6 +1093,7 @@ coach.confirm.resign_draw = Abandonner cette partie ? Le coach ne peut plus mate
 coach.confirm.leave = Revenir au menu principal ? Cette partie avec le coach sera abandonnée.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Rejouer
+coach.gameover.practise = S’entraîner : {0}
 coach.gameover.unrated = Cette partie avec le coach n’est pas classée.
 coach.lesson.done = BRAVO
 coach.lesson.done.line = Vous connaissez maintenant les règles des échecs.
@@ -1218,6 +1221,10 @@ options.voice_quality.high = Haute
 options.voice_quality.very_high = Très haute
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Maximale
+options.voice_speed_lesson = Débit de la voix : leçon des règles
+options.voice_speed_beginner = Débit de la voix : niveaux 1-2
+options.voice_speed = Débit de la voix : autres niveaux
+options.voice_speed.help = La vitesse à laquelle le coach parle : 100 % est sa vitesse normale. La leçon des règles et les niveaux 1 et 2 sont plus lents par défaut (85 %), pour les nouveaux joueurs. Les autres niveaux incluent les défis. Un changement s’applique dès la prochaine réplique du coach.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = La voix du coach
 coach.download.text = Le coach parle avec Supertonic 3, un modèle de synthèse vocale de Supertone. Il n’est pas fourni avec Scacelith : le jeu peut le télécharger maintenant depuis Hugging Face ({0} Mo, une seule fois). Sans lui, le coach écrit ses paroles à l’écran.

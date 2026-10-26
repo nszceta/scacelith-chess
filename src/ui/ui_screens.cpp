@@ -243,6 +243,9 @@ void copyOptions(game::Settings& dst, const game::Settings& src) {
     dst.subtitles = src.subtitles;
     dst.coachVoice = src.coachVoice;  // the voice model download (W12)
     dst.ttsSteps = src.ttsSteps;
+    dst.ttsSpeedLesson = src.ttsSpeedLesson;
+    dst.ttsSpeedBeginner = src.ttsSpeedBeginner;
+    dst.ttsSpeed = src.ttsSpeed;
     dst.showLegalMoves = src.showLegalMoves;
     dst.showCoordinates = src.showCoordinates;
     dst.mouseSensitivity = src.mouseSensitivity;
@@ -265,7 +268,8 @@ bool sameOptions(const game::Settings& a, const game::Settings& b) {
            a.graphicsLevels == b.graphicsLevels && feq(a.brightness, b.brightness) && feq(a.masterVolume, b.masterVolume) &&
            feq(a.effectsVolume, b.effectsVolume) && feq(a.ambienceVolume, b.ambienceVolume) && a.ambience == b.ambience &&
            feq(a.voiceVolume, b.voiceVolume) && a.subtitles == b.subtitles && a.coachVoice == b.coachVoice &&
-           a.ttsSteps == b.ttsSteps && a.showLegalMoves == b.showLegalMoves && a.showCoordinates == b.showCoordinates &&
+           a.ttsSteps == b.ttsSteps && feq(a.ttsSpeedLesson, b.ttsSpeedLesson) && feq(a.ttsSpeedBeginner, b.ttsSpeedBeginner) &&
+           feq(a.ttsSpeed, b.ttsSpeed) && a.showLegalMoves == b.showLegalMoves && a.showCoordinates == b.showCoordinates &&
            feq(a.mouseSensitivity, b.mouseSensitivity) && a.invertLook == b.invertLook && a.gameCursor == b.gameCursor &&
            a.autoPressClock == b.autoPressClock && a.ignoreOpponentHead == b.ignoreOpponentHead &&
            a.humanizeThinking == b.humanizeThinking && feq(a.handoverSeconds, b.handoverSeconds) &&
@@ -468,13 +472,13 @@ bool optionsPage(MenuAction& act) {
     im::tabBar(tabs, o.tab, Rect(p.x + 60.0f, p.y + 124.0f, p.w - 120.0f, 50.0f));
 
     game::Settings& s = o.work;
-    // Rows from under the tabs to above the buttons: the nine rows of Gameplay are closer, and the
-    // eight of Audio (nine when it shows the voice model's update); the twelve lines of Controls
-    // closer still.
+    // Rows from under the tabs to above the buttons: the nine rows of Gameplay are closer; the
+    // eleven of Audio (twelve when it shows the voice model's update) and the twelve lines of
+    // Controls closer still.
     const VoiceUpdateRow voiceUpdate = o.tab == 2 ? detail::voiceUpdateRow() : VoiceUpdateRow();
     constexpr int kControlsTab = detail::kOnlineOptionsTab + 1;
     float rx = p.x + 70.0f, rw = p.w - 140.0f,
-          rh = o.tab == kControlsTab ? 40.0f : o.tab == 3 || voiceUpdate.show ? 52.0f : o.tab == 2 ? 56.0f : 60.0f;
+          rh = o.tab == kControlsTab || voiceUpdate.show ? 40.0f : o.tab == 2 ? 42.0f : o.tab == 3 ? 52.0f : 60.0f;
     float y = p.y + 200.0f;
     auto row = [&]() {
         Rect r(rx, y, rw, rh - 4.0f);
@@ -619,6 +623,18 @@ bool optionsPage(MenuAction& act) {
                                   1.0f, levelText, row(), s.coachVoice && voiceUpdate.modelInstalled))
                     s.ttsSteps = int(std::lround(steps));
                 im::tooltip(T("options.voice_quality.help"));
+            }
+            // The coach's speaking speeds: the rules lesson, levels 1-2 (both slower by default),
+            // the other levels and the challenges; a game under way takes them from its next line.
+            {
+                using game::Settings;
+                const std::pair<const char*, float*> speeds[] = {{"options.voice_speed_lesson", &s.ttsSpeedLesson},
+                                                                 {"options.voice_speed_beginner", &s.ttsSpeedBeginner},
+                                                                 {"options.voice_speed", &s.ttsSpeed}};
+                for (const auto& [key, v] : speeds) {
+                    im::sliderRow(L(key), *v, Settings::kTtsSpeedMin, Settings::kTtsSpeedMax, 0.05f, pct, row(), s.coachVoice);
+                    im::tooltip(T("options.voice_speed.help"));
+                }
             }
             im::sliderRow(L("options.voice_volume"), s.voiceVolume, 0.0f, 1.0f, 0.05f, pct, row(), s.coachVoice);
             im::tooltip(T("options.voice_volume.help"));
@@ -2030,7 +2046,10 @@ MenuAction gameOver(const std::string& result, const std::string& reason, bool p
             reasonLines = gfx::wrapLineCount(reasonText, reasonWrap, why);
         }
         const float reasonLineH = 32.0f, extra = float(reasonLines - 1) * reasonLineH;
-        float h = 380.0f + (S.goExtras.detail.empty() ? 0.0f : 38.0f) + extra;
+        // "Practise: Forks" (GameOverExtras::practiseLabel): its own row above the buttons.
+        const bool practise = !S.goExtras.practiseLabel.empty();
+        const float practiseRow = practise ? 72.0f : 0.0f;
+        float h = 380.0f + (S.goExtras.detail.empty() ? 0.0f : 38.0f) + extra + practiseRow;
         Rect p(v.x * 0.5f - w * 0.5f, v.y * 0.5f - h * 0.5f + 60.0f + (1.0f - t) * 20.0f + fold * 40.0f, w, h);
         im::captureMouseRect(p);
         gfx::Layer prev = gfx::layer();
@@ -2073,6 +2092,12 @@ MenuAction gameOver(const std::string& result, const std::string& reason, bool p
         const int nb = analyse ? 3 : 2;
         const float bx0 = p.cx() - (float(nb) * bw + float(nb - 1) * gap) * 0.5f;
         auto slot = [&](int i) { return im::flip(p, Rect(bx0 + float(i) * (bw + gap), by, bw, bh)); };
+        if (practise) {
+            const std::string label = S.goExtras.practiseLabel + "##gameover.practise";
+            const float pw = m::clamp(im::buttonWidthFor(label), 300.0f, w - 120.0f);
+            if (im::button(label, im::flip(p, Rect(p.cx() - pw * 0.5f, by - practiseRow, pw, bh)), im::ButtonKind::Secondary))
+                act = MenuAction::Practise;
+        }
         if (im::button(L("common.main_menu"), slot(0), im::ButtonKind::Secondary)) act = MenuAction::BackToMainMenu;
         if (analyse && im::button(L("analysis.menu.gameover"), slot(1), im::ButtonKind::Secondary)) act = MenuAction::StartAnalysis;
         im::Id rematchId = im::makeId("##gameover.rematch");

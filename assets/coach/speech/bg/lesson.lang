@@ -24,6 +24,8 @@ lesson.title.castling = рокада
 lesson.title.en_passant = вземане ан пасан
 lesson.title.promotion = произвеждане на пешка
 lesson.title.draws = пат и реми
+lesson.title.before_move = преди хода
+lesson.title.opening = дебютът
 lesson.title.etiquette = рейтинг, часовник и поведение в истинските партии
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -243,7 +245,52 @@ lesson.draws.kings = Има и други случаи на реми: когат
 lesson.draws.agree = Играчите могат и да се споразумеят за реми.
 lesson.draws.repeat = Трикратното повторение на позиция или петдесет хода без вземане и без ход с пешка също позволяват реми.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Преди всеки ход спри и огледай. Силните играчи го правят всеки път.
+lesson.before.last = Първи въпрос: какво направи последният ми ход? Гледай.
+lesson.before.threat = {my} напада {your:obj}. Това е заплаха.
+lesson.before.safe = Да се махнеш не стига. Новото поле също трябва да е безопасно.
+lesson.before.dodge.ask = Премести коня си на безопасно поле.
+lesson.before.dodge.still = Конят ти все още е под удар. Гледай.
+lesson.before.dodge.hint = Пешките ми защитават полетата {sq} и {sq2}. Избери друго поле.
+lesson.before.dodge.ok = Безопасно! Ти видя заплахата и провери полето.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Не на {to}: {my} защитава това поле. Гледай.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = Губиш {your:refl}. Първо гледай, после ходи.
+lesson.before.again = Пак, първо моят ход. Гледай.
+lesson.before.free.ask = Погледни последния ми ход. Можеш ли да вземеш нещо безплатно?
+lesson.before.free.missed = Погледни пак {my:obj}. Какво може да {my:pron_obj} вземе?
+lesson.before.free.hint = {my} няма защитник. {@}Пешката ти може да {my:pron_obj} вземе.
+lesson.before.free.ok = Да! Офицерът ми беше свободен. Винаги гледай последния ми ход.
+lesson.before.check.ask = Дай ми шах така, че да не мога да взема фигурата ти.
+lesson.before.check.wrong = Това не е шах. Намери шах от безопасно поле.
+lesson.before.check.hint = {my} защитава полето {sq}. Дай шах от безопасно поле.
+lesson.before.check.ok = Добър шах! Дамата ти е на сигурно място там.
+lesson.before.done = Направи го навик: първо гледай, после ходи.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Дебютът е началото на партията. Помагат няколко прости правила.
+lesson.opening.goals = {@}Контролирай центъра, {@2}развий конете и офицерите и {@3}направи рокада рано.
+lesson.opening.centre = Четирите полета в {@}средата са центърът.
+lesson.opening.pawn.ask = Постави пешка в центъра: две полета напред.
+lesson.opening.pawn.one = Не е зле, но две полета държат повече от центъра.
+lesson.opening.pawn.knight = Конете идват скоро. Първо пешка в центъра.
+lesson.opening.pawn.wrong = Използвай пешката пред царя или пред дамата.
+lesson.opening.pawn.ok = Добре! Пешката ти държи място в центъра.
+lesson.opening.queen = Не изкарвай дамата рано: фигурите ми ще я гонят.
+lesson.opening.knight.ask = Изкарай кон към центъра.
+lesson.opening.rim = Конят по края стига до малко полета. Скочи към центъра.
+lesson.opening.bishop = Развиваш, добре! Но този път кон.
+lesson.opening.knight.ok = Добре! Оттам конят ти наблюдава центъра.
+lesson.opening.later = Няколко хода по-късно: конят ти и {@}офицерът са навън.
+lesson.opening.twice = Не мести една и съща фигура два пъти без добра причина.
+lesson.opening.castle.ask = Пътят е чист. Направи рокада и скрий царя си.
+lesson.opening.castle.wrong = Царят ти е готов. Направи рокада сега, докато пътят е чист.
+lesson.opening.castle.ok = Рокада! Царят ти е в безопасност, а топът влиза в играта.
+lesson.opening.done = Център, фигури, рокада: това е добро начало на всяка партия.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Вече знаеш всички правила на шаха. Браво!
 lesson.talk.real = Нека ти разкажа как се играят истинските партии.
 # "Elo" is written in Latin letters (glossary); the voice reads it in Cyrillic.

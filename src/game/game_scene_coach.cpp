@@ -23,6 +23,7 @@
 #include "../coach/repertoire.h"
 #include "../coach/rewind.h"
 #include "../coach/session.h"
+#include "../coach/tactics.h"
 #include "../core/log.h"
 #include "../i18n/i18n.h"
 #include "../i18n/unicode.h"
@@ -59,11 +60,32 @@ constexpr float kNodApex = 0.2f;          // a nod is at its lowest this long af
 constexpr float kFaceLiftIdle = 1.5f;
 // Failsafes of the end of a coach game, should the session never get there.
 constexpr float kHandshakeFailsafe = 45.0f, kEndCardFailsafe = 300.0f;
+// The pieces in danger: their tints fade in and out this fast (s), in a raspberry rose (sRGB
+// #E5468C, linear here), apart from the coach's cobalt marks and the review's symbol colours
+// (analysis::nagColor: red, orange, yellow, violet, steel blue, teal; the better move's green).
+constexpr float kDangerFadeIn = 0.25f, kDangerFadeOut = 0.35f;
+const vec3 kDangerColor{0.7835f, 0.0612f, 0.2623f};
 
 float smooth01(float x) { return x <= 0.0f ? 0.0f : x >= 1.0f ? 1.0f : x * x * (3.0f - 2.0f * x); }
 
-// The TTS speed of a coach game's lines: the rules lesson speaks slower.
-float speechSpeed(int level) { return level == 0 ? coach::kLessonSpeechSpeed : 1.0f; }
+// The rules lesson's chapters, to save the chapter to resume at by its id (Settings::coachLessonChapter).
+const coach::Lesson& lessonBook() {
+    static const coach::Lesson lesson;
+    return lesson;
+}
+int lessonChapterIndex(const std::string& id) { return id.empty() ? 0 : std::max(0, lessonBook().chapterIndex(id)); }
+std::string lessonChapterId(int index) {
+    const std::vector<coach::LessonChapter>& c = lessonBook().chapters();
+    return index > 0 && index < int(c.size()) ? c[size_t(index)].id : std::string();
+}
+// Options > Audio: the coach's speaking speeds.
+coach::SpeechSpeeds speechSpeeds(const Settings& s) {
+    coach::SpeechSpeeds v;
+    v.lesson = s.ttsSpeedLesson;
+    v.beginner = s.ttsSpeedBeginner;
+    v.normal = s.ttsSpeed;
+    return v;
+}
 
 }  // namespace
 
@@ -150,6 +172,13 @@ struct CoachRuntime {
     // Marks, analyses, draw offer, end of the game
     std::map<int, int> markPieces;                    // square of a Piece mark -> the piece's id
     std::vector<TestMark> testMarks;
+    // The pieces in danger (levels 1-2, Settings::coachDangerMarkers): the set found for the
+    // position with hash dangerHash, and each square's tint (strength [0,1], seconds shown).
+    bool dangerKnown = false;
+    uint64_t dangerHash = 0;
+    uint64_t danger = 0;
+    float dangerStrength[64] = {};
+    float dangerAge[64] = {};
     std::set<uint32_t> analyses;                      // ids the session asked for
     uint32_t drawAnalysis = 0;
     int drawPly = -1;
@@ -733,7 +762,7 @@ void GameScene::startCoachGame() {
     c.human = humanColor_;
     c.director.uiLanguage = i18n::language();
     c.director.subtitles = s.subtitles;
-    c.director.speed = challenge() ? 1.0f : speechSpeed(coachLevel_);
+    c.speeds = speechSpeeds(s);
     c.challenge = coachChallenge_;
     c.challengePosition = coachArgs_.challengePosition;
     c.introduceLevel = s.coachHistory.empty() || s.coachHistory.back().level != coachLevel_;
@@ -741,7 +770,7 @@ void GameScene::startCoachGame() {
     for (const Settings::CoachGame& g : s.coachHistory) c.history.push_back({g.level, g.result, g.accuracy});
     c.accuracyExplained = s.coachAccuracyExplained;
     c.takeYourTime = s.coachTakeYourTime;
-    c.lessonChapter = s.coachLessonChapter;
+    c.lessonChapter = lessonChapterIndex(s.coachLessonChapter);
     rt.stage->ensureWorker();
     // Every glyph the coach's lines can show in this language, once (subtitles never wait).
     std::string ui = i18n::language();
@@ -769,7 +798,7 @@ void GameScene::leaveCoachGame() {
     if (rt.sessionRunning) {
         if (lesson() && !rt.resultsSaved) {
             // The lesson resumes where the player left it.
-            settings().coachLessonChapter = rt.session.lessonCompleted() ? 0 : rt.session.lessonChapter();
+            settings().coachLessonChapter = rt.session.lessonCompleted() ? std::string() : lessonChapterId(rt.session.lessonChapter());
             settings().save();
         }
         rt.session.stop();
@@ -849,7 +878,7 @@ void GameScene::endLesson() {
     Settings& s = settings();
     s.coachRulesDone = true;
     s.coachLevel = 1;
-    s.coachLessonChapter = 0;
+    s.coachLessonChapter.clear();
     s.save();
     coachArgs_.level = -1;
 }
@@ -895,12 +924,22 @@ void GameScene::nextChallenge() {
             break;
         }
     }
-    LOGI("coach: next challenge '%s'", next.c_str());
-    coachChallenge_ = next;
+    chainChallenge(next);
+}
+
+void GameScene::chainChallenge(const std::string& id) {
+    LOGI("coach: next challenge '%s'", id.c_str());
+    coachChallenge_ = id;
     coachArgs_.challengePosition = 0;
     Settings& s = settings();
-    s.coachChallenge = next;   // the Coach page shows it selected
+    s.coachChallenge = id;   // the Coach page shows it selected
     s.save();
+}
+
+std::string GameScene::practiseChallenge() const {
+    // Levels 1-3 of a game only (the session suggests none elsewhere: lesson, challenge, 4-6).
+    if (!coach_ || !coach_->sessionRunning || challenge() || lesson() || coachLevel_ > 3) return std::string();
+    return coach_->session.suggestedChallenge();
 }
 
 bool GameScene::coachHandshakeWanted() const {
@@ -930,7 +969,7 @@ void GameScene::persistCoachResults() {
         s.coachHistory.erase(s.coachHistory.begin(), s.coachHistory.end() - Settings::kCoachHistoryMax);
     s.coachAccuracyExplained = rt.session.accuracyExplained();
     LOGI("coach: results saved (%d games in the history)", int(s.coachHistory.size()));
-    if (lesson()) s.coachLessonChapter = rt.session.lessonCompleted() ? 0 : rt.session.lessonChapter();
+    if (lesson()) s.coachLessonChapter = rt.session.lessonCompleted() ? std::string() : lessonChapterId(rt.session.lessonChapter());
     // The level the coach suggested is the Coach page's choice next time ("Play again" keeps this
     // game's level).
     int suggested = rt.session.suggestedLevel();
@@ -1070,6 +1109,7 @@ void GameScene::updateCoach(float dt) {
     if (rt.sessionRunning && !hold && (state_ == State::Playing || state_ == State::GameOver)) {
         bool searching = state_ == State::Playing && turn_ == Turn::AiThinking && aiRequested_ && !aiHasMove_;
         rt.session.onCoachThinking(searching ? aiElapsed_ : 0.0f);
+        rt.session.setSpeechSpeeds(speechSpeeds(settings()));   // Options > Audio, from the next line
         rt.session.update(game_, dt);
     }
     if (rt.test && !hold && state_ == State::Playing) runStageTest(dt);
@@ -1164,6 +1204,28 @@ void GameScene::updateCoach(float dt) {
         stage.mouth(pos, facing);
         audio::setVoicePose(rt.voice, pos, facing);
     }
+    // The pieces in danger (levels 1-2 games, the Coach page's switch): on the player's turn only,
+    // never with the coach's own marks, a demonstration or a rewind on the table, the takeback card
+    // or a finished game. The set is found once per position; each square fades in and out on its
+    // own, so a piece coming into danger or leaving it does not make the others blink.
+    bool dangerShown = settings().coachDangerMarkers && coachLevel_ >= 1 && coachLevel_ <= 2 && !challenge() && !rt.test &&
+                       state_ == State::Playing && !game_.isOver() && (turn_ == Turn::HumanIdle || turn_ == Turn::HumanTouched) &&
+                       game_.position().sideToMove() == humanColor_ && !rt.jobRunning && rt.jobs.empty() && !offerUp;
+    if (dangerShown && rt.sessionRunning)
+        for (const coach::ShownMark& m : rt.session.director().marks())
+            if (m.strength > 0.0f) dangerShown = false;
+    if (dangerShown && (!rt.dangerKnown || game_.position().hash() != rt.dangerHash)) {
+        rt.danger = coach::hangingPieces(game_.position(), humanColor_, false);
+        rt.dangerHash = game_.position().hash();
+        rt.dangerKnown = true;
+    }
+    for (int s = 0; s < 64; ++s) {
+        const bool on = dangerShown && ((rt.danger >> s) & 1u);
+        float& k = rt.dangerStrength[s];
+        k = clamp(k + (on ? dt / kDangerFadeIn : -dt / kDangerFadeOut), 0.0f, 1.0f);
+        rt.dangerAge[s] = k > 0.0f ? rt.dangerAge[s] + dt : 0.0f;
+    }
+
     // Board coordinates: the option, forced on for the lesson, the first levels and the challenges.
     world_.setBoardCoordinates(settings().showCoordinates || coachLevel_ <= 2 || challenge());
 
@@ -1408,6 +1470,21 @@ void GameScene::coachMarks(std::vector<PieceHighlight>& highlights, std::vector<
     for (auto it = rt.markPieces.begin(); it != rt.markPieces.end();) {
         if (!used.count(it->first)) it = rt.markPieces.erase(it);
         else ++it;
+    }
+}
+
+void GameScene::coachDangerMarks(std::vector<AnalysisMark>& marks) const {
+    if (!coach_ || state_ == State::Menu || state_ == State::Loading) return;
+    const CoachRuntime& rt = *coach_;
+    for (int s = 0; s < 64; ++s) {
+        if (rt.dangerStrength[s] <= 0.0f) continue;
+        AnalysisMark tint;
+        tint.kind = AnalysisMark::Tint;
+        tint.sq = Square(s);
+        tint.color = kDangerColor;
+        tint.strength = smooth01(rt.dangerStrength[s]);
+        tint.age = rt.dangerAge[s];
+        marks.push_back(tint);
     }
 }
 

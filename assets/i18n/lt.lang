@@ -1089,6 +1089,8 @@ coach.colour.help = Kokiomis figūromis žaidžiate prieš trenerį. Pakaitomis:
 coach.colour.alternate = Pakaitomis
 coach.take_time = Priminimas „Neskubėkite“
 coach.take_time.help = Po minutės mąstymo treneris pasako, kad skubėti nereikia. Tik 1–3 lygiuose.
+coach.danger_markers = Rodyti figūras, kurioms gresia pavojus
+coach.danger_markers.help = 1 ir 2 lygiuose, kai jūsų ėjimas, po kiekviena jūsų figūra, kurią treneris dabar galėtų kirsti, atsiranda spalvotas langelis.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Trenerio balsas neįdiegtas arba išjungtas (Nustatymai > Garsas): jo žodžiai bus rodomi ekrane.
 # At the table
@@ -1109,6 +1111,7 @@ coach.confirm.resign_draw = Pasiduoti šioje partijoje? Treneris nebegali paskel
 coach.confirm.leave = Grįžti į pagrindinį meniu? Ši partija su treneriu bus nutraukta.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Žaisti dar kartą
+coach.gameover.practise = Treniruotis: {0}
 coach.gameover.unrated = Ši partija su treneriu neturi įtakos reitingui.
 coach.lesson.done = PUIKU
 coach.lesson.done.line = Dabar jau žinote šachmatų taisykles.
@@ -1242,6 +1245,10 @@ options.voice_quality.high = Aukšta
 options.voice_quality.very_high = Labai aukšta
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Maksimali
+options.voice_speed_lesson = Balso greitis: taisyklių pamoka
+options.voice_speed_beginner = Balso greitis: 1–2 lygiai
+options.voice_speed = Balso greitis: kiti lygiai
+options.voice_speed.help = Kaip greitai kalba treneris: 100 % – įprastas jo greitis. Taisyklių pamoka ir 1 bei 2 lygiai pagal numatytuosius nustatymus lėtesni (85 %), pradedantiesiems. Kiti lygiai apima iššūkius. Pakeitimas įsigalioja nuo kitos trenerio frazės.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = Trenerio balsas
 coach.download.text = Treneris kalba Supertonic 3 balsu – tai Supertone sukurtas kalbos sintezės modelis. Jis nepridedamas prie Scacelith: žaidimas gali jį atsisiųsti dabar iš Hugging Face ({0} MB, vieną kartą). Be jo treneris savo žodžius rašo ekrane.

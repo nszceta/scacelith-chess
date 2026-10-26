@@ -1089,6 +1089,8 @@ coach.colour.help = Το χρώμα με το οποίο παίζετε απέν
 coach.colour.alternate = Εναλλάξ
 coach.take_time = Υπενθύμιση «Μη βιάζεστε»
 coach.take_time.help = Μετά από ένα λεπτό σκέψης, ο προπονητής σάς λέει ότι δεν υπάρχει βιασύνη. Μόνο για τα επίπεδα 1 έως 3.
+coach.danger_markers = Εμφάνιση κομματιών σε κίνδυνο
+coach.danger_markers.help = Στα επίπεδα 1 και 2, όταν είναι η σειρά σας, εμφανίζεται ένα χρωματιστό τετράγωνο κάτω από κάθε κομμάτι σας που ο προπονητής θα μπορούσε να κερδίσει αυτή τη στιγμή.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Η φωνή του προπονητή δεν είναι εγκατεστημένη ή είναι απενεργοποιημένη (Επιλογές > Ήχος): τα λόγια του θα εμφανίζονται γραμμένα στην οθόνη.
 # At the table
@@ -1109,6 +1111,7 @@ coach.confirm.resign_draw = Θέλετε να εγκαταλείψετε την 
 coach.confirm.leave = Επιστροφή στο κύριο μενού; Αυτή η παρτίδα με τον προπονητή θα διακοπεί οριστικά.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Νέα παρτίδα
+coach.gameover.practise = Εξάσκηση: {0}
 coach.gameover.unrated = Αυτή η παρτίδα με τον προπονητή δεν βαθμολογείται.
 coach.lesson.done = ΜΠΡΑΒΟ
 coach.lesson.done.line = Τώρα ξέρετε τους κανόνες του σκακιού.
@@ -1241,6 +1244,10 @@ options.voice_quality.high = Υψηλή
 options.voice_quality.very_high = Πολύ υψηλή
 options.voice_quality.ultra = Υπερυψηλή
 options.voice_quality.max = Μέγιστη
+options.voice_speed_lesson = Ταχύτητα φωνής: μάθημα κανόνων
+options.voice_speed_beginner = Ταχύτητα φωνής: επίπεδα 1–2
+options.voice_speed = Ταχύτητα φωνής: άλλα επίπεδα
+options.voice_speed.help = Πόσο γρήγορα μιλά ο προπονητής: το 100% είναι η κανονική του ταχύτητα. Το μάθημα κανόνων και τα επίπεδα 1 και 2 είναι από προεπιλογή πιο αργά (85%), για νέους παίκτες. Τα άλλα επίπεδα περιλαμβάνουν τις προκλήσεις. Η αλλαγή ισχύει από την επόμενη φράση του προπονητή.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = Η φωνή του προπονητή
 coach.download.text = Ο προπονητής μιλά με το Supertonic 3, ένα μοντέλο σύνθεσης ομιλίας της Supertone. Δεν περιλαμβάνεται στο Scacelith: το παιχνίδι μπορεί να το κατεβάσει τώρα από το Hugging Face ({0} MB, μία φορά). Χωρίς αυτό, ο προπονητής γράφει τα λόγια του στην οθόνη.

@@ -105,7 +105,7 @@ TEST(coach_settings_round_trip) {
     a.coachRulesDone = true;
     a.coachHistory = {{5, 1, 88.2}, {5, 0, -1.0}};
     a.coachAccuracyExplained = true;
-    a.coachLessonChapter = 7;
+    a.coachLessonChapter = "castling";
     a.coachTab = 1;
     a.coachChallenge = "fork";
     a.coachChallengesDone = {"mate1", "fork", "gone_since"};  // an id the game no longer knows is kept
@@ -113,6 +113,9 @@ TEST(coach_settings_round_trip) {
     a.ttsVoice = 6;
     a.ttsSteps = 8;
     a.ttsArch = "avx2";
+    a.ttsSpeedLesson = 0.75f;
+    a.ttsSpeedBeginner = 0.9f;
+    a.ttsSpeed = 1.15f;
     IniFile out;
     game::writeCoachSettings(out, a);
     const char* path = "/tmp/scacelith_coach_settings_test.ini";
@@ -130,7 +133,7 @@ TEST(coach_settings_round_trip) {
     CHECK(b.coachHistory[0].accuracy > 88.1 && b.coachHistory[0].accuracy < 88.3);
     CHECK(b.coachHistory[1].accuracy < 0.0);
     CHECK(b.coachAccuracyExplained);
-    CHECK_EQ(b.coachLessonChapter, 7);
+    CHECK_EQ(b.coachLessonChapter, std::string("castling"));
     CHECK_EQ(b.coachTab, 1);
     CHECK_EQ(b.coachChallenge, std::string("fork"));
     CHECK(b.coachChallengesDone == a.coachChallengesDone);
@@ -139,6 +142,17 @@ TEST(coach_settings_round_trip) {
     CHECK_EQ(b.ttsVoice, 6);
     CHECK_EQ(b.ttsSteps, 8);
     CHECK_EQ(b.ttsArch, std::string("avx2"));
+    CHECK(std::fabs(b.ttsSpeedLesson - 0.75f) < 1e-4f);
+    CHECK(std::fabs(b.ttsSpeedBeginner - 0.9f) < 1e-4f);
+    CHECK(std::fabs(b.ttsSpeed - 1.15f) < 1e-4f);
+    // A hand-edited speed outside the slider's range is brought back into it; "nan" keeps the default.
+    for (const auto& [text, want] : {std::pair<const char*, float>{"0.1", 0.7f}, {"3", 1.2f}, {"nan", 1.0f}}) {
+        IniFile e;
+        e.set("tts.speed", text);
+        game::Settings d;
+        game::readCoachSettings(e, d);
+        CHECK(std::fabs(d.ttsSpeed - want) < 1e-6f);
+    }
     std::remove(path);
     // Voice quality: a hand-edited step count outside Options' range is brought back into it.
     for (int steps : {1, 3, 4, 9, 10, 99}) {
@@ -158,7 +172,7 @@ TEST(coach_settings_round_trip) {
     CHECK_EQ(c.coachLevel, 2);
     CHECK(c.coachHistory.empty());
     CHECK(!c.coachAccuracyExplained);
-    CHECK_EQ(c.coachLessonChapter, 0);
+    CHECK(c.coachLessonChapter.empty());
     CHECK_EQ(c.coachTab, 0);
     CHECK(c.coachChallenge.empty());
     CHECK(c.coachChallengesDone.empty());
@@ -166,6 +180,23 @@ TEST(coach_settings_round_trip) {
     CHECK_EQ(c.ttsVoice, -1);
     CHECK_EQ(c.ttsSteps, 5);
     CHECK_EQ(c.ttsArch, std::string("auto"));
+
+    // The lesson's chapter saved as an index by earlier versions (ten chapters then): read through
+    // their ids, so that chapters added since do not move the player; the id key wins over it.
+    const std::pair<int, const char*> legacy[] = {{0, ""}, {8, "draws"}, {9, "etiquette"}, {10, ""}, {-3, ""}};
+    for (const auto& [index, id] : legacy) {
+        IniFile e;
+        e.setInt("coach.lesson_chapter", index);
+        game::Settings d;
+        game::readCoachSettings(e, d);
+        CHECK_EQ(d.coachLessonChapter, std::string(id));
+    }
+    IniFile both;
+    both.setInt("coach.lesson_chapter", 9);
+    both.set("coach.lesson_chapter_id", "opening");
+    game::Settings e;
+    game::readCoachSettings(both, e);
+    CHECK_EQ(e.coachLessonChapter, std::string("opening"));
 }
 
 // The completed challenges: each id once, spaces and empty entries dropped (a hand-edited file),

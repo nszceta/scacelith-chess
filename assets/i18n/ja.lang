@@ -1071,6 +1071,8 @@ coach.colour.help = コーチと対局するときの色。交互：対局ごと
 coach.colour.alternate = 交互
 coach.take_time = 「ゆっくり考えて」の声かけ
 coach.take_time.help = 1分間考えると、コーチが急がなくてよいと声をかけます。レベル1〜3のみ。
+coach.danger_markers = 危ない駒を表示
+coach.danger_markers.help = レベル1と2で、あなたの番に、コーチがいま取れる駒の下に色付きのマスを表示します。
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = コーチの音声がインストールされていないか、オフになっています（設定 > サウンド）。コーチの言葉は画面に表示されます。
 # At the table
@@ -1091,6 +1093,7 @@ coach.confirm.resign_draw = この対局を投了しますか？コーチはも�
 coach.confirm.leave = メインメニューに戻りますか？コーチとのこの対局は放棄されます。
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = もう一局
+coach.gameover.practise = 練習する：{0}
 coach.gameover.unrated = コーチとのこの対局はレーティング対象外です。
 coach.lesson.done = よくできました
 coach.lesson.done.line = これでチェスのルールを覚えました。
@@ -1218,6 +1221,10 @@ options.voice_quality.high = 高
 options.voice_quality.very_high = 非常に高い
 options.voice_quality.ultra = ウルトラ
 options.voice_quality.max = 最大
+options.voice_speed_lesson = 音声の速さ：ルールレッスン
+options.voice_speed_beginner = 音声の速さ：レベル1～2
+options.voice_speed = 音声の速さ：その他のレベル
+options.voice_speed.help = コーチの話す速さです。100%が通常の速さです。ルールレッスンとレベル1・2は、初心者向けに既定で遅め（85%）になっています。その他のレベルにはチャレンジも含まれます。変更はコーチの次のセリフから反映されます。
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = コーチの音声
 coach.download.text = コーチは Supertone 社の音声合成モデル Supertonic 3 で話します。このモデルは Scacelith に含まれていませんが、今すぐ Hugging Face からダウンロードできます（{0} MB、1 回のみ）。モデルがない場合、コーチは言葉を画面に表示します。

@@ -21,6 +21,8 @@ lesson.title.castling = rok
 lesson.title.en_passant = geçerken alma
 lesson.title.promotion = piyon terfisi
 lesson.title.draws = pat ve beraberlik
+lesson.title.before_move = hamle yapmadan önce
+lesson.title.opening = açılış
 lesson.title.etiquette = gerçek oyunlarda puan, saat ve görgü kuralları
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -240,7 +242,52 @@ lesson.draws.kings = Başka beraberlikler de var: yalnız iki şahın kalması g
 lesson.draws.agree = Oyuncular beraberlikte de anlaşabilir.
 lesson.draws.repeat = Aynı pozisyonun üç kez tekrarı ya da taş alınmadan ve piyon oynanmadan geçen elli hamle de beraberlik hakkı verir.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Her hamleden önce dur ve bak. Güçlü oyuncular bunu her seferinde yapar.
+lesson.before.last = İlk soru: son hamlem ne yaptı? İzle.
+lesson.before.threat = {my} {your:acc} tehdit ediyor. Bu bir tehdit.
+lesson.before.safe = Kaçmak yetmez. Yeni kare de güvenli olmalı.
+lesson.before.dodge.ask = Atını güvenli bir kareye götür.
+lesson.before.dodge.still = Atına hâlâ saldırılıyor. İzle.
+lesson.before.dodge.hint = Piyonlarım {sq} ve {sq2} karelerini koruyor. Başka bir kare seç.
+lesson.before.dodge.ok = Güvenli! Tehdidi gördün, kareyi de kontrol ettin.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = {to} karesi olmaz: {my} o kareyi koruyor. İzle.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = {your} gitti. Önce bak, sonra oyna.
+lesson.before.again = Yine önce ben oynuyorum. İzle.
+lesson.before.free.ask = Son hamleme bak. Bedavaya bir şey alabilir misin?
+lesson.before.free.missed = {my:dat} bir daha bak. Onu ne alabilir?
+lesson.before.free.hint = {my:gen} koruyanı yok. {@}Piyonun onu alabilir.
+lesson.before.free.ok = Evet! Filim bedavaydı. Hep son hamlemi izle.
+lesson.before.check.ask = Bana şah çek, ama alamayacağım bir kareden.
+lesson.before.check.wrong = Bu şah değil. Güvenli bir kareden şah çekmeyi bul.
+lesson.before.check.hint = {my} {sq} karesini koruyor. Güvenli bir kareden şah çek.
+lesson.before.check.ok = Güzel şah! Vezirin orada güvende.
+lesson.before.done = Alışkanlık edin: önce bak, sonra oyna.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Açılış, oyunun başlangıcıdır. Birkaç basit kural işe yarar.
+lesson.opening.goals = {@}Merkezi al, {@2}atları ve filleri çıkar, {@3}erken rok yap.
+lesson.opening.centre = {@}Ortadaki dört kare merkezdir.
+lesson.opening.pawn.ask = Merkeze bir piyon koy: iki kare ileri.
+lesson.opening.pawn.one = Fena değil, ama iki kare merkezi daha çok tutar.
+lesson.opening.pawn.knight = Atlar birazdan gelecek. Önce merkezde bir piyon.
+lesson.opening.pawn.wrong = Şahının ya da vezirinin önündeki piyonu kullan.
+lesson.opening.pawn.ok = Güzel! Piyonun merkezde yer kapıyor.
+lesson.opening.queen = Vezirini erken çıkarma: taşlarım onu kovalar.
+lesson.opening.knight.ask = Merkeze doğru bir at çıkar.
+lesson.opening.rim = Kenardaki at az kareye ulaşır. Merkeze doğru zıpla.
+lesson.opening.bishop = Taş çıkarmak güzel! Ama bu sefer bir at.
+lesson.opening.knight.ok = Güzel! Oradan atın merkezi gözlüyor.
+lesson.opening.later = Birkaç hamle sonra: atın ve {@}fil çıkmış durumda.
+lesson.opening.twice = İyi bir sebep olmadan aynı taşı iki kez oynama.
+lesson.opening.castle.ask = Yol açık. Şahını güvene almak için rok yap.
+lesson.opening.castle.wrong = Şahın hazır. Yol açıkken şimdi rok yap.
+lesson.opening.castle.ok = Rok yapıldı! Şahın güvende, kalen de oyuna katıldı.
+lesson.opening.done = Merkez, taşlar, rok: her oyun için iyi bir başlangıç.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Artık satrancın bütün kurallarını biliyorsun. Bravo!
 lesson.talk.real = Sana gerçek oyunların nasıl oynandığını anlatayım.
 lesson.talk.elo = Oyuncuların Elo denen bir puanı vardır. Kazanınca artar, kaybedince düşer.

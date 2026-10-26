@@ -69,6 +69,7 @@ void loadCoach(CoachSetup& c) {
     c.colour = std::clamp(g.coachColour, 0, 2);
     c.challenge = g.coachChallenge;
     c.takeYourTime = g.coachTakeYourTime;
+    c.dangerMarkers = g.coachDangerMarkers;
 }
 void storeCoach(const CoachSetup& c) {
     game::Settings& g = game::settings();
@@ -77,6 +78,7 @@ void storeCoach(const CoachSetup& c) {
     g.coachColour = c.colour;
     g.coachChallenge = c.challenge;
     g.coachTakeYourTime = c.takeYourTime;
+    g.coachDangerMarkers = c.dangerMarkers;
     g.save();
 }
 
@@ -306,7 +308,7 @@ void trainingTab(CoachSetup& setup, float lx, float rx, float colW, float top) {
         gfx::fill(im::flip(band, Rect(band.r() - tw - 10.0f, band.y, tw + 10.0f, band.h)), dark);
         gfx::text(elo, im::flipX(band, band.r()), top + 8.0f, es);
     }
-    const float rowH = 66.0f;
+    const float rowH = 62.0f;
     im::pushId("levels");
     for (int i = 0; i < n; ++i) {
         Rect r(lx, top + 30.0f + float(i) * rowH, colW, rowH - 5.0f);
@@ -316,9 +318,30 @@ void trainingTab(CoachSetup& setup, float lx, float rx, float colW, float top) {
         }
     }
     im::popId();
+    // ---- The coach's help in games, under the levels: the "Take your time." reminder (levels
+    // 1-3) and the pieces in danger marked on the board (levels 1-2); greyed out elsewhere.
+    float hy = top + 30.0f + float(n) * rowH + 12.0f;
+    {
+        const bool reminds = setup.level >= 1 && setup.level <= 3;
+        int on = setup.takeYourTime ? 1 : 0;
+        if (im::selectorRow(L("coach.take_time"), on, {T("common.off"), T("common.on")}, Rect(lx, hy, colW, 46.0f), reminds) &&
+            reminds)
+            setup.takeYourTime = on == 1;
+        im::tooltip(T("coach.take_time.help"));
+        hy += 50.0f;
+    }
+    {
+        const bool marks = setup.level >= 1 && setup.level <= 2;
+        int on = setup.dangerMarkers ? 1 : 0;
+        if (im::selectorRow(L("coach.danger_markers"), on, {T("common.off"), T("common.on")}, Rect(lx, hy, colW, 46.0f), marks) &&
+            marks)
+            setup.dangerMarkers = on == 1;
+        im::tooltip(T("coach.danger_markers.help"));
+        hy += 46.0f;
+    }
     // Without its voice files the coach still teaches, in writing.
     if (!setup.voiceAvailable) {
-        float y = top + 30.0f + float(n) * rowH + 34.0f;
+        float y = hy + 30.0f;
         TextStyle vs = style(font::FACE_ITALIC, 21.0f, danger, im::startAlign());
         gfx::diamond(vec2(im::flipX(lcol, lx + 6.0f), y - 7.0f), 3.5f, withAlpha(danger, 0.9f));
         std::string text = T("coach.no_voice");
@@ -355,16 +378,6 @@ void trainingTab(CoachSetup& setup, float lx, float rx, float colW, float top) {
     y += note(T("coach.note.unrated"), rcol, rx, y, colW, ivoryDim);
     // The coach judges the player's moves in games (the lesson has none): it can misjudge one.
     if (!lessonNow) y += note(T("coach.note.fallible"), rcol, rx, y, colW, ivoryDim);
-    // The "Take your time." reminder: said at levels 1-3 only.
-    {
-        const bool reminds = setup.level >= 1 && setup.level <= 3;
-        int on = setup.takeYourTime ? 1 : 0;
-        if (im::selectorRow(L("coach.take_time"), on, {T("common.off"), T("common.on")}, Rect(rx, y, colW, 50.0f), reminds) &&
-            reminds)
-            setup.takeYourTime = on == 1;
-        im::tooltip(T("coach.take_time.help"));
-        y += 50.0f + 14.0f;
-    }
     y += 12.0f;
     // Colour: White in the lesson; else White, Black or alternating (the next colour is shown).
     {
@@ -627,8 +640,11 @@ void subtitles(const Subtitle& s) {
             if (c >= 0x0600) caps = false;
         TextStyle sp = style(font::FACE_TITLE, caps ? 16.0f : 19.0f, withAlpha(gold, a), HAlign::Center, caps ? 0.24f : 0.1f);
         float tw = gfx::textWidth(tag, sp);
-        vec4 d(0.02f, 0.017f, 0.015f, 0.74f * a);  // the band's core, over the top hairline
-        gfx::fill(Rect(plate.cx() - tw * 0.5f - 18.0f, plate.y - 1.0f, tw + 36.0f, 3.0f), d);
+        // A tab of the band's core behind the whole tag: half of it stands above the plate, over
+        // the board or the hall, where a bare tag could not be read.
+        const float ch = gfx::capHeight(sp);
+        vec4 d(0.02f, 0.017f, 0.015f, 0.74f * a);
+        gfx::fill(Rect(plate.cx() - tw * 0.5f - 18.0f, plate.y - ch * 0.5f - 7.0f, tw + 36.0f, ch + 14.0f), d, 3.0f);
         gfx::text(tag, plate.cx(), plate.y + gfx::capHeight(sp) * 0.5f, sp);
     }
     float base = plate.y + 17.0f + ts.size * 0.8f;

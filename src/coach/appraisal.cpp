@@ -433,6 +433,7 @@ namespace {
 struct Part {
     Beat beat;
     int keep = 0;   // higher = dropped last when the level's sentence cap is exceeded
+    ExType theme = ExType::None;   // the theme the sentence names aloud ("One thing to practise: forks")
 };
 
 int sentenceCap(int level) { return level <= 2 ? 5 : level <= 4 ? 6 : 4; }
@@ -478,7 +479,8 @@ int rounded(double x) { return int(std::lround(x)); }
 
 }  // namespace
 
-Script Appraisal::script(const Game& g, const AppraisalContext& ctx) const {
+Script Appraisal::script(const Game& g, const AppraisalContext& ctx, ExType* improvement) const {
+    if (improvement) *improvement = ExType::None;
     Script out;
     if (!g.isOver() || g.moves().empty()) return out;   // abandoned: no appraisal
     const AppraisalStats st = stats(g);
@@ -637,6 +639,7 @@ Script Appraisal::script(const Game& g, const AppraisalContext& ctx) const {
         const PlyVerdict* crit = st.criticalPly >= 0 ? &vs[size_t(st.criticalPly)] : nullptr;
         if (crit && L == 1 && crit->cls != MoveClass::Blunder) crit = nullptr;   // level 1: blunders only
         Beat b;
+        ExType named = ExType::None;   // the theme b says aloud
         if (stalemated) {
             b = say(bandKey("appraisal.improve.stalemate", L), Look::Player);
         } else if (crit) {
@@ -652,9 +655,11 @@ Script Appraisal::script(const Game& g, const AppraisalContext& ctx) const {
                 .with("crit_best", Arg::ofMove(crit->bestSan, crit->bestUci))
                 .with("theme", Arg::ofText(themeKey(crit->exType)))
                 .with("eval", Arg::ofEval(sign * crit->cpWhiteBefore, 0));
+            if (L <= 2) named = crit->exType;   // levels 3+ name the better move, not its theme
         } else if (st.themeRecurring) {
             b = say(bandKey("appraisal.improve.theme", L), Look::Player);
             b.line.with("theme", Arg::ofText(themeKey(st.theme)));
+            named = st.theme;
         } else if (st.coachHungPly >= 0 && L <= 3) {
             b = say(bandKey("appraisal.improve.coach_hung", L), Look::Player);
             b.line.with("my", Arg::ofPiece(st.coachHungType, opposite(human_), false))
@@ -662,12 +667,12 @@ Script Appraisal::script(const Game& g, const AppraisalContext& ctx) const {
         } else {
             b = say(bandKey("appraisal.improve.clean", L), Look::Player);
         }
-        parts.push_back({b, 8});
+        parts.push_back({b, 8, named});
         // Level 4: the recurring theme too, when the critical moment was about something else.
         if (crit && !stalemated && L == 4 && st.themeRecurring && st.theme != crit->exType) {
             Beat t = say("appraisal.improve.theme.b4", Look::Player);
             t.line.with("theme", Arg::ofText(themeKey(st.theme)));
-            parts.push_back({t, 2});
+            parts.push_back({t, 2, st.theme});
         }
     }
 
@@ -690,8 +695,30 @@ Script Appraisal::script(const Game& g, const AppraisalContext& ctx) const {
         auto drop = std::min_element(parts.begin(), parts.end(), [](const Part& a, const Part& b) { return a.keep < b.keep; });
         parts.erase(drop);
     }
-    for (const Part& p : parts) out.push_back(p.beat);
+    for (const Part& p : parts) {
+        out.push_back(p.beat);
+        if (improvement && *improvement == ExType::None) *improvement = p.theme;
+    }
     return out;
+}
+
+const char* practiceChallenge(ExType theme) {
+    switch (theme) {
+    case ExType::MateAllowed: return "defend";
+    case ExType::MateMissed: return "mate1";
+    case ExType::Fork:
+    case ExType::MissedFork: return "fork";
+    case ExType::Discovered: return "discovered";
+    case ExType::Skewer: return "skewer";
+    case ExType::Pin: return "pin";
+    case ExType::Trapped: return "trapped";
+    case ExType::BackRank: return "backrank";
+    case ExType::Hanging:
+    case ExType::MissedCapture: return "hanging";
+    case ExType::PromotionRace: return "promotion";
+    case ExType::Endgame: return "endgame";
+    default: return "";
+    }
 }
 
 }  // namespace coach

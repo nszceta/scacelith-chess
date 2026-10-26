@@ -18,6 +18,8 @@ lesson.title.castling = le roque
 lesson.title.en_passant = la prise en passant
 lesson.title.promotion = la promotion
 lesson.title.draws = le pat et les parties nulles
+lesson.title.before_move = le réflexe avant de jouer
+lesson.title.opening = l’ouverture
 lesson.title.etiquette = le classement, la pendule et le savoir-vivre des vraies parties
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -236,7 +238,52 @@ lesson.draws.kings = Autre cas de partie nulle : quand personne ne peut mater, 
 lesson.draws.agree = Les joueurs peuvent aussi convenir de la nulle.
 lesson.draws.repeat = La triple répétition, ou cinquante coups sans prise ni coup de pion, permettent aussi la nulle.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ----------------------------------------
+lesson.before.habit = Avant chaque coup, arrête-toi et regarde. Les bons joueurs le font à chaque fois.
+lesson.before.last = Première question : qu’a fait mon dernier coup ? Regarde.
+lesson.before.threat = {my} attaque {your}. C’est une menace.
+lesson.before.safe = S’éloigner ne suffit pas. La nouvelle case doit aussi être sûre.
+lesson.before.dodge.ask = Mets ton cavalier sur une case sûre.
+lesson.before.dodge.still = Ton cavalier est toujours attaqué. Regarde.
+lesson.before.dodge.hint = Mes pions protègent {sq} et {sq2}. Choisis une autre case.
+lesson.before.dodge.ok = Sûr ! Tu as vu la menace, et tu as vérifié la case.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Pas en {to} : {my} protège cette case. Regarde.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = Tu as perdu {your}. Regarde d’abord, joue ensuite.
+lesson.before.again = Encore une fois, je joue d’abord. Regarde.
+lesson.before.free.ask = Regarde mon dernier coup. Peux-tu prendre quelque chose gratuitement ?
+lesson.before.free.missed = Regarde encore {my}. Qui peut {my:le} prendre ?
+lesson.before.free.hint = {my} n’a aucun défenseur. Ton {@}pion peut {my:le} prendre.
+lesson.before.free.ok = Oui ! Mon fou était libre. Regarde toujours mon dernier coup.
+lesson.before.check.ask = Donne-moi échec, depuis une case où je ne peux pas te prendre.
+lesson.before.check.wrong = Ce n’est pas un échec. Trouve un échec depuis une case sûre.
+lesson.before.check.hint = {my} protège {sq}. Donne échec depuis une case sûre.
+lesson.before.check.ok = Bel échec ! Ta dame est en sécurité là.
+lesson.before.done = Prends l’habitude : regarde d’abord, joue ensuite.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------
+lesson.opening.what = L’ouverture, c’est le début de la partie. Quelques règles simples aident.
+lesson.opening.goals = {@}Prends le centre, {@2}sors cavaliers et fous, et {@3}roque tôt.
+lesson.opening.centre = Les quatre cases du {@}milieu forment le centre.
+lesson.opening.pawn.ask = Mets un pion au centre : avance-le de deux cases.
+lesson.opening.pawn.one = Pas mal, mais deux cases prennent plus de centre.
+lesson.opening.pawn.knight = Les cavaliers viendront bientôt. D’abord, un pion au centre.
+lesson.opening.pawn.wrong = Utilise le pion devant ton roi ou devant ta dame.
+lesson.opening.pawn.ok = Bien ! Ton pion prend de la place au centre.
+lesson.opening.queen = Ne sors pas ta dame trop tôt : mes pièces la chasseraient.
+lesson.opening.knight.ask = Sors un cavalier, vers le centre.
+lesson.opening.rim = Un cavalier sur le bord contrôle peu de cases. Saute vers le centre.
+lesson.opening.bishop = Tu développes, très bien ! Mais cette fois, un cavalier.
+lesson.opening.knight.ok = Bien ! De là, ton cavalier surveille le centre.
+lesson.opening.later = Quelques coups plus tard : ton cavalier et ton {@}fou sont sortis.
+lesson.opening.twice = Ne joue pas deux fois la même pièce sans bonne raison.
+lesson.opening.castle.ask = La voie est libre. Roque pour mettre ton roi à l’abri.
+lesson.opening.castle.wrong = Ton roi est prêt. Roque maintenant, tant que la voie est libre.
+lesson.opening.castle.ok = Roque fait ! Ton roi est en sécurité, et ta tour entre dans la partie.
+lesson.opening.done = Centre, pièces, roque : c’est un bon début pour chaque partie.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Tu connais maintenant toutes les règles des échecs. Bravo !
 lesson.talk.real = Laisse-moi te raconter comment se jouent les vraies parties.
 lesson.talk.elo = Chaque joueur a un classement Elo. Il monte quand tu gagnes et baisse quand tu perds.

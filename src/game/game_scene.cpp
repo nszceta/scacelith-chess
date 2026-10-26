@@ -940,6 +940,8 @@ ui::GameOverExtras GameScene::gameOverExtras() const {
             x.detail = i18n::tr("coach.gameover.unrated");
             x.primaryLabel = i18n::tr("coach.gameover.again");
             x.analyse = !game_.moves().empty();
+            const std::string practise = practiseChallenge();
+            if (!practise.empty()) x.practiseLabel = i18n::trf("coach.gameover.practise", {ui::challengeName(practise)});
         }
         return x;
     }
@@ -1224,6 +1226,13 @@ bool GameScene::update(AppContext& ctx, float dt) {
                     else if (!lesson()) coachArgs_.level = coachLevel_;
                     leaveCoachGame();
                 }
+                state_ = State::FadeToGame;
+                stateTime_ = 0.0f;
+            } else if (a == ui::MenuAction::Practise) {
+                // "Practise: Forks": the challenge set for the theme the appraisal named, from its
+                // first position, as "Next challenge" starts one.
+                chainChallenge(practiseChallenge());
+                leaveCoachGame();
                 state_ = State::FadeToGame;
                 stateTime_ = 0.0f;
             } else if (a == ui::MenuAction::BackToMainMenu) {
@@ -2803,11 +2812,15 @@ void GameScene::render(AppContext& ctx, float dt) {
     if (coach()) r.fade = std::max(r.fade, coachFade_);             // a lesson position set up behind a fade
     r.beginFrame(cam, env, dt);
     if (state_ != State::Loading) {
-        // Coach mode: the pieces and squares the coach designates (the director's marks).
+        // Coach mode: the pieces and squares the coach designates (the director's marks), and at
+        // levels 1-2 the player's pieces in danger (tints in the review's way).
         std::vector<PieceHighlight> highlights;
         std::vector<CoachMark> coachMarkList;
         std::vector<AnalysisMark> analysisMarkList;
-        if (coach()) coachMarks(highlights, coachMarkList);
+        if (coach()) {
+            coachMarks(highlights, coachMarkList);
+            coachDangerMarks(analysisMarkList);
+        }
         if (analysing()) analysisMarks(analysisMarkList, highlights, coachMarkList);
         // A player standing has pushed their chair back (anim::Animator::chairSlide).
         for (int seat = 0; seat < 2; ++seat) world_.setChairSlide(seat, anim_[seat].chairSlide());

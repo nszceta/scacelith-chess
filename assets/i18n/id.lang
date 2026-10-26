@@ -1084,6 +1084,8 @@ coach.colour.help = Warna yang Anda mainkan melawan pelatih. Bergantian: Putih, 
 coach.colour.alternate = Bergantian
 coach.take_time = Pengingat "Santai saja"
 coach.take_time.help = Setelah satu menit berpikir, pelatih mengatakan bahwa Anda tidak perlu terburu-buru. Hanya tingkat 1 sampai 3.
+coach.danger_markers = Tampilkan buah yang terancam
+coach.danger_markers.help = Pada tingkat 1 dan 2, saat giliran Anda, sebuah petak berwarna muncul di bawah setiap buah Anda yang bisa dimakan pelatih saat ini.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Suara pelatih belum terpasang atau dinonaktifkan (Opsi > Audio): ucapannya akan ditulis di layar.
 # At the table
@@ -1104,6 +1106,7 @@ coach.confirm.resign_draw = Menyerah dalam permainan ini? Pelatih tidak dapat la
 coach.confirm.leave = Kembali ke menu utama? Permainan dengan pelatih ini akan ditinggalkan.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Main lagi
+coach.gameover.practise = Latihan: {0}
 coach.gameover.unrated = Permainan dengan pelatih ini tidak dinilai.
 coach.lesson.done = BAGUS SEKALI
 coach.lesson.done.line = Sekarang Anda sudah mengetahui aturan catur.
@@ -1236,6 +1239,10 @@ options.voice_quality.high = Tinggi
 options.voice_quality.very_high = Sangat tinggi
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Maksimum
+options.voice_speed_lesson = Kecepatan suara: pelajaran aturan
+options.voice_speed_beginner = Kecepatan suara: tingkat 1-2
+options.voice_speed = Kecepatan suara: tingkat lain
+options.voice_speed.help = Seberapa cepat pelatih berbicara: 100% adalah kecepatan normalnya. Pelajaran aturan serta tingkat 1 dan 2 secara bawaan lebih lambat (85%), untuk pemain baru. Tingkat lain mencakup tantangan. Perubahan berlaku mulai kalimat pelatih berikutnya.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = Suara Pelatih
 coach.download.text = Pelatih berbicara dengan Supertonic 3, model sintesis suara buatan Supertone. Model ini tidak disertakan bersama Scacelith: permainan dapat mengunduhnya sekarang dari Hugging Face ({0} MB, sekali saja). Tanpa model ini, pelatih menuliskan ucapannya di layar.

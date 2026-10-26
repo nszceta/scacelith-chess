@@ -20,6 +20,8 @@ lesson.title.castling = 王車易位
 lesson.title.en_passant = 吃過路兵
 lesson.title.promotion = 升變
 lesson.title.draws = 逼和與和棋
+lesson.title.before_move = 走棋之前
+lesson.title.opening = 開局
 lesson.title.etiquette = 正式對局的等級分、棋鐘與禮儀
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -234,7 +236,52 @@ lesson.draws.kings = 其他和棋：誰都無法將死對方時，例如只剩�
 lesson.draws.agree = 雙方也可以協議和棋。
 lesson.draws.repeat = 局面重複三次，或五十回合沒有吃子也沒有走兵，也可以要求判和。
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = 每一步之前，都要停一下，看一看。高手每次都這樣做。
+lesson.before.last = 第一個問題：我上一步棋做了什麼？請看。
+lesson.before.threat = {my}正在攻擊{your}。這就是威脅。
+lesson.before.safe = 只是躲開還不夠。新的格子也必須安全。
+lesson.before.dodge.ask = 把你的馬走到一個安全的格子。
+lesson.before.dodge.still = 你的馬還在被攻擊。請看。
+lesson.before.dodge.hint = 我的兵守著{sq}和{sq2}。換一個格子吧。
+lesson.before.dodge.ok = 安全！你看到了威脅，也檢查了格子。
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = 不能走{to}：{my}守著那個格子。請看。
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = {your}丟了。先看，再走。
+lesson.before.again = 再來一次，先由我走。請看。
+lesson.before.free.ask = 看看我上一步棋。你能白吃一個子嗎？
+lesson.before.free.missed = 再看看{my}。什麼子可以吃它？
+lesson.before.free.hint = {my}沒有保護。你的{@}兵可以吃掉它。
+lesson.before.free.ok = 對！我的象是白送的。一定要看我的上一步棋。
+lesson.before.check.ask = 請將軍，而且要走到我吃不到的格子。
+lesson.before.check.wrong = 這不是將軍。找一個安全格子上的將軍。
+lesson.before.check.hint = {my}守著{sq}。請從安全的格子將軍。
+lesson.before.check.ok = 好將軍！你的后在那裡很安全。
+lesson.before.done = 養成習慣：先看，再走。
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = 開局是一盤棋的開始。幾條簡單的規則會有幫助。
+lesson.opening.goals = {@}控制中心，{@2}出動馬和象，{@3}儘早王車易位。
+lesson.opening.centre = {@}中間的四個格子就是中心。
+lesson.opening.pawn.ask = 在中心放一個兵：向前走兩格。
+lesson.opening.pawn.one = 不錯，但走兩格能佔據更多中心。
+lesson.opening.pawn.knight = 馬很快就出場。先在中心放一個兵。
+lesson.opening.pawn.wrong = 請用王前面或后前面的兵。
+lesson.opening.pawn.ok = 很好！你的兵在中心佔了空間。
+lesson.opening.queen = 不要過早出后：我的棋子會追趕她。
+lesson.opening.knight.ask = 出一個馬，朝中心走。
+lesson.opening.rim = 邊上的馬能到的格子很少。向中心跳吧。
+lesson.opening.bishop = 出子，很好！不過這次要出馬。
+lesson.opening.knight.ok = 很好！從那裡，你的馬盯著中心。
+lesson.opening.later = 幾步之後：你的馬和{@}象都出來了。
+lesson.opening.twice = 沒有好理由，不要把同一個棋子走兩次。
+lesson.opening.castle.ask = 路是通的。王車易位，讓王安全。
+lesson.opening.castle.wrong = 你的王準備好了。趁路是通的，現在就易位。
+lesson.opening.castle.ok = 易位完成！你的王安全了，你的車也加入了戰鬥。
+lesson.opening.done = 中心、出子、易位：這是每盤棋的好開局。
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = 現在你已經知道西洋棋的所有規則了。做得好！
 lesson.talk.real = 我來告訴你正式對局是怎麼下的。
 lesson.talk.elo = 棋手都有等級分，也叫Elo分。贏棋會升，輸棋會降。

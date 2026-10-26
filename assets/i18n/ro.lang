@@ -1094,6 +1094,8 @@ coach.colour.help = Culoarea cu care jucați împotriva antrenorului. Pe rând: 
 coach.colour.alternate = Pe rând
 coach.take_time = Mesajul „Nu vă grăbiți”
 coach.take_time.help = După un minut de gândire, antrenorul vă spune că nu vă grăbește nimeni. Doar la nivelurile 1–3.
+coach.danger_markers = Arată piesele în pericol
+coach.danger_markers.help = La nivelurile 1 și 2, când vă vine rândul, apare un câmp colorat sub fiecare dintre piesele dumneavoastră pe care antrenorul le-ar putea câștiga chiar acum.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Vocea antrenorului nu este instalată sau este dezactivată (Opțiuni > Audio): cuvintele lui vor fi scrise pe ecran.
 # At the table
@@ -1114,6 +1116,7 @@ coach.confirm.resign_draw = Abandonați partida? Antrenorul nu mai poate da mat:
 coach.confirm.leave = Reveniți la meniul principal? Această partidă cu antrenorul va fi abandonată.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Încă o partidă
+coach.gameover.practise = Exersați: {0}
 coach.gameover.unrated = Această partidă cu antrenorul nu contează pentru rating.
 coach.lesson.done = BRAVO
 coach.lesson.done.line = Acum cunoașteți regulile șahului.
@@ -1246,6 +1249,10 @@ options.voice_quality.high = Ridicată
 options.voice_quality.very_high = Foarte ridicată
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Maximă
+options.voice_speed_lesson = Viteza vocii: lecția de reguli
+options.voice_speed_beginner = Viteza vocii: nivelurile 1-2
+options.voice_speed = Viteza vocii: celelalte niveluri
+options.voice_speed.help = Cât de repede vorbește antrenorul: 100 % este viteza lui normală. Lecția de reguli și nivelurile 1 și 2 sunt implicit mai lente (85 %), pentru jucătorii noi. Celelalte niveluri includ provocările. O modificare se aplică de la următoarea replică a antrenorului.
 # The prompt. {0} = the size in megabytes ("398,7")
 coach.download.title = Vocea antrenorului
 coach.download.text = Antrenorul vorbește cu Supertonic 3, un model de sinteză vocală creat de Supertone. Nu este inclus în Scacelith: jocul îl poate descărca acum de pe Hugging Face ({0} MB, o singură dată). Fără el, antrenorul își scrie cuvintele pe ecran.

@@ -1097,6 +1097,8 @@ coach.colour.help = Kolor, którym grasz przeciwko trenerowi. Na zmianę: białe
 coach.colour.alternate = Na zmianę
 coach.take_time = Przypomnienie „Nie spiesz się”
 coach.take_time.help = Po minucie namysłu trener mówi, że nie ma pośpiechu. Tylko poziomy od 1 do 3.
+coach.danger_markers = Pokazuj bierki w niebezpieczeństwie
+coach.danger_markers.help = Na poziomach 1 i 2, w twoim ruchu, pod każdą twoją bierką, którą trener może teraz wygrać, pojawia się kolorowe pole.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Głos trenera nie jest zainstalowany lub jest wyłączony (Opcje > Dźwięk): jego słowa będą wyświetlane na ekranie.
 # At the table
@@ -1117,6 +1119,7 @@ coach.confirm.resign_draw = Poddać tę partię? Trener nie może już dać mata
 coach.confirm.leave = Wrócić do menu głównego? Ta partia z trenerem zostanie porzucona.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Zagraj ponownie
+coach.gameover.practise = Poćwicz: {0}
 coach.gameover.unrated = Ta partia z trenerem nie jest rankingowa.
 coach.lesson.done = BRAWO
 coach.lesson.done.line = Znasz już zasady gry w szachy.
@@ -1251,6 +1254,10 @@ options.voice_quality.high = Wysoka
 options.voice_quality.very_high = Bardzo wysoka
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Maksymalna
+options.voice_speed_lesson = Tempo głosu: lekcja zasad
+options.voice_speed_beginner = Tempo głosu: poziomy 1–2
+options.voice_speed = Tempo głosu: inne poziomy
+options.voice_speed.help = Jak szybko mówi trener: 100% to jego normalne tempo. Lekcja zasad oraz poziomy 1 i 2 są domyślnie wolniejsze (85%), dla początkujących. „Inne poziomy” obejmują wyzwania. Zmiana działa od następnej wypowiedzi trenera.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = Głos trenera
 coach.download.text = Trener mówi głosem Supertonic 3, modelu syntezy mowy firmy Supertone. Model nie jest dołączony do Scacelith: gra może go teraz pobrać z Hugging Face ({0} MB, jednorazowo). Bez niego trener wyświetla swoje słowa na ekranie.

@@ -48,7 +48,9 @@ int bestCapturePoints(const chess::Position& p, chess::Color by);
 uint64_t exchangeParticipants(const chess::Position& p, chess::Square sq, bool directOnly);
 // c's pieces (king excluded) the opponent attacks and can win. undefendedOnly (levels 1-2):
 // attacked and not defended at all ("it has no protector"); otherwise any piece whose capture wins
-// material (seeSquarePoints > 0: also a piece defended but attacked by a cheaper one).
+// material (seeSquarePoints > 0: also a piece defended but attacked by a cheaper one), the pieces
+// in danger a game at levels 1-2 marks on the board. Pins count for nothing, as in the exchange:
+// a defender pinned to its king still defends.
 uint64_t hangingPieces(const chess::Position& p, chess::Color c, bool undefendedOnly);
 // The piece on s is attacked and nothing of its own colour defends it.
 bool isUndefended(const chess::Position& p, chess::Square s);

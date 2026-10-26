@@ -132,6 +132,18 @@ TEST(coach_tactics_hanging) {
     CHECK_EQ(hangingPieces(kd, Black, true), uint64_t(0));    // but it has a protector
 }
 
+// The pieces in danger a game at levels 1-2 marks under the player's pieces (White's here).
+TEST(coach_tactics_pieces_in_danger) {
+    // A knight the bishop attacks, nothing defends.
+    CHECK_EQ(hangingPieces(fen("4k3/8/8/2b5/8/4N3/8/4K3 w - - 0 1"), White, false), bits({"e3"}));
+    // A pawn a pawn attacks but another pawn defends: exd4 exd4 is an even trade.
+    CHECK_EQ(hangingPieces(fen("4k3/8/8/4p3/3P4/4P3/8/4K3 w - - 0 1"), White, false), uint64_t(0));
+    // A queen a knight attacks, defended, as the knight is: Nxd4 exd4 still wins 6 points.
+    CHECK_EQ(hangingPieces(fen("4k3/5p2/4n3/8/3Q4/4P3/8/4K3 w - - 0 1"), White, false), bits({"d4"}));
+    // The king in check, attacked and undefended, is never one of them.
+    CHECK_EQ(hangingPieces(fen("4k3/8/8/8/8/8/8/r3K3 w - - 0 1"), White, false), uint64_t(0));
+}
+
 TEST(coach_tactics_fork) {
     // The worked example: 1.e4 e5 2.Nf3 Nc6 3.Bc4 Nd4 4.Nxe5 Qg5 forks e5 and g2.
     Position w = fen("r1b1kbnr/pppp1ppp/8/4N1q1/2BnP3/8/PPPP1PPP/RNBQK2R w KQkq - 1 5");

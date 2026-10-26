@@ -18,6 +18,8 @@ lesson.title.castling = el enroque
 lesson.title.en_passant = la captura al paso
 lesson.title.promotion = la promoción
 lesson.title.draws = el rey ahogado y las tablas
+lesson.title.before_move = lo que hay que mirar antes de mover
+lesson.title.opening = la apertura
 lesson.title.etiquette = las partidas de verdad: Elo, reloj y buenos modales
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -235,7 +237,52 @@ lesson.draws.kings = Otro caso de tablas: cuando nadie puede dar mate, como con 
 lesson.draws.agree = Los jugadores también pueden acordar tablas.
 lesson.draws.repeat = La triple repetición, o cincuenta jugadas sin capturar ni mover peones, también da derecho a tablas.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ----------------------------------------
+lesson.before.habit = Antes de cada jugada, detente y mira. Los buenos jugadores lo hacen siempre.
+lesson.before.last = Primera pregunta: ¿qué hizo mi última jugada? Mira.
+lesson.before.threat = {my} ataca {your}. Es una amenaza.
+lesson.before.safe = Alejarse no basta. La casilla nueva también tiene que ser segura.
+lesson.before.dodge.ask = Lleva tu caballo a una casilla segura.
+lesson.before.dodge.still = Tu caballo sigue atacado. Mira.
+lesson.before.dodge.hint = Mis peones protegen {sq} y {sq2}. Elige otra casilla.
+lesson.before.dodge.ok = ¡Segura! Viste la amenaza y revisaste la casilla.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = A {to} no: {my} protege esa casilla. Mira.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = Has perdido {your}. Primero mira, luego mueve.
+lesson.before.again = Otra vez, primero juego yo. Mira.
+lesson.before.free.ask = Mira mi última jugada. ¿Puedes capturar algo gratis?
+lesson.before.free.missed = Mira otra vez {my}. ¿Qué puede capturar{my:lo}?
+lesson.before.free.hint = {my} no tiene defensor. Tu {@}peón puede capturar{my:lo}.
+lesson.before.free.ok = ¡Sí! Mi alfil estaba libre. Mira siempre mi última jugada.
+lesson.before.check.ask = Dame jaque desde una casilla donde no pueda capturarte.
+lesson.before.check.wrong = Eso no es jaque. Busca un jaque desde una casilla segura.
+lesson.before.check.hint = {my} protege {sq}. Da jaque desde una casilla segura.
+lesson.before.check.ok = ¡Buen jaque! Tu dama está a salvo ahí.
+lesson.before.done = Hazlo un hábito: primero mira, luego mueve.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------
+lesson.opening.what = La apertura es el comienzo de la partida. Unas pocas reglas sencillas ayudan.
+lesson.opening.goals = {@}Controla el centro, {@2}saca caballos y alfiles, y {@3}enroca pronto.
+lesson.opening.centre = Las cuatro casillas del {@}medio son el centro.
+lesson.opening.pawn.ask = Pon un peón en el centro: dos casillas hacia delante.
+lesson.opening.pawn.one = No está mal, pero dos casillas toman más centro.
+lesson.opening.pawn.knight = Los caballos llegarán pronto. Primero, un peón al centro.
+lesson.opening.pawn.wrong = Usa el peón que está delante de tu rey o de tu dama.
+lesson.opening.pawn.ok = ¡Bien! Tu peón gana espacio en el centro.
+lesson.opening.queen = No saques la dama pronto: mis piezas la perseguirían.
+lesson.opening.knight.ask = Saca un caballo, hacia el centro.
+lesson.opening.rim = Un caballo en el borde llega a pocas casillas. Salta hacia el centro.
+lesson.opening.bishop = ¡Desarrollar, muy bien! Pero ahora, un caballo.
+lesson.opening.knight.ok = ¡Bien! Desde ahí tu caballo vigila el centro.
+lesson.opening.later = Unas jugadas después: tu caballo y tu {@}alfil ya están fuera.
+lesson.opening.twice = No muevas dos veces la misma pieza sin un buen motivo.
+lesson.opening.castle.ask = El camino está libre. Enroca para poner a salvo a tu rey.
+lesson.opening.castle.wrong = Tu rey está listo. Enroca ahora, mientras el camino está libre.
+lesson.opening.castle.ok = ¡Enrocaste! Tu rey está a salvo y tu torre entra en juego.
+lesson.opening.done = Centro, piezas, enroque: es un buen comienzo para cualquier partida.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Ya conoces todas las reglas del ajedrez. ¡Bien hecho!
 lesson.talk.real = Déjame contarte cómo se juegan las partidas de verdad.
 lesson.talk.elo = Cada jugador tiene una puntuación, el Elo. Sube cuando ganas y baja cuando pierdes.

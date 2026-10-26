@@ -1091,6 +1091,8 @@ coach.colour.help = Цветът, с който играете срещу тре
 coach.colour.alternate = Редуване
 coach.take_time = Напомняне „Не бързайте“
 coach.take_time.help = След минута размисъл треньорът ви казва, че няма за къде да бързате. Само за нива от 1 до 3.
+coach.danger_markers = Показване на фигури в опасност
+coach.danger_markers.help = На нива 1 и 2 във ваш ред под всяка ваша фигура, която треньорът може да спечели веднага, се появява цветно поле.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Гласът на треньора не е инсталиран или е изключен (Настройки > Звук): думите му ще се изписват на екрана.
 # At the table
@@ -1111,6 +1113,7 @@ coach.confirm.resign_draw = Да предадете ли партията? Тр�
 coach.confirm.leave = Да се върнете ли в главното меню? Тази партия с треньора ще бъде прекратена.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Играй отново
+coach.gameover.practise = Упражнявай: {0}
 coach.gameover.unrated = Тази партия с треньора не се отчита за рейтинга.
 coach.lesson.done = БРАВО
 coach.lesson.done.line = Вече знаете правилата на шаха.
@@ -1244,6 +1247,10 @@ options.voice_quality.high = Високо
 options.voice_quality.very_high = Много високо
 options.voice_quality.ultra = Ултра
 options.voice_quality.max = Максимално
+options.voice_speed_lesson = Скорост на гласа: урок по правила
+options.voice_speed_beginner = Скорост на гласа: нива 1–2
+options.voice_speed = Скорост на гласа: други нива
+options.voice_speed.help = Колко бързо говори треньорът: 100% е нормалната му скорост. Урокът по правила и нива 1 и 2 са по подразбиране по-бавни (85%), за начинаещи. „Други нива“ включва предизвикателствата. Промяната важи от следващата реплика на треньора.
 # The prompt. {0} = the size in megabytes ("398,7")
 coach.download.title = Гласът на треньора
 coach.download.text = Треньорът говори със Supertonic 3 – модел за синтез на реч от Supertone. Той не е включен в Scacelith: играта може да го изтегли сега от Hugging Face ({0} MB, еднократно). Без него треньорът изписва думите си на екрана.

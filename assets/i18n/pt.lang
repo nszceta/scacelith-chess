@@ -1085,6 +1085,8 @@ coach.colour.help = A cor com que joga contra o treinador. Alternar: brancas e d
 coach.colour.alternate = Alternar
 coach.take_time = Lembrete «Sem pressa»
 coach.take_time.help = Após um minuto de reflexão, o treinador diz que não há pressa. Apenas nos níveis 1 a 3.
+coach.danger_markers = Mostrar as peças em perigo
+coach.danger_markers.help = Nos níveis 1 e 2, na sua vez, aparece uma casa colorida sob cada uma das suas peças que o treinador poderia ganhar já.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = A voz do treinador não está instalada ou está desativada (Opções > Áudio): as palavras do treinador serão escritas no ecrã.
 # At the table
@@ -1105,6 +1107,7 @@ coach.confirm.resign_draw = Abandonar esta partida? O treinador já não pode da
 coach.confirm.leave = Voltar ao menu principal? Esta partida com o treinador será abandonada.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Jogar de novo
+coach.gameover.practise = Praticar: {0}
 coach.gameover.unrated = Esta partida com o treinador não conta para o Elo.
 coach.lesson.done = MUITO BEM
 coach.lesson.done.line = Já conhece as regras do xadrez.
@@ -1238,6 +1241,10 @@ options.voice_quality.high = Alta
 options.voice_quality.very_high = Muito alta
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Máxima
+options.voice_speed_lesson = Velocidade da voz: lição de regras
+options.voice_speed_beginner = Velocidade da voz: níveis 1-2
+options.voice_speed = Velocidade da voz: outros níveis
+options.voice_speed.help = A velocidade a que o treinador fala: 100% é a sua velocidade normal. A lição de regras e os níveis 1 e 2 são mais lentos por predefinição (85%), para os jogadores novos. Outros níveis inclui os desafios. Uma alteração aplica-se a partir da próxima fala do treinador.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = A voz do treinador
 coach.download.text = O treinador fala com o Supertonic 3, um modelo de síntese de voz da Supertone. Não está incluído no Scacelith: o jogo pode transferi-lo agora do Hugging Face ({0} MB, uma única vez). Sem ele, o treinador escreve as suas palavras no ecrã.

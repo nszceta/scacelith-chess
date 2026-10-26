@@ -19,6 +19,8 @@ lesson.title.castling = التبييت
 lesson.title.en_passant = الأخذ بالمرور
 lesson.title.promotion = الترقية
 lesson.title.draws = الجمود والتعادل
+lesson.title.before_move = قبل أن تنقل
+lesson.title.opening = الافتتاح
 lesson.title.etiquette = المباريات الحقيقية: التصنيف والساعة والآداب
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -239,7 +241,52 @@ lesson.draws.kings = وللتعادل حالات أخرى: إذا تعذّرت �
 lesson.draws.agree = ويمكن للاعبين أيضًا الاتفاق على التعادل.
 lesson.draws.repeat = وتكرار الموقف ثلاث مرات، أو خمسون نقلة دون أخذ أو تحريك بيدق، يتيح التعادل أيضًا.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = قبل كل نقلة، توقّف وانظر. اللاعبون الأقوياء يفعلون ذلك في كل مرة.
+lesson.before.last = السؤال الأول: ماذا فعلت نقلتي الأخيرة؟ شاهد.
+lesson.before.threat = {my} يهاجم {your}. هذا تهديد.
+lesson.before.safe = الابتعاد وحده لا يكفي. يجب أن يكون المربع الجديد آمنًا أيضًا.
+lesson.before.dodge.ask = انقل حصانك إلى مربع آمن.
+lesson.before.dodge.still = ما زال حصانك مهاجَمًا. شاهد.
+lesson.before.dodge.hint = بيادقي تحمي {sq} و{sq2}. اختر مربعًا آخر.
+lesson.before.dodge.ok = آمن! لقد رأيت التهديد، وفحصت المربع.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = ليس {to}: {my} يحمي ذلك المربع. شاهد.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = ضاع {your}. انظر أولًا، ثم انقل.
+lesson.before.again = مرة أخرى، أبدأ أنا بنقلتي. شاهد.
+lesson.before.free.ask = انظر إلى نقلتي الأخيرة. هل تستطيع أخذ شيء مجانًا؟
+lesson.before.free.missed = انظر إلى {my} مجددًا. ما الذي يستطيع أخذه؟
+lesson.before.free.hint = {my} بلا حماية. {@}بيدقك يستطيع أخذه.
+lesson.before.free.ok = نعم! كان فيلي مجانيًا. انظر دائمًا إلى نقلتي الأخيرة.
+lesson.before.check.ask = أعطني كشًا، من مربع لا أستطيع أخذه.
+lesson.before.check.wrong = هذا ليس كشًا. ابحث عن كش من مربع آمن.
+lesson.before.check.hint = {my} يحمي {sq}. أعطِ الكش من مربع آمن.
+lesson.before.check.ok = كش ممتاز! وزيرك آمن هناك.
+lesson.before.done = اجعلها عادة: انظر أولًا، ثم انقل.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = الافتتاح هو بداية المباراة. بضع قواعد بسيطة تساعدك.
+lesson.opening.goals = {@}سيطر على المركز، و{@2}أخرج الأحصنة والأفيال، و{@3}بيّت مبكرًا.
+lesson.opening.centre = المربعات الأربعة في {@}الوسط هي المركز.
+lesson.opening.pawn.ask = ضع بيدقًا في المركز: مربعين إلى الأمام.
+lesson.opening.pawn.one = ليس سيئًا، لكن مربعين يأخذان من المركز أكثر.
+lesson.opening.pawn.knight = الأحصنة ستأتي قريبًا. أولًا، بيدق في المركز.
+lesson.opening.pawn.wrong = استخدم البيدق الذي أمام ملِكك أو وزيرك.
+lesson.opening.pawn.ok = جيد! بيدقك يأخذ مساحة في المركز.
+lesson.opening.queen = لا تُخرج وزيرك مبكرًا: ستطارده قطعي.
+lesson.opening.knight.ask = أخرج حصانًا، نحو المركز.
+lesson.opening.rim = الحصان على الحافة يصل إلى مربعات قليلة. اقفز نحو المركز.
+lesson.opening.bishop = إخراج القطع جيد! لكن هذه المرة، حصان.
+lesson.opening.knight.ok = جيد! من هناك يراقب حصانك المركز.
+lesson.opening.later = بعد بضع نقلات: حصانك و{@}فيلك قد خرجا.
+lesson.opening.twice = لا تحرّك القطعة نفسها مرتين بلا سبب وجيه.
+lesson.opening.castle.ask = الطريق مفتوح. بيّت ملِكك إلى الأمان.
+lesson.opening.castle.wrong = ملِكك جاهز. بيّت الآن، والطريق مفتوح.
+lesson.opening.castle.ok = تم التبييت! ملِكك آمن، ورخّك ينضم إلى اللعب.
+lesson.opening.done = المركز، القطع، التبييت: هذه بداية جيدة لكل مباراة.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = أنت الآن تعرف كل قواعد الشطرنج. أحسنت!
 lesson.talk.real = سأخبرك الآن كيف تُلعب المباريات الحقيقية.
 lesson.talk.elo = للاعبين تصنيف يُسمّى إيلو. يرتفع مع الفوز، وينخفض مع الخسارة.

@@ -1091,6 +1091,8 @@ coach.colour.help = A szín, amellyel az edző ellen játszik. Váltakozó: ját
 coach.colour.alternate = Váltakozó
 coach.take_time = „Nyugodtan gondolkodjon” emlékeztető
 coach.take_time.help = Egy perc gondolkodás után az edző jelzi, hogy nem kell sietni. Csak az 1–3. szinten.
+coach.danger_markers = Veszélyben lévő bábuk jelzése
+coach.danger_markers.help = Az 1. és 2. szinten, amikor Ön következik, színes mező jelenik meg minden olyan bábuja alatt, amelyet az edző éppen most le tudna ütni.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Az edző hangja nincs telepítve vagy ki van kapcsolva (Beállítások > Hang): a szavai a képernyőn jelennek meg.
 # At the table
@@ -1111,6 +1113,7 @@ coach.confirm.resign_draw = Feladja a játszmát? Az edző már nem tud mattot a
 coach.confirm.leave = Visszatér a főmenübe? Az edzővel játszott játszma félbemarad.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Még egy játszma
+coach.gameover.practise = Gyakorlás: {0}
 coach.gameover.unrated = Ez az edzővel játszott játszma nem értékelt.
 coach.lesson.done = SZÉP MUNKA
 coach.lesson.done.line = Most már ismeri a sakk szabályait.
@@ -1244,6 +1247,10 @@ options.voice_quality.high = Magas
 options.voice_quality.very_high = Nagyon magas
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Maximális
+options.voice_speed_lesson = Beszédsebesség: szabálylecke
+options.voice_speed_beginner = Beszédsebesség: 1–2. szint
+options.voice_speed = Beszédsebesség: többi szint
+options.voice_speed.help = Milyen gyorsan beszél az edző: a 100% a szokásos sebessége. A szabálylecke és az 1. és 2. szint alapértelmezés szerint lassabb (85%), kezdőknek. A többi szint közé tartoznak a kihívások is. A módosítás az edző következő mondatától érvényes.
 # The prompt. {0} = the size in megabytes ("398,7")
 coach.download.title = Az edző hangja
 coach.download.text = Az edző hangját a Supertonic 3, a Supertone beszédszintézis-modellje adja. A Scacelith nem tartalmazza: a játék most letöltheti a Hugging Face oldaláról ({0} MB, egyszeri letöltés). Nélküle az edző a képernyőre írja a szavait.

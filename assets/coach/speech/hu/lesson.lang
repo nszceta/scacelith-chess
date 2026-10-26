@@ -21,6 +21,8 @@ lesson.title.castling = a sáncolás
 lesson.title.en_passant = az en passant ütés
 lesson.title.promotion = az átváltozás
 lesson.title.draws = a patt és a döntetlen
+lesson.title.before_move = a lépés előtti ellenőrzés
+lesson.title.opening = a megnyitás
 lesson.title.etiquette = értékszám, sakkóra és illem a valódi játszmákban
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -238,7 +240,52 @@ lesson.draws.kings = Más döntetlenek: ha senki sem tud mattot adni, például 
 lesson.draws.agree = A játékosok döntetlenben is megegyezhetnek.
 lesson.draws.repeat = Döntetlent lehet kérni akkor is, ha ugyanaz az állás háromszor előfordul, vagy ha ötven lépésen át nem volt sem ütés, sem gyaloglépés.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Minden lépés előtt állj meg, és nézz körül. Az erős játékosok ezt minden alkalommal megteszik.
+lesson.before.last = Első kérdés: mit csinált az előző lépésem? Figyelj.
+lesson.before.threat = {my} megtámadja {your:acc}. Ez fenyegetés.
+lesson.before.safe = Nem elég elmenekülni. Az új mezőnek is biztonságosnak kell lennie.
+lesson.before.dodge.ask = Lépj a huszároddal egy biztonságos mezőre.
+lesson.before.dodge.still = A huszárod még mindig támadás alatt áll. Figyelj.
+lesson.before.dodge.hint = A gyalogjaim védik {sq} és {sq2} mezőt. Válassz másik mezőt.
+lesson.before.dodge.ok = Biztonságos! Észrevetted a fenyegetést, és ellenőrizted a mezőt.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Nem {to} mezőre: {my} védi azt a mezőt. Figyelj.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = Elvesztetted {your:acc}. Előbb nézz, aztán lépj.
+lesson.before.again = Még egyszer, előbb az én lépésem. Figyelj.
+lesson.before.free.ask = Nézd meg az utolsó lépésemet. Le tudsz ütni valamit ingyen?
+lesson.before.free.missed = Nézd meg újra {my:acc}. Mi tudja leütni?
+lesson.before.free.hint = {my} védtelen. A {@}gyalogod le tudja ütni.
+lesson.before.free.ok = Igen! A futóm ingyen volt. Mindig nézd meg az utolsó lépésemet.
+lesson.before.check.ask = Adj nekem sakkot olyan mezőről, ahol nem tudok leütni.
+lesson.before.check.wrong = Ez nem sakk. Keress sakkot egy biztonságos mezőről.
+lesson.before.check.hint = {my} védi {sq} mezőt. Adj sakkot egy biztonságos mezőről.
+lesson.before.check.ok = Jó sakk! A vezéred ott biztonságban van.
+lesson.before.done = Legyen szokásod: előbb nézz, aztán lépj.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = A megnyitás a játszma eleje. Néhány egyszerű szabály segít.
+lesson.opening.goals = {@}Foglald el a centrumot, {@2}hozd ki a huszárokat és a futókat, és {@3}sáncolj korán.
+lesson.opening.centre = A {@}középső négy mező a centrum.
+lesson.opening.pawn.ask = Tegyél egy gyalogot a centrumba: lépj két mezőt előre.
+lesson.opening.pawn.one = Nem rossz, de két mező több centrumot foglal el.
+lesson.opening.pawn.knight = A huszárok hamarosan jönnek. Előbb egy gyalog a centrumba.
+lesson.opening.pawn.wrong = A királyod vagy a vezéred előtti gyalogot használd.
+lesson.opening.pawn.ok = Jó! A gyalogod teret foglal a centrumban.
+lesson.opening.queen = A vezéredet ne hozd ki korán: a bábuim kergetnék.
+lesson.opening.knight.ask = Hozd ki az egyik huszárt a centrum felé.
+lesson.opening.rim = A szélen álló huszár kevés mezőt ér el. Ugorj a centrum felé.
+lesson.opening.bishop = Fejlesztés, jó! De most egy huszár jön.
+lesson.opening.knight.ok = Jó! Onnan a huszárod a centrumot figyeli.
+lesson.opening.later = Pár lépéssel később: a huszárod és a {@}futód már kint van.
+lesson.opening.twice = Ne lépj kétszer ugyanazzal a bábuval jó ok nélkül.
+lesson.opening.castle.ask = Szabad az út. Sáncolj, és vidd biztonságba a királyodat.
+lesson.opening.castle.wrong = A királyod készen áll. Sáncolj most, amíg szabad az út.
+lesson.opening.castle.ok = Sáncoltál! A királyod biztonságban van, a bástyád pedig játékba lép.
+lesson.opening.done = Centrum, bábuk, sánc: ez jó kezdés minden játszmához.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Most már ismered a sakk összes szabályát. Szép munka!
 lesson.talk.real = Elmesélem, hogyan zajlanak az igazi játszmák.
 lesson.talk.elo = A játékosoknak értékszámuk van, ez az Élő-pontszám. Ha nyersz, nő, ha veszítesz, csökken.

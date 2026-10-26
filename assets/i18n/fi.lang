@@ -1084,6 +1084,8 @@ coach.colour.help = Väri, jolla pelaat valmentajaa vastaan. Vuorotellen: ensin 
 coach.colour.alternate = Vuorotellen
 coach.take_time = Muistutus ”Ei kiirettä”
 coach.take_time.help = Kun olet miettinyt minuutin, valmentaja sanoo, ettei ole kiire. Vain tasoilla 1–3.
+coach.danger_markers = Näytä vaarassa olevat nappulat
+coach.danger_markers.help = Tasoilla 1 ja 2 vuorollasi ilmestyy värillinen ruutu jokaisen sellaisen nappulasi alle, jonka valmentaja voisi voittaa heti.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Valmentajan ääntä ei ole asennettu tai se on pois päältä (Asetukset > Ääni): valmentajan sanat näytetään tekstinä näytöllä.
 # At the table
@@ -1104,6 +1106,7 @@ coach.confirm.resign_draw = Luovutatko pelin? Valmentaja ei voi enää tehdä ma
 coach.confirm.leave = Palaatko päävalikkoon? Tämä peli valmentajan kanssa jää kesken.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Pelaa uudelleen
+coach.gameover.practise = Harjoittele: {0}
 coach.gameover.unrated = Tätä valmentajan kanssa pelattua peliä ei pisteytetä.
 coach.lesson.done = HIENOA
 coach.lesson.done.line = Osaat nyt shakin säännöt.
@@ -1236,6 +1239,10 @@ options.voice_quality.high = Korkea
 options.voice_quality.very_high = Erittäin korkea
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Maksimi
+options.voice_speed_lesson = Puheen nopeus: sääntöoppitunti
+options.voice_speed_beginner = Puheen nopeus: tasot 1-2
+options.voice_speed = Puheen nopeus: muut tasot
+options.voice_speed.help = Kuinka nopeasti valmentaja puhuu: 100 % on sen normaali nopeus. Sääntöoppitunti sekä tasot 1 ja 2 ovat oletuksena hitaampia (85 %) uusia pelaajia varten. Muihin tasoihin kuuluvat haasteet. Muutos tulee voimaan valmentajan seuraavasta repliikistä.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = Valmentajan ääni
 coach.download.text = Valmentaja puhuu Supertonic 3 -mallilla, joka on Supertonen puhesynteesimalli. Se ei sisälly Scacelithiin: peli voi ladata sen nyt Hugging Face -palvelusta ({0} MB, kerran). Ilman sitä valmentaja kirjoittaa sanansa näytölle.

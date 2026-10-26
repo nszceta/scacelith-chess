@@ -1083,6 +1083,8 @@ coach.colour.help = Den farve, du spiller med mod træneren. Skiftevis: hvid og 
 coach.colour.alternate = Skiftevis
 coach.take_time = Påmindelsen „Tag dig god tid“
 coach.take_time.help = Efter et minuts betænkningstid siger træneren, at der ikke er nogen hast. Kun niveau 1 til 3.
+coach.danger_markers = Vis brikker i fare
+coach.danger_markers.help = På niveau 1 og 2 vises der på din tur et farvet felt under hver af dine brikker, som træneren kunne vinde lige nu.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Trænerens stemme er ikke installeret eller er slået fra (Indstillinger > Lyd): hans ord bliver skrevet på skærmen.
 # At the table
@@ -1103,6 +1105,7 @@ coach.confirm.resign_draw = Vil du opgive partiet? Træneren kan ikke længere s
 coach.confirm.leave = Vil du vende tilbage til hovedmenuen? Dette parti med træneren bliver afbrudt.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Spil igen
+coach.gameover.practise = Øv dig: {0}
 coach.gameover.unrated = Dette parti med træneren er ikke ratet.
 coach.lesson.done = GODT KLARET
 coach.lesson.done.line = Nu kender du skakkens regler.
@@ -1235,6 +1238,10 @@ options.voice_quality.high = Høj
 options.voice_quality.very_high = Meget høj
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Maksimum
+options.voice_speed_lesson = Stemmens tempo: regellektion
+options.voice_speed_beginner = Stemmens tempo: niveau 1-2
+options.voice_speed = Stemmens tempo: andre niveauer
+options.voice_speed.help = Hvor hurtigt træneren taler: 100 % er den normale hastighed. Regellektionen og niveau 1 og 2 er som standard langsommere (85 %), for nye spillere. Andre niveauer omfatter udfordringerne. En ændring gælder fra trænerens næste replik.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = Trænerens stemme
 coach.download.text = Træneren taler med Supertonic 3, en talesyntesemodel fra Supertone. Den følger ikke med Scacelith: spillet kan downloade den nu fra Hugging Face ({0} MB, én gang). Uden den skriver træneren sine ord på skærmen.

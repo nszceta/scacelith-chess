@@ -205,7 +205,8 @@ Analysis menus: `--scene ui --ui-screen analysis-page|analysis-page-online|libra
 the Analysis page and the Saved games page (on sample games written to `pgn-viewer-sample/` in the
 user data folder unless `--ui-library <folder>` is given; `--ui-clipboard <file>` stands in for the
 clipboard), `gameover-analyse|gameover-analyse-coach|gameover-analyse-online|gameover-analyse-folded`
-the game over card with Analyse the game, and `online-game-analysing` a history game fetching its
+the game over card with Analyse the game (`gameover-analyse-coach-practise`: with the coach's
+"Practise: Forks" button), and `online-game-analysing` a history game fetching its
 PGN for the analysis.
 
 Analysis mode: `--analyse <file.pgn>` opens that file's first game (`--game N`: its Nth, from 1) in

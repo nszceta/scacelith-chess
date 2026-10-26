@@ -1070,6 +1070,8 @@ coach.colour.help = El color con el que juega contra el entrenador. Alterno: bla
 coach.colour.alternate = Alterno
 coach.take_time = Aviso «Tómese su tiempo»
 coach.take_time.help = Tras un minuto de reflexión, el entrenador le dice que no hay prisa. Solo en los niveles 1 a 3.
+coach.danger_markers = Mostrar las piezas en peligro
+coach.danger_markers.help = En los niveles 1 y 2, en su turno, aparece una casilla de color bajo cada una de sus piezas que el entrenador podría ganar ahora mismo.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = La voz del entrenador no está instalada o está desactivada (Opciones > Sonido): sus palabras se mostrarán en pantalla.
 # At the table
@@ -1090,6 +1092,7 @@ coach.confirm.resign_draw = ¿Abandonar esta partida? El entrenador ya no puede 
 coach.confirm.leave = ¿Volver al menú principal? Esta partida con el entrenador se perderá.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Jugar otra vez
+coach.gameover.practise = Practicar: {0}
 coach.gameover.unrated = Esta partida con el entrenador no puntúa.
 coach.lesson.done = ¡BIEN HECHO!
 coach.lesson.done.line = Ya conoce las reglas del ajedrez.
@@ -1217,6 +1220,10 @@ options.voice_quality.high = Alta
 options.voice_quality.very_high = Muy alta
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Máxima
+options.voice_speed_lesson = Velocidad de voz: lección de reglas
+options.voice_speed_beginner = Velocidad de voz: niveles 1-2
+options.voice_speed = Velocidad de voz: otros niveles
+options.voice_speed.help = Qué tan rápido habla el entrenador: 100 % es su velocidad normal. La lección de reglas y los niveles 1 y 2 son más lentos por defecto (85 %), para los jugadores nuevos. Otros niveles incluye los desafíos. Un cambio se aplica desde la siguiente frase del entrenador.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = La voz del entrenador
 coach.download.text = El entrenador habla con Supertonic 3, un modelo de síntesis de voz de Supertone. No se incluye con Scacelith: el juego puede descargarlo ahora desde Hugging Face ({0} MB, una sola vez). Sin él, el entrenador escribe sus palabras en pantalla.

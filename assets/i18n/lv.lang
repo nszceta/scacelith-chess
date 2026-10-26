@@ -1100,6 +1100,8 @@ coach.colour.help = Krāsa, ar kuru spēlējat pret treneri. Pārmaiņus: vienā
 coach.colour.alternate = Pārmaiņus
 coach.take_time = Atgādinājums “Nesteidzieties”
 coach.take_time.help = Pēc minūtes domāšanas treneris saka, ka nav jāsteidzas. Tikai 1.–3. līmenī.
+coach.danger_markers = Rādīt apdraudētās figūras
+coach.danger_markers.help = 1. un 2. līmenī, kad esat gājienā, zem katras jūsu figūras, ko treneris tagad varētu paņemt, parādās krāsains lauciņš.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Trenera balss nav instalēta vai ir izslēgta (Opcijas > Skaņa): viņa vārdi tiks rakstīti ekrānā.
 # At the table
@@ -1120,6 +1122,7 @@ coach.confirm.resign_draw = Padoties šajā partijā? Treneris vairs nevar piete
 coach.confirm.leave = Atgriezties galvenajā izvēlnē? Šī partija ar treneri tiks pārtraukta.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Spēlēt vēlreiz
+coach.gameover.practise = Trenēties: {0}
 coach.gameover.unrated = Šī partija ar treneri reitingu neietekmē.
 coach.lesson.done = LIELISKI
 coach.lesson.done.line = Tagad jūs zināt šaha noteikumus.
@@ -1252,6 +1255,10 @@ options.voice_quality.high = Augsta
 options.voice_quality.very_high = Ļoti augsta
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Maksimāla
+options.voice_speed_lesson = Balss ātrums: noteikumu nodarbība
+options.voice_speed_beginner = Balss ātrums: 1.–2. līmenis
+options.voice_speed = Balss ātrums: citi līmeņi
+options.voice_speed.help = Cik ātri runā treneris: 100% ir tā parastais ātrums. Noteikumu nodarbība un 1. un 2. līmenis pēc noklusējuma ir lēnāki (85%), iesācējiem. Citi līmeņi ietver izaicinājumus. Izmaiņas stājas spēkā no trenera nākamās frāzes.
 # The prompt. {0} = the size in megabytes ("398,7")
 coach.download.title = Trenera balss
 coach.download.text = Treneris runā ar Supertonic 3 — Supertone runas sintēzes modeli. Tas nav iekļauts Scacelith: spēle to var lejupielādēt tagad no Hugging Face ({0} MB, vienreiz). Bez tā treneris raksta savus vārdus ekrānā.

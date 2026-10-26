@@ -639,7 +639,7 @@ TEST(coach_session_lesson_space_skips_one_line) {
 
     Table u;
     SessionConfig last = levelConfig(0);
-    last.lessonChapter = 9;   // the talk, no exercise
+    last.lessonChapter = 11;   // the talk, no exercise
     u.start(last);
     CHECK(u.until([&] { return u.said("lesson.talk.rules"); }, 60.0f));
     u.step();
@@ -863,6 +863,41 @@ TEST(coach_session_game_over_keeps_the_review_analyses) {
     CHECK(u.said("event.end.resigned"));
 }
 
+// The speeds by level (Options > Audio): the defaults slow the lesson and levels 1-2 by 15%; set
+// ones apply by level, and a change during a game applies from the next line.
+TEST(coach_session_speech_speeds_by_level) {
+    CHECK(SpeechSpeeds().lesson == 0.85f && SpeechSpeeds().beginner == 0.85f && SpeechSpeeds().normal == 1.0f);
+    SpeechSpeeds set;
+    set.lesson = 0.8f;
+    set.beginner = 0.9f;
+    set.normal = 1.1f;
+    for (int level : {1, 2, 3}) {
+        Table t;
+        SessionConfig cfg = levelConfig(level);
+        cfg.speeds = set;
+        t.start(cfg);
+        CHECK(t.quiet());
+        REQUIRE(!t.stage.reqs.empty());
+        const float want = level <= 2 ? 0.9f : 1.1f;
+        for (const fake::Stage::Req& r : t.stage.reqs) CHECK(std::fabs(r.speed - want) < 1e-6f);
+    }
+    Table t;
+    t.start(levelConfig(1));
+    CHECK(t.quiet());
+    CHECK(t.until([&] { return t.session.playerMayMove(t.game); }, 10.0f));
+    t.move("e2e4");
+    CHECK(t.reply("e7e5"));
+    CHECK(t.quiet());
+    const size_t before = t.stage.reqs.size();
+    set.beginner = 0.75f;
+    t.session.setSpeechSpeeds(set);
+    t.run(61.0f);   // "Take your time."
+    CHECK(t.quiet());
+    REQUIRE(t.said("event.take_time"));
+    REQUIRE(t.stage.reqs.size() > before);
+    CHECK(std::fabs(t.stage.reqs.back().speed - 0.75f) < 1e-6f);
+}
+
 TEST(coach_session_rules_lesson_chapter) {
     Table t;
     SessionConfig cfg = levelConfig(0);
@@ -877,7 +912,7 @@ TEST(coach_session_rules_lesson_chapter) {
     CHECK_EQ(t.session.lessonChapter(), 1);
     bool slow = true, prefetched = false;
     for (const fake::Stage::Req& r : t.stage.reqs) {
-        slow = slow && std::fabs(r.speed - kLessonSpeechSpeed) < 1e-6f;
+        slow = slow && std::fabs(r.speed - SpeechSpeeds().lesson) < 1e-6f;
         prefetched = prefetched || r.priority == 0;   // the next chapter, ahead
     }
     CHECK(slow);

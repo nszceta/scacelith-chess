@@ -23,6 +23,8 @@ lesson.title.castling = o roque
 lesson.title.en_passant = a captura en passant
 lesson.title.promotion = a promoção
 lesson.title.draws = o afogamento e os empates
+lesson.title.before_move = a verificação antes de jogar
+lesson.title.opening = a abertura
 lesson.title.etiquette = as partidas de verdade: rating, relógio e boas maneiras
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -251,7 +253,52 @@ lesson.draws.kings = Outros empates: quando ninguém consegue dar xeque-mate, co
 lesson.draws.agree = Os jogadores também podem combinar o empate.
 lesson.draws.repeat = Repetir uma posição três vezes, ou jogar cinquenta lances sem captura nem lance de peão, também permite o empate.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ----------------------------------------
+lesson.before.habit = Antes de cada lance, pare e olhe. Os bons jogadores fazem isso sempre.
+lesson.before.last = Primeira pergunta: o que o meu último lance fez? Olhe.
+lesson.before.threat = {my} ataca {your}. É uma ameaça.
+lesson.before.safe = Sair de lá não basta. A nova casa também precisa ser segura.
+lesson.before.dodge.ask = Leve o seu cavalo para uma casa segura.
+lesson.before.dodge.still = O seu cavalo continua atacado. Olhe.
+lesson.before.dodge.hint = Os meus peões protegem {sq} e {sq2}. Escolha outra casa.
+lesson.before.dodge.ok = Segura! Você viu a ameaça e conferiu a casa.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = {to} não: {my} protege essa casa. Olhe.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = Você perdeu {your}. Primeiro olhe, depois jogue.
+lesson.before.again = De novo, eu jogo primeiro. Olhe.
+lesson.before.free.ask = Olhe o meu último lance. Você consegue capturar algo de graça?
+lesson.before.free.missed = Olhe {my} de novo. Quem consegue capturá-{my:lo}?
+lesson.before.free.hint = {my} não tem defesa. O seu {@}peão pode capturá-{my:lo}.
+lesson.before.free.ok = Sim! O meu bispo estava livre. Olhe sempre o meu último lance.
+lesson.before.check.ask = Dê xeque em mim a partir de uma casa onde eu não possa capturar.
+lesson.before.check.wrong = Isso não é xeque. Ache um xeque a partir de uma casa segura.
+lesson.before.check.hint = {my} protege {sq}. Dê xeque a partir de uma casa segura.
+lesson.before.check.ok = Bom xeque! A sua dama está segura ali.
+lesson.before.done = Faça disso um hábito: primeiro olhe, depois jogue.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------
+lesson.opening.what = A abertura é o início da partida. Algumas regras simples ajudam.
+lesson.opening.goals = {@}Tome o centro, {@2}coloque em jogo cavalos e bispos, e {@3}faça o roque cedo.
+lesson.opening.centre = As quatro casas do {@}meio são o centro.
+lesson.opening.pawn.ask = Coloque um peão no centro: duas casas para a frente.
+lesson.opening.pawn.one = Nada mal, mas duas casas ocupam mais do centro.
+lesson.opening.pawn.knight = Os cavalos vêm logo depois. Primeiro, um peão no centro.
+lesson.opening.pawn.wrong = Use o peão que está na frente do seu rei ou da sua dama.
+lesson.opening.pawn.ok = Muito bem! O seu peão ganha espaço no centro.
+lesson.opening.queen = Não coloque a dama em jogo cedo: as minhas peças iriam persegui-la.
+lesson.opening.knight.ask = Coloque um cavalo em jogo, em direção ao centro.
+lesson.opening.rim = Um cavalo na borda alcança poucas casas. Pule em direção ao centro.
+lesson.opening.bishop = Desenvolver é bom! Mas desta vez, um cavalo.
+lesson.opening.knight.ok = Muito bem! Dali o seu cavalo vigia o centro.
+lesson.opening.later = Alguns lances depois: o seu cavalo e o seu {@}bispo já estão em jogo.
+lesson.opening.twice = Não mova a mesma peça duas vezes sem um bom motivo.
+lesson.opening.castle.ask = O caminho está livre. Faça o roque para pôr o rei em segurança.
+lesson.opening.castle.wrong = O seu rei está pronto. Faça o roque agora, enquanto o caminho está livre.
+lesson.opening.castle.ok = Roque feito! O seu rei está seguro e a torre entra no jogo.
+lesson.opening.done = Centro, peças, roque: é um bom começo para qualquer partida.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Agora você conhece todas as regras do xadrez. Muito bem!
 lesson.talk.real = Vou contar como são as partidas de verdade.
 lesson.talk.elo = Os jogadores têm um rating, chamado Elo. Ele sobe quando você vence e cai quando você perde.

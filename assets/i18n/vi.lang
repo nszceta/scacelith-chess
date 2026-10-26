@@ -1084,6 +1084,8 @@ coach.colour.help = Màu quân bạn chơi khi đấu với huấn luyện viên
 coach.colour.alternate = Luân phiên
 coach.take_time = Nhắc "Cứ từ từ"
 coach.take_time.help = Sau một phút suy nghĩ, huấn luyện viên sẽ nói rằng bạn không cần vội. Chỉ áp dụng cho cấp độ 1 đến 3.
+coach.danger_markers = Hiện quân đang gặp nguy hiểm
+coach.danger_markers.help = Ở cấp độ 1 và 2, đến lượt bạn, một ô màu hiện dưới mỗi quân của bạn mà huấn luyện viên có thể bắt ngay lúc này.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Giọng nói của huấn luyện viên chưa được cài đặt hoặc đang tắt (Tùy chọn > Âm thanh): lời của huấn luyện viên sẽ được hiển thị trên màn hình.
 # At the table
@@ -1104,6 +1106,7 @@ coach.confirm.resign_draw = Xin thua ván này? Huấn luyện viên không còn
 coach.confirm.leave = Quay về menu chính? Ván cờ với huấn luyện viên sẽ bị bỏ dở.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Chơi lại
+coach.gameover.practise = Luyện tập: {0}
 coach.gameover.unrated = Ván cờ với huấn luyện viên không được tính điểm.
 coach.lesson.done = GIỎI LẮM
 coach.lesson.done.line = Giờ bạn đã biết luật cờ vua.
@@ -1236,6 +1239,10 @@ options.voice_quality.high = Cao
 options.voice_quality.very_high = Rất cao
 options.voice_quality.ultra = Cực cao
 options.voice_quality.max = Tối đa
+options.voice_speed_lesson = Tốc độ giọng nói: bài học luật
+options.voice_speed_beginner = Tốc độ giọng nói: cấp độ 1-2
+options.voice_speed = Tốc độ giọng nói: các cấp độ khác
+options.voice_speed.help = Tốc độ nói của huấn luyện viên: 100% là tốc độ bình thường. Bài học luật và cấp độ 1, 2 mặc định chậm hơn (85%), dành cho người mới. Các cấp độ khác bao gồm cả các thử thách. Thay đổi có hiệu lực từ câu nói tiếp theo của huấn luyện viên.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = Giọng nói của huấn luyện viên
 coach.download.text = Huấn luyện viên nói bằng Supertonic 3, một mô hình tổng hợp giọng nói của Supertone. Mô hình này không đi kèm Scacelith: trò chơi có thể tải xuống ngay bây giờ từ Hugging Face ({0} MB, một lần duy nhất). Nếu không có mô hình, huấn luyện viên sẽ hiển thị lời nói trên màn hình.

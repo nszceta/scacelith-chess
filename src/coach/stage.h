@@ -23,7 +23,7 @@ public:
     // device): the director then shows every line as a subtitle held for readingTime().
     virtual bool voiceAvailable() const = 0;
     // Queue the synthesis of 'text' (spoken rendering) in 'lang' (a Supertonic language) at 'speed'
-    // (1 = normal, the lesson uses kLessonSpeechSpeed). Higher priority first. 0 = refused.
+    // (1 = normal, coach::SpeechSpeeds). Higher priority first. 0 = refused.
     virtual uint32_t requestSpeech(const std::string& text, const std::string& lang, float speed, int priority) = 0;
     // The synthesised audio (mono float PCM at speechSampleRate()) once ready: true once, then the
     // request is forgotten. False while pending.

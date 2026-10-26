@@ -23,6 +23,8 @@ lesson.title.castling = roszada
 lesson.title.en_passant = bicie w przelocie
 lesson.title.promotion = promocja
 lesson.title.draws = pat i remisy
+lesson.title.before_move = przed ruchem
+lesson.title.opening = debiut
 lesson.title.etiquette = ranking, zegar i dobre obyczaje w prawdziwych partiach
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -242,7 +244,52 @@ lesson.draws.kings = Inne remisy: gdy nikt nie może dać mata, na przykład gdy
 lesson.draws.agree = Gracze mogą też zgodzić się na remis.
 lesson.draws.repeat = Trzykrotne powtórzenie pozycji albo pięćdziesiąt ruchów bez bicia i bez ruchu pionkiem też pozwalają na remis.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Przed każdym ruchem zatrzymaj się i popatrz. Silni gracze robią tak za każdym razem.
+lesson.before.last = Pierwsze pytanie: co zrobił mój ostatni ruch? Patrz.
+lesson.before.threat = {my} atakuje {your:acc}. To jest groźba.
+lesson.before.safe = Samo odejście nie wystarczy. Nowe pole też musi być bezpieczne.
+lesson.before.dodge.ask = Przesuń skoczka na bezpieczne pole.
+lesson.before.dodge.still = Twój skoczek nadal jest atakowany. Patrz.
+lesson.before.dodge.hint = Moje pionki bronią pól {sq} i {sq2}. Wybierz inne pole.
+lesson.before.dodge.ok = Bezpiecznie! Widzisz groźbę i sprawdzasz pole.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Nie na {to}: {my} broni tego pola. Patrz.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = Tracisz {your:refl_acc}. Najpierw spójrz, potem rusz.
+lesson.before.again = Jeszcze raz, najpierw mój ruch. Patrz.
+lesson.before.free.ask = Spójrz na mój ostatni ruch. Możesz coś zbić za darmo?
+lesson.before.free.missed = Spójrz jeszcze raz na {my:acc}. Co może {my:pron_acc} zbić?
+lesson.before.free.hint = {my} nie ma obrońcy. Twój {@}pionek może {my:pron_acc} zbić.
+lesson.before.free.ok = Tak! Mój goniec był za darmo. Zawsze patrz na mój ostatni ruch.
+lesson.before.check.ask = Daj mi szacha tak, żebym nie mógł zbić twojej bierki.
+lesson.before.check.wrong = To nie jest szach. Znajdź szacha z bezpiecznego pola.
+lesson.before.check.hint = {my} broni pola {sq}. Daj szacha z bezpiecznego pola.
+lesson.before.check.ok = Dobry szach! Twój hetman jest tam bezpieczny.
+lesson.before.done = Zrób z tego nawyk: najpierw patrz, potem ruszaj.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Debiut to początek partii. Pomaga kilka prostych zasad.
+lesson.opening.goals = {@}Zajmij centrum, {@2}wyprowadź skoczki i gońce i {@3}zrób wcześnie roszadę.
+lesson.opening.centre = Cztery pola w {@}środku to centrum.
+lesson.opening.pawn.ask = Postaw pionka w centrum: dwa pola do przodu.
+lesson.opening.pawn.one = Nieźle, ale dwa pola zajmują więcej centrum.
+lesson.opening.pawn.knight = Skoczki przyjdą wkrótce. Najpierw pionek w centrum.
+lesson.opening.pawn.wrong = Użyj pionka przed królem albo przed hetmanem.
+lesson.opening.pawn.ok = Dobrze! Twój pionek zajmuje miejsce w centrum.
+lesson.opening.queen = Nie wyprowadzaj hetmana za wcześnie: moje bierki będą go gonić.
+lesson.opening.knight.ask = Wyprowadź skoczka w stronę centrum.
+lesson.opening.rim = Skoczek na brzegu sięga do niewielu pól. Skocz w stronę centrum.
+lesson.opening.bishop = Rozwijasz bierki, dobrze! Ale tym razem skoczek.
+lesson.opening.knight.ok = Dobrze! Stamtąd twój skoczek pilnuje centrum.
+lesson.opening.later = Kilka ruchów później: twój skoczek i {@}goniec są już wyprowadzone.
+lesson.opening.twice = Bez dobrego powodu nie ruszaj dwa razy tą samą bierką.
+lesson.opening.castle.ask = Droga jest wolna. Zrób roszadę i schowaj króla.
+lesson.opening.castle.wrong = Twój król jest gotowy. Zrób roszadę teraz, póki droga jest wolna.
+lesson.opening.castle.ok = Roszada! Twój król jest bezpieczny, a wieża wchodzi do gry.
+lesson.opening.done = Centrum, bierki, roszada: to dobry początek każdej partii.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Znasz już wszystkie zasady szachów. Brawo!
 lesson.talk.real = Opowiem ci, jak wyglądają prawdziwe partie.
 lesson.talk.elo = Gracze mają ranking, nazywany Elo. Rośnie, gdy wygrywasz, i spada, gdy przegrywasz.

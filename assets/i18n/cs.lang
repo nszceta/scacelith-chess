@@ -1085,6 +1085,8 @@ coach.colour.help = Barva, kterou hrajete proti trenérovi. Střídavě: jednu p
 coach.colour.alternate = Střídavě
 coach.take_time = Připomínka „Nespěchejte“
 coach.take_time.help = Po minutě přemýšlení vám trenér řekne, že nemusíte spěchat. Jen pro úrovně 1 až 3.
+coach.danger_markers = Zobrazovat ohrožené figury
+coach.danger_markers.help = Na úrovních 1 a 2 se ve vašem tahu pod každou vaší figurou, kterou by trenér mohl hned vyhrát, objeví barevné pole.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Trenérův hlas není nainstalován nebo je vypnutý (Možnosti > Zvuk): jeho slova se budou vypisovat na obrazovku.
 # At the table
@@ -1105,6 +1107,7 @@ coach.confirm.resign_draw = Chcete tuto partii vzdát? Trenér už nemůže dát
 coach.confirm.leave = Chcete se vrátit do hlavní nabídky? Tato partie s trenérem bude opuštěna.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Hrát znovu
+coach.gameover.practise = Procvičit: {0}
 coach.gameover.unrated = Tato partie s trenérem není na rating.
 coach.lesson.done = VÝBORNĚ
 coach.lesson.done.line = Teď znáte pravidla šachu.
@@ -1237,6 +1240,10 @@ options.voice_quality.high = Vysoká
 options.voice_quality.very_high = Velmi vysoká
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Maximální
+options.voice_speed_lesson = Rychlost hlasu: lekce pravidel
+options.voice_speed_beginner = Rychlost hlasu: úrovně 1–2
+options.voice_speed = Rychlost hlasu: ostatní úrovně
+options.voice_speed.help = Jak rychle trenér mluví: 100 % je jeho běžná rychlost. Lekce pravidel a úrovně 1 a 2 jsou ve výchozím nastavení pomalejší (85 %), pro začátečníky. Ostatní úrovně zahrnují výzvy. Změna se projeví od další trenérovy věty.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = Hlas trenéra
 coach.download.text = Trenér mluví hlasem Supertonic 3, modelu syntézy řeči od společnosti Supertone. Model není součástí Scacelithu: hra ho teď může stáhnout z Hugging Face ({0} MB, jednorázově). Bez něj trenér svá slova vypisuje na obrazovku.

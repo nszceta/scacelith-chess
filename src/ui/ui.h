@@ -102,7 +102,8 @@ enum class MenuAction {
     // game over card of a game just played ("Analyse the game", GameOverExtras::analyse: the
     // scene analyses the game it holds)
     StartAnalysis,
-    StartChallenge  // Coach page, Challenges tab: Start (CoachSetup::challenge names the set)
+    StartChallenge, // Coach page, Challenges tab: Start (CoachSetup::challenge names the set)
+    Practise        // coach game's end card: "Practise: Forks" (GameOverExtras::practiseLabel)
 };
 
 // "Watch a Game" (viewer mode): two Stockfish players. The page starts from the last choices saved
@@ -126,7 +127,7 @@ int promotionPicker(bool playerIsWhite);
 void notify(const std::string& message, float seconds = 3.0f);
 void drawNotifications();
 // End of game card: result line ("1-0", "½-½"), reason, move count. Returns Rematch or BackToMainMenu
-// (and StartAnalysis, Report with the extras below).
+// (and StartAnalysis, Report, Practise with the extras below).
 // The card can be folded away by the player to look at the final position.
 MenuAction gameOver(const std::string& result, const std::string& reason, bool playerWon, bool draw, int moveCount = -1);
 // Additions to the end of game card.
@@ -139,6 +140,9 @@ struct GameOverExtras {
     // "Analyse the game" (returns StartAnalysis): a game just played (against Stockfish, the
     // coach, on one PC, online). Choosing it declines the rematch.
     bool analyse = false;
+    // Coach game, levels 1-3: "Practise: Forks" (returns Practise), a second row above the
+    // buttons: the challenge set for the theme the appraisal named. "" = none.
+    std::string practiseLabel;
 };
 MenuAction gameOver(const std::string& result, const std::string& reason, bool playerWon, bool draw, int moveCount,
                     const GameOverExtras& extras);
@@ -248,6 +252,7 @@ struct CoachSetup {
                                  // lesson is always played with White: Settings::coachPlayerColour)
     std::string challenge;       // the challenge selected (coach::Challenge::id)
     bool takeYourTime = true;    // the coach's "Take your time." reminder (levels 1-3)
+    bool dangerMarkers = true;   // the pieces in danger shown on the board (levels 1-2)
     // Set by the game before mainMenu(): false when the coach's voice files (tts::modelFolder(),
     // <application data>/coach/) are missing or failed to load. The page then says in one line that
     // the coach will speak through subtitles only.

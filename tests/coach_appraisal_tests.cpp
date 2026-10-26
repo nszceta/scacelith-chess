@@ -8,6 +8,7 @@
 #include "ai/analysis.h"
 #include "chess/chess.h"
 #include "coach/appraisal.h"
+#include "coach/challenge.h"
 #include "coach/review.h"
 #include "core/embedded.h"
 #include "i18n/i18n.h"
@@ -614,6 +615,36 @@ TEST(coach_appraisal_improvement_claims) {
         checkAppraisal(s, 3, "was winning");
         CHECK_EQ(hasKey(s, "appraisal.improve.was_winning.b3"), cpAfter < 0);
         CHECK_EQ(hasKey(s, "appraisal.improve.critical.b3"), cpAfter > 0);
+    }
+}
+
+TEST(coach_appraisal_practise_suggestion) {
+    // The lost game from Black's side, its blunder at ply 5 of a given theme: the theme the
+    // improvement names aloud, and the challenge set that practises it.
+    Game g = rookGame();
+    auto improvement = [&g](int level, ExType type) {
+        Appraisal a;
+        a.reset(level, Black);
+        for (int ply = 1; ply < 21; ply += 2) {
+            if (ply == 5) a.add(reviewAt(g, ply, MoveClass::Blunder, 0, 600, type));
+            else a.add(reviewAt(g, ply, ply < 5 ? MoveClass::Best : MoveClass::Good, ply < 5 ? 0 : 600, ply < 5 ? 0 : 600));
+        }
+        ExType named = ExType::Positional;
+        a.script(g, AppraisalContext{}, &named);
+        return named;
+    };
+    for (int level = 1; level <= 2; ++level) {
+        CHECK(improvement(level, ExType::Fork) == ExType::Fork);
+        CHECK(std::string(practiceChallenge(improvement(level, ExType::Fork))) == "fork");
+        CHECK(improvement(level, ExType::Positional) == ExType::Positional);
+        CHECK(std::string(practiceChallenge(improvement(level, ExType::Positional))).empty());
+    }
+    // Level 3 names the better move, not the theme: nothing to practise.
+    CHECK(improvement(3, ExType::Fork) == ExType::None);
+    // Every set suggested exists.
+    for (int t = 0; t <= int(ExType::Material); ++t) {
+        const std::string id = practiceChallenge(ExType(t));
+        CHECK(id.empty() || ChallengeBook::shared().find(id) != nullptr);
     }
 }
 

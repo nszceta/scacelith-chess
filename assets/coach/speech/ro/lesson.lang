@@ -21,6 +21,8 @@ lesson.title.castling = rocada
 lesson.title.en_passant = luarea en passant
 lesson.title.promotion = promovarea
 lesson.title.draws = patul și remiza
+lesson.title.before_move = verificarea înainte de mutare
+lesson.title.opening = deschiderea
 lesson.title.etiquette = ratingul, ceasul și bunele maniere în partidele adevărate
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -238,7 +240,52 @@ lesson.draws.kings = Alte remize: când nimeni nu mai poate da mat, de exemplu c
 lesson.draws.agree = Jucătorii pot și să cadă de acord asupra remizei.
 lesson.draws.repeat = Remiza e posibilă și când aceeași poziție apare de trei ori sau după cincizeci de mutări fără nicio captură și fără nicio mutare de pion.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ----------------------------------------
+lesson.before.habit = Înainte de fiecare mutare, oprește-te și privește. Jucătorii buni fac asta mereu.
+lesson.before.last = Prima întrebare: ce a făcut ultima mea mutare? Privește.
+lesson.before.threat = {my} atacă {your}. Asta e o amenințare.
+lesson.before.safe = Nu e destul să te muți de acolo. Și câmpul nou trebuie să fie sigur.
+lesson.before.dodge.ask = Mută-ți calul pe un câmp sigur.
+lesson.before.dodge.still = Calul tău e tot atacat. Privește.
+lesson.before.dodge.hint = Pionii mei apără {sq} și {sq2}. Alege alt câmp.
+lesson.before.dodge.ok = Sigur! Ai văzut amenințarea și ai verificat câmpul.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Nu pe {to}: {my} apără acel câmp. Privește.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = Ai pierdut {your}. Mai întâi privește, apoi mută.
+lesson.before.again = Încă o dată, mai întâi mut eu. Privește.
+lesson.before.free.ask = Privește ultima mea mutare. Poți lua ceva gratis?
+lesson.before.free.missed = Privește din nou {my}. Cine poate {my:cl} lua?
+lesson.before.free.hint = {my} nu are apărare. {@}Pionul tău poate {my:cl} lua.
+lesson.before.free.ok = Da! Nebunul meu era liber. Privește mereu ultima mea mutare.
+lesson.before.check.ask = Dă-mi șah de pe un câmp unde nu pot lua piesa ta.
+lesson.before.check.wrong = Nu e șah. Găsește un șah de pe un câmp sigur.
+lesson.before.check.hint = {my} apără {sq}. Dă șah de pe un câmp sigur.
+lesson.before.check.ok = Șah bun! Dama ta e în siguranță acolo.
+lesson.before.done = Fă din asta un obicei: mai întâi privește, apoi mută.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------
+lesson.opening.what = Deschiderea e începutul partidei. Câteva reguli simple ajută.
+lesson.opening.goals = {@}Ia centrul, {@2}scoate caii și nebunii și {@3}fă rocada devreme.
+lesson.opening.centre = Cele patru câmpuri din {@}mijloc formează centrul.
+lesson.opening.pawn.ask = Pune un pion în centru: două câmpuri înainte.
+lesson.opening.pawn.one = Nu e rău, dar două câmpuri iau mai mult din centru.
+lesson.opening.pawn.knight = Caii vin imediat. Mai întâi, un pion în centru.
+lesson.opening.pawn.wrong = Folosește pionul din fața regelui sau al damei.
+lesson.opening.pawn.ok = Bine! Pionul tău ocupă loc în centru.
+lesson.opening.queen = Nu scoate dama devreme: piesele mele ar alunga-o.
+lesson.opening.knight.ask = Scoate un cal, spre centru.
+lesson.opening.rim = Un cal pe margine ajunge la puține câmpuri. Sari spre centru.
+lesson.opening.bishop = Dezvoltarea e bună! Dar de data asta, un cal.
+lesson.opening.knight.ok = Bine! De acolo calul tău supraveghează centrul.
+lesson.opening.later = Câteva mutări mai târziu: calul tău și {@}nebunul tău sunt scoși.
+lesson.opening.twice = Nu muta aceeași piesă de două ori fără un motiv bun.
+lesson.opening.castle.ask = Drumul e liber. Fă rocada ca să-ți pui regele la adăpost.
+lesson.opening.castle.wrong = Regele tău e gata. Fă rocada acum, cât timp drumul e liber.
+lesson.opening.castle.ok = Rocadă făcută! Regele tău e în siguranță, iar turnul intră în joc.
+lesson.opening.done = Centru, piese, rocadă: e un început bun pentru orice partidă.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Acum cunoști toate regulile șahului. Bravo!
 lesson.talk.real = Hai să-ți spun cum se joacă partidele adevărate.
 lesson.talk.elo = Jucătorii au un rating, numit Elo. Crește când câștigi și scade când pierzi.

@@ -142,9 +142,9 @@ your colour (White, Black, or alternating from one game to the next); the choice
 
 - **The rules of chess** (level 0) is an interactive lesson, always with White: the coach sets up
   small positions and shows how each piece moves and captures, then castling, promotion, check
-  and checkmate, and you try each idea on the board. Legal-move hints are on, touch-move is
-  relaxed (a piece can be put back), nothing is written down; leaving it resumes at the same
-  chapter next time.
+  and checkmate, the habit of looking before every move and the first rules of the opening, and
+  you try each idea on the board. Legal-move hints are on, touch-move is relaxed (a piece can be
+  put back), nothing is written down; leaving it resumes at the same chapter next time.
 - **Levels 1 to 6** (from *First steps* to *Expert*) are real games against the coach's Stockfish
   at that strength, with its teaching repertoire in the opening. The lower the level, the plainer
   the words; levels 0 to 2 show the board's coordinates. There is no clock, the game is never

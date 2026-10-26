@@ -124,7 +124,10 @@ public:
     // The coach's verdict of every ply (the human's from the review, the coach's from the
     // neighbouring evaluations); Unjudged where nothing is known.
     std::vector<PlyVerdict> verdicts(const chess::Game& g) const;
-    Script script(const chess::Game& g, const AppraisalContext& ctx) const;
+    // *improvement (when given): the theme the "one improvement" sentence names aloud ("One thing
+    // to practise: forks"), after the sentence cap; ExType::None when it names none (keep doing,
+    // a critical move said without its theme, the coach's hung piece, stalemate, a dropped sentence).
+    Script script(const chess::Game& g, const AppraisalContext& ctx, ExType* improvement = nullptr) const;
 
 private:
     int level_ = 1;
@@ -135,5 +138,10 @@ private:
     int offers_ = 0, takebacks_ = 0, fixed_ = 0;
     void setEval(size_t plies, int cpWhite, uint8_t source);
 };
+
+// The challenge set (assets/coach/challenges/challenges.txt) that practises a theme: "fork" for
+// Fork and MissedFork, "hanging" for Hanging and MissedCapture, ...; "" for a theme without one
+// (positional, exchange, king safety, opening, material, stalemate, none).
+const char* practiceChallenge(ExType theme);
 
 }  // namespace coach

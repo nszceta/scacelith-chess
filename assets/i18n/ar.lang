@@ -1075,6 +1075,8 @@ coach.colour.help = اللون الذي تلعب به ضد المدرّب. با�
 coach.colour.alternate = بالتناوب
 coach.take_time = تذكير «خذ وقتك»
 coach.take_time.help = بعد دقيقة من التفكير، يقول لك المدرّب إنه لا داعي للعجلة. للمستويات من 1 إلى 3 فقط.
+coach.danger_markers = إظهار القطع المعرّضة للخطر
+coach.danger_markers.help = في المستويين 1 و2، في دورك، يظهر مربع ملوّن تحت كل قطعة من قطعك يستطيع المدرّب أخذها الآن.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = صوت المدرّب غير مثبّت أو متوقف (الخيارات > الصوت): ستظهر كلماته مكتوبةً على الشاشة.
 # At the table
@@ -1095,6 +1097,7 @@ coach.confirm.resign_draw = هل تستسلم في هذه المباراة؟ ل�
 coach.confirm.leave = هل تعود إلى القائمة الرئيسية؟ ستُلغى هذه المباراة مع المدرّب.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = العب مجددًا
+coach.gameover.practise = تمرّن: {0}
 coach.gameover.unrated = هذه المباراة مع المدرّب غير محتسبة.
 coach.lesson.done = أحسنت
 coach.lesson.done.line = أصبحت تعرف قواعد الشطرنج.
@@ -1222,6 +1225,10 @@ options.voice_quality.high = عالية
 options.voice_quality.very_high = عالية جدًا
 options.voice_quality.ultra = فائقة
 options.voice_quality.max = قصوى
+options.voice_speed_lesson = سرعة الصوت: درس القواعد
+options.voice_speed_beginner = سرعة الصوت: المستويان 1-2
+options.voice_speed = سرعة الصوت: المستويات الأخرى
+options.voice_speed.help = سرعة كلام المدرّب: 100٪ هي سرعته العادية. درس القواعد والمستويان 1 و2 أبطأ افتراضيًا (85٪) للاعبين الجدد. وتشمل «المستويات الأخرى» التحديات. يسري التغيير من الجملة التالية للمدرّب.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = صوت المدرّب
 coach.download.text = يتحدث المدرّب بواسطة Supertonic 3، وهو نموذج لتوليد الكلام من شركة Supertone. هذا النموذج غير مضمَّن في Scacelith: يمكن للعبة تنزيله الآن من Hugging Face ({0} ميغابايت، مرة واحدة). ومن دونه يكتب المدرّب كلماته على الشاشة.

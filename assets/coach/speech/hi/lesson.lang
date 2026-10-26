@@ -20,6 +20,8 @@ lesson.title.castling = कैसलिंग
 lesson.title.en_passant = आँ पासाँ
 lesson.title.promotion = प्रमोशन
 lesson.title.draws = स्टेलमेट और ड्रॉ
+lesson.title.before_move = चलने से पहले
+lesson.title.opening = ओपनिंग
 lesson.title.etiquette = असली बाज़ियों में रेटिंग, घड़ी और शिष्टाचार
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -239,7 +241,52 @@ lesson.draws.kings = दूसरी तरह के ड्रॉ: जब क�
 lesson.draws.agree = खिलाड़ी आपसी सहमति से भी ड्रॉ कर सकते हैं।
 lesson.draws.repeat = एक ही स्थिति तीन बार दोहराई जाए, या पचास चालों तक न कोई मोहरा कटे, न कोई प्यादा चले, तब भी ड्रॉ हो सकता है।
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = हर चाल से पहले रुको और देखो। मज़बूत खिलाड़ी हर बार ऐसा करते हैं।
+lesson.before.last = पहला सवाल: मेरी पिछली चाल ने क्या किया? देखो।
+lesson.before.threat = {my} {your:ko} निशाना बना रहा है। यह ख़तरा है।
+lesson.before.safe = बस हट जाना काफ़ी नहीं है। नया खाना भी सुरक्षित होना चाहिए।
+lesson.before.dodge.ask = अपने घोड़े को किसी सुरक्षित खाने पर ले जाओ।
+lesson.before.dodge.still = तुम्हारे घोड़े पर अब भी हमला है। देखो।
+lesson.before.dodge.hint = मेरे प्यादे {sq} और {sq2} की रक्षा करते हैं। कोई दूसरा खाना चुनो।
+lesson.before.dodge.ok = सुरक्षित! तुमने ख़तरा देखा, और खाने को भी जाँचा।
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = {to} पर नहीं: {my} उस खाने की रक्षा करता है। देखो।
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = {your} गया। पहले देखो, फिर चलो।
+lesson.before.again = फिर से, पहले मेरी चाल। देखो।
+lesson.before.free.ask = मेरी पिछली चाल देखो। क्या तुम कुछ मुफ़्त में काट सकते हो?
+lesson.before.free.missed = {my:ko} फिर से देखो। उसे कौन काट सकता है?
+lesson.before.free.hint = {my:ka} कोई रक्षक नहीं है। तुम्हारा {@}प्यादा उसे काट सकता है।
+lesson.before.free.ok = हाँ! मेरा ऊँट मुफ़्त था। हमेशा मेरी पिछली चाल देखो।
+lesson.before.check.ask = मुझे शह दो, ऐसे खाने से जिसे मैं काट न सकूँ।
+lesson.before.check.wrong = यह शह नहीं है। किसी सुरक्षित खाने से शह ढूँढो।
+lesson.before.check.hint = {my} {sq} की रक्षा करता है। सुरक्षित खाने से शह दो।
+lesson.before.check.ok = बढ़िया शह! तुम्हारा वज़ीर वहाँ सुरक्षित है।
+lesson.before.done = इसे आदत बना लो: पहले देखो, फिर चलो।
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = ओपनिंग बाज़ी की शुरुआत है। कुछ आसान नियम काम आते हैं।
+lesson.opening.goals = {@}केंद्र पर क़ब्ज़ा करो, {@2}घोड़े और ऊँट बाहर निकालो, और {@3}जल्दी कैसलिंग करो।
+lesson.opening.centre = {@}बीच के चार खाने केंद्र कहलाते हैं।
+lesson.opening.pawn.ask = केंद्र में एक प्यादा रखो: दो खाने आगे।
+lesson.opening.pawn.one = बुरा नहीं, पर दो खाने केंद्र पर ज़्यादा क़ब्ज़ा देते हैं।
+lesson.opening.pawn.knight = घोड़े जल्दी आएँगे। पहले, केंद्र में एक प्यादा।
+lesson.opening.pawn.wrong = अपने राजा या अपने वज़ीर के सामने वाला प्यादा चलो।
+lesson.opening.pawn.ok = बढ़िया! तुम्हारा प्यादा केंद्र में जगह लेता है।
+lesson.opening.queen = अपना वज़ीर जल्दी बाहर मत निकालो: मेरे मोहरे उसे भगाएँगे।
+lesson.opening.knight.ask = केंद्र की ओर एक घोड़ा बाहर निकालो।
+lesson.opening.rim = किनारे का घोड़ा बहुत कम खानों तक पहुँचता है। केंद्र की ओर कूदो।
+lesson.opening.bishop = मोहरे निकालना अच्छा है! पर इस बार, घोड़ा।
+lesson.opening.knight.ok = बढ़िया! वहाँ से तुम्हारा घोड़ा केंद्र पर नज़र रखता है।
+lesson.opening.later = कुछ चालों के बाद: तुम्हारा घोड़ा और {@}ऊँट बाहर हैं।
+lesson.opening.twice = बिना अच्छी वजह एक ही मोहरे को दो बार मत चलो।
+lesson.opening.castle.ask = रास्ता साफ़ है। अपने राजा को सुरक्षित करने के लिए कैसलिंग करो।
+lesson.opening.castle.wrong = तुम्हारा राजा तैयार है। अभी कैसलिंग करो, जब तक रास्ता साफ़ है।
+lesson.opening.castle.ok = कैसलिंग हो गई! तुम्हारा राजा सुरक्षित है, और हाथी खेल में आ गया।
+lesson.opening.done = केंद्र, मोहरे, कैसलिंग: हर बाज़ी की यह अच्छी शुरुआत है।
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = अब तुम्हें शतरंज के सारे नियम पता हैं। शाबाश!
 lesson.talk.real = अब मैं तुम्हें बताता हूँ कि असली बाज़ियाँ कैसे खेली जाती हैं।
 lesson.talk.elo = खिलाड़ियों की एक रेटिंग होती है, जिसे Elo कहते हैं। जीतने पर यह बढ़ती है और हारने पर घटती है।

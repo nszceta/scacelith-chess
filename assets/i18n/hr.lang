@@ -1105,6 +1105,8 @@ coach.colour.help = Boja kojom igrate protiv trenera. Naizmjence: bijelima, zati
 coach.colour.alternate = Naizmjence
 coach.take_time = Podsjetnik „Ne žurite“
 coach.take_time.help = Nakon minute razmišljanja trener vam kaže da nema žurbe. Samo razine od 1 do 3.
+coach.danger_markers = Prikaži figure u opasnosti
+coach.danger_markers.help = Na razinama 1 i 2, kad ste na potezu, ispod svake vaše figure koju bi trener sada mogao uzeti pojavljuje se obojeno polje.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Trenerov glas nije instaliran ili je isključen (Postavke > Zvuk): njegove će riječi biti ispisane na zaslonu.
 # At the table
@@ -1125,6 +1127,7 @@ coach.confirm.resign_draw = Želite li predati ovu partiju? Trener više ne mož
 coach.confirm.leave = Želite li se vratiti u glavni izbornik? Ova partija s trenerom bit će napuštena.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Igraj ponovno
+coach.gameover.practise = Vježbaj: {0}
 coach.gameover.unrated = Ova partija s trenerom nije za rejting.
 coach.lesson.done = BRAVO
 coach.lesson.done.line = Sada znate pravila šaha.
@@ -1257,6 +1260,10 @@ options.voice_quality.high = Visoka
 options.voice_quality.very_high = Vrlo visoka
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Najviša
+options.voice_speed_lesson = Brzina glasa: lekcija pravila
+options.voice_speed_beginner = Brzina glasa: razine 1–2
+options.voice_speed = Brzina glasa: ostale razine
+options.voice_speed.help = Koliko brzo trener govori: 100 % je njegova uobičajena brzina. Lekcija pravila i razine 1 i 2 zadano su sporije (85 %), za početnike. Ostale razine uključuju izazove. Promjena vrijedi od trenerove sljedeće rečenice.
 # The prompt. {0} = the size in megabytes ("398,7")
 coach.download.title = Trenerov glas
 coach.download.text = Trenerov glas stvara Supertonic 3, model za sintezu govora tvrtke Supertone. Nije uključen u Scacelith: igra ga sada može preuzeti s Hugging Facea ({0} MB, jednokratno). Bez njega trener svoje riječi ispisuje na zaslonu.

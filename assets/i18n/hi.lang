@@ -1094,6 +1094,8 @@ coach.colour.help = कोच के ख़िलाफ़ आपके मो�
 coach.colour.alternate = बारी-बारी
 coach.take_time = "आराम से सोचिए" याद दिलाना
 coach.take_time.help = एक मिनट सोचने के बाद कोच कहता है कि कोई जल्दी नहीं है। केवल स्तर 1 से 3 तक।
+coach.danger_markers = ख़तरे में पड़े मोहरे दिखाएँ
+coach.danger_markers.help = स्तर 1 और 2 में, आपकी बारी पर, आपके हर उस मोहरे के नीचे एक रंगीन खाना दिखता है जिसे कोच अभी जीत सकता है।
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = कोच की आवाज़ इंस्टॉल नहीं है या बंद है (विकल्प > ऑडियो): उसकी बातें स्क्रीन पर लिखी जाएँगी।
 # At the table
@@ -1114,6 +1116,7 @@ coach.confirm.resign_draw = इस बाज़ी में हार मान
 coach.confirm.leave = मुख्य मेनू पर लौटें? कोच के साथ यह बाज़ी छोड़ दी जाएगी।
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = फिर से खेलें
+coach.gameover.practise = अभ्यास: {0}
 coach.gameover.unrated = कोच के साथ यह बाज़ी रेटेड नहीं है।
 coach.lesson.done = शाबाश
 coach.lesson.done.line = अब आपको शतरंज के नियम आते हैं।
@@ -1246,6 +1249,10 @@ options.voice_quality.high = उच्च
 options.voice_quality.very_high = बहुत उच्च
 options.voice_quality.ultra = अल्ट्रा
 options.voice_quality.max = अधिकतम
+options.voice_speed_lesson = आवाज़ की गति: नियमों का पाठ
+options.voice_speed_beginner = आवाज़ की गति: स्तर 1-2
+options.voice_speed = आवाज़ की गति: अन्य स्तर
+options.voice_speed.help = कोच कितनी तेज़ बोलता है: 100% उसकी सामान्य गति है। नए खिलाड़ियों के लिए नियमों का पाठ और स्तर 1 व 2 डिफ़ॉल्ट रूप से धीमे (85%) हैं। अन्य स्तरों में चुनौतियाँ भी शामिल हैं। बदलाव कोच की अगली पंक्ति से लागू होता है।
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = कोच की आवाज़
 coach.download.text = कोच Supertonic 3 से बोलता है, जो Supertone का एक स्पीच सिंथेसिस मॉडल है। यह Scacelith के साथ शामिल नहीं है: गेम इसे अभी Hugging Face से डाउनलोड कर सकता है ({0} MB, एक बार)। इसके बिना कोच अपनी बातें स्क्रीन पर लिखता है।

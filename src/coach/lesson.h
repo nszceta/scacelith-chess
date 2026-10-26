@@ -1,4 +1,4 @@
-// Level 0: the interactive rules lesson. Ten chapters of scripted beats
+// Level 0: the interactive rules lesson. Twelve chapters of scripted beats
 // (coach/script.h): the coach sets up small positions, explains, points, demonstrates, and waits
 // for the player's move (WaitMove) that an Expectation judges. A wrong move is answered and taken
 // back, an illegal one is refused and explained (why it is illegal, computed from the position),
@@ -16,7 +16,6 @@
 
 namespace coach {
 
-constexpr float kLessonSpeechSpeed = 0.92f;   // TTS speed of the lesson (a little slower)
 constexpr float kLessonIdleHint1 = 20.0f;     // seconds without a touch before the first hint
 constexpr float kLessonIdleHint2 = 45.0f;     // ... and the second one (with pointing)
 
@@ -104,7 +103,7 @@ struct Expectation {
 
 struct LessonChapter {
     std::string id;       // "welcome", "pieces", "safety", "check", "mate", "castling", "en_passant",
-                          // "promotion", "draws", "etiquette"
+                          // "promotion", "draws", "before_move", "opening", "etiquette"
     Line title;           // lesson.title.<id> ("the board"), for "Let's continue with {chapter}."
     Script beats;         // starts with a SetPosition
 };
@@ -125,6 +124,7 @@ public:
     const std::vector<Expectation>& expectations() const { return expectations_; }
     const Expectation& expectation(int index) const { return expectations_[size_t(index)]; }
     int chapterOf(int expectation) const;   // chapter holding that WaitMove, -1 if none
+    int chapterIndex(const std::string& id) const;   // the chapter with that id, -1 if none
 
     // The player completed the legal move 'move' from 'before' at WaitMove 'expect'. failures:
     // wrong moves already made at this WaitMove (0 the first time; illegal attempts do not count).

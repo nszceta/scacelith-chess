@@ -1088,6 +1088,8 @@ coach.colour.help = A cor com que você joga contra o treinador. Alternada: Bran
 coach.colour.alternate = Alternada
 coach.take_time = Lembrete “Sem pressa”
 coach.take_time.help = Depois de um minuto pensando, o treinador diz que não há pressa. Só nos níveis 1 a 3.
+coach.danger_markers = Mostrar as peças em perigo
+coach.danger_markers.help = Nos níveis 1 e 2, na sua vez, aparece uma casa colorida sob cada uma das suas peças que o treinador poderia ganhar agora mesmo.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = A voz do treinador não está instalada ou está desativada (Opções > Áudio): as falas dele vão aparecer escritas na tela.
 # At the table
@@ -1108,6 +1110,7 @@ coach.confirm.resign_draw = Abandonar esta partida? O treinador não pode mais d
 coach.confirm.leave = Voltar ao menu principal? Esta partida com o treinador será abandonada.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Jogar de novo
+coach.gameover.practise = Praticar: {0}
 coach.gameover.unrated = Esta partida com o treinador não é ranqueada.
 coach.lesson.done = MUITO BEM
 coach.lesson.done.line = Agora você conhece as regras do xadrez.
@@ -1240,6 +1243,10 @@ options.voice_quality.high = Alta
 options.voice_quality.very_high = Muito alta
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Máxima
+options.voice_speed_lesson = Velocidade da voz: lição de regras
+options.voice_speed_beginner = Velocidade da voz: níveis 1-2
+options.voice_speed = Velocidade da voz: outros níveis
+options.voice_speed.help = A velocidade com que o treinador fala: 100% é a velocidade normal. A lição de regras e os níveis 1 e 2 são mais lentos por padrão (85%), para jogadores novos. Outros níveis inclui os desafios. Uma mudança vale a partir da próxima fala do treinador.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = A voz do treinador
 coach.download.text = O treinador fala com o Supertonic 3, um modelo de síntese de voz da Supertone. Ele não vem incluído no Scacelith: o jogo pode baixá-lo agora do Hugging Face ({0} MB, uma única vez). Sem ele, as falas do treinador aparecem escritas na tela.

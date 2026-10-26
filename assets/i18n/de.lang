@@ -1070,6 +1070,8 @@ coach.colour.help = Die Farbe, mit der Sie gegen den Trainer spielen. Abwechseln
 coach.colour.alternate = Abwechselnd
 coach.take_time = Hinweis „Lassen Sie sich Zeit“
 coach.take_time.help = Nach einer Minute Bedenkzeit sagt der Trainer, dass es keine Eile hat. Nur Stufen 1 bis 3.
+coach.danger_markers = Gefährdete Figuren anzeigen
+coach.danger_markers.help = Auf Stufe 1 und 2 erscheint bei Ihrem Zug unter jeder Ihrer Figuren, die der Trainer gerade gewinnen könnte, ein farbiges Feld.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Die Stimme des Trainers ist nicht installiert oder ausgeschaltet (Optionen > Ton): Seine Worte werden auf dem Bildschirm angezeigt.
 # At the table
@@ -1090,6 +1092,7 @@ coach.confirm.resign_draw = Diese Partie aufgeben? Der Trainer kann nicht mehr m
 coach.confirm.leave = Zurück zum Hauptmenü? Diese Partie mit dem Trainer wird abgebrochen.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Noch eine Partie
+coach.gameover.practise = Üben: {0}
 coach.gameover.unrated = Diese Partie mit dem Trainer wird nicht gewertet.
 coach.lesson.done = GUT GEMACHT
 coach.lesson.done.line = Jetzt kennen Sie die Schachregeln.
@@ -1217,6 +1220,10 @@ options.voice_quality.high = Hoch
 options.voice_quality.very_high = Sehr hoch
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Maximal
+options.voice_speed_lesson = Sprechtempo: Regellektion
+options.voice_speed_beginner = Sprechtempo: Stufen 1-2
+options.voice_speed = Sprechtempo: andere Stufen
+options.voice_speed.help = Wie schnell der Trainer spricht: 100 % ist sein normales Tempo. Die Regellektion und die Stufen 1 und 2 sind für neue Spieler standardmäßig langsamer (85 %). Zu den anderen Stufen gehören die Aufgaben. Eine Änderung gilt ab der nächsten Zeile des Trainers.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = Die Stimme des Trainers
 coach.download.text = Der Trainer spricht mit Supertonic 3, einem Sprachsynthesemodell von Supertone. Es ist nicht in Scacelith enthalten: Das Spiel kann es jetzt von Hugging Face herunterladen ({0} MB, einmalig). Ohne das Modell schreibt der Trainer seine Worte auf den Bildschirm.

@@ -23,6 +23,8 @@ lesson.title.castling = rošáda
 lesson.title.en_passant = branie mimochodom
 lesson.title.promotion = premena pešiaka
 lesson.title.draws = pat a remíza
+lesson.title.before_move = pred ťahom
+lesson.title.opening = otvorenie
 lesson.title.etiquette = rating, hodiny a etiketa v skutočných partiách
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -244,7 +246,52 @@ lesson.draws.kings = Ďalšie remízy: keď nikto nemôže dať mat, napríklad 
 lesson.draws.agree = Hráči sa môžu na remíze aj dohodnúť.
 lesson.draws.repeat = Remízu umožňuje aj trojnásobné opakovanie pozície alebo päťdesiat ťahov bez brania a bez ťahu pešiakom.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Pred každým ťahom sa zastav a pozri sa. Silní hráči to robia zakaždým.
+lesson.before.last = Prvá otázka: čo urobil môj posledný ťah? Sleduj.
+lesson.before.threat = {my} napáda {your:acc}. To je hrozba.
+lesson.before.safe = Odísť nestačí. Aj nové pole musí byť bezpečné.
+lesson.before.dodge.ask = Presuň jazdca na bezpečné pole.
+lesson.before.dodge.still = Tvoj jazdec je stále pod útokom. Sleduj.
+lesson.before.dodge.hint = Moji pešiaci kryjú polia {sq} a {sq2}. Vyber si iné pole.
+lesson.before.dodge.ok = Bezpečné! Hrozbu vidíš a pole kontroluješ.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Nie na {to}: {my} kryje to pole. Sleduj.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = Prichádzaš o {your:refl_acc}. Najprv sa pozri, potom ťahaj.
+lesson.before.again = Ešte raz, najprv ťahám ja. Sleduj.
+lesson.before.free.ask = Pozri sa na môj posledný ťah. Vieš niečo vziať zadarmo?
+lesson.before.free.missed = Pozri sa ešte raz na {my:acc}. Čo môže {my:pron_acc} vziať?
+lesson.before.free.hint = {my} nemá žiadneho obrancu. Tvoj {@}pešiak môže {my:pron_acc} vziať.
+lesson.before.free.ok = Áno! Môj strelec bol voľný. Vždy sa pozeraj na môj posledný ťah.
+lesson.before.check.ask = Daj mi šach tak, aby som nemohol vziať tvoju figúru.
+lesson.before.check.wrong = To nie je šach. Nájdi šach z bezpečného poľa.
+lesson.before.check.hint = {my} kryje pole {sq}. Daj šach z bezpečného poľa.
+lesson.before.check.ok = Dobrý šach! Tvoja dáma je tam v bezpečí.
+lesson.before.done = Urob si z toho zvyk: najprv sa pozri, potom ťahaj.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Otvorenie je začiatok partie. Pomôže pár jednoduchých pravidiel.
+lesson.opening.goals = {@}Ovládni stred, {@2}vyveď jazdcov a strelcov a {@3}urob včas rošádu.
+lesson.opening.centre = Štyri polia v {@}strede sú stred.
+lesson.opening.pawn.ask = Daj pešiaka do stredu: o dve polia dopredu.
+lesson.opening.pawn.one = Nie je to zlé, ale dve polia zaberú viac stredu.
+lesson.opening.pawn.knight = Jazdci prídu čoskoro. Najprv pešiak do stredu.
+lesson.opening.pawn.wrong = Ťahaj pešiakom pred kráľom alebo pred dámou.
+lesson.opening.pawn.ok = Dobre! Tvoj pešiak zaberá miesto v strede.
+lesson.opening.queen = Nevyvádzaj dámu skoro: moje figúry by ju naháňali.
+lesson.opening.knight.ask = Vyveď jazdca smerom k stredu.
+lesson.opening.rim = Jazdec na kraji dosiahne na málo polí. Skoč smerom k stredu.
+lesson.opening.bishop = Vyvádzať figúry je dobre! Ale tentoraz jazdca.
+lesson.opening.knight.ok = Dobre! Odtiaľ tvoj jazdec stráži stred.
+lesson.opening.later = O pár ťahov neskôr: tvoj jazdec a {@}strelec sú vonku.
+lesson.opening.twice = Bez dobrého dôvodu neťahaj dvakrát tou istou figúrou.
+lesson.opening.castle.ask = Cesta je voľná. Urob rošádu a skry kráľa.
+lesson.opening.castle.wrong = Tvoj kráľ je pripravený. Urob rošádu hneď, kým je cesta voľná.
+lesson.opening.castle.ok = Rošáda! Tvoj kráľ je v bezpečí a veža vstupuje do hry.
+lesson.opening.done = Stred, figúry, rošáda: to je dobrý začiatok každej partie.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Teraz už poznáš všetky pravidlá šachu. Výborne!
 lesson.talk.real = Poviem ti, ako sa hrajú skutočné partie.
 lesson.talk.elo = Hráči majú rating, ktorý sa volá Elo. Keď vyhrávaš, stúpa, a keď prehrávaš, klesá.

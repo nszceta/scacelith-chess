@@ -1084,6 +1084,8 @@ coach.colour.help = Värv, millega mängite treeneri vastu. Vaheldumisi: partiis
 coach.colour.alternate = Vaheldumisi
 coach.take_time = Meeldetuletus „Võtke aega“
 coach.take_time.help = Pärast minutist mõtlemist ütleb treener, et kiiret pole. Ainult tasemetel 1 kuni 3.
+coach.danger_markers = Näita ohus malendeid
+coach.danger_markers.help = Tasemetel 1 ja 2 ilmub teie käigul värviline väli iga teie malendi alla, mille treener võiks kohe võita.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Treeneri hääl pole installitud või on välja lülitatud (Seaded > Heli): tema sõnad kuvatakse ekraanil.
 # At the table
@@ -1104,6 +1106,7 @@ coach.confirm.resign_draw = Kas annate selle partii alla? Treener ei saa enam ma
 coach.confirm.leave = Kas naasta peamenüüsse? See partii treeneriga katkestatakse.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Mängi uuesti
+coach.gameover.practise = Harjuta: {0}
 coach.gameover.unrated = See partii treeneriga ei mõjuta reitingut.
 coach.lesson.done = HÄSTI TEHTUD
 coach.lesson.done.line = Nüüd te tunnete malereegleid.
@@ -1236,6 +1239,10 @@ options.voice_quality.high = Kõrge
 options.voice_quality.very_high = Väga kõrge
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Maksimaalne
+options.voice_speed_lesson = Hääle kiirus: reeglite tund
+options.voice_speed_beginner = Hääle kiirus: tasemed 1-2
+options.voice_speed = Hääle kiirus: muud tasemed
+options.voice_speed.help = Kui kiiresti treener räägib: 100 % on tema tavakiirus. Reeglite tund ning tasemed 1 ja 2 on uute mängijate jaoks vaikimisi aeglasemad (85 %). Muude tasemete hulka kuuluvad ülesanded. Muudatus jõustub treeneri järgmisest repliigist.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = Treeneri hääl
 coach.download.text = Treener räägib mudeliga Supertonic 3, mis on Supertone'i kõnesünteesimudel. See ei kuulu Scacelithi koosseisu: mäng saab selle kohe Hugging Face'ist alla laadida ({0} MB, ühekordselt). Ilma selleta kirjutab treener oma sõnad ekraanile.

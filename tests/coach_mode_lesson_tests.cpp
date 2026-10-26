@@ -11,7 +11,7 @@
 // solution itself after the third wrong move: en passant, a promotion) or with words only. Then
 // the end card's "First game". A second App resumes the lesson where a player left it ([coach]
 // lesson_chapter): the idle hints, an illegal move refused and explained, the mate played by hand,
-// the lesson left during its last chapter.
+// the lesson left during the chapter that follows.
 #include "test.h"
 #include "coach_mode_support.h"
 #include "game_scene_testkit.h"
@@ -35,9 +35,11 @@ const char* kLessonMoves =
     "e1f1,e1g1,e1c1,"                                        // 5 castling
     "e1d1,e1d1,e1d1,e5d6,"                                   // 6 en passant, shown after three wrong moves
     "e7e8r,e1d1,e1d1,e7e8q,"                                 // 7 promotion: a rook first, then shown
-    "f2f7,f2f8";                                             // 8 stalemate, then the mate
+    "f2f7,f2f8,"                                             // 8 stalemate, then the mate
+    "d4c6,d4f3,a1a7,h3g4,d1e2,d1h5,"                         // 9 before you move: each trap taken, shown
+    "e2e4,g1h3,g1f3,f3e5,e1g1";                              // 10 the opening: the knight on the rim, the knight lost
 
-constexpr int kWrongMoves = 14;   // the wrong moves above: each one taken back once
+constexpr int kWrongMoves = 19;   // the wrong moves above: each one taken back once
 
 const std::string& lessonIni() {
     static headless::TempDir dir("coach-lesson-ini");
@@ -55,8 +57,9 @@ const std::vector<std::string>& lessonArgs() {
     return args;
 }
 
-// A player who left the lesson at its chapter "draws" (8). The script's only move fits no exercise
-// of that chapter: refused when it is tried, it marks the moment the first exercise waits.
+// A player who left the lesson at its chapter "draws", saved by an earlier version as its index (8,
+// coach.lesson_chapter). The script's only move fits no exercise of that chapter: refused when it
+// is tried, it marks the moment the first exercise waits.
 const std::string& resumeIni() {
     static headless::TempDir dir("coach-lesson-resume-ini");
     static const std::string path = [] {
@@ -141,15 +144,16 @@ TEST(coach_mode_lesson_played_to_its_end_card) {
     CHECK(app->runUntil([&] { return subtitles(log.since(held)) >= 1; }, 400, 0.1f));
 
     // Every exercise, Space skipping the talk: the end card offers the first real game.
-    REQUIRE(runSkipping(*app, [&] { return app->hasLabel("First game"); }, 20000));
+    REQUIRE(runSkipping(*app, [&] { return app->hasLabel("First game"); }, 30000));
     const std::string text = log.text();
     // The coach's own moves of the lesson, played by its hand.
     CHECK(log.has("coach: lesson move e7e5"));
     CHECK(log.has("coach: lesson move d7d5"));
     // The demonstrations: castling (the chapter's own), the pawn taking the queen, the king's escape
-    // from a check, and the solutions after three wrong moves (en passant, the promotion). The
-    // under-promotion was taken back too: the rook back beside the board, the pawn on e7.
-    for (const char* demo : {"e1g1", "e6d5", "e8d8", "e8e7", "e5d6", "e7e8q"})
+    // from a check, the solutions after three wrong moves (en passant, the promotion), and the
+    // pieces moved onto guarded squares taken (before you move, the opening). The under-promotion
+    // was taken back too: the rook back beside the board, the pawn on e7.
+    for (const char* demo : {"e1g1", "e6d5", "e8d8", "e8e7", "e5d6", "e7e8q", "b7c6", "a8a7", "d4e2", "c6e5"})
         CHECK(log.has(std::string("coach: demonstrates ") + demo + " on the table"));
     CHECK(!log.has("is not legal on the table"));
     CHECK(!log.has("does not show the position after the rewind"));
@@ -169,7 +173,7 @@ TEST(coach_mode_lesson_played_to_its_end_card) {
     const game::Settings& s = game::settings();
     CHECK(s.coachRulesDone);
     CHECK_EQ(s.coachLevel, 1);
-    CHECK_EQ(s.coachLessonChapter, 0);
+    CHECK(s.coachLessonChapter.empty());
     IniFile ini;
     REQUIRE(ini.load(s.path));
     CHECK(ini.getBool("coach.rules_done", false));
@@ -201,7 +205,7 @@ TEST(coach_mode_lesson_end_card_starts_the_first_game) {
 // The lesson started again by a player who left it at its stalemate chapter: it resumes there.
 // The exercise waits (the scripted move does not fit it: the script stops); the coach repeats the
 // instruction after 20 s without a touch, then gives the hint with its pointing after 45 s. An
-// illegal placement is refused and explained; the mate is played by hand. Left during the last
+// illegal placement is refused and explained; the mate is played by hand. Left during the next
 // chapter, the lesson keeps that chapter for next time.
 TEST(coach_mode_lesson_resumed_at_its_chapter) {
     coachtest::VoiceFolder voice;
@@ -211,7 +215,7 @@ TEST(coach_mode_lesson_resumed_at_its_chapter) {
     game::Settings& s = game::settings();
     REQUIRE(coachtest::waitLog(*app, log, "New game (coach): level 0 (the rules lesson), human plays White", 3000));
     REQUIRE(!modelPrompt(*app));
-    CHECK_EQ(s.coachLessonChapter, 8);
+    CHECK_EQ(s.coachLessonChapter, std::string("draws"));
     CHECK(!s.coachRulesDone);
     // The exercise waits: the script's first move does not fit it.
     REQUIRE(runSkipping(*app, [&] { return log.has("--play: 'e1d1' is not legal here"); }, 2000));
@@ -243,10 +247,10 @@ TEST(coach_mode_lesson_resumed_at_its_chapter) {
     gstest::clickAt(*app, gstest::squarePoint("f8"));
     REQUIRE(coachtest::waitLog(*app, log, "move 1: Qf8#", 400));
 
-    // The rest of the chapter, then the last one begins ("Let me tell you how real games are
-    // played"): left there, by the pause menu, which offers no resignation nor draw in the lesson.
+    // The rest of the chapter, then the next one begins ("Before every move, stop and look"): left
+    // there, by the pause menu, which offers no resignation nor draw in the lesson.
     mark = log.mark();
-    REQUIRE(runSkipping(*app, [&] { return log.since(mark).find("how real games are played") != std::string::npos; }, 3000));
+    REQUIRE(runSkipping(*app, [&] { return log.since(mark).find("Before every move, stop and look") != std::string::npos; }, 3000));
     app->key(plat::KEY_ESCAPE);
     REQUIRE(app->waitForLabel("Resume", 60));
     const std::vector<std::string> labels = app->labels();
@@ -261,9 +265,9 @@ TEST(coach_mode_lesson_resumed_at_its_chapter) {
     REQUIRE(app->runUntil([&] { return app->hasLabel("New Game"); }, 600, 1.0f / 20.0f));
     CHECK(!log.has("coach: the rules lesson is over"));
     CHECK(!log.has("voice model download"));
-    CHECK_EQ(s.coachLessonChapter, 9);
+    CHECK_EQ(s.coachLessonChapter, std::string("before_move"));
     IniFile ini;
     REQUIRE(ini.load(s.path));
-    CHECK_EQ(ini.getInt("coach.lesson_chapter", -1), 9);
+    CHECK_EQ(ini.getString("coach.lesson_chapter_id"), std::string("before_move"));
     CHECK(coachtest::filesIn(app->folder().path + "pgn/", ".pgn").empty());
 }

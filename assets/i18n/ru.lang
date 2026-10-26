@@ -1071,6 +1071,8 @@ coach.colour.help = Цвет, которым вы играете против т
 coach.colour.alternate = Поочерёдно
 coach.take_time = Напоминание «Не спешите»
 coach.take_time.help = После минуты раздумий тренер скажет, что спешить некуда. Только на уровнях 1–3.
+coach.danger_markers = Показывать фигуры под угрозой
+coach.danger_markers.help = На уровнях 1 и 2 в ваш ход под каждой вашей фигурой, которую тренер может выиграть прямо сейчас, появляется цветное поле.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Голос тренера не установлен или выключен (Настройки > Звук): его слова будут показаны на экране.
 # At the table
@@ -1091,6 +1093,7 @@ coach.confirm.resign_draw = Сдать эту партию? Тренер бол�
 coach.confirm.leave = Вернуться в главное меню? Эта партия с тренером будет прервана.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Сыграть ещё
+coach.gameover.practise = Потренироваться: {0}
 coach.gameover.unrated = Эта партия с тренером не рейтинговая.
 coach.lesson.done = ОТЛИЧНО
 coach.lesson.done.line = Теперь вы знаете правила шахмат.
@@ -1218,6 +1221,10 @@ options.voice_quality.high = Высокое
 options.voice_quality.very_high = Отличное
 options.voice_quality.ultra = Ультра
 options.voice_quality.max = Максимум
+options.voice_speed_lesson = Скорость голоса: урок правил
+options.voice_speed_beginner = Скорость голоса: уровни 1–2
+options.voice_speed = Скорость голоса: другие уровни
+options.voice_speed.help = Как быстро говорит тренер: 100 % — его обычная скорость. Урок правил и уровни 1 и 2 по умолчанию медленнее (85 %), для начинающих. «Другие уровни» включают испытания. Изменение вступает в силу со следующей реплики тренера.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = Голос тренера
 coach.download.text = Тренер говорит с помощью Supertonic 3 — модели синтеза речи от Supertone. Она не входит в состав Scacelith: игра может скачать её сейчас с Hugging Face ({0} МБ, один раз). Без неё тренер пишет свои слова на экране.

@@ -22,6 +22,8 @@ lesson.title.castling = рокіровка
 lesson.title.en_passant = взяття на проході
 lesson.title.promotion = перетворення пішака
 lesson.title.draws = пат і нічия
+lesson.title.before_move = перед ходом
+lesson.title.opening = дебют
 lesson.title.etiquette = справжні партії: рейтинг, годинник і етикет
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -241,7 +243,52 @@ lesson.draws.agree = Гравці також можуть домовитися �
 lesson.draws.repeat = Право на нічию дає й триразове повторення чи 50 ходів без взять і ходів пішаків.
 lesson.draws.repeat.spoken = Право на нічию дає й триразове повторення чи п’ятдесят ходів без взять і ходів пішаків.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Перед кожним ходом зупинись і подивись. Сильні гравці роблять так щоразу.
+lesson.before.last = Перше питання: що зробив мій останній хід? Дивись.
+lesson.before.threat = {my} атакує {your:acc}. Це загроза.
+lesson.before.safe = Піти з поля замало. Нове поле теж має бути безпечним.
+lesson.before.dodge.ask = Відведи коня на безпечне поле.
+lesson.before.dodge.still = Твій кінь досі під ударом. Дивись.
+lesson.before.dodge.hint = Мої пішаки захищають поля {sq} і {sq2}. Вибери інше поле.
+lesson.before.dodge.ok = Безпечно! Загрозу помічено, поле перевірено.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Не на {to}: {my} захищає це поле. Дивись.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = Ти втрачаєш {your:refl_acc}. Спершу дивись, потім ходи.
+lesson.before.again = Ще раз, спершу мій хід. Дивись.
+lesson.before.free.ask = Подивись на мій останній хід. Можеш узяти щось задурно?
+lesson.before.free.missed = Подивись ще раз на {my:acc}. Хто може узяти {my:pron_acc}?
+lesson.before.free.hint = У {my:gen} немає захисника. Твій {@}пішак може узяти {my:pron_acc}.
+lesson.before.free.ok = Так! Мій слон був без захисту. Завжди дивись на мій останній хід.
+lesson.before.check.ask = Оголоси мені шах так, щоб я не міг узяти твою фігуру.
+lesson.before.check.wrong = Це не шах. Знайди шах із безпечного поля.
+lesson.before.check.hint = {my} захищає поле {sq}. Оголоси шах із безпечного поля.
+lesson.before.check.ok = Гарний шах! Там твій ферзь у безпеці.
+lesson.before.done = Зроби це звичкою: спершу дивись, потім ходи.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Дебют — початок партії. Допоможуть кілька простих правил.
+lesson.opening.goals = {@}Займи центр, {@2}виведи коней і слонів і {@3}рано зроби рокіровку.
+lesson.opening.centre = Чотири поля {@}посередині — це центр.
+lesson.opening.pawn.ask = Постав пішака в центр: на два поля вперед.
+lesson.opening.pawn.one = Непогано, але два поля займають більше центру.
+lesson.opening.pawn.knight = Коні потім. Спершу пішак у центр.
+lesson.opening.pawn.wrong = Піди пішаком перед королем або перед ферзем.
+lesson.opening.pawn.ok = Добре! Твій пішак займає місце в центрі.
+lesson.opening.queen = Не виводь ферзя рано: мої фігури його проганятимуть.
+lesson.opening.knight.ask = Виведи коня ближче до центру.
+lesson.opening.rim = З краю кінь б’є мало полів. Стрибай до центру.
+lesson.opening.bishop = Розвиток — це добре! Але зараз потрібен кінь.
+lesson.opening.knight.ok = Добре! Звідти твій кінь стежить за центром.
+lesson.opening.later = Кілька ходів потому: твій кінь і {@}слон уже виведені.
+lesson.opening.twice = Без поважної причини не ходи однією фігурою двічі.
+lesson.opening.castle.ask = Шлях вільний. Зроби рокіровку й заховай короля.
+lesson.opening.castle.wrong = Твій король готовий. Зроби рокіровку зараз, поки шлях вільний.
+lesson.opening.castle.ok = Рокіровку зроблено! Король у безпеці, а тура вступає в гру.
+lesson.opening.done = Центр, фігури, рокіровка — хороший початок кожної партії.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Тепер ти знаєш усі правила шахів. Молодець!
 lesson.talk.real = Розповім, як проходять справжні партії.
 lesson.talk.elo = У гравців є рейтинг Ело. Він росте, коли виграєш, і падає, коли програєш.

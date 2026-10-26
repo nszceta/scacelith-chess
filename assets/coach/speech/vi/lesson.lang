@@ -21,6 +21,8 @@ lesson.title.castling = nhập thành
 lesson.title.en_passant = bắt tốt qua đường
 lesson.title.promotion = phong cấp
 lesson.title.draws = hết nước đi và hòa cờ
+lesson.title.before_move = trước khi đi quân
+lesson.title.opening = khai cuộc
 lesson.title.etiquette = hệ số Elo, đồng hồ và phép lịch sự trong ván đấu thật
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -240,7 +242,52 @@ lesson.draws.kings = Các trường hợp hòa khác: khi không bên nào có t
 lesson.draws.agree = Hai người chơi cũng có thể thỏa thuận hòa.
 lesson.draws.repeat = Lặp lại một thế cờ ba lần, hoặc năm mươi nước liền không có bắt quân hay đi Tốt, cũng cho phép hòa.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Trước mỗi nước đi, hãy dừng lại và quan sát. Người chơi giỏi nào cũng làm vậy.
+lesson.before.last = Câu hỏi đầu tiên: nước đi vừa rồi của tôi đã làm gì? Xem nhé.
+lesson.before.threat = {my} đang tấn công {your}. Đó là một mối đe dọa.
+lesson.before.safe = Chỉ tránh đi là chưa đủ. Ô mới cũng phải an toàn.
+lesson.before.dodge.ask = Hãy đưa Mã của bạn đến một ô an toàn.
+lesson.before.dodge.still = Mã của bạn vẫn đang bị tấn công. Xem nhé.
+lesson.before.dodge.hint = Các Tốt của tôi bảo vệ ô {sq} và ô {sq2}. Hãy chọn ô khác.
+lesson.before.dodge.ok = An toàn! Bạn đã thấy mối đe dọa, và đã kiểm tra ô đó.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Không phải ô {to}: {my} bảo vệ ô đó. Xem nhé.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = {your} mất rồi. Hãy nhìn trước, rồi mới đi.
+lesson.before.again = Lại lần nữa, tôi đi trước. Xem nhé.
+lesson.before.free.ask = Hãy nhìn nước đi cuối của tôi. Bạn có bắt được quân nào miễn phí không?
+lesson.before.free.missed = Hãy nhìn {my} lần nữa. Quân nào bắt được nó?
+lesson.before.free.hint = {my} không có quân bảo vệ. Con {@}Tốt của bạn có thể bắt nó.
+lesson.before.free.ok = Đúng rồi! Tượng của tôi đã bị bỏ ngỏ. Hãy luôn nhìn nước đi cuối của tôi.
+lesson.before.check.ask = Hãy chiếu tôi, từ một ô mà tôi không bắt được.
+lesson.before.check.wrong = Đó không phải nước chiếu. Hãy tìm nước chiếu từ một ô an toàn.
+lesson.before.check.hint = {my} bảo vệ ô {sq}. Hãy chiếu từ một ô an toàn.
+lesson.before.check.ok = Nước chiếu hay! Hậu của bạn an toàn ở đó.
+lesson.before.done = Hãy tập thành thói quen: nhìn trước, rồi mới đi.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Khai cuộc là phần đầu của ván cờ. Vài quy tắc đơn giản sẽ giúp bạn.
+lesson.opening.goals = {@}Chiếm trung tâm, {@2}đưa Mã và Tượng ra, và {@3}nhập thành sớm.
+lesson.opening.centre = Bốn ô ở {@}giữa bàn cờ là trung tâm.
+lesson.opening.pawn.ask = Hãy đặt một con Tốt vào trung tâm: đi lên hai ô.
+lesson.opening.pawn.one = Không tệ, nhưng đi hai ô chiếm nhiều trung tâm hơn.
+lesson.opening.pawn.knight = Mã sẽ ra sớm thôi. Trước tiên, một con Tốt ở trung tâm.
+lesson.opening.pawn.wrong = Hãy dùng con Tốt trước Vua hoặc trước Hậu của bạn.
+lesson.opening.pawn.ok = Tốt lắm! Con Tốt của bạn chiếm chỗ ở trung tâm.
+lesson.opening.queen = Đừng đưa Hậu ra sớm: quân của tôi sẽ đuổi nó.
+lesson.opening.knight.ask = Hãy đưa một con Mã ra, về phía trung tâm.
+lesson.opening.rim = Mã ở mép bàn chỉ tới được vài ô. Hãy nhảy về phía trung tâm.
+lesson.opening.bishop = Phát triển quân là tốt! Nhưng lần này, hãy đưa Mã.
+lesson.opening.knight.ok = Tốt lắm! Từ đó Mã của bạn canh giữ trung tâm.
+lesson.opening.later = Vài nước sau: Mã và {@}Tượng của bạn đã ra.
+lesson.opening.twice = Đừng đi cùng một quân hai lần nếu không có lý do chính đáng.
+lesson.opening.castle.ask = Đường đã thông. Hãy nhập thành để Vua an toàn.
+lesson.opening.castle.wrong = Vua của bạn sẵn sàng rồi. Hãy nhập thành ngay, khi đường còn thông.
+lesson.opening.castle.ok = Đã nhập thành! Vua của bạn an toàn, và Xe tham gia ván cờ.
+lesson.opening.done = Trung tâm, quân, nhập thành: đó là khởi đầu tốt cho mọi ván cờ.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Bây giờ bạn đã biết mọi luật cờ vua. Giỏi lắm!
 lesson.talk.real = Để tôi kể cho bạn nghe các ván đấu thật diễn ra như thế nào.
 lesson.talk.elo = Mỗi người chơi có một hệ số xếp hạng, gọi là Elo. Nó tăng khi bạn thắng và giảm khi bạn thua.

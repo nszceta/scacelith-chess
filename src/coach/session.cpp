@@ -166,6 +166,7 @@ struct Session::Impl {
         bool explainPending = false;  // the appraisal explains accuracy: accuracyExplained once it is said
         bool done = false;            // finished()
         int suggested = 0;
+        std::string practise;         // suggestedChallenge(): the set for the appraisal's improvement theme
         // The lesson.
         int chapter = 0;
         uint64_t chapterScript = 0;
@@ -719,7 +720,11 @@ struct Session::Impl {
         ctx.explainAccuracy = !accuracyExplained;
         ctx.opening = openingRef(game, &ctx.outOfBookMove);
         ctx.suggestedLevel = sug;
-        const Script s = appraisal.script(game, ctx);
+        ExType improvement = ExType::None;
+        const Script s = appraisal.script(game, ctx, &improvement);
+        // Levels 1-3: the challenge set that practises the theme the appraisal names.
+        const std::string set = practiceChallenge(improvement);
+        if (g.level <= 3 && !set.empty() && ChallengeBook::shared().find(set)) g.practise = set;
         g.explainPending = hasKey(s, kAccuracyExplain);
         if (s.empty()) {
             g.done = true;
@@ -835,6 +840,15 @@ struct Session::Impl {
 Session::Session() : d_(new Impl) {}
 Session::~Session() { delete d_; }
 
+void Session::setSpeechSpeeds(const SpeechSpeeds& speeds) {
+    Impl& d = *d_;
+    d.config.speeds = speeds;
+    const float speed = d.g.challenge ? speeds.normal : speeds.forLevel(d.g.level);
+    if (speed == d.config.director.speed) return;
+    d.config.director.speed = speed;
+    d.director.setConfig(d.config.director);
+}
+
 void Session::start(Stage& stage, Analyst& analyst, const chess::Game& game, const SessionConfig& config) {
     Impl& d = *d_;
     if (d.g.started) stop();
@@ -847,7 +861,7 @@ void Session::start(Stage& stage, Analyst& analyst, const chess::Game& game, con
     d.accuracyExplained = config.accuracyExplained;
     d.g.level = std::clamp(config.level, 0, 6);
     d.g.human = d.g.level == 0 ? chess::White : config.human;
-    if (d.g.level == 0) d.config.director.speed = kLessonSpeechSpeed;
+    d.config.director.speed = config.speeds.forLevel(d.g.level);
     installOpeningResolver();
 
     const Challenge* ch = config.challenge.empty() ? nullptr : ChallengeBook::shared().find(config.challenge);
@@ -856,7 +870,7 @@ void Session::start(Stage& stage, Analyst& analyst, const chess::Game& game, con
         d.g.challenge = true;
         d.g.level = 1;   // no lesson path (level 0) applies
         d.g.human = chess::White;
-        d.config.director.speed = 1.0f;
+        d.config.director.speed = config.speeds.normal;
         d.director.reset(&stage, d.config.director);
         if (!d.lesson) d.lesson.reset(new Lesson());   // why a move is illegal
         if (!d.run) d.run.reset(new ChallengeRun());
@@ -1035,6 +1049,7 @@ bool Session::offerUsesTakeback() const {
 const std::vector<GameRecord>& Session::history() const { return d_->history; }
 bool Session::accuracyExplained() const { return d_->accuracyExplained; }
 int Session::suggestedLevel() const { return d_->g.suggested; }
+const std::string& Session::suggestedChallenge() const { return d_->g.practise; }
 int Session::lessonChapter() const { return d_->g.lessonDone ? 0 : d_->g.chapter; }
 bool Session::lessonCompleted() const { return d_->g.lessonDone; }
 bool Session::challengeMode() const { return d_->g.challenge; }

@@ -169,7 +169,7 @@ public:
         audio::VoiceParams p;
         p.sampleRate = speechSampleRate();
         p.spatial = false;      // a narrator: nobody at the table says it
-        p.roomSend = 0.06f;     // close, as in a commentator's booth
+        p.q = 0.0f;             // a narrator in a booth: not in the hall, no reverberation
         audio::VoiceId id = audio::openVoice(p);
         if (!id) return false;  // pcm untouched: the director retries
         double seconds = double(pcm.size()) / double(speechSampleRate());

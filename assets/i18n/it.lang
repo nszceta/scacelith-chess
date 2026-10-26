@@ -1086,6 +1086,8 @@ coach.colour.help = Il colore con cui giochi contro l’allenatore. Alterna: Bia
 coach.colour.alternate = Alterna
 coach.take_time = Promemoria «Prenditi il tuo tempo»
 coach.take_time.help = Dopo un minuto di riflessione, l’allenatore ti dice che non c’è fretta. Solo livelli da 1 a 3.
+coach.danger_markers = Mostra i pezzi in pericolo
+coach.danger_markers.help = Ai livelli 1 e 2, quando tocca a te, compare una casa colorata sotto ogni tuo pezzo che l’allenatore potrebbe vincere subito.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = La voce dell’allenatore non è installata o è disattivata (Opzioni > Audio): le sue parole saranno scritte sullo schermo.
 # At the table
@@ -1106,6 +1108,7 @@ coach.confirm.resign_draw = Vuoi abbandonare questa partita? L’allenatore non 
 coach.confirm.leave = Vuoi tornare al menu principale? Questa partita con l’allenatore verrà abbandonata.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Gioca ancora
+coach.gameover.practise = Esercitati: {0}
 coach.gameover.unrated = Questa partita con l’allenatore non è classificata.
 coach.lesson.done = BEN FATTO
 coach.lesson.done.line = Ora conosci le regole degli scacchi.
@@ -1238,6 +1241,10 @@ options.voice_quality.high = Alta
 options.voice_quality.very_high = Molto alta
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Massima
+options.voice_speed_lesson = Velocità della voce: lezione sulle regole
+options.voice_speed_beginner = Velocità della voce: livelli 1-2
+options.voice_speed = Velocità della voce: altri livelli
+options.voice_speed.help = Quanto velocemente parla l’allenatore: 100% è la sua velocità normale. La lezione sulle regole e i livelli 1 e 2 sono più lenti per impostazione predefinita (85%), per i nuovi giocatori. Altri livelli comprende le sfide. Una modifica si applica dalla battuta successiva dell’allenatore.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = La voce dell’allenatore
 coach.download.text = L’allenatore parla con Supertonic 3, un modello di sintesi vocale di Supertone. Non è incluso in Scacelith: il gioco può scaricarlo ora da Hugging Face ({0} MB, una sola volta). Senza di esso, l’allenatore scrive le sue parole sullo schermo.

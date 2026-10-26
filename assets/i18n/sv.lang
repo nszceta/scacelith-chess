@@ -1084,6 +1084,8 @@ coach.colour.help = Färgen du spelar med mot tränaren. Växla: vit, sedan svar
 coach.colour.alternate = Växla
 coach.take_time = Påminnelsen ”Ta god tid”
 coach.take_time.help = Efter en minuts betänketid säger tränaren att det inte är bråttom. Endast nivå 1 till 3.
+coach.danger_markers = Visa pjäser i fara
+coach.danger_markers.help = På nivå 1 och 2 visas, när det är din tur, en färgad ruta under varje pjäs som tränaren kan vinna just nu.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Tränarens röst är inte installerad eller är avstängd (Inställningar > Ljud): hans ord skrivs ut på skärmen.
 # At the table
@@ -1104,6 +1106,7 @@ coach.confirm.resign_draw = Vill du ge upp partiet? Tränaren kan inte längre s
 coach.confirm.leave = Vill du gå tillbaka till huvudmenyn? Det här partiet med tränaren överges.
 # Game over card of a coach game, and the end of the lesson on the rules
 coach.gameover.again = Spela igen
+coach.gameover.practise = Öva: {0}
 coach.gameover.unrated = Det här partiet med tränaren räknas inte in i ratingen.
 coach.lesson.done = BRA GJORT
 coach.lesson.done.line = Nu kan du schackets regler.
@@ -1236,6 +1239,10 @@ options.voice_quality.high = Hög
 options.voice_quality.very_high = Mycket hög
 options.voice_quality.ultra = Ultra
 options.voice_quality.max = Maximal
+options.voice_speed_lesson = Rösttempo: regellektionen
+options.voice_speed_beginner = Rösttempo: nivå 1-2
+options.voice_speed = Rösttempo: övriga nivåer
+options.voice_speed.help = Hur fort tränaren talar: 100 % är dess normala tempo. Regellektionen och nivå 1 och 2 är långsammare som standard (85 %), för nya spelare. Övriga nivåer omfattar utmaningarna. En ändring gäller från tränarens nästa replik.
 # The prompt. {0} = the size in megabytes ("398.7")
 coach.download.title = Tränarens röst
 coach.download.text = Tränaren talar med Supertonic 3, en talsyntesmodell från Supertone. Den ingår inte i Scacelith: spelet kan ladda ned den nu från Hugging Face ({0} MB, en gång). Utan den skriver tränaren sina ord på skärmen.

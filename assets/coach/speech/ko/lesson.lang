@@ -21,6 +21,8 @@ lesson.title.castling = 캐슬링
 lesson.title.en_passant = 앙파상
 lesson.title.promotion = 프로모션
 lesson.title.draws = 스테일메이트와 무승부
+lesson.title.before_move = 두기 전에
+lesson.title.opening = 오프닝
 lesson.title.etiquette = 실전 게임의 레이팅, 시계, 매너
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -249,7 +251,52 @@ lesson.draws.agree = 두 플레이어가 합의해서 무승부로 할 수도 �
 lesson.draws.repeat = 같은 포지션이 세 번 나오거나, 잡기도 폰 이동도 없이 50수가 지나도 무승부가 될 수 있어요.
 lesson.draws.repeat.spoken = 같은 포지션이 세 번 나오거나, 잡기도 폰 이동도 없이 오십 수가 지나도 무승부가 될 수 있어요.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = 두기 전에 멈춰서 살펴보세요. 강한 사람들은 매번 그렇게 해요.
+lesson.before.last = 첫 번째 질문이에요. 제 마지막 수는 무엇을 했을까요? 보세요.
+lesson.before.threat = {my:subj} {your:obj} 공격해요. 이게 위협이에요.
+lesson.before.safe = 피하는 것만으로는 부족해요. 새로 가는 칸도 안전해야 해요.
+lesson.before.dodge.ask = 나이트를 안전한 칸으로 옮기세요.
+lesson.before.dodge.still = 나이트가 아직 공격받고 있어요. 보세요.
+lesson.before.dodge.hint = 제 폰들이 {sq} 칸과 {sq2} 칸을 지키고 있어요. 다른 칸을 고르세요.
+lesson.before.dodge.ok = 안전해요! 위협을 알아챘고, 칸도 확인했네요.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = {to} 칸은 안 돼요. {my:subj} 그 칸을 지키고 있어요. 보세요.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = {your:subj} 잡혔어요. 먼저 살피고, 그다음에 두세요.
+lesson.before.again = 다시요. 제가 먼저 둘게요. 보세요.
+lesson.before.free.ask = 제 마지막 수를 보세요. 공짜로 잡을 수 있는 기물이 있나요?
+lesson.before.free.missed = {my:obj} 다시 보세요. 무엇으로 잡을 수 있을까요?
+lesson.before.free.hint = {my:subj} 지켜 주는 기물이 없어요. {@}폰으로 잡을 수 있어요.
+lesson.before.free.ok = 맞아요! 제 비숍은 공짜였어요. 항상 제 마지막 수를 보세요.
+lesson.before.check.ask = 제가 잡을 수 없는 칸에서 체크를 거세요.
+lesson.before.check.wrong = 그건 체크가 아니에요. 안전한 칸에서 거는 체크를 찾아보세요.
+lesson.before.check.hint = {my:subj} {sq} 칸을 지키고 있어요. 안전한 칸에서 체크를 거세요.
+lesson.before.check.ok = 좋은 체크예요! 퀸이 거기서는 안전해요.
+lesson.before.done = 습관으로 만드세요. 먼저 살피고, 그다음에 두세요.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = 오프닝은 게임의 시작이에요. 간단한 규칙 몇 가지가 도움이 돼요.
+lesson.opening.goals = {@}중앙을 차지하고, {@2}나이트와 비숍을 내보내고, {@3}일찍 캐슬링하세요.
+lesson.opening.centre = {@}가운데 네 칸이 중앙이에요.
+lesson.opening.pawn.ask = 중앙에 폰을 놓으세요. 두 칸 앞으로요.
+lesson.opening.pawn.one = 나쁘지 않지만, 두 칸 가는 쪽이 중앙을 더 많이 차지해요.
+lesson.opening.pawn.knight = 나이트는 곧 나와요. 먼저 중앙에 폰을 두세요.
+lesson.opening.pawn.wrong = 킹 앞이나 퀸 앞의 폰을 쓰세요.
+lesson.opening.pawn.ok = 좋아요! 폰이 중앙에서 공간을 차지해요.
+lesson.opening.queen = 퀸을 일찍 내보내지 마세요. 제 기물들이 쫓아올 거예요.
+lesson.opening.knight.ask = 나이트를 중앙 쪽으로 내보내세요.
+lesson.opening.rim = 가장자리의 나이트는 갈 수 있는 칸이 적어요. 중앙 쪽으로 뛰세요.
+lesson.opening.bishop = 기물을 내보내는 건 좋아요! 하지만 이번에는 나이트예요.
+lesson.opening.knight.ok = 좋아요! 거기서 나이트가 중앙을 지켜봐요.
+lesson.opening.later = 몇 수 뒤예요. 나이트와 {@}비숍이 나왔어요.
+lesson.opening.twice = 좋은 이유 없이 같은 기물을 두 번 움직이지 마세요.
+lesson.opening.castle.ask = 길이 열려 있어요. 킹을 캐슬링해서 안전하게 하세요.
+lesson.opening.castle.wrong = 킹이 준비됐어요. 길이 열려 있을 때 지금 캐슬링하세요.
+lesson.opening.castle.ok = 캐슬링했어요! 킹은 안전하고, 룩도 게임에 참여해요.
+lesson.opening.done = 중앙, 기물, 캐슬링. 이게 모든 게임의 좋은 시작이에요.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = 이제 체스 규칙을 모두 아시게 됐어요. 잘하셨어요!
 lesson.talk.real = 실전 게임은 어떻게 두는지 알려 드릴게요.
 lesson.talk.elo = 플레이어마다 Elo라는 레이팅이 있어요. 이기면 오르고, 지면 내려가요.

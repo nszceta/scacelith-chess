@@ -159,9 +159,15 @@ struct Settings {
     static constexpr int kCoachHistoryMax = 40;
     std::vector<CoachGame> coachHistory;
     bool coachAccuracyExplained = false;
-    int coachLessonChapter = 0;
+    // The rules lesson's chapter to resume at, by id (coach::LessonChapter::id, "" = from the
+    // start): an id survives chapters added to the lesson. Saved as coach.lesson_chapter_id; the
+    // index of earlier versions (coach.lesson_chapter, ten chapters) is read through their ids.
+    std::string coachLessonChapter;
     // The coach's "Take your time." after a minute without a move (levels 1-3): the Coach page's switch.
     bool coachTakeYourTime = true;
+    // Levels 1-2: a coloured square under the player's pieces the coach could win, on the player's
+    // turn (GameScene::coachDangerMarks): the Coach page's switch.
+    bool coachDangerMarkers = true;
     // The Coach page's tab (0 Training, 1 Challenges) and the challenge last chosen on it
     // (coach::Challenge::id, "" = none yet), stored when the player presses Start.
     int coachTab = 0;
@@ -193,6 +199,12 @@ struct Settings {
     int ttsVoice = -1;
     int ttsSteps = kTtsStepsDefault;
     std::string ttsArch = "auto";
+    // The coach's speaking speed (Options > Audio), kTtsSpeedMin..kTtsSpeedMax: in the rules lesson,
+    // at levels 1-2, and at levels 3-6 and in the challenges (coach::SpeechSpeeds).
+    static constexpr float kTtsSpeedMin = 0.7f, kTtsSpeedMax = 1.2f;
+    float ttsSpeedLesson = 0.85f;
+    float ttsSpeedBeginner = 0.85f;
+    float ttsSpeed = 1.0f;
     // [coach] voice: the coach speaks (Options > Audio > Coach voice). Its model is not shipped:
     // the game offers to download it (game/coach_model.h) the first time Coach mode or this
     // option needs it. Off = the coach's words as subtitles only; declining the download prompt

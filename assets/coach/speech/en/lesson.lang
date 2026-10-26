@@ -18,6 +18,8 @@ lesson.title.castling = castling
 lesson.title.en_passant = en passant
 lesson.title.promotion = promotion
 lesson.title.draws = stalemate and draws
+lesson.title.before_move = before you move
+lesson.title.opening = the opening
 lesson.title.etiquette = real games: rating, clock and manners
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -234,7 +236,52 @@ lesson.draws.kings = Other draws: when nobody can checkmate, like two kings alon
 lesson.draws.agree = Players can also agree to a draw.
 lesson.draws.repeat = Repeating a position three times, or fifty moves without a capture or pawn move, allows a draw too.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Before every move, stop and look. Strong players do it every time.
+lesson.before.last = First question: what did my last move do? Watch.
+lesson.before.threat = {my} attacks {your}. That's a threat.
+lesson.before.safe = Moving away is not enough. The new square must be safe too.
+lesson.before.dodge.ask = Move your knight to a safe square.
+lesson.before.dodge.still = Your knight is still attacked. Watch.
+lesson.before.dodge.hint = My pawns guard {sq} and {sq2}. Choose another square.
+lesson.before.dodge.ok = Safe! You saw the threat, and you checked the square.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Not {to}: {my} guards that square. Watch.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = {your} is lost. Look first, then move.
+lesson.before.again = Again, my move first. Watch.
+lesson.before.free.ask = Look at my last move. Can you capture something for free?
+lesson.before.free.missed = Look at {my} again. What can capture it?
+lesson.before.free.hint = {my} has no defender. Your {@}pawn can take it.
+lesson.before.free.ok = Yes! My bishop was free. Always look at my last move.
+lesson.before.check.ask = Give me check, on a square I can't capture.
+lesson.before.check.wrong = That's not check. Find a check on a safe square.
+lesson.before.check.hint = {my} guards {sq}. Give check from a safe square.
+lesson.before.check.ok = Good check! Your queen is safe there.
+lesson.before.done = Make it a habit: look first, then move.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = The opening is the start of the game. A few simple rules help.
+lesson.opening.goals = {@}Take the centre, {@2}bring out knights and bishops, and {@3}castle early.
+lesson.opening.centre = The four squares in the {@}middle are the centre.
+lesson.opening.pawn.ask = Put a pawn in the centre: two squares forward.
+lesson.opening.pawn.one = Not bad, but two squares take more of the centre.
+lesson.opening.pawn.knight = Knights come soon. First, a pawn in the centre.
+lesson.opening.pawn.wrong = Use the pawn in front of your king or your queen.
+lesson.opening.pawn.ok = Good! Your pawn takes space in the centre.
+lesson.opening.queen = Don't bring your queen out early: my pieces would chase her.
+lesson.opening.knight.ask = Bring out a knight, toward the centre.
+lesson.opening.rim = A knight on the edge reaches few squares. Jump toward the centre.
+lesson.opening.bishop = Developing, good! But this time, a knight.
+lesson.opening.knight.ok = Good! From there your knight watches the centre.
+lesson.opening.later = A few moves later: your knight and {@}bishop are out.
+lesson.opening.twice = Don't move the same piece twice without a good reason.
+lesson.opening.castle.ask = The way is clear. Castle your king to safety.
+lesson.opening.castle.wrong = Your king is ready. Castle now, while the way is clear.
+lesson.opening.castle.ok = Castled! Your king is safe, and your rook joins the game.
+lesson.opening.done = Centre, pieces, castle: that's a good start to every game.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = You now know every rule of chess. Well done!
 lesson.talk.real = Let me tell you how real games are played.
 lesson.talk.elo = Players have a rating, called Elo. It goes up when you win and down when you lose.

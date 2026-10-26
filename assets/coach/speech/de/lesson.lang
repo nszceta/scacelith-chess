@@ -19,6 +19,8 @@ lesson.title.castling = der Rochade
 lesson.title.en_passant = dem Schlagen en passant
 lesson.title.promotion = der Umwandlung
 lesson.title.draws = Patt und Remis
+lesson.title.before_move = dem Blick vor dem Zug
+lesson.title.opening = der Eröffnung
 lesson.title.etiquette = echten Partien: Wertung, Uhr und Umgangsformen
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -234,7 +236,52 @@ lesson.draws.kings = Remis ist es auch, wenn keiner mehr mattsetzen kann, etwa b
 lesson.draws.agree = Die Spieler können sich auch auf Remis einigen.
 lesson.draws.repeat = Dreimal dieselbe Stellung oder fünfzig Züge ohne Schlagen und Bauernzug erlauben auch Remis.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Vor jedem Zug halte kurz an und schau hin. Starke Spieler tun das jedes Mal.
+lesson.before.last = Erste Frage: Was hat mein letzter Zug bewirkt? Schau.
+lesson.before.threat = {my} greift {your:acc} an. Das ist eine Drohung.
+lesson.before.safe = Wegziehen reicht nicht. Das neue Feld muss auch sicher sein.
+lesson.before.dodge.ask = Zieh deinen Springer auf ein sicheres Feld.
+lesson.before.dodge.still = Dein Springer wird noch immer angegriffen. Schau.
+lesson.before.dodge.hint = Meine Bauern decken {sq} und {sq2}. Wähle ein anderes Feld.
+lesson.before.dodge.ok = Sicher! Du hast die Drohung gesehen und das Feld geprüft.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Nicht nach {to}! {my} deckt dieses Feld. Schau.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = {your} ist verloren. Erst schauen, dann ziehen.
+lesson.before.again = Noch einmal, zuerst mein Zug. Schau.
+lesson.before.free.ask = Sieh dir meinen letzten Zug an. Kannst du etwas umsonst schlagen?
+lesson.before.free.missed = Sieh dir {my:acc} noch einmal an. Welche deiner Figuren kann hier schlagen?
+lesson.before.free.hint = {my} ist nicht gedeckt. Dein {@}Bauer kann zuschlagen.
+lesson.before.free.ok = Ja! Mein Läufer war ungedeckt. Schau immer auf meinen letzten Zug.
+lesson.before.check.ask = Gib mir Schach, auf einem Feld, das ich nicht schlagen kann.
+lesson.before.check.wrong = Das ist kein Schach. Finde ein Schach von einem sicheren Feld.
+lesson.before.check.hint = {my} deckt {sq}. Gib Schach von einem sicheren Feld.
+lesson.before.check.ok = Gutes Schach! Deine Dame ist dort sicher.
+lesson.before.done = Mach es dir zur Gewohnheit: erst schauen, dann ziehen.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Die Eröffnung ist der Anfang der Partie. Ein paar einfache Regeln helfen.
+lesson.opening.goals = {@}Beherrsche das Zentrum, {@2}entwickle Springer und Läufer und {@3}rochiere früh.
+lesson.opening.centre = Die vier Felder in der {@}Mitte sind das Zentrum.
+lesson.opening.pawn.ask = Stell einen Bauern ins Zentrum: zwei Felder vor.
+lesson.opening.pawn.one = Nicht schlecht, aber zwei Felder erobern mehr vom Zentrum.
+lesson.opening.pawn.knight = Die Springer kommen gleich. Zuerst ein Bauer ins Zentrum.
+lesson.opening.pawn.wrong = Nimm den Bauern vor deinem König oder vor deiner Dame.
+lesson.opening.pawn.ok = Gut! Dein Bauer erobert Platz im Zentrum.
+lesson.opening.queen = Hol deine Dame nicht zu früh heraus: Meine Figuren würden sie jagen.
+lesson.opening.knight.ask = Entwickle einen Springer, Richtung Zentrum.
+lesson.opening.rim = Ein Springer am Rand erreicht nur wenige Felder. Spring Richtung Zentrum.
+lesson.opening.bishop = Entwickeln ist gut! Aber diesmal einen Springer.
+lesson.opening.knight.ok = Gut! Von dort aus überwacht dein Springer das Zentrum.
+lesson.opening.later = Ein paar Züge später: Dein Springer und dein {@}Läufer sind draußen.
+lesson.opening.twice = Zieh dieselbe Figur nicht zweimal ohne guten Grund.
+lesson.opening.castle.ask = Der Weg ist frei. Rochiere und bring deinen König in Sicherheit.
+lesson.opening.castle.wrong = Dein König ist bereit. Rochiere jetzt, solange der Weg frei ist.
+lesson.opening.castle.ok = Rochiert! Dein König steht sicher, und dein Turm kommt ins Spiel.
+lesson.opening.done = Zentrum, Figuren, Rochade: So beginnt jede Partie gut.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Jetzt kennst du alle Schachregeln. Gut gemacht!
 lesson.talk.real = Ich erzähle dir jetzt, wie echte Partien ablaufen.
 lesson.talk.elo = Jeder Spieler hat eine Elo-Zahl. Sie steigt bei Siegen und sinkt bei Niederlagen.

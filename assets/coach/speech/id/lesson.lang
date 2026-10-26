@@ -18,6 +18,8 @@ lesson.title.castling = rokade
 lesson.title.en_passant = en passant
 lesson.title.promotion = promosi
 lesson.title.draws = pat dan remis
+lesson.title.before_move = sebelum melangkah
+lesson.title.opening = pembukaan
 lesson.title.etiquette = rating, jam, dan sopan santun dalam permainan sungguhan
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -239,7 +241,52 @@ lesson.draws.kings = Remis lainnya: kalau tidak ada yang bisa memberi skakmat, m
 lesson.draws.agree = Para pemain juga bisa sepakat untuk remis.
 lesson.draws.repeat = Posisi yang terulang tiga kali, atau lima puluh langkah tanpa ada buah yang dimakan dan tanpa langkah pion, juga memungkinkan remis.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Sebelum setiap langkah, berhenti dan lihat. Pemain kuat selalu melakukannya.
+lesson.before.last = Pertanyaan pertama: apa yang dilakukan langkahku tadi? Perhatikan.
+lesson.before.threat = {my} menyerang {your}. Itu ancaman.
+lesson.before.safe = Menghindar saja tidak cukup. Petak yang baru juga harus aman.
+lesson.before.dodge.ask = Pindahkan kudamu ke petak yang aman.
+lesson.before.dodge.still = Kudamu masih diserang. Perhatikan.
+lesson.before.dodge.hint = Pionku menjaga {sq} dan {sq2}. Pilih petak lain.
+lesson.before.dodge.ok = Aman! Kamu melihat ancamannya, dan kamu memeriksa petaknya.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Jangan ke {to}: {my} menjaga petak itu. Perhatikan.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = {your} hilang. Lihat dulu, baru melangkah.
+lesson.before.again = Sekali lagi, aku jalan dulu. Perhatikan.
+lesson.before.free.ask = Lihat langkah terakhirku. Bisakah kamu memakan sesuatu secara gratis?
+lesson.before.free.missed = Lihat {my} lagi. Apa yang bisa memakannya?
+lesson.before.free.hint = {my} tidak punya pelindung. {@}Pionmu bisa memakannya.
+lesson.before.free.ok = Ya! Gajahku tadi gratis. Selalu lihat langkah terakhirku.
+lesson.before.check.ask = Skak aku, dari petak yang tidak bisa kumakan.
+lesson.before.check.wrong = Itu bukan skak. Cari skak dari petak yang aman.
+lesson.before.check.hint = {my} menjaga {sq}. Skaklah dari petak yang aman.
+lesson.before.check.ok = Skak yang bagus! Menterimu aman di sana.
+lesson.before.done = Jadikan kebiasaan: lihat dulu, baru melangkah.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Pembukaan adalah awal permainan. Beberapa aturan sederhana akan membantu.
+lesson.opening.goals = {@}Kuasai pusat, {@2}keluarkan kuda dan gajah, dan {@3}rokade lebih awal.
+lesson.opening.centre = Empat petak di {@}tengah disebut pusat.
+lesson.opening.pawn.ask = Taruh sebuah pion di pusat: maju dua petak.
+lesson.opening.pawn.one = Lumayan, tapi dua petak menguasai lebih banyak pusat.
+lesson.opening.pawn.knight = Kuda akan segera keluar. Pertama, sebuah pion di pusat.
+lesson.opening.pawn.wrong = Pakai pion di depan rajamu atau menterimu.
+lesson.opening.pawn.ok = Bagus! Pionmu menguasai ruang di pusat.
+lesson.opening.queen = Jangan keluarkan menterimu terlalu cepat: buahku akan mengejarnya.
+lesson.opening.knight.ask = Keluarkan sebuah kuda, ke arah pusat.
+lesson.opening.rim = Kuda di tepi hanya mencapai sedikit petak. Lompatlah ke arah pusat.
+lesson.opening.bishop = Mengembangkan buah itu bagus! Tapi kali ini, kuda.
+lesson.opening.knight.ok = Bagus! Dari sana kudamu mengawasi pusat.
+lesson.opening.later = Beberapa langkah kemudian: kuda dan {@}gajahmu sudah keluar.
+lesson.opening.twice = Jangan gerakkan buah yang sama dua kali tanpa alasan bagus.
+lesson.opening.castle.ask = Jalannya sudah bersih. Rokade rajamu ke tempat aman.
+lesson.opening.castle.wrong = Rajamu sudah siap. Rokade sekarang, selagi jalannya bersih.
+lesson.opening.castle.ok = Rokade! Rajamu aman, dan bentengmu ikut bermain.
+lesson.opening.done = Pusat, buah, rokade: itu awal yang baik untuk setiap permainan.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Sekarang kamu sudah tahu semua aturan catur. Bagus sekali!
 lesson.talk.real = Biar kuceritakan bagaimana permainan sungguhan dimainkan.
 lesson.talk.elo = Setiap pemain punya rating, yang disebut Elo. Rating naik kalau kamu menang dan turun kalau kamu kalah.

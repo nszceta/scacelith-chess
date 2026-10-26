@@ -20,6 +20,8 @@ lesson.title.castling = vangerdus
 lesson.title.en_passant = möödaminnes löömine
 lesson.title.promotion = muundumine
 lesson.title.draws = patt ja viik
+lesson.title.before_move = vaatamine enne käiku
+lesson.title.opening = avamäng
 lesson.title.etiquette = päris partiid: reiting, kell ja head kombed
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -240,7 +242,52 @@ lesson.draws.kings = Muud viigid: kui keegi ei saa matti panna, näiteks kui lau
 lesson.draws.agree = Mängijad võivad ka viigis kokku leppida.
 lesson.draws.repeat = Viigini võib viia ka sama seisu kolmekordne kordumine või viiskümmend käiku ilma löömise ja etturikäiguta.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Enne iga käiku peatu ja vaata. Tugevad mängijad teevad nii iga kord.
+lesson.before.last = Esimene küsimus: mida minu viimane käik tegi? Vaata.
+lesson.before.threat = {my} ründab {your:part}. See on oht.
+lesson.before.safe = Eest ära käimisest ei piisa. Uus väli peab olema ka turvaline.
+lesson.before.dodge.ask = Käi oma ratsuga turvalisele väljale.
+lesson.before.dodge.still = Sinu ratsu on endiselt rünnaku all. Vaata.
+lesson.before.dodge.hint = Minu etturid kontrollivad välju {sq} ja {sq2}. Vali mõni muu väli.
+lesson.before.dodge.ok = Turvaline! Sa nägid ohtu ja kontrollisid välja.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Mitte väljale {to}, {my} valvab seda. Vaata.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = {your} on kadunud. Vaata kõigepealt, käi siis.
+lesson.before.again = Veel kord, kõigepealt minu käik. Vaata.
+lesson.before.free.ask = Vaata minu viimast käiku. Kas saad midagi tasuta lüüa?
+lesson.before.free.missed = Vaata {my:part} veel kord. Mis saab teda lüüa?
+lesson.before.free.hint = {my:ade} pole kaitsjat. Sinu {@}ettur saab ta lüüa.
+lesson.before.free.ok = Jah! Minu oda oli kaitseta. Vaata alati minu viimast käiku.
+lesson.before.check.ask = Anna tuli väljalt, kus ma sind lüüa ei saa.
+lesson.before.check.wrong = See pole tuli. Leia tuli turvaliselt väljalt.
+lesson.before.check.hint = {my} valvab välja {sq}. Anna tuli turvaliselt väljalt.
+lesson.before.check.ok = Hea tuli! Sinu lipp on seal turvaline.
+lesson.before.done = Tee sellest harjumus: vaata kõigepealt, käi siis.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Avamäng on partii algus. Mõni lihtne reegel aitab.
+lesson.opening.goals = {@}Võta tsenter, {@2}too ratsud ja odad mängu ning {@3}vangerda varakult.
+lesson.opening.centre = Neli välja {@}keskel on tsenter.
+lesson.opening.pawn.ask = Pane ettur tsentrisse: kaks välja edasi.
+lesson.opening.pawn.one = Pole paha, aga kaks välja haaravad tsentrist rohkem.
+lesson.opening.pawn.knight = Ratsud tulevad varsti. Kõigepealt ettur tsentrisse.
+lesson.opening.pawn.wrong = Kasuta kuninga või lipu ees seisvat etturit.
+lesson.opening.pawn.ok = Hea! Sinu ettur võtab tsentris ruumi.
+lesson.opening.queen = Ära too lippu liiga vara välja: minu malendid ajaksid teda taga.
+lesson.opening.knight.ask = Too ratsu välja, tsentri poole.
+lesson.opening.rim = Servas jõuab ratsu vaid väheste väljadeni. Hüppa tsentri poole.
+lesson.opening.bishop = Arendamine on hea! Aga seekord ratsu.
+lesson.opening.knight.ok = Hea! Sealt vaatab sinu ratsu tsentrit.
+lesson.opening.later = Mõne käigu pärast: sinu ratsu ja {@}oda on väljas.
+lesson.opening.twice = Ära käi sama malendiga kaks korda ilma heal põhjusel.
+lesson.opening.castle.ask = Tee on vaba. Vangerda ja vii kuningas turvalisse kohta.
+lesson.opening.castle.wrong = Sinu kuningas on valmis. Vangerda nüüd, kuni tee on vaba.
+lesson.opening.castle.ok = Vangerdatud! Sinu kuningas on turvaline ja vanker astub mängu.
+lesson.opening.done = Tsenter, malendid, vangerdus: nii algab iga partii hästi.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Nüüd tead sa kõiki malereegleid. Tubli!
 lesson.talk.real = Las ma räägin, kuidas päris partiisid mängitakse.
 lesson.talk.elo = Mängijatel on reiting, mida nimetatakse Elo-reitinguks. See tõuseb, kui võidad, ja langeb, kui kaotad.

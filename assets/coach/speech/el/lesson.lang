@@ -24,6 +24,8 @@ lesson.title.castling = Το ροκέ
 lesson.title.en_passant = Το αν πασάν
 lesson.title.promotion = Η προαγωγή
 lesson.title.draws = Το πατ και οι ισοπαλίες
+lesson.title.before_move = Πριν κινήσεις
+lesson.title.opening = Το άνοιγμα
 lesson.title.etiquette = Πραγματικές παρτίδες: βαθμολογία, ρολόι και καλοί τρόποι
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -244,7 +246,52 @@ lesson.draws.kings = Άλλες ισοπαλίες: όταν κανείς δεν
 lesson.draws.agree = Οι παίκτες μπορούν επίσης να συμφωνήσουν σε ισοπαλία.
 lesson.draws.repeat = Η επανάληψη της ίδιας θέσης τρεις φορές, ή πενήντα κινήσεις χωρίς να παρθεί κομμάτι και χωρίς να κινηθεί πιόνι, επιτρέπουν επίσης ισοπαλία.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Πριν από κάθε κίνηση, σταμάτα και κοίτα. Οι δυνατοί παίκτες το κάνουν κάθε φορά.
+lesson.before.last = Πρώτη ερώτηση: τι έκανε η τελευταία μου κίνηση; Κοίτα.
+lesson.before.threat = {my} απειλεί {your:acc}. Αυτή είναι μια απειλή.
+lesson.before.safe = Δεν αρκεί να φύγεις. Και το νέο τετράγωνο πρέπει να είναι ασφαλές.
+lesson.before.dodge.ask = Κίνησε τον ίππο σου σε ασφαλές τετράγωνο.
+lesson.before.dodge.still = Ο ίππος σου δέχεται ακόμα επίθεση. Κοίτα.
+lesson.before.dodge.hint = Τα πιόνια μου φυλάνε το {sq} και το {sq2}. Διάλεξε άλλο τετράγωνο.
+lesson.before.dodge.ok = Ασφαλές! Είδες την απειλή και έλεγξες το τετράγωνο.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Όχι στο {to}: {my} φυλάει αυτό το τετράγωνο. Κοίτα.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = Έχασες {your:acc}. Πρώτα κοίτα, μετά κίνησε.
+lesson.before.again = Πάλι, πρώτα η δική μου κίνηση. Κοίτα.
+lesson.before.free.ask = Κοίτα την τελευταία μου κίνηση. Μπορείς να πάρεις κάτι δωρεάν;
+lesson.before.free.missed = Κοίτα ξανά {my:acc}. Τι μπορεί να {my:pron_acc} πάρει;
+lesson.before.free.hint = {my} δεν έχει προστασία. Το {@}πιόνι σου μπορεί να {my:pron_acc} πάρει.
+lesson.before.free.ok = Ναι! Ο αξιωματικός μου ήταν ανυπεράσπιστος. Κοίτα πάντα την τελευταία μου κίνηση.
+lesson.before.check.ask = Δώσε μου σαχ από τετράγωνο που δεν μπορώ να πάρω.
+lesson.before.check.wrong = Αυτό δεν είναι σαχ. Βρες ένα σαχ από ασφαλές τετράγωνο.
+lesson.before.check.hint = {my} φυλάει το {sq}. Δώσε σαχ από ασφαλές τετράγωνο.
+lesson.before.check.ok = Ωραίο σαχ! Η βασίλισσά σου είναι ασφαλής εκεί.
+lesson.before.done = Κάν’ το συνήθεια: πρώτα κοίτα, μετά κίνησε.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Το άνοιγμα είναι η αρχή της παρτίδας. Λίγοι απλοί κανόνες βοηθούν.
+lesson.opening.goals = {@}Έλεγξε το κέντρο, {@2}βγάλε ίππους και αξιωματικούς, και {@3}κάνε νωρίς ροκέ.
+lesson.opening.centre = Τα τέσσερα τετράγωνα στη {@}μέση είναι το κέντρο.
+lesson.opening.pawn.ask = Βάλε ένα πιόνι στο κέντρο: δύο τετράγωνα μπροστά.
+lesson.opening.pawn.one = Όχι άσχημα, αλλά δύο τετράγωνα παίρνουν περισσότερο κέντρο.
+lesson.opening.pawn.knight = Οι ίπποι έρχονται σύντομα. Πρώτα, ένα πιόνι στο κέντρο.
+lesson.opening.pawn.wrong = Χρησιμοποίησε το πιόνι μπροστά από τον βασιλιά ή τη βασίλισσά σου.
+lesson.opening.pawn.ok = Ωραία! Το πιόνι σου παίρνει χώρο στο κέντρο.
+lesson.opening.queen = Μη βγάζεις νωρίς τη βασίλισσα: τα κομμάτια μου θα την κυνηγούν.
+lesson.opening.knight.ask = Βγάλε έναν ίππο προς το κέντρο.
+lesson.opening.rim = Ένας ίππος στην άκρη φτάνει σε λίγα τετράγωνα. Πήδηξε προς το κέντρο.
+lesson.opening.bishop = Η ανάπτυξη είναι καλή! Αλλά αυτή τη φορά, ίππος.
+lesson.opening.knight.ok = Ωραία! Από εκεί ο ίππος σου ελέγχει το κέντρο.
+lesson.opening.later = Λίγες κινήσεις μετά: ο ίππος σου και ο {@}αξιωματικός είναι έξω.
+lesson.opening.twice = Μην κινείς το ίδιο κομμάτι δύο φορές χωρίς καλό λόγο.
+lesson.opening.castle.ask = Ο δρόμος είναι ελεύθερος. Κάνε ροκέ για να βάλεις τον βασιλιά σε ασφάλεια.
+lesson.opening.castle.wrong = Ο βασιλιάς σου είναι έτοιμος. Κάνε ροκέ τώρα, όσο ο δρόμος είναι ελεύθερος.
+lesson.opening.castle.ok = Ροκέ! Ο βασιλιάς σου είναι ασφαλής και ο πύργος μπαίνει στο παιχνίδι.
+lesson.opening.done = Κέντρο, κομμάτια, ροκέ: αυτή είναι μια καλή αρχή για κάθε παρτίδα.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Τώρα ξέρεις όλους τους κανόνες του σκακιού. Μπράβο!
 lesson.talk.real = Άσε με να σου πω πώς παίζονται οι πραγματικές παρτίδες.
 lesson.talk.elo = Οι σκακιστές έχουν μια βαθμολογία που λέγεται Elo. Ανεβαίνει όταν κερδίζεις και πέφτει όταν χάνεις.

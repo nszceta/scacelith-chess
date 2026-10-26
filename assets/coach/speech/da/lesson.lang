@@ -19,6 +19,8 @@ lesson.title.castling = rokade
 lesson.title.en_passant = en passant
 lesson.title.promotion = bondeforvandling
 lesson.title.draws = pat og remis
+lesson.title.before_move = tjek før du flytter
+lesson.title.opening = åbningen
 lesson.title.etiquette = rigtige partier: rating, skakur og god skik
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
@@ -239,7 +241,52 @@ lesson.draws.kings = Andre former for remis: når ingen kan sætte mat, som med 
 lesson.draws.agree = Spillerne kan også aftale remis.
 lesson.draws.repeat = Gentages den samme stilling tre gange, eller går der halvtreds træk uden slag eller bondetræk, kan man også få remis.
 
-# ---- Chapter 9: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 9: before you move (the safety habit) ---------------------------------------------------------------
+lesson.before.habit = Stop op og kig, før du flytter. Stærke spillere gør det hver gang.
+lesson.before.last = Første spørgsmål: Hvad gjorde mit sidste træk? Se her.
+lesson.before.threat = {my} angriber {your}. Det er en trussel.
+lesson.before.safe = Det er ikke nok at flytte væk. Det nye felt skal også være sikkert.
+lesson.before.dodge.ask = Flyt din springer til et sikkert felt.
+lesson.before.dodge.still = Din springer bliver stadig angrebet. Se her.
+lesson.before.dodge.hint = Mine bønder dækker {sq} og {sq2}. Vælg et andet felt.
+lesson.before.dodge.ok = Sikkert! Du så truslen, og du tjekkede feltet.
+# A wrong move onto a guarded square ({my} guards {to}); the coach then takes the piece.
+lesson.before.unsafe = Ikke {to}, for {my} dækker det felt. Se her.
+# Said after the coach took the piece, before the move is taken back.
+lesson.before.lost = {your} er tabt. Kig først, og flyt så.
+lesson.before.again = Igen, mit træk først. Se her.
+lesson.before.free.ask = Se på mit sidste træk. Kan du slå noget gratis?
+lesson.before.free.missed = Se på {my} igen. Hvad kan slå {my:den}?
+lesson.before.free.hint = {my} har ingen forsvarer. Din {@}bonde kan slå {my:den}.
+lesson.before.free.ok = Ja! Min løber stod gratis. Se altid på mit sidste træk.
+lesson.before.check.ask = Giv mig skak på et felt, hvor jeg ikke kan slå.
+lesson.before.check.wrong = Det er ikke skak. Find et skak fra et sikkert felt.
+lesson.before.check.hint = {my} dækker {sq}. Giv skak fra et sikkert felt.
+lesson.before.check.ok = Godt skak! Din dronning er sikker der.
+lesson.before.done = Gør det til en vane: kig først, og flyt så.
+
+# ---- Chapter 10: the opening ------------------------------------------------------------------------------------
+lesson.opening.what = Åbningen er begyndelsen af partiet. Et par enkle regler hjælper.
+lesson.opening.goals = {@}Tag centrum, {@2}få springere og løbere ud, og {@3}rokér tidligt.
+lesson.opening.centre = De fire felter i {@}midten er centrum.
+lesson.opening.pawn.ask = Sæt en bonde i centrum: to felter frem.
+lesson.opening.pawn.one = Ikke dårligt, men to felter tager mere af centrum.
+lesson.opening.pawn.knight = Springerne kommer snart. Først en bonde i centrum.
+lesson.opening.pawn.wrong = Brug bonden foran din konge eller din dronning.
+lesson.opening.pawn.ok = Godt! Din bonde tager plads i centrum.
+lesson.opening.queen = Tag ikke dronningen frem for tidligt: mine brikker ville jagte hende.
+lesson.opening.knight.ask = Få en springer ud, mod centrum.
+lesson.opening.rim = En springer i kanten når kun få felter. Hop mod centrum.
+lesson.opening.bishop = Godt at udvikle! Men denne gang en springer.
+lesson.opening.knight.ok = Godt! Derfra holder din springer øje med centrum.
+lesson.opening.later = Et par træk senere: din springer og din {@}løber er ude.
+lesson.opening.twice = Flyt ikke den samme brik to gange uden en god grund.
+lesson.opening.castle.ask = Vejen er fri. Rokér din konge i sikkerhed.
+lesson.opening.castle.wrong = Din konge er klar. Rokér nu, mens vejen er fri.
+lesson.opening.castle.ok = Rokeret! Din konge er i sikkerhed, og dit tårn er med i spillet.
+lesson.opening.done = Centrum, brikker, rokade: det er en god start på hvert parti.
+
+# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Nu kender du alle skakkens regler. Godt gået!
 lesson.talk.real = Lad mig fortælle dig hvordan rigtige partier foregår.
 lesson.talk.elo = Spillere har en rating, der kaldes Elo. Den stiger når du vinder, og den falder når du taber.

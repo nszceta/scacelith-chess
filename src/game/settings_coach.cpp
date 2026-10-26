@@ -73,6 +73,14 @@ std::vector<std::string> decodeChallengeIds(const std::string& text) {
     return out;
 }
 
+// The chapter saved as an index by earlier versions (coach.lesson_chapter): the lesson then had
+// these ten chapters, in this order. "" = from the start.
+static std::string legacyLessonChapterId(int index) {
+    static const char* const kIds[] = {"welcome", "pieces", "safety", "check", "mate",
+                                       "castling", "en_passant", "promotion", "draws", "etiquette"};
+    return index > 0 && index < int(sizeof kIds / sizeof *kIds) ? kIds[index] : "";
+}
+
 void readCoachSettings(const IniFile& ini, Settings& s) {
     s.coachLevel = std::max(0, ini.getInt("coach.level", s.coachLevel));  // the UI clamps to its list
     s.coachColour = std::clamp(ini.getInt("coach.colour", s.coachColour), 0, 2);
@@ -81,7 +89,9 @@ void readCoachSettings(const IniFile& ini, Settings& s) {
     if (ini.has("coach.history")) s.coachHistory = decodeCoachHistory(ini.getString("coach.history"));
     s.coachAccuracyExplained = ini.getBool("coach.accuracy_explained", s.coachAccuracyExplained);
     s.coachTakeYourTime = ini.getBool("coach.take_your_time", s.coachTakeYourTime);
-    s.coachLessonChapter = std::max(0, ini.getInt("coach.lesson_chapter", s.coachLessonChapter));
+    s.coachDangerMarkers = ini.getBool("coach.danger_markers", s.coachDangerMarkers);
+    if (ini.has("coach.lesson_chapter_id")) s.coachLessonChapter = ini.getString("coach.lesson_chapter_id");
+    else if (ini.has("coach.lesson_chapter")) s.coachLessonChapter = legacyLessonChapterId(ini.getInt("coach.lesson_chapter", 0));
     s.coachTab = std::clamp(ini.getInt("coach.tab", s.coachTab), 0, 1);
     s.coachChallenge = ini.getString("coach.challenge", s.coachChallenge);
     if (ini.has("coach.challenges_done")) s.coachChallengesDone = decodeChallengeIds(ini.getString("coach.challenges_done"));
@@ -90,6 +100,14 @@ void readCoachSettings(const IniFile& ini, Settings& s) {
     s.ttsSteps = std::clamp(ini.getInt("tts.steps", s.ttsSteps), Settings::kTtsStepsMin, Settings::kTtsStepsMax);
     s.ttsArch = ini.getString("tts.arch", s.ttsArch);
     if (s.ttsArch.empty()) s.ttsArch = "auto";
+    // The speeds, in the slider's range (a hand-edited "nan" keeps the default).
+    auto speed = [&](const char* key, float def) {
+        const float v = ini.getFloat(key, def);
+        return std::isfinite(v) ? std::clamp(v, Settings::kTtsSpeedMin, Settings::kTtsSpeedMax) : def;
+    };
+    s.ttsSpeedLesson = speed("tts.speed_lesson", s.ttsSpeedLesson);
+    s.ttsSpeedBeginner = speed("tts.speed_beginner", s.ttsSpeedBeginner);
+    s.ttsSpeed = speed("tts.speed", s.ttsSpeed);
     s.coachVoice = ini.getBool("coach.voice", s.coachVoice);  // the voice model download (W12)
     s.coachVoiceOffered = ini.getBool("coach.voice_offered", s.coachVoiceOffered);
     s.coachVoiceUpdateOffered = ini.getBool("coach.voice_update_offered", s.coachVoiceUpdateOffered);
@@ -106,7 +124,8 @@ void writeCoachSettings(IniFile& ini, const Settings& s) {
     ini.set("coach.history", encodeCoachHistory(s.coachHistory));
     ini.setBool("coach.accuracy_explained", s.coachAccuracyExplained);
     ini.setBool("coach.take_your_time", s.coachTakeYourTime);
-    ini.setInt("coach.lesson_chapter", s.coachLessonChapter);
+    ini.setBool("coach.danger_markers", s.coachDangerMarkers);
+    ini.set("coach.lesson_chapter_id", s.coachLessonChapter);
     ini.setInt("coach.tab", s.coachTab);
     ini.set("coach.challenge", s.coachChallenge);
     ini.set("coach.challenges_done", encodeChallengeIds(s.coachChallengesDone));
@@ -114,6 +133,9 @@ void writeCoachSettings(IniFile& ini, const Settings& s) {
     ini.setInt("tts.voice", s.ttsVoice);
     ini.setInt("tts.steps", s.ttsSteps);
     ini.set("tts.arch", s.ttsArch);
+    ini.setFloat("tts.speed_lesson", s.ttsSpeedLesson);
+    ini.setFloat("tts.speed_beginner", s.ttsSpeedBeginner);
+    ini.setFloat("tts.speed", s.ttsSpeed);
     ini.setBool("coach.voice", s.coachVoice);  // the voice model download (W12)
     ini.setBool("coach.voice_offered", s.coachVoiceOffered);
     ini.setBool("coach.voice_update_offered", s.coachVoiceUpdateOffered);
