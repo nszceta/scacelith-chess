@@ -212,6 +212,7 @@ struct Review {
     bool unsettled = false;       // a fault the search's last iterations disagree on (said at most as a mistake, no reason)
     double costBefore[2] = {-1.0, -1.0};   // what the fault cost at the two iterations before the last (-1: not known)
     bool ignoredThreat = false;   // the verdict says the move left the coach's threat standing (levels 1-2)
+    bool answeredThreat = false;  // the move dealt with the coach's threat (levels 1-2): its reply no longer wins what it threatened
     // The refutation (UCI, from the position after the move) the reason was looked for on, when the
     // verification changed the engine's line (audits); empty otherwise.
     std::vector<std::string> refutation;
@@ -268,19 +269,34 @@ public:
     Review review(const ReviewInput& in);
 
     // After the coach's own move, before the human plays: warnings about the coach's new threats
-    // (levels 1-2) and, at level 1, "my last move was a mistake" once A0 of the human's turn
-    // ('before', optional) confirms the capture. Low-priority beats. 'threat' (optional): the search
-    // of threatKey(g), what the coach would play with the turn passed to it: a warning the board's
-    // rules find is said only when that search wins the material (or mates) too, and the threat is
-    // kept for the review of the player's move ("you did not answer my threat").
+    // and, at level 1, "my last move was a mistake" once A0 of the human's turn ('before', optional)
+    // confirms the capture. Low-priority beats. 'threat' (optional): the search of threatKey(g),
+    // what the coach would play with the turn passed to it: a warning the board's rules find is said
+    // only when that search wins the material (or mates) too, and the threat is kept for the review
+    // of the player's move ("you did not answer my threat"). What is warned of:
+    //   - level 1: a mate threat, a piece or pawn of the player left loose (attacked, no protector);
+    //   - level 2: a mate threat, a fork or a pin the coach's move creates (named), the queen attacked;
+    //   - level 3: a mate threat, the queen attacked, and a position where only one move is good
+    //     (A0's two best lines far apart), each in one plain line.
+    // The first threat of a game at levels 1-2 is asked, not told: a question with nothing pointed
+    // at, the statement kept back for threatReveal().
     Script coachMoved(const chess::Game& g, const ai::Analysis* before = nullptr, const ai::Analysis* threat = nullptr);
-    // The search of the coach's threats after its move (levels 1-2): the position with the turn passed
+    // The question coachMoved asked is open: the player has neither moved nor been shown the answer.
+    bool threatAsked() const { return ask_.ply >= 0; }
+    // The question is dropped without an answer (the move it was asked after was taken back).
+    void closeThreatQuestion() { ask_ = Ask{}; }
+    // The statement of the threat asked about, with its pointing, once: the player waited too long
+    // (touched = NoSquare) or touched a piece (its square) that is neither one the threat is about
+    // nor one with a move that deals with it. Empty (the question stays open) when the touched piece
+    // is on the right track, or none is open; a question about a position the game has left is closed.
+    Script threatReveal(const chess::Game& g, chess::Square touched = chess::NoSquare);
+    // The search of the coach's threats after its move (levels 1-3): the position with the turn passed
     // to the coach, searched as a verification's short search (verifyRequest(key)); "" when there is
-    // none to search (levels 3-6, the player in check, the game over, the last move the player's).
+    // none to search (levels 4-6, the player in check, the game over, the last move the player's).
     std::string threatKey(const chess::Game& g) const;
 
     // The player's answer to an offer. Accepted: call after Game::undo(1); returns the hint
-    // (levels 1-2) and remembers the move so the replay is judged against it. Declined: returns the
+    // (levels 1-3) and remembers the move so the replay is judged against it. Declined: returns the
     // better move when the offer did not name it (a blunder without a reason: TakebackRecord::
     // hintOnly), said before the director's events line; nothing is remembered.
     // fromOffer: the player took the card. The pause menu's takeback of an offered move passes
@@ -288,6 +304,14 @@ public:
     // only those the coach offered and the player accepted.
     Script takebackAccepted(const chess::Game& g, bool fromOffer = true);
     Script takebackDeclined();
+
+    // The end card's "Try that position again" (levels 1-3): the lines of a retry of the position
+    // before the game's critical blunder, 'g' standing at that position and 'bestUci' the engine's
+    // move there. Start: the task and the scaffold of an explanation (ex.hint: the piece that has the
+    // better move); Again: after a miss, the move taken back; Found: the move was no mistake;
+    // Reveal: the second miss, the better move shown (the move taken back first).
+    enum class RetryStep : uint8_t { Start, Again, Found, Reveal };
+    Script positionRetry(const chess::Game& g, const std::string& bestUci, RetryStep step) const;
 
     int offersMade() const { return offers_; }
     int humanMoves() const { return humanMoves_; }
@@ -313,6 +337,8 @@ private:
     int bookPraises_ = 0;
     bool castlePraised_ = false;
     bool coachCheckExplained_ = false;
+    int developPraises_ = 0;          // "you developed a piece" said this game
+    int protectPraises_ = 0;          // "you defended your piece" said this game
     bool punishHintDone_ = false;
     // The coach's threat after its last move, as the threat search found it (coachMoved): the move it
     // would play, what it wins for good within four plies, a mate; ply: of the coach's move (-1: none).
@@ -323,6 +349,28 @@ private:
         bool mate = false;
     };
     Threat threat_;
+    // The question asked about the first threat of the game (levels 1-2, coachMoved): its answer
+    // waits in 'reveal' until the player is shown it. ply: of the coach's move (-1: none open).
+    // 'targets' are the squares of the player's pieces the threat is about; 'attacker' and 'target'
+    // identify the threat for answersAsk (a fork: the forking piece; a pin: the pinner and the
+    // pinned piece; a piece threat: the attacked piece).
+    struct Ask {
+        enum class Kind { Piece, Mate, Fork, Pin };
+        int ply = -1;
+        Kind kind = Kind::Piece;
+        Beat reveal;
+        uint64_t targets = 0;
+        chess::Square attacker = chess::NoSquare;
+        chess::Square target = chess::NoSquare;
+    };
+    Ask ask_;
+    bool askedOnce_ = false;          // the game's first threat has been asked about
+    bool developReminded_ = false;    // "bring out your pieces" said this game (levels 1-2)
+    int lastOnlyWarning_ = -1000;     // humanMoves_ at the last "only one move is good" warning (level 3)
+    // A move of the player's, made from the position the question was asked in, that deals with the
+    // threat it is about (a fork's forker taken or the targets no longer both winnable, a loose piece
+    // guarded, a mate threat gone).
+    bool answersAsk(const chess::Position& now, const chess::Move& m) const;
     uint32_t tipsSaid_ = 0;           // opening principles and endgame tips already voiced (bits)
     std::vector<double> humanW_;      // the human's W% after each judged move on the board (index = ply, -1: none)
     // The last offer, and a takeback in progress.

@@ -5,15 +5,23 @@
 # grammatical gender: nothing agrees with the coach or the player.
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Szia! Játsszunk egy barátságos játszmát. Ha valami félresikerül, mindig segítek.
+event.greet.l1 = Szia! Játsszunk egy barátságos játszmát. Szólok, ha az egyik bábud veszélyben van.
 event.greet.l1.2 = Helló! Kíméletesen játszom, és megmutatom, mire kell figyelned.
 event.greet.l1.3 = Üdvözöllek! Nyugodtan, ne siess: szólok, ha egy bábu veszélyben van.
-event.greet.l2 = Szia! Játsszunk. Ha villa vagy kötés adódik, megmutatom.
+event.greet.l1.first = Szia! Minden lépés előtt kérdezd meg: biztonságban van a bábum? Mit támad a lépésem? Mivel fenyeget az ellenfél? Emlékeztetlek rá.
+event.greet.l1.first.2 = Az első igazi játszmád! Minden lépés előtt: biztonságban van a bábum, mit támad, mi a fenyegetés? Emlékeztetlek.
+event.greet.l2 = Szia! Játsszunk. Ha a lépésem villát vagy kötést készít elő, szólok.
 event.greet.l2.2 = Helló! Hozd ki a tisztjeidet, és tartsd biztonságban a királyodat. Menet közben segítek.
 event.greet.l2.3 = Üdv újra a táblánál! Figyelj a villákra és a kötésekre: ezek nyerik meg a játszmákat.
-event.greet.l3 = Szia! Játsszunk egy igazi játszmát. Elmondom a véleményem a terveidről és a nagyobb hibákról.
+event.greet.l3 = Szia! Játsszunk egy igazi játszmát. Figyelmeztetlek a nagy fenyegetésekre, és elmagyarázom a nagyobb hibákat.
 event.greet.l3.2 = Helló! Gondolj ki egy tervet a bábuidnak. Szólok, ha egy lépésnél elnézel valamit.
-event.greet.l3.3 = Játsszunk! Jelzem, ha csak egyetlen lépés jó, és azt is, ha egy lépés rosszul sül el.
+event.greet.l3.3 = Játsszunk! Szólok, ha csak egyetlen lépés jó, és ha egy lépés rosszul sül el.
+event.greet.l1.theme = Üdv újra! Az előző játszma tippje ez volt: {theme}. Tartsd észben ma is.
+event.greet.l1.theme.2 = Helló újra! Emlékezz az előző játszma tippjére: {theme}. Segítek.
+event.greet.l2.theme = Üdv újra! Az előző játszma ötlete ez volt: {theme}. Lássuk, hogy megy ma.
+event.greet.l2.theme.2 = Helló újra! Valami az előző játszmából, amire érdemes emlékezni: {theme}.
+event.greet.l3.theme = Üdv újra! Az előző játszma témája ez volt: {theme}. Tartsd észben ma is.
+event.greet.l3.theme.2 = Szia újra! Az előző játszmából: {theme}. Lássuk, hogy megy ma.
 event.greet.l4 = Szia! Ezúttal értékelem az állást, és megmutatom a jobb jelölt lépéseket.
 event.greet.l4.2 = Játsszunk. Egy hiba után megmondom, mi lett volna pontosabb.
 event.greet.l4.3 = Készen állsz egy klubjátszmára? Megjegyzést teszek, ha változik az értékelés.
@@ -33,9 +41,9 @@ event.colour.black.2 = Most sötéttel játszol: én lépek először.
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names match coach.level.<n>.name of assets/i18n/hu.lang: Első lépések, Kezdő,
 # Fejlődő játékos, Klubjátékos, Erős klubjátékos, Szakértő.
-event.level.l1 = Első lépések: kíméletesen játszom, és minden hibát egyszerű szavakkal magyarázok el.
-event.level.l2 = Kezdő: kicsit erősebben játszom, és megnevezem az egyszerű taktikai fogásokat, például a villát és a kötést.
-event.level.l3 = Fejlődő játékos: beszélek a tervekről és a gyalogszerkezetről, és rövid változatokat mutatok.
+event.level.l1 = Első lépések: kíméletesen játszom. Szólok, ha egy bábud támadott és védtelen, a nagy hibákat pedig egyszerű szavakkal elmagyarázom.
+event.level.l2 = Kezdő: kicsit erősebben játszom. Szólok a villákról, kötésekről és a vezéred elleni támadásokról, és emlékeztetlek a bábuk kihozására.
+event.level.l3 = Fejlődő játékos: csak mattról és a vezéred elleni támadásról szólok, és arról, ha csak egy lépés jó. A hibáidat elmagyarázom.
 event.level.l4 = Klubjátékos: gyalogegységben értékelem az állást, és jelölt lépéseket javaslok.
 event.level.l5 = Erős klubjátékos: rövid megjegyzések, és hosszabb változatok, ha fontos.
 event.level.l6 = Szakértő: a legjobb tudásom szerint játszom, és csak a kritikus pillanatokat kommentálom.
@@ -106,5 +114,7 @@ event.end.handshake = Fogjunk kezet.
 # lower case: it always follows a colon, so it needs no case suffix.
 event.lesson.resume = Üdv újra! Folytassuk a leckét: {chapter}.
 event.lesson.resume.2 = Örülök, hogy újra látlak! Itt hagytuk abba: {chapter}.
+event.lesson.start = Kezdjük ezzel: {chapter}.
+event.lesson.start.2 = Ezzel kezdünk: {chapter}.
 event.lesson.next = Következik: {chapter}.
 event.lesson.next.2 = Most pedig: {chapter}.

@@ -1,4 +1,4 @@
-// Level 0: the interactive rules lesson. Twelve chapters of scripted beats
+// Level 0: the interactive rules lesson. Fifteen chapters of scripted beats
 // (coach/script.h): the coach sets up small positions, explains, points, demonstrates, and waits
 // for the player's move (WaitMove) that an Expectation judges. A wrong move is answered and taken
 // back, an illegal one is refused and explained (why it is illegal, computed from the position),
@@ -99,11 +99,17 @@ struct Expectation {
     Line hint1, hint2;                                  // idle hints (empty: the ask; the ask with pointing)
     std::vector<Gesture> hint2Gestures;
     std::vector<Mark> hint2Marks;
+    bool showEscape = false;                            // accepted: if the move gives a check that is not mate,
+                                                        // the coach says and shows how its king escapes
+    Line afterDemo;                                     // after the solution was demonstrated and rewound (the
+    std::vector<Gesture> afterDemoGestures;             // third wrong move), before "Now you try": why it works,
+    std::vector<Mark> afterDemoMarks;                   // pointing at what the solution covers
 };
 
 struct LessonChapter {
-    std::string id;       // "welcome", "pieces", "safety", "check", "mate", "castling", "en_passant",
-                          // "promotion", "draws", "before_move", "opening", "etiquette"
+    std::string id;       // "welcome", "pieces_lines", "pieces_steps", "values_setup", "safety", "check", "mate",
+                          // "castling", "en_passant", "promotion", "draws", "before_move", "opening", "review",
+                          // "etiquette"
     Line title;           // lesson.title.<id> ("the board"), for "Let's continue with {chapter}."
     Script beats;         // starts with a SetPosition
 };
@@ -119,6 +125,9 @@ struct LessonReaction {
 class Lesson {
 public:
     Lesson();   // builds the chapters (cheap: a few hundred beats)
+    // The one lesson the game shares for what only reads the chapters (the Coach page's chapter list,
+    // the chapter ids saved in the settings).
+    static const Lesson& shared();
 
     const std::vector<LessonChapter>& chapters() const { return chapters_; }
     const std::vector<Expectation>& expectations() const { return expectations_; }

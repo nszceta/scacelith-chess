@@ -39,15 +39,28 @@ struct SessionConfig {
     DirectorConfig director;
     SpeechSpeeds speeds;                  // the director's speed, by level (Session::start)
     bool introduceLevel = false;          // first game at this level (or the level changed)
+    bool firstAfterLesson = false;        // level 1: the first real game after the rules lesson (greeting recalls its questions)
+    bool dangerMarkers = false;           // levels 1-2: the danger markers are shown in this game (GameRecord::markers)
     bool offersEnabled = true;            // takeback offers after blunders
     bool takeYourTime = true;             // "Take your time." after a minute without a move (levels 1-3)
     std::vector<GameRecord> history;      // earlier coach games, oldest first (suggestLevel)
     bool accuracyExplained = false;       // the appraisal has already explained what accuracy is
-    int lessonChapter = 0;                // level 0: resume at this chapter (0 = from the start)
+    int lessonChapter = 0;                // level 0: start at this chapter (0 = from the start)
+    bool lessonChosen = false;            // ... which the player picked (the Coach page's chapter list, the command
+                                          // line) rather than resumed: "Let's start with ...", not "Welcome back!"
     // A challenge (coach/challenge.h) instead of a game: its id ("" = none). The level is then
     // ignored, the human plays White, and nothing is recorded (history() is unchanged).
     std::string challenge;
     int challengePosition = 0;            // begin at this position, 0-based (tests, screenshots)
+    std::string practiseTheme;            // a challenge started from a game's end card: the theme (exTypeName) it
+                                          // practises, named when it begins ("" = none)
+    // A retry of a game's critical position (levels 1-3, the end card's "Try that position again")
+    // instead of a game: 'game' stands at that position, the human to move, and this is the engine's
+    // better move there ("" = a game). The coach asks for it, with the explanation's scaffold; a move
+    // that the review calls a mistake is taken back (the second miss shows the better move); the
+    // session wants the handshake (handshakeWanted) when the retry is over. The coach never moves,
+    // nothing is recorded (history() is unchanged).
+    std::string retryBest;
 };
 
 class Session {
@@ -74,6 +87,13 @@ public:
     // The player touched a piece (idle timers, stale lines). While the takeback card is shown it
     // answers it: the player plays on (as onOfferAnswer(false), with "Let's play on").
     void onPlayerActive();
+    // The player picked up the piece on 'from' (onPlayerActive, and the coach's open question about
+    // its threat, levels 1-2: a piece that is neither one the threat is about nor one that can deal
+    // with it shows the player the answer). The scene calls this instead of onPlayerActive.
+    void onPieceTouched(const chess::Game& game, chess::Square from);
+    // The coach has asked whether the player sees its threat and not yet shown it (levels 1-2): the
+    // scene paints no danger markers meanwhile, they would answer the question.
+    bool threatQuestionOpen() const;
     // A placement refused as illegal (legal-move hints on): the rules lesson explains why.
     void onIllegalAttempt(const chess::Game& game, chess::Square from, chess::Square to);
     void onOfferAnswer(const chess::Game& game, bool accept);   // the takeback card's answer
@@ -113,8 +133,16 @@ public:
     // Levels 1-3 of a game: the challenge set (id) that practises the theme the appraisal named as
     // the one improvement; "" when it named none or no set practises it. Not persisted: the end card.
     const std::string& suggestedChallenge() const;
+    // The theme (exTypeName) behind suggestedChallenge(), "" when there is none.
+    const std::string& practiseTheme() const;
     int lessonChapter() const;                     // the chapter to resume at
     bool lessonCompleted() const;
+    // Levels 1-3 of a game: the position the end card offers again (the one before the critical
+    // blunder); valid() is false when there is none. Known once the appraisal has begun.
+    const RetryPoint& retryPoint() const;
+    // A retry (SessionConfig::retryBest) ended with the player's own move (the better move or a move
+    // that is no mistake), not with the coach showing the better move.
+    bool retryFound() const;
 
     // ---- Challenges ---------------------------------------------------------------------------------
     bool challengeMode() const;                    // a challenge runs (its id was found)

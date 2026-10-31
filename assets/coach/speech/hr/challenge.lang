@@ -17,6 +17,10 @@
 # A sentence after "{n:position}" never uses a relative pronoun that would have to agree with the
 # number ("u svakoj ..." instead of "u kojima ...").
 
+ch.practise = Iz tvoje zadnje partije: {theme}. Ovaj je set napravljen baš za to.
+ch.practise.2 = Tvoja zadnja partija imala je jednu stvar za vježbu: {theme}. Vježbajmo je.
+ch.practise.3 = Savjet zadnje partije bio je: {theme}. Evo vježbe.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Mat u jednom potezu. {n:position}, i u svakoj samo jedan potez daje mat. Provjeri svaki šah.
 ch.intro.mate2 = Mat u dva poteza. {n:position}: tvoj prvi potez mora me ostaviti bez obrane, a zatim daješ mat.

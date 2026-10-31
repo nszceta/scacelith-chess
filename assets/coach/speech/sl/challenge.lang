@@ -16,6 +16,12 @@
 # The player always has the white pieces. The coach says "ti" and is male ("odgovoril bi", "branil se
 # bom"); the player's gender is unknown: no past tense, future, conditional or adjective about the player.
 
+# ---- A challenge started from the end card of a game: said before its introduction ----------------
+# {theme}: the one thing the coach named at the end of that game.
+ch.practise = Iz tvoje zadnje partije: {theme}. Ta sklop je narejen za to.
+ch.practise.2 = V tvoji zadnji partiji je bilo nekaj za vajo: {theme}. Vadiva to.
+ch.practise.3 = Nasvet zadnje partije je bil: {theme}. Tukaj je nekaj vaje.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Mat v eni potezi. {n:position}: v vsaki da mat ena sama poteza. Preveri vse šahe.
 ch.intro.mate2 = Mat v dveh potezah. {n:position}: tvoja prva poteza mi ne sme pustiti obrambe, nato daš mat.

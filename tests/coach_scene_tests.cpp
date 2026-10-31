@@ -36,6 +36,20 @@ TEST(coach_args_lesson_colour_dir) {
     CHECK(c.start);
 }
 
+// --coach-lesson-chapter names the chapter and, alone, means level 0; another level named wins.
+TEST(coach_args_lesson_chapter) {
+    CoachArgs c = parseCoachArgs({"--start", "--coach", "--coach-lesson-chapter", "castling"});
+    CHECK_EQ(c.lessonChapter, std::string("castling"));
+    CHECK_EQ(c.level, 0);
+    CoachArgs other = parseCoachArgs({"--coach-lesson-chapter", "castling", "--coach-level", "3"});
+    CHECK_EQ(other.level, 3);
+    CoachArgs bad = parseCoachArgs({"--coach-lesson-chapter", "--start", "--coach"});
+    CHECK(bad.lessonChapter.empty());
+    CHECK_EQ(bad.level, -1);
+    CHECK_EQ(int(bad.problems.size()), 1);
+    CHECK(bad.start);
+}
+
 TEST(coach_args_stage_test_and_bad_values) {
     CoachArgs t = parseCoachArgs({"--coach-stage-test"});
     CHECK(t.stageTest);
@@ -63,10 +77,10 @@ TEST(coach_args_stage_test_and_bad_values) {
 }
 
 TEST(coach_settings_history_codec) {
-    std::vector<game::Settings::CoachGame> games = {{3, 1, 81.44}, {3, -1, -1.0}, {0, 0, 55.0}};
+    std::vector<coach::GameRecord> games = {{3, 1, 81.44}, {3, -1, -1.0}, {0, 0, 55.0}};
     std::string text = game::encodeCoachHistory(games);
-    CHECK_EQ(text, std::string("3:1:81.4 3:-1:- 0:0:55.0"));
-    std::vector<game::Settings::CoachGame> back = game::decodeCoachHistory(text);
+    CHECK_EQ(text, std::string("3:1:81.4:-:-:0 3:-1:-:-:-:0 0:0:55.0:-:-:0"));
+    std::vector<coach::GameRecord> back = game::decodeCoachHistory(text);
     CHECK_EQ(int(back.size()), 3);
     CHECK_EQ(back[0].level, 3);
     CHECK_EQ(back[0].result, 1);
@@ -75,7 +89,7 @@ TEST(coach_settings_history_codec) {
     CHECK_EQ(back[1].result, -1);
     CHECK_EQ(back[2].level, 0);
     // Malformed entries are skipped, values clamped.
-    std::vector<game::Settings::CoachGame> odd = game::decodeCoachHistory("  9:5:120 garbage 2:0:  4:-3:12.5 ");
+    std::vector<coach::GameRecord> odd = game::decodeCoachHistory("  9:5:120 garbage 2:0:  4:-3:12.5 ");
     CHECK_EQ(int(odd.size()), 3);
     CHECK_EQ(odd[0].level, 6);
     CHECK_EQ(odd[0].result, 1);
@@ -84,15 +98,35 @@ TEST(coach_settings_history_codec) {
     CHECK_EQ(odd[2].result, -1);
     // A NaN accuracy (a hand-edited file) is unknown, not an accurate game. glibc reads "nan" as NaN
     // (unknown) and "inf" as infinity (100); msvcrt reads both as 0: never NaN.
-    std::vector<game::Settings::CoachGame> nan = game::decodeCoachHistory("3:1:nan 2:0:inf 4:1:50");
+    std::vector<coach::GameRecord> nan = game::decodeCoachHistory("3:1:nan 2:0:inf 4:1:50");
     CHECK_EQ(int(nan.size()), 3);
     CHECK(nan[0].accuracy == -1.0 || nan[0].accuracy == 0.0);
     CHECK(nan[1].accuracy == 100.0 || nan[1].accuracy == 0.0);
     CHECK(nan[2].accuracy == 50.0);
+    // The theme, first-try blunders and markers of a game survive the round trip.
+    coach::GameRecord rich{2, 1, 90.0};
+    rich.theme = "missed_fork";
+    rich.blunders = 0;
+    rich.markers = true;
+    coach::GameRecord unknown{1, -1, 40.0};
+    unknown.theme = "fork";
+    std::vector<coach::GameRecord> twoBack = game::decodeCoachHistory(game::encodeCoachHistory({rich, unknown}));
+    REQUIRE(twoBack.size() == 2u);
+    CHECK(twoBack[0].theme == "missed_fork" && twoBack[0].blunders == 0 && twoBack[0].markers);
+    CHECK(twoBack[1].theme == "fork" && twoBack[1].blunders == -1 && !twoBack[1].markers);
+    // A history written by an earlier version (three fields): no theme, unknown blunders, no markers.
+    std::vector<coach::GameRecord> legacy = game::decodeCoachHistory("1:1:80.0 2:-1:- 3:0:70.5:fork:2:1");
+    REQUIRE(legacy.size() == 3u);
+    for (int i = 0; i < 2; ++i) CHECK(legacy[size_t(i)].theme.empty() && legacy[size_t(i)].blunders == -1 && !legacy[size_t(i)].markers);
+    CHECK(legacy[2].theme == "fork" && legacy[2].blunders == 2 && legacy[2].markers);
+    // A hand-edited theme that is not a name, or a blunder count out of range, is dropped / clamped.
+    std::vector<coach::GameRecord> odd2 = game::decodeCoachHistory("1:1:80:Fork!:500:1");
+    REQUIRE(odd2.size() == 1u);
+    CHECK(odd2[0].theme.empty() && odd2[0].blunders == 99);
     // Only the last kCoachHistoryMax games are kept.
-    std::vector<game::Settings::CoachGame> many;
+    std::vector<coach::GameRecord> many;
     for (int i = 0; i < game::Settings::kCoachHistoryMax + 5; ++i) many.push_back({1 + i % 6, 0, double(i)});
-    std::vector<game::Settings::CoachGame> kept = game::decodeCoachHistory(game::encodeCoachHistory(many));
+    std::vector<coach::GameRecord> kept = game::decodeCoachHistory(game::encodeCoachHistory(many));
     CHECK_EQ(int(kept.size()), game::Settings::kCoachHistoryMax);
     CHECK(kept.front().accuracy > 4.9 && kept.front().accuracy < 5.1);
 }
@@ -183,7 +217,7 @@ TEST(coach_settings_round_trip) {
 
     // The lesson's chapter saved as an index by earlier versions (ten chapters then): read through
     // their ids, so that chapters added since do not move the player; the id key wins over it.
-    const std::pair<int, const char*> legacy[] = {{0, ""}, {8, "draws"}, {9, "etiquette"}, {10, ""}, {-3, ""}};
+    const std::pair<int, const char*> legacy[] = {{0, ""}, {1, "pieces_lines"}, {8, "draws"}, {9, "etiquette"}, {10, ""}, {-3, ""}};
     for (const auto& [index, id] : legacy) {
         IniFile e;
         e.setInt("coach.lesson_chapter", index);
@@ -197,6 +231,58 @@ TEST(coach_settings_round_trip) {
     game::Settings e;
     game::readCoachSettings(both, e);
     CHECK_EQ(e.coachLessonChapter, std::string("opening"));
+
+    // The chapter "pieces" was split in three: saved by its id, it resumes at the first of them.
+    IniFile split;
+    split.set("coach.lesson_chapter_id", "pieces");
+    game::Settings f;
+    game::readCoachSettings(split, f);
+    CHECK_EQ(f.coachLessonChapter, std::string("pieces_lines"));
+
+    // The danger markers: three choices, saved by name; the on / off switch of earlier versions is
+    // read as Automatic / Off, and the new key wins over it.
+    for (const auto& [text, want] : {std::pair<const char*, int>{"auto", game::Settings::DangerMarkersAuto},
+                                     {"on", game::Settings::DangerMarkersOn}, {"off", game::Settings::DangerMarkersOff},
+                                     {"nonsense", game::Settings::DangerMarkersAuto}}) {
+        IniFile e;
+        e.set("coach.danger_markers_mode", text);
+        game::Settings d;
+        game::readCoachSettings(e, d);
+        CHECK_EQ(d.coachDangerMarkerMode, want);
+        IniFile w;
+        game::writeCoachSettings(w, d);
+        game::Settings back;
+        back.coachDangerMarkerMode = game::Settings::DangerMarkersOff;
+        game::readCoachSettings(w, back);
+        CHECK_EQ(back.coachDangerMarkerMode, want);
+    }
+    for (const auto& [text, want] : {std::pair<const char*, int>{"true", game::Settings::DangerMarkersAuto},
+                                     {"false", game::Settings::DangerMarkersOff}}) {
+        IniFile e;
+        e.set("coach.danger_markers", text);
+        game::Settings d;
+        game::readCoachSettings(e, d);
+        CHECK_EQ(d.coachDangerMarkerMode, want);
+        e.set("coach.danger_markers_mode", "on");
+        game::readCoachSettings(e, d);
+        CHECK_EQ(d.coachDangerMarkerMode, game::Settings::DangerMarkersOn);
+    }
+    CHECK_EQ(game::Settings().coachDangerMarkerMode, game::Settings::DangerMarkersAuto);
+
+    // Which games show the markers: Auto for the first games of levels 1 and 2 only, On at both
+    // levels always, Off never; never from level 3.
+    game::Settings m;
+    m.coachHistory = {{1, 1, 80.0}, {1, 0, 70.0}};
+    CHECK(m.coachDangerMarkersAt(1) && m.coachDangerMarkersAt(2));
+    m.coachHistory.push_back({1, 1, 85.0});
+    CHECK(!m.coachDangerMarkersAt(1) && m.coachDangerMarkersAt(2));
+    m.coachHistory.push_back({2, -1, 50.0});
+    CHECK(!m.coachDangerMarkersAt(1) && !m.coachDangerMarkersAt(2));
+    CHECK(!m.coachDangerMarkersAt(0) && !m.coachDangerMarkersAt(3));
+    m.coachDangerMarkerMode = game::Settings::DangerMarkersOn;
+    CHECK(m.coachDangerMarkersAt(1) && m.coachDangerMarkersAt(2) && !m.coachDangerMarkersAt(3));
+    m.coachDangerMarkerMode = game::Settings::DangerMarkersOff;
+    CHECK(!m.coachDangerMarkersAt(1) && !m.coachDangerMarkersAt(2));
 }
 
 // The completed challenges: each id once, spaces and empty entries dropped (a hand-edited file),

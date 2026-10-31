@@ -83,6 +83,7 @@ struct ChallengeRun::Impl {
     int failures = 0;         // wrong moves at this move
     int hintStep = 0;         // hints given at this move
     bool leadSaid = false;    // "These positions come from real games" (once)
+    std::string practiseTheme; // the game's error this set practises (said before the introduction), "" none
     int waitTag = -1;         // the expectation of the WaitMove of this move
     Position waitPos;         // the position it waits in
 
@@ -182,6 +183,11 @@ struct ChallengeRun::Impl {
         const ChallengePosition& p = cur();
         Script s;
         if (first) {
+            if (!practiseTheme.empty()) {   // from a game's end card: the error this set is for
+                Line from = line("ch.practise");
+                from.with("theme", Arg::ofText("theme." + practiseTheme));
+                s.push_back(say(from, Look::Player, {gesture(GestureKind::Nod)}));
+            }
             Line intro = line("ch.intro." + ch.id);
             intro.with("n", Arg::ofNumber(int(ch.positions.size())));
             s.push_back(say(intro, Look::Player, {gesture(GestureKind::Open)}));
@@ -530,7 +536,8 @@ struct ChallengeRun::Impl {
 ChallengeRun::ChallengeRun() : d_(new Impl) {}
 ChallengeRun::~ChallengeRun() = default;
 
-void ChallengeRun::start(const Challenge& challenge, Director& director, Stage& stage, Analyst& analyst, int from) {
+void ChallengeRun::start(const Challenge& challenge, Director& director, Stage& stage, Analyst& analyst, int from,
+                         const std::string& practiseTheme) {
     stop();
     Impl& d = *d_;
     d = Impl();
@@ -538,6 +545,7 @@ void ChallengeRun::start(const Challenge& challenge, Director& director, Stage& 
     d.director = &director;
     d.stage = &stage;
     d.analyst = &analyst;
+    d.practiseTheme = practiseTheme;
     d.running = !d.ch.positions.empty();
     if (!d.running) return;
     d.pos = std::clamp(from, 0, int(d.ch.positions.size()) - 1);

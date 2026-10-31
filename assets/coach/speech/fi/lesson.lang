@@ -12,7 +12,9 @@
 # ---- Chapter titles (said inside "Jatketaan oppituntia: {chapter}.") ----------------------------------
 # Nominative, lower case (see event.lesson.* in events.lang).
 lesson.title.welcome = shakkilauta
-lesson.title.pieces = miten nappulat liikkuvat
+lesson.title.pieces_lines = miten torni, lähetti ja kuningatar liikkuvat
+lesson.title.pieces_steps = miten kuningas, ratsu ja sotilas liikkuvat
+lesson.title.values_setup = nappuloiden arvot ja ensimmäiset siirrot
 lesson.title.safety = turvalliset ja vaaralliset lyönnit
 lesson.title.check = shakki
 lesson.title.mate = matti
@@ -22,7 +24,8 @@ lesson.title.promotion = sotilaan korotus
 lesson.title.draws = patti ja tasapelit
 lesson.title.before_move = katso ennen siirtoa
 lesson.title.opening = avaus
-lesson.title.etiquette = vahvuusluku, kello ja käytöstavat oikeissa peleissä
+lesson.title.review = pikakertaus
+lesson.title.etiquette = miten pelimme toimivat
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
 # After the coach demonstrated the solution.
@@ -95,7 +98,7 @@ lesson.rook.king = Tuo on kuninkaasi. Käytä nurkassa olevaa {your:part}.
 lesson.rook.ok = Lyöty! {my} poistuu laudalta.
 # Pieces don't jump
 lesson.jump.blocked = Nappulat eivät voi hypätä muiden yli. Sotilaasi ruudussa {sq} on tornin tiellä.
-lesson.jump.knight = Vain ratsu voi hypätä. Tutustumme siihen pian.
+lesson.jump.all = Sama pätee lähettiin ja kuningattareen: nekään eivät voi hypätä nappuloiden yli.
 # Bishop
 lesson.bishop.intro = Tämä on {your}. Se liikkuu vinottain, niin pitkälle kuin haluaa.
 lesson.bishop.colour = Lähetti pysyy aina samanvärisillä ruuduilla.
@@ -140,7 +143,12 @@ lesson.pawncap.ok = Juuri niin! Suoraan siirtyessä, vinottain lyödessä.
 lesson.values.pawn = Jokaisella nappulalla on arvo pisteinä. Sotilaan arvo on yksi.
 lesson.values.pieces = Ratsu tai {@}lähetti: kolme. {@2}Torni: viisi. {@3}Kuningatar: yhdeksän.
 lesson.values.king = Kuningas on korvaamaton: sitä ei voi koskaan antaa pois.
-lesson.values.trade = Pyri siihen, ettet koskaan anna nappulaa pois halvemmalla kuin se on arvoinen.
+lesson.values.trade = Älä vaihda isompaa nappulaa pienempään, ellet voita enemmän kuin menetät.
+lesson.values.two = Ratsusi uhkaa kahta nappulaani: {sq} ja {sq2}. Kumpaakaan ei puolusta mikään.
+lesson.values.ask = Lyö se, joka on arvokkaampi!
+lesson.values.small = Se on sotilas, arvoltaan yksi. {my} oli myös suojaton, ja sen arvo on yhdeksän.
+lesson.values.look = Katso, mitä ratsusi uhkaa, ja lyö arvokkaampi nappula.
+lesson.values.ok = Kyllä! Kuningatar on yhdeksän arvoinen. Kun kaksi nappulaa on suojattomia, lyö isompi.
 lesson.setup.corners = Jokainen peli alkaa näin: tornit {@}nurkissa, sitten {@2}ratsut, sitten {@3}lähetit.
 lesson.setup.queen = Kuningatar on omanvärisellään ruudulla: kuningattaresi on vaalealla ruudulla.
 lesson.setup.king = Kuningas on sen vieressä. Valkea siirtää aina ensin.
@@ -161,6 +169,18 @@ lesson.safety.gave = Annoit kuningattaresi, jonka arvo on yhdeksän, ratsustani,
 lesson.safety.other = Kokeile toista nappulaa.
 lesson.safety.look = Etsi nappula, jota mikään ei puolusta.
 lesson.safety.ok = Erinomaista! Kysy aina: onko tuo nappula puolustettu?
+lesson.safety.pawns = Kuningattaresi uhkaa kahta sotilastani: {sq} ja {sq2}.
+lesson.safety.pawns_ask = Lyö se sotilas, jonka voi lyödä turvallisesti.
+lesson.safety.gave_pawn = Annoit kuningattaresi, jonka arvo on yhdeksän, sotilaasta, jonka arvo on yksi.
+lesson.safety.pawns_other = Sotilaskin voi olla puolustettu. Kokeile toista sotilasta.
+lesson.safety.pawns_ok = Oikein! Älä koskaan vaaranna kuningatarta puolustetun sotilaan takia.
+lesson.safety.small = Nyt toisin päin. {my} on puolustettu, mutta sotilaasi uhkaa sitä.
+lesson.safety.small_count = Jos lyöt sen, {@}sotilaani lyö sinun sotilaasi takaisin. Annat yhden pisteen ja voitat yhdeksän.
+lesson.safety.small_ask = Lyö kuningattareni oikealla nappulalla!
+lesson.safety.small_other = Lyö se mieluummin sotilaallasi: halvimmalla nappulalla, joka voi.
+lesson.safety.small_look = Sotilaasi uhkaa kuningatarta. Lyö se sillä.
+lesson.safety.small_ok = Kyllä! Pieni nappula saa lyödä ison, vaikka se olisi puolustettu: menetät yhden pisteen ja voitat yhdeksän.
+lesson.safety.count = Ennen jokaista lyöntiä laske, mitä voitat ja mitä voit menettää takaisin.
 
 # ---- Chapter 3: check and getting out of check -----------------------------------------------------------------
 lesson.danger.rank = Tornini hallitsee koko toista riviä.
@@ -182,6 +202,11 @@ lesson.capture.check = Kuningattareni antaa shakin aivan kuninkaasi vieressä.
 lesson.capture.ask = Lyö hyökkääjä!
 lesson.capture.king_ok = Kyllä! Kuningattarellani ei ollut puolustajaa, joten kuninkaasi pystyi lyömään sen.
 lesson.capture.knight_ok = Kyllä! Ratsusi poisti hyökkääjän.
+lesson.check.open.ask = Taas shakki! Pääse siitä nyt pois miten haluat.
+lesson.check.open.king = Siirsit kuninkaan pois. Voisit myös tukkia hyökkäyksen, tai ratsusi olisi voinut lyödä tornini.
+lesson.check.open.block = Tukit hyökkäyksen. Kuninkaasi olisi voinut myös väistää, tai ratsusi olisi voinut lyödä tornini.
+lesson.check.open.take = Löit tornini, shakin antajan. Myös kuninkaan siirto tai tukkiminen olisi käynyt.
+lesson.check.open.hint = Kolme tapaa: {@}siirrä kuningas, {@2}tuki linjalla tai {@3}lyö tornini ratsullasi.
 
 # ---- Chapter 4: checkmate ------------------------------------------------------------------------------------
 lesson.mate1.what = Matti: kuningas on shakissa, eikä sillä ole pakotietä. Se voittaa pelin.
@@ -189,16 +214,34 @@ lesson.mate1.stuck = Kuninkaani on jumissa {@}omien sotilaidensa takana.
 lesson.mate1.ask = Tee minulle matti yhdellä siirrolla!
 lesson.mate1.wrong = Lähellä! Anna shakki takarivilläni, jolta kuninkaani ei pääse pakoon.
 lesson.mate1.ok = Matti! Tämä on takarivimatti. Muista se!
+lesson.mate1.king = Kuninkaasi on hyvässä paikassa. Anna shakki tornilla.
+lesson.mate1.why = Näetkö? Torni vartioi koko {@}takariviäni, ja {@2}omat sotilaani täyttävät kuninkaani edessä olevat ruudut.
 lesson.mate2.ask = Kuninkaasi ja kuningattaresi toimivat yhdessä. Tee minulle matti yhdellä siirrolla.
 lesson.mate2.wrong = Etsi shakki, joka ei jätä kuninkaalleni yhtään ruutua.
 lesson.mate2.ok = Matti! Kuninkaasi suojaa kuningatarta, joten minun kuninkaani ei voi lyödä sitä.
 lesson.mate2.ok_rank = Matti takarivillä! Kuninkaasi vartioi jokaista ruutua kuninkaani edessä.
+lesson.mate2.king = Kuninkaasi vartioi kuninkaani vieressä olevia ruutuja. Jätä se paikalleen ja käytä kuningatarta.
+lesson.mate2.half = Se valvoo ruutua {sq}, mutta kuninkaani voi yhä mennä ruutuun {sq2}.
+lesson.mate2.why = Näetkö? Kuningattaresi valvoo ruutuja {sq} ja {sq2}, kuninkaasi ruudut kuninkaani edessä. Kuninkaallani ei ole pakotietä.
 lesson.mate3.edge = Tornisi seitsemännellä rivillä pitää kuninkaani laudan reunalla.
 lesson.mate3.ask = Tee nyt matti {your:ade}.
 lesson.mate3.free = Shakki, mutta seitsemäs rivi on nyt vapaa, ja kuninkaani pakenee.
 lesson.mate3.takes = Kuninkaani yksinkertaisesti lyö tornisi.
 lesson.mate3.hint = Anna shakki takarivillä sillä tornilla, joka ei vartioi seitsemättä riviä.
 lesson.mate3.ok = Matti! Kaksi tornia toimivat kuin tikapuut.
+lesson.mate3.why = Näetkö? Yksi torni katkaisee {@}seitsemännen rivin, ja toinen antaa shakin {@2}takarivillä. Kuninkaallani ei ole pakotietä.
+lesson.mate4.look = Shakki ei ole aina matti. Katsotaan, mitä tapahtuu.
+lesson.mate4.ask = Anna kuninkaalleni shakki tornillasi.
+lesson.mate4.king = Kuninkaasi pysyy paikallaan. Anna shakki tornilla.
+lesson.mate4.wrong = Tuo ei ole shakki. Tornisi voi hyökätä kuninkaani kimppuun takariviltä.
+lesson.mate4.ok = Kyllä, se on shakki! Mutta onko se matti? Katso.
+lesson.mate4.after = Sotilaani ruudussa {sq} antoi kuninkaalleni tilaa. Ennen kuin juhlit shakkia, laske ruudut, joita kuninkaani voi vielä käyttää.
+lesson.mate5.ask = Kaksi tornisiirtoasi antaa shakin, ja vain toinen on matti. Laske kuninkaani ruudut ja valitse.
+lesson.mate5.king = Kuninkaasi valvoo jo ruutuja {sq} ja {sq2}. Jätä se paikalleen ja siirrä tornia.
+lesson.mate5.wrong = Tuo ei ole shakki. Etsi tornisiirto, joka hyökkää kuninkaani kimppuun.
+lesson.mate5.hint = Kuninkaasi valvoo ruutuja {sq} ja {sq2}. Mikä tornishakki vie myös ruudun {sq3}?
+lesson.mate5.why = Näetkö? Torni valvoo ruutua {sq}, kuninkaasi kahta muuta ruutua, ja kuninkaani on jumissa.
+lesson.mate5.ok = Matti! Laskit kuninkaani ruudut: yhtään ei jäänyt.
 
 # ---- Chapter 5: castling ---------------------------------------------------------------------------------------
 # Castling kingside / queenside = lyhyt / pitkä linnoitus (glossary).
@@ -219,12 +262,23 @@ lesson.castle2.ok = Oikein! Pitkä linnoitus vie kuninkaasi ruutuun {sq}.
 
 # ---- Chapter 6: en passant ------------------------------------------------------------------------------------
 # Finnish says "ohestalyönti" (a capture "in passing"), so no French words and no respelling.
+lesson.ep0.rule = Ohestalyönti alkaa kaksoisaskeleesta. Vain {@}kotona oleva sotilas saa edetä kaksi ruutua. {@2}Liikkunut sotilas etenee yhden.
+lesson.ep0.ask = Siirrä yksi sotilaistasi kaksi ruutua.
+lesson.ep0.moved = Tuo sotilas on jo liikkunut, joten se voi edetä vain yhden ruudun. Käytä sotilasta, joka on yhä kotona.
+lesson.ep0.ok = Oikein: vain alkuruudussaan oleva sotilas saa edetä kaksi.
 lesson.ep.what = Yksi sotilaan erikoislyönneistä on ohestalyönti. Nimi tarkoittaa, että sotilas lyödään ohimennen.
 lesson.ep.watch = Katso sotilastani: se etenee kaksi ruutua ja päätyy aivan sotilaasi viereen.
 lesson.ep.how = Sotilaasi voi lyödä sen ikään kuin se olisi edennyt vain yhden ruudun: ruutuun {sq}.
 lesson.ep.now = Mutta vain nyt, tällä siirrolla. Tee ohestalyönti!
 lesson.ep.gone = Tilaisuus meni: ohestalyönti onnistuu vain heti. Yritetään uudelleen.
 lesson.ep.ok = Ohestalyönti! Sotilaani ruudussa {sq} poistetaan laudalta.
+lesson.ep2.old = Sotilaani ruudussa {sq} on seissyt sotilaasi vieressä jo jonkin aikaa. Sitä ei voi enää lyödä ohestalyönnillä.
+lesson.ep2.watch = Katso nyt toista sotilastani.
+lesson.ep2.ask = Kaksi sotilastani on sotilaasi vieressä, mutta vain yksi eteni juuri kaksi ruutua. Lyö se ohestalyönnillä!
+lesson.ep2.push = Tuo vain työntää sotilastasi. Lyö sotilas, joka eteni juuri kaksi ruutua.
+lesson.ep2.wrong = Etsi sotilas, joka juuri teki kaksoisaskeleen, ja lyö se ohestalyönnillä.
+lesson.ep2.hint = Sotilaani ruudussa {sq} eteni juuri kaksi ruutua. Lyö se ohestalyönnillä ruutuun {sq2}.
+lesson.ep2.ok = Ohestalyönti! Sotilastani ruudussa {sq} ei ollut lyötävissä: sen tilaisuus oli ohi.
 
 # ---- Chapter 7: promotion -------------------------------------------------------------------------------------
 lesson.promo.what = Kun sotilas pääsee viimeiselle riville, se korotetaan: siitä tulee kuningatar, torni, lähetti tai ratsu.
@@ -233,12 +287,21 @@ lesson.promo.under = Sallittu! Mutta kuningatar on vahvempi. Valitaan kuningatar
 lesson.promo.under_ok = Hyvä on. Useimmat pelaajat valitsevat silti kuningattaren.
 lesson.promo.push = Siirrä sotilaasi viimeiselle riville, ruutuun {sq}.
 lesson.promo.ok = Uusi kuningatar! Sinulla voi olla jopa kaksi kuningatarta yhtä aikaa.
+lesson.promo2.ask = Sotilas voi korottua myös lyömällä, vinottain. Lyö torni ja tee kuningatar!
+lesson.promo2.push = Sekin korottaa, mutta tornini vartioi ruutua {sq}. Katso.
+lesson.promo2.lost = Tornini lyö uuden nappulasi. Lyö ensin torni.
+lesson.promo2.wrong = Tuo ei lyö torniani. Sotilaasi lyö vinottain, ruutuun {sq}.
+lesson.promo2.hint = Lyö torni sotilaallasi ruutuun {sq}: se korottuu lyödessään.
+lesson.promo2.ok = Lyönti ja korotus! Sotilas voi tehdä molemmat yhdellä siirrolla.
 
 # ---- Chapter 8: stalemate and draws -----------------------------------------------------------------------------
 lesson.stale.what = On minun vuoroni. Kuninkaani ei ole shakissa, mutta {@}jokainen sen ympärillä oleva ruutu on uhattuna.
 lesson.stale.draw = Minulla ei ole yhtään sallittua siirtoa. Se on patti, ja peli päättyy tasapeliin.
 lesson.stale2.ask = Kun olet voitolla, varo pattia. Tee minulle matti yhdellä siirrolla, ilman pattia!
-lesson.stale2.wrong = Anna shakki takarivilläni, jolta kuninkaani ei pääse pakoon.
+lesson.stale2.wrong = Etsi shakki, joka ei jätä kuninkaalleni yhtään ruutua. Varo: hiljainen siirto voi tehdä minusta patin.
+lesson.stale2.king = Kuninkaasi valvoo jo ruutuja {sq} ja {sq2}. Jätä se paikalleen ja käytä kuningatarta.
+lesson.stale2.hint = Kuninkaasi valvoo ruutuja {sq} ja {sq2}. Anna shakki takarivillä, niin kuninkaallani ei ole minne mennä.
+lesson.stale2.why = Näetkö? Kuninkaani on shakissa {@}eikä sillä ole vapaata ruutua: se on matti. Ilman shakkia se olisi patti.
 lesson.stale2.ok = Matti! Jätä vastustajan kuninkaalle aina siirto, ellet samalla tee mattia.
 lesson.draws.kings = Muita tasapelejä: kun kumpikaan ei pysty tekemään mattia, esimerkiksi kun laudalla on vain kaksi kuningasta, peli on tasapeli.
 lesson.draws.agree = Pelaajat voivat myös sopia tasapelistä.
@@ -288,32 +351,30 @@ lesson.opening.castle.ask = Tie on vapaa. Linnoittaudu ja vie kuninkaasi turvaan
 lesson.opening.castle.wrong = Kuninkaasi on valmis. Linnoittaudu nyt, kun tie on vapaa.
 lesson.opening.castle.ok = Linnoittauduit! Kuninkaasi on turvassa, ja tornisi pääsee peliin.
 lesson.opening.done = Keskusta, nappulat, linnoitus: näin jokainen peli alkaa hyvin.
+# ---- Chapter 11: review (no teaching: the coach only asks; the positions come in a different order than the chapters) ----
+lesson.review.start = Nopea kertaus, tällä kertaa eri järjestyksessä. En selitä: sinä näytät minulle.
+lesson.review.promo.ask = Korota tämä sotilas.
+lesson.review.promo.ok = Hyvä: uusi kuningatar ja shakki!
+lesson.review.check.ask = Kuninkaasi on shakissa. Pääse siitä pois.
+lesson.review.check.ok = Pois shakista. Hyvä.
+lesson.review.castle.ask = Linnoittaudu sillä puolella, jossa se on sallittua.
+lesson.review.castle.other = Tuo ei ole linnoittautuminen. Linnoittaudu sillä puolella, jossa se on sallittua.
+lesson.review.castle.ok = Linnoittauduit turvalliselle puolelle!
+lesson.review.ep.ask = Lyö sotilaani ohestalyönnillä.
+lesson.review.ep.ok = Ohestalyönti! Muistit sen.
+lesson.review.mate.ask = Tee minulle matti yhdellä siirrolla.
+lesson.review.mate.ok = Matti! Kertaus on valmis.
 
-# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 12: how our games work (no clock, touch-move, handshake, and how the coach helps) -------------------
 lesson.talk.rules = Osaat nyt kaikki shakin säännöt. Hienoa!
-lesson.talk.real = Kerron sinulle, miten oikeita pelejä pelataan.
-lesson.talk.elo = Pelaajilla on vahvuusluku, jota kutsutaan Elo-luvuksi. Se nousee, kun voitat, ja laskee, kun häviät.
-lesson.talk.elo_gap = Voitto vahvemmasta pelaajasta tuo enemmän pisteitä, ja tappio heikommalle maksaa enemmän.
-lesson.talk.elo_start = Vahvuuslukusi näkyy viiden pisteytetyn pelin jälkeen. Valmentajan kanssa pelatut pelit ovat harjoitusta, joten niitä ei pisteytetä.
-lesson.talk.clock = Tämä on {@}shakkikello. Jokaisella pelaajalla on oma aikansa, joka kuluu vain hänen vuorollaan.
-lesson.talk.press = Siirron jälkeen painat kelloa samalla kädellä. Silloin minun aikani alkaa kulua.
-lesson.talk.flag = Jos aikasi loppuu, häviät, paitsi jos minun on täysin mahdotonta tehdä sinulle mattia.
-lesson.talk.increment = ”Viisi plus kolme” tarkoittaa, että kummallakin on viisi minuuttia ja jokaisesta siirrosta saa kolme sekuntia lisää.
-# The time controls as in assets/i18n/fi.lang (tc.blitz, tc.rapid, tc.classical): salamashakki,
-# pikashakki, klassinen shakki.
-lesson.talk.speeds = Lyhyitä pelejä kutsutaan salamashakiksi, pidempiä pikashakiksi ja pisimpiä klassiseksi shakiksi.
-lesson.talk.no_clock = Minun kanssani kello ei ole käytössä. Mieti niin kauan kuin tarvitset.
-lesson.talk.touch = Oikeassa pelissä, jos kosket omaan nappulaasi, sinun on siirrettävä se.
-lesson.talk.touch_mine = Jos kosket minun nappulaani, sinun on lyötävä se, jos se on mahdollista.
-lesson.talk.adjust = Jos haluat suoristaa nappulaa siirtämättä sitä, sano ensin ”korjaan”.
-lesson.talk.release = Kun päästät irti nappulasta uudessa ruudussa, siirto on tehty.
-lesson.talk.sheet = Turnauksissa molemmat pelaajat kirjaavat jokaisen siirron {@}pöytäkirjaan.
-# {move:letters} shows the Finnish scoresheet letters ("Rf3"), which is what this line teaches.
-lesson.talk.notation = Siirrosta kirjoitetaan nappulan kirjain ja ruutu, esimerkiksi {move:letters}. Sotilaan siirrosta kirjoitetaan vain ruutu.
-lesson.talk.robot = Robottisi kirjaa siirtosi puolestasi. Nopeissa peleissä kirjaaminen ei ole pakollista.
+lesson.talk.real = Kerron, miten pelimme toimivat.
+lesson.talk.no_clock = Minun kanssani ei ole kelloa eikä vahvuuslukua. Mieti niin kauan kuin tarvitset.
+lesson.talk.touch = Nappula, johon kosket, on siirrettävä, joten katso ensin, kosketa sitten.
 lesson.talk.handshake = Pelit alkavat ja päättyvät kättelyyn. Se tarkoittaa: hyvä peli ja kiitos.
 lesson.talk.polite = Voitosta tai tappiosta riippumatta pysy kohteliaana, äläkä koskaan häiritse vastustajaa, kun hän miettii.
-lesson.talk.tips = Kolme vinkkiä peleihisi: {@}hallitse keskustaa, {@2}kehitä ratsusi ja lähettisi ja {@3}linnoittaudu ajoissa.
+lesson.talk.help = Peleissämme autan sinua. Jos jokin nappulasi on uhattuna tai suojaamatta, kerron siitä.
+lesson.talk.help_back = Suuren virheen jälkeen näytän, miksi se meni pieleen, ja tarjoudun perumaan siirtosi.
+lesson.talk.help_skip = Ja jos puhun liikaa, paina välilyöntiä: vaikenen.
 # The level name is that of assets/i18n/fi.lang (coach.level.1.name).
-lesson.talk.next = Kun olet valmis, valitse ”Ensiaskeleet”. Pelaan lempeästi ja autan sinua jokaisen virheen jälkeen.
+lesson.talk.next = Kun olet valmis, pelaa Ensiaskeleet. Pelaan lempeästi.
 lesson.talk.welcome = Tervetuloa shakin pariin! Kätellään.

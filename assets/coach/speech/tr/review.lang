@@ -854,6 +854,12 @@ tip.centre.b2 = Merkez için savaş: {sq} gibi kareler önemli.
 tip.centre.b2.2 = Merkezi bana bırakıyorsun. {sq} karesine bak.
 tip.centre.b3 = Merkez için mücadele etmiyorsun; {sq} karesi benim.
 tip.centre.b3.2 = Merkez için mücadele et, {sq} karesinin çevresinde.
+# A reminder once per game at levels 1-2 when no knight or bishop has left its home square by the
+# player's fifth move ({your} = a knight to start with).
+tip.develop.b1 = Atların ve fillerin hâlâ evinde. Mesela {your:acc} oyuna sok.
+tip.develop.b1.2 = Gelişme zamanı! Küçük taşların hâlâ evinde. {your:acc} dene.
+tip.develop.b2 = Hafif taşlarından hiçbiri henüz hareket etmedi. {your:acc} ve arkadaşlarını çıkar.
+tip.develop.b2.2 = Taşların hâlâ uykuda. {your:ins} başla.
 # Endgame technique tips.
 tip.mate_technique.b1 = Tek başına bir şah kaldığında onu kenara it, sonra mat et.
 tip.mate_technique.b1.2 = İpucu: şahımı kenara doğru sıkıştır. Kendi şahını da yakın tut.
@@ -930,12 +936,50 @@ praise.excellent.b4.2 = Mükemmel.
 praise.excellent.b4.3 = Güzel, {move} isabetli.
 praise.castle.b1 = Güzel! Rok attın. Şahın artık daha güvende.
 praise.castle.b1.2 = Güzel rok! Şahın güvenli bir köşeye saklandı.
+praise.castle.b2 = Güzel, rok attın. Şah güvende ve kale oyuna katılıyor.
+praise.castle.b2.2 = Rok: güvenli bir şah ve oyundaki bir kale. Aferin.
+praise.castle.b3 = Güzel: rok attın, şah güvende.
+praise.castle.b3.2 = Erken rok. Akıllıca.
 praise.saved.b1 = Güzel! Taşını kurtardın.
 praise.saved.b1.2 = Aferin, onu güvenli bir yere çektin.
+praise.saved.b2 = Güzel, o taş saldırı altındaydı ve onu uzaklaştırdın.
+praise.saved.b2.2 = İyi fark ettin. Taşı kurtardın.
+praise.saved.b3 = Güzel: saldırı altındaki taşı güvene aldın.
+praise.saved.b3.2 = İyi fark ettin. Taş tehlikedeydi.
+# A habit named: the player's move dealt with what the coach attacked (the coach's last threat).
+praise.check_threat.b1 = Güzel! Hamlemin neye saldırdığını gördün ve çaresine baktın.
+praise.check_threat.b1.2 = Aferin! Oynamadan önce tehdidimi kontrol ettin.
+praise.check_threat.b1.3 = Evet! Neye saldırdığıma baktın. Bu harika bir alışkanlık.
+praise.check_threat.b2 = Güzel: tehdidimi gördün ve karşıladın.
+praise.check_threat.b2.2 = Hamlemin neye saldırdığını kontrol ettin. İyi alışkanlık.
+praise.check_threat.b2.3 = Bu, tehdidimi karşılıyor. İyi fark ettin.
+# A piece of the player's was attacked and the move defended it.
+praise.protect.b1 = Güzel! {your} saldırı altındaydı, şimdi korunuyor.
+praise.protect.b1.2 = Aferin! {your:acc} ben alamadan önce korudun.
+praise.protect.b2 = Güzel: {your} saldırı altındaydı ve onu korudun.
+praise.protect.b2.2 = İyi fark ettin. {your} artık güvende.
+# A minor piece brought out from its first square in the opening.
+praise.develop.b1 = Güzel! Bir taşı oyuna çıkardın. Taşlar orada daha çok iş görür.
+praise.develop.b1.2 = Güzel! Taşlarını erken çıkarmak iyi bir alışkanlık.
+praise.develop.b2 = Güzel, bir taşını geliştirdin. Diğerlerini de çıkar.
+praise.develop.b2.2 = Aferin: taşlarını erken geliştir.
 praise.book.b1 = Güzel, bu bilinen bir açılış hamlesi.
 praise.book.b1.2 = Güzel, güçlü oyuncular da böyle başlar.
 
 # ---- The coach's own threats (levels 1-2, before the player moves) ------------------------------
+# The first threat of a game at levels 1-2 is asked about first, nothing pointed at.
+threat.ask.b1 = Son hamlem bir tehdit oluşturdu. Taşlarından hangisinin tehlikede olduğunu görebiliyor musun?
+threat.ask.b1.2 = Tahtaya bak. Son hamlem sana ait bir şeye saldırıyor. Bulabilir misin?
+threat.ask.b1.3 = Dur, oynamadan önce: son hamlem bir tehdit. Taşlarından hangisi tehlikede?
+threat.ask.b2 = Son hamlem bir tehdit oluşturdu. Ne olduğunu görebiliyor musun?
+threat.ask.b2.2 = Bir bak: son hamlem neye saldırıyor?
+threat.ask.b2.3 = Az önce bir tehdit oluşturdum. Bulabilir misin?
+# The same when the threat is a checkmate.
+threat.ask_mate.b1 = Son hamlem şahına bir tehdit. Ne yapmak istediğimi görebiliyor musun?
+threat.ask_mate.b1.2 = Dikkat et: büyük bir şey planlıyorum. Ne yapmak istediğimi görebiliyor musun?
+threat.ask_mate.b1.3 = Son hamleme bak. Ciddi bir şey tehdit ediyorum. Görebiliyor musun?
+threat.ask_mate.b2 = Son hamlem ciddi bir tehdit. Ne yapmak istediğimi görebiliyor musun?
+threat.ask_mate.b2.2 = Son hamleme bak: büyük bir şey tehdit ediyor. Görebiliyor musun?
 # A mate threat ({sq} = where it would mate, pointed at at level 1; {my} = the piece).
 threat.mate.b1 = Dikkat! {sq} karesinde şah mat tehdidim var.
 threat.mate.b1.2 = Dikkat et: {my} {sq} karesine gitmek istiyor. Bu şah mat olurdu.
@@ -943,6 +987,9 @@ threat.mate.b1.3 = {sq} karesine bak. Oraya ulaşırsam şah mat!
 threat.mate.b2 = Dikkat, mat tehdidim var.
 threat.mate.b2.2 = Dikkat et: {sq} karesinde bir mat tehdidi var.
 threat.mate.b2.3 = İyi bak: şah mat tehdidim var.
+threat.mate.b3 = Dikkat, {sq} karesinde mat tehdidim var.
+threat.mate.b3.2 = Mat tehdidi var: {my} {sq} karesine gitmek istiyor.
+threat.mate.b3.3 = Dikkat et: şah mat tehdit ediyorum.
 # A threat on a piece ({my} = my attacker, pointed at at level 1; {your} = the target, pointed at).
 threat.piece.b1 = Bak: {my} {your:dat} saldırıyor.
 threat.piece.b1.2 = Dikkat! {your}, {my:gen} saldırısı altında.
@@ -950,6 +997,21 @@ threat.piece.b1.3 = Dikkat et, {my} {your:acc} almak istiyor.
 threat.piece.b2 = {your:dat} dikkat et.
 threat.piece.b2.2 = {your} saldırı altında.
 threat.piece.b2.3 = {your:dat} göz kulak ol.
+threat.piece.b3 = {my} {your:dat} saldırıyor ve onu almak malzeme kazandırır.
+threat.piece.b3.2 = {your} tehlikede: {my} onu almakla tehdit ediyor.
+threat.piece.b3.3 = Dikkat: son hamlem {your:dat} saldırıyor.
+# A fork the coach's move sets up (level 2): {my} on {sq} attacks {t1} and {t2}.
+threat.fork.b2 = {sq} karesindeki {my}, {t1:dat} ve {t2:dat} aynı anda saldırıyor. Bu bir çatal!
+threat.fork.b2.2 = Dikkat, çatal: {my}, {t1:dat} ve {t2:dat} saldırıyor.
+threat.fork.b2.3 = {my}, {t1:acc} ve {t2:acc} çatala alıyor. İkisini birden kolayca kurtaramazsın.
+# A pin (level 2): {my} on {sq} holds {your} in front of {t1}, the piece behind it.
+threat.pin.b2 = {sq} karesindeki {my}, {your:acc} {t1:gen} önünde açmazda tutuyor. Oynarsa {t1:acc} alırım.
+threat.pin.b2.2 = Dikkat: {your}, {my:gen} açmazında. Oynarsa {t1} düşer.
+threat.pin.b2.3 = {your} açmazda: giderse {my} {t1:acc} alır.
+# Level 3: the position has one good move only.
+threat.only.b3 = Bu kritik bir pozisyon: yalnızca tek hamle gerçekten iyi. Acele etme.
+threat.only.b3.2 = Dikkat, burada tek bir iyi hamle var. Önce her şeye bak.
+threat.only.b3.3 = Yavaşla: bu pozisyonda çoğu hamle ters gider.
 threat.punish.b1 = Son hamlem bir hataydı. Bunu cezalandırabilir misin?
 threat.punish.b1.2 = Hımm, sanırım bir hata yaptım. Bulabilir misin?
 
@@ -965,6 +1027,8 @@ tb.hint.mate_missed.b1 = Şahıma bak. Onu mat edebilir misin?
 tb.hint.mate_missed.b1.2 = Önce şah çeken hamleleri dene. Belki bir şah mat vardır!
 tb.hint.general.b1 = Acele etme ve bütün tahtaya bak.
 tb.hint.general.b1.2 = Daha güvenli bir hamle bulmaya çalış.
+tb.hint.b3 = Cevabımın taşlarından hangisine saldırdığına bak.
+tb.hint.b3.2 = Oynamadan önce cevabımın neye saldıracağına bak.
 # The retry.
 tb.fixed.b1 = Çok daha iyi!
 tb.fixed.b1.2 = Evet, bu daha iyi!
@@ -972,6 +1036,13 @@ tb.fixed.b1.3 = Güzel, bu çok daha iyi oldu.
 tb.fixed = Bu daha iyi.
 tb.fixed.2 = Daha iyi.
 tb.fixed.3 = İyi düzeltme.
+# After a good retry of a move taken back for a named fault: one line naming the habit ({theme}, no full stop).
+tb.why.b1 = Bir dahaki sefere hatırla: {theme}.
+tb.why.b1.2 = İyi bir alışkanlık: {theme}.
+tb.why.b2 = Buradaki ders: {theme}.
+tb.why.b2.2 = Yardımı dokunan şey: {theme}.
+tb.why.b3 = Hatırlamaya değer: {theme}.
+tb.why.b3.2 = Edinilecek alışkanlık: {theme}.
 tb.same = Yine aynı hamle mi? Peki, görelim.
 tb.same.2 = Bu hamleyi seviyorsun. Oynayıp görelim.
 # The retry after a hint-only offer is the move the coach had in mind.
@@ -983,3 +1054,30 @@ tb.found.2 = Aynen, işte bu.
 # where the offer would have been).
 tb.none_left = Maalesef bu oyunda geri alma hakkın kalmadı.
 tb.none_left.2 = Bu oyunda hiç geri alma hakkın kalmadı.
+
+# ---- Trying the critical position again (levels 1-3) ----------------------------------------------
+# The board is set to the position before the game's biggest mistake; {best} is the better move.
+retry.task.b1 = O ana geri dönelim. Daha iyi bir hamle bulabilir misin?
+retry.task.b1.2 = Pozisyon yine karşında. Daha iyi bir hamle bulabilir misin?
+retry.task.b2 = Bu, büyük hatandan önceki pozisyon. Daha iyi bir hamle bul.
+retry.task.b2.2 = O ana bir daha bakalım. Onun yerine ne oynardın?
+retry.task.b3 = Bu, kritik hamleden önceki pozisyon. Daha iyi hamleyi bul.
+retry.task.b3.2 = Kritik ana dönelim. Daha iyi hamle hangisi?
+retry.again.b1 = Bu değil. Bir daha bak.
+retry.again.b1.2 = Henüz o değil. Tekrar dene.
+retry.again.b2 = Bu değil. Bütün tahtaya bak.
+retry.again.b2.2 = Henüz değil. Başka bir hamle dene.
+retry.again.b3 = Bu değil. Cevabımın ne yapacağına bak.
+retry.again.b3.2 = Yine değil. En iyi cevabımı düşün.
+retry.found.b1 = Evet! Daha iyi hamle bu. Aferin!
+retry.found.b1.2 = Buldun! Bu çok daha iyi.
+retry.found.b2 = Evet, bu işe yarıyor. Aferin.
+retry.found.b2.2 = İşte fikir bu. Güzel iş.
+retry.found.b3 = Doğru, bu sağlam. Aferin.
+retry.found.b3.2 = İşte bu. İyi buldun.
+retry.reveal.b1 = Daha iyi hamle şu: {best}. İzle.
+retry.reveal.b1.2 = Göstereyim, daha iyi hamle: {best}.
+retry.reveal.b2 = Daha iyi hamle şuydu: {best}. Bak.
+retry.reveal.b2.2 = İşte: {best}.
+retry.reveal.b3 = Daha iyi hamle şuydu: {best}.
+retry.reveal.b3.2 = Hamle şuydu: {best}.

@@ -7,15 +7,23 @@
 # "Partie je vzdaná").
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Ahoj! Zahrajeme si přátelskou partii. Kdykoli se něco pokazí, pomůžu ti.
+event.greet.l1 = Ahoj! Zahrajeme si přátelskou partii. Řeknu ti, když bude některá tvá figura v nebezpečí.
 event.greet.l1.2 = Zdravím tě! Budu hrát zlehka a ukážu ti, na co si dávat pozor.
 event.greet.l1.3 = Vítej! Nespěchej: řeknu ti, když bude některá figura v nebezpečí.
-event.greet.l2 = Ahoj! Pojďme hrát. Jakmile se objeví vidlička nebo vazba, ukážu ti ji.
+event.greet.l1.first = Ahoj! Před každým tahem se ptej: je moje figura v bezpečí? Na co útočí můj tah? Co mi hrozí? Budu ti to připomínat.
+event.greet.l1.first.2 = Tvoje první opravdová partie! Před každým tahem: je moje figura v bezpečí, na co útočí, co hrozí? Připomenu ti to.
+event.greet.l2 = Ahoj! Pojďme hrát. Jestli můj tah připraví vidličku nebo vazbu, řeknu ti to.
 event.greet.l2.2 = Zdravím tě! Vyvíjej figury a drž krále v bezpečí. Průběžně ti budu pomáhat.
 event.greet.l2.3 = Vítej zpátky u šachovnice! Hlídej vidličky a vazby: díky nim se vyhrávají partie.
-event.greet.l3 = Ahoj! Zahrajeme si opravdovou partii. Budu komentovat tvoje plány a větší chyby.
+event.greet.l3 = Ahoj! Zahrajeme si opravdovou partii. Upozorním tě na velké hrozby a vysvětlím větší chyby.
 event.greet.l3.2 = Zdravím tě! Promysli si plán pro své figury. Řeknu ti, když ti v tahu něco unikne.
-event.greet.l3.3 = Hrajme! Ukážu ti jediné tahy a upozorním tě na tahy, které nevycházejí.
+event.greet.l3.3 = Hrajme! Řeknu ti, když vychází jen jeden tah a když tah nevychází.
+event.greet.l1.theme = Vítej zpátky! Tip z minulé partie: {theme}. Mysli na to i dnes.
+event.greet.l1.theme.2 = Ahoj znovu! Pamatuj na tip z minulé partie: {theme}. Pomůžu ti.
+event.greet.l2.theme = Vítej zpátky! Nápad z minulé partie: {theme}. Uvidíme, jak to půjde dnes.
+event.greet.l2.theme.2 = Ahoj znovu! Na co pamatovat z minulé partie: {theme}.
+event.greet.l3.theme = Vítej zpátky! Téma minulé partie: {theme}. Mysli na to i dnes.
+event.greet.l3.theme.2 = Ahoj znovu! Z minulé partie: {theme}. Uvidíme, jak to půjde dnes.
 event.greet.l4 = Ahoj! Tentokrát budu hodnotit pozici a ukazovat ti lepší kandidátní tahy.
 event.greet.l4.2 = Hrajme. Po chybě ti řeknu, co bylo přesnější.
 event.greet.l4.3 = Zahrajeme si partii jako v klubu? Ozvu se, když se změní hodnocení.
@@ -35,9 +43,9 @@ event.colour.black.2 = Tentokrát hraješ černými: táhnu první.
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names of assets/i18n/cs.lang (coach.level.<n>.name): První kroky, Začátečník, Mírně
 # pokročilý, Klubový hráč, Silný klubový hráč, Expert.
-event.level.l1 = První kroky: hraju mírně a každou chybu vysvětlím jednoduchými slovy.
-event.level.l2 = Začátečník: hraju o něco silněji a pojmenovávám jednoduché taktické motivy, jako jsou vidličky a vazby.
-event.level.l3 = Mírně pokročilý: mluvím o plánech a pěšcové struktuře a ukazuju krátké varianty.
+event.level.l1 = První kroky: hraju mírně. Řeknu ti, když je některá tvá figura napadená a bez krytí, a velké chyby vysvětlím jednoduchými slovy.
+event.level.l2 = Začátečník: hraju o něco silněji. Varuju tě před vidličkami, vazbami a útoky na tvou dámu a připomenu ti vyvést figury.
+event.level.l3 = Mírně pokročilý: varuju tě jen před matem a útoky na tvou dámu a když vychází jen jeden tah. Chyby ti pořád vysvětlím.
 event.level.l4 = Klubový hráč: udávám hodnocení v pěšcích a navrhuju kandidátní tahy.
 event.level.l5 = Silný klubový hráč: krátké komentáře, a když na tom záleží, delší varianty.
 event.level.l6 = Expert: hraju naplno a komentuju jen kritické momenty.
@@ -109,5 +117,7 @@ event.end.handshake = Podáme si ruce.
 # nominative).
 event.lesson.resume = Vítej zpátky! Pokračujeme kapitolou „{chapter}“.
 event.lesson.resume.2 = Zase spolu! Minule jsme skončili u kapitoly „{chapter}“.
+event.lesson.start = Začneme kapitolou „{chapter}“.
+event.lesson.start.2 = Začínáme kapitolou „{chapter}“.
 event.lesson.next = Dál: {chapter}.
 event.lesson.next.2 = A teď: {chapter}.

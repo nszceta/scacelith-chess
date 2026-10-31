@@ -14,6 +14,11 @@
 # Speech says "le mat" in the singular ("mat" is respelled for the voice, "mats" is not).
 # Typography as in the other French files: a no-break space before : ; ? ! and typographic apostrophes.
 
+# ---- Practising the theme of the last game ({theme}) -----------------------------------------------
+ch.practise = Depuis ta dernière partie : {theme}. Cette série est faite pour ça.
+ch.practise.2 = Ta dernière partie avait une chose à travailler : {theme}. Entraînons-nous.
+ch.practise.3 = Le conseil de la dernière partie était : {theme}. Voici de l’entraînement.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Mat en un coup. {n:position}, et à chaque fois, un seul coup fait mat. Regarde tous les échecs.
 ch.intro.mate2 = Mat en deux coups. {n:position} : ton premier coup doit me laisser sans défense, puis tu mates.

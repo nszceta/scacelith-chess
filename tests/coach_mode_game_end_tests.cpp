@@ -101,7 +101,7 @@ TEST(coach_mode_game_end_play_again_then_main_menu) {
     app->frames(30);
     game::Settings& s = game::settings();
     // A long history: the oldest games go once the new one is added.
-    s.coachHistory.assign(size_t(game::Settings::kCoachHistoryMax), game::Settings::CoachGame{2, 1, 80.0});
+    s.coachHistory.assign(size_t(game::Settings::kCoachHistoryMax), coach::GameRecord{2, 1, 80.0});
     REQUIRE(app->clickLabel("Play again"));
     REQUIRE(coachtest::waitLog(*app, log, "New game (coach): level 4, human plays Black", 600));
     REQUIRE(coachtest::waitEngine(*app, [&] { return log.has("--play-then: resign"); }, 30.0));

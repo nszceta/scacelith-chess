@@ -5,15 +5,26 @@
 # Check, checkmate and praise of good moves are review lines (review.lang).
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Hello! Let's play a friendly game. I'll help you whenever something goes wrong.
+event.greet.l1 = Hello! Let's play a friendly game. I'll tell you when one of your pieces is in danger.
 event.greet.l1.2 = Hi! I'll play gently and show you what to watch out for.
 event.greet.l1.3 = Welcome! Take your time: I'll tell you when a piece is in danger.
-event.greet.l2 = Hello! Let's play. When a fork or a pin appears, I'll show it to you.
+# The first level 1 game after the rules lesson: recalls the three questions of its "before you move" chapter.
+event.greet.l1.first = Hello! Before each move, ask: is my piece safe? What does my move attack? What is my opponent threatening? I'll remind you.
+event.greet.l1.first.2 = Your first real game! Before each move: is my piece safe, what does it attack, what is the threat? I'll remind you.
+event.greet.l2 = Hello! Let's play. If my move sets up a fork or a pin, I'll tell you.
 event.greet.l2.2 = Hi! Bring out your pieces and keep your king safe. I'll help along the way.
 event.greet.l2.3 = Welcome back to the board! Watch for forks and pins: they win games.
-event.greet.l3 = Hello! Let's play a real game. I'll comment on your plans and on the bigger mistakes.
+event.greet.l3 = Hello! Let's play a real game. I'll warn you of the big threats and explain the bigger mistakes.
 event.greet.l3.2 = Hi! Think about a plan for your pieces. I'll tell you when a move misses something.
-event.greet.l3.3 = Let's play! I'll point out the only moves and the moves that go wrong.
+event.greet.l3.3 = Let's play! I'll tell you when only one move works, and when a move goes wrong.
+# Levels 1-3, when the appraisal of the last game named a theme: this greeting replaces the one above (except the
+# first game after the rules lesson). {theme} is a phrase of appraisal.lang (theme.*), "watching for double attacks".
+event.greet.l1.theme = Welcome back! Last game's tip was {theme}. Keep it in mind today.
+event.greet.l1.theme.2 = Hello again! Remember last game's tip: {theme}. I'll help you.
+event.greet.l2.theme = Welcome back! Last game's idea was {theme}. Let's see how it goes today.
+event.greet.l2.theme.2 = Hello again! Something to remember from last game: {theme}.
+event.greet.l3.theme = Welcome back! Last game's theme was {theme}. Keep it in mind today.
+event.greet.l3.theme.2 = Hi again! From the last game: {theme}. Let's see how it goes today.
 event.greet.l4 = Hello! This time I'll give evaluations and show you the better candidate moves.
 event.greet.l4.2 = Let's play. After a mistake I'll tell you what was more precise.
 event.greet.l4.3 = Ready for a club game? I'll comment when the evaluation changes.
@@ -31,9 +42,9 @@ event.colour.black = I have White, so I'll start.
 event.colour.black.2 = You play Black this time: I move first.
 
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
-event.level.l1 = First steps: I play gently and explain every mistake in simple words.
-event.level.l2 = Beginner: I play a little stronger, and I name simple tactics like forks and pins.
-event.level.l3 = Improver: I talk about plans and pawn structure, and I show short lines.
+event.level.l1 = First steps: I play gently. I tell you when one of your pieces is attacked and unprotected, and I explain big mistakes in simple words.
+event.level.l2 = Beginner: I play a little stronger. I warn you about forks, pins and attacks on your queen, and I remind you to bring your pieces out.
+event.level.l3 = Improver: I warn you only about mate and attacks on your queen, and when only one move works. I still explain your mistakes.
 event.level.l4 = Club player: I give evaluations in pawns and suggest candidate moves.
 event.level.l5 = Strong club player: short comments, and longer lines when it matters.
 event.level.l6 = Expert: I play my best and comment only on the critical moments.
@@ -74,7 +85,7 @@ event.encourage.mistake.3 = That happens to every player. Let's keep going.
 event.encourage.behind = Don't give up: look for chances, and make me work for it.
 event.encourage.behind.2 = Keep fighting. Positions like this can still turn around.
 event.encourage.behind.3 = Stay calm and look for my weaknesses.
-# The player has played several good moves in a row.
+# The player has played several good moves in a row, or just dealt with the coach's threat.
 event.encourage.well = You're checking my threats before you move. Well done.
 event.encourage.well.2 = Careful, solid moves. Keep it up.
 event.encourage.well.3 = You're thinking well today.
@@ -103,5 +114,7 @@ event.end.handshake = Let's shake hands.
 # {chapter} = the chapter's title (lesson.title.* in lesson.lang).
 event.lesson.resume = Welcome back! Let's continue with {chapter}.
 event.lesson.resume.2 = Hello again! We stopped at {chapter}.
+event.lesson.start = Let's start with {chapter}.
+event.lesson.start.2 = We begin with {chapter}.
 event.lesson.next = Next: {chapter}.
 event.lesson.next.2 = Now, {chapter}.

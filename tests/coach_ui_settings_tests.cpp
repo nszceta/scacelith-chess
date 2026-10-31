@@ -76,9 +76,9 @@ TEST(coach_ui_settings_challenge_command_line) {
 TEST(coach_ui_settings_codecs_when_memory_runs_out) {
     if (!allocfail::available()) SKIP("AddressSanitizer build: no simulated out of memory");
     allocfail::Reset reset;
-    const std::vector<game::Settings::CoachGame> games = {{3, 1, 81.44}, {2, -1, -1.0}, {0, 0, 55.0}, {6, 1, 99.0}};
+    const std::vector<coach::GameRecord> games = {{3, 1, 81.44}, {2, -1, -1.0}, {0, 0, 55.0}, {6, 1, 99.0}};
     CHECK(throwsOutOfMemory([&] { game::encodeCoachHistory(games); }));
-    CHECK_EQ(game::encodeCoachHistory(games), std::string("3:1:81.4 2:-1:- 0:0:55.0 6:1:99.0"));
+    CHECK_EQ(game::encodeCoachHistory(games), std::string("3:1:81.4:-:-:0 2:-1:-:-:-:0 0:0:55.0:-:-:0 6:1:99.0:-:-:0"));
     CHECK(throwsOutOfMemory([] { game::decodeCoachHistory("3:1:81.4 2:-1:- 0:0:55.0"); }));
     CHECK_EQ(game::decodeCoachHistory("3:1:81.4 2:-1:- 0:0:55.0").size(), size_t(3));
     const std::vector<std::string> ids = {"mate1", "backrank", "discovered", "intermezzo"};

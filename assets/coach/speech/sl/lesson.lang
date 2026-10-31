@@ -16,7 +16,9 @@
 # ---- Chapter titles (said inside "Nadaljujva s poglavjem: {chapter}.") -------------------------------
 # Lower-case nominatives (see event.lesson.* in events.lang).
 lesson.title.welcome = šahovnica
-lesson.title.pieces = kako se premikajo figure
+lesson.title.pieces_lines = kako se premikajo trdnjava, lovec in dama
+lesson.title.pieces_steps = kako se premikajo kralj, skakač in kmet
+lesson.title.values_setup = vrednosti figur in prve poteze
 lesson.title.safety = varno in tvegano jemanje
 lesson.title.check = šah
 lesson.title.mate = mat
@@ -28,7 +30,8 @@ lesson.title.promotion = promocija
 lesson.title.draws = pat in remi
 lesson.title.before_move = pred potezo
 lesson.title.opening = otvoritev
-lesson.title.etiquette = rating, ura in olika v pravih partijah
+lesson.title.review = hiter pregled
+lesson.title.etiquette = kako potekajo najine partije
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
 # After the coach demonstrated the solution.
@@ -99,7 +102,7 @@ lesson.rook.king = To je tvoj kralj. Uporabi {your:refl_acc} v kotu.
 lesson.rook.ok = Vzeto! {my} zapusti šahovnico.
 # Pieces don't jump
 lesson.jump.blocked = Figure ne morejo preskakovati drugih figur. Tvoj kmet na polju {sq} zapira pot trdnjavi.
-lesson.jump.knight = Preskakovati zna samo skakač. Kmalu ga spoznava.
+lesson.jump.all = Enako velja za lovca in damo: nobena figura, razen skakača, ne preskakuje drugih.
 # Bishop
 lesson.bishop.intro = To je {your}. Premika se diagonalno, poljubno daleč.
 lesson.bishop.colour = Lovec vedno ostane na poljih iste barve.
@@ -144,7 +147,12 @@ lesson.pawncap.ok = Tako je! Naravnost se premika, diagonalno jemlje.
 lesson.values.pawn = Vsaka figura ima svojo vrednost v točkah. Kmet je vreden eno točko.
 lesson.values.pieces = Skakač ali {@}lovec: tri. {@2}Trdnjava: pet. {@3}Dama: devet.
 lesson.values.king = Kralj je neprecenljiv: nikoli ga ne moreš dati.
-lesson.values.trade = Trudi se, da nikoli ne daš figure za manj, kot je vredna.
+lesson.values.trade = Ne menjaj večje figure za manjšo, razen če pridobiš več, kot izgubiš.
+lesson.values.two = Tvoj skakač napada dve moji figuri: na polju {sq} in na polju {sq2}. Nobene ne brani nobena figura.
+lesson.values.ask = Vzemi tisto, ki je vredna več!
+lesson.values.small = To je kmet, vreden eno točko. Tudi {my} je bil{my:ag} prost{my:ag} in je vred{my:ag_en} devet.
+lesson.values.look = Poglej, kaj napada tvoj skakač, in vzemi figuro, ki je vredna več.
+lesson.values.ok = Da! Dama je vredna devet. Kadar sta dve figuri prosti, vzemi večjo.
 lesson.setup.corners = Vsaka partija se začne takole: trdnjave v {@}kotih, nato {@2}skakači, nato {@3}lovci.
 lesson.setup.queen = Dama stoji na polju svoje barve: tvoja dama je na svetlem polju.
 lesson.setup.king = Kralj stoji poleg nje. Beli vedno začne.
@@ -165,6 +173,18 @@ lesson.safety.gave = Tvoja dama, vredna devet, je šla za mojega skakača, vredn
 lesson.safety.other = Poskusi z drugo figuro.
 lesson.safety.look = Poišči figuro, ki je nič ne brani.
 lesson.safety.ok = Odlično! Vedno se vprašaj: ali je ta figura zaščitena?
+lesson.safety.pawns = Tvoja dama napada dva moja kmeta: na polju {sq} in na polju {sq2}.
+lesson.safety.pawns_ask = Vzemi kmeta, ki ga je varno vzeti.
+lesson.safety.gave_pawn = Tvoja dama, vredna devet, je šla za kmeta, vrednega eno točko.
+lesson.safety.pawns_other = Tudi kmeta lahko kdo brani. Poskusi drugega kmeta.
+lesson.safety.pawns_ok = Tako je! Nikoli ne tvegaj dame za zaščitenega kmeta.
+lesson.safety.small = Zdaj obratno. {my} je zaščiten{my:ag}, a tvoj kmet {my:cl_acc} napada.
+lesson.safety.small_count = Če vzameš damo, moj {@}kmet vzame tvojega nazaj. Daš eno točko, pridobiš devet.
+lesson.safety.small_ask = Vzemi mojo damo s pravo figuro!
+lesson.safety.small_other = Vzemi jo raje s kmetom: to je najcenejša figura, ki to lahko stori.
+lesson.safety.small_look = Tvoj kmet napada mojo damo. Vzemi jo z njim.
+lesson.safety.small_ok = Da! Majhna figura sme vzeti veliko, tudi zaščiteno: izgubiš eno točko, pridobiš devet.
+lesson.safety.count = Pred vsakim jemanjem preštej, kaj pridobiš in kaj lahko izgubiš nazaj.
 
 # ---- Chapter 3: check and getting out of check -----------------------------------------------------------------
 lesson.danger.rank = Moja trdnjava nadzoruje vso drugo vrsto.
@@ -186,6 +206,11 @@ lesson.capture.check = Moja dama daje šah, tik ob tvojem kralju.
 lesson.capture.ask = Vzemi napadalca!
 lesson.capture.king_ok = Tako je! Moja dama ni imela branilca, zato jo je tvoj kralj lahko vzel.
 lesson.capture.knight_ok = Tako je! Tvoj skakač je odstranil napadalca.
+lesson.check.open.ask = Spet šah! Tokrat se iz njega reši, kakor koli želiš.
+lesson.check.open.king = Kralj se je umaknil. Možna je bila tudi zapora z drugo figuro ali jemanje moje trdnjave s tvojim skakačem.
+lesson.check.open.block = Napad je zaprt. Možen je bil tudi umik kralja ali jemanje moje trdnjave s tvojim skakačem.
+lesson.check.open.take = Moja trdnjava, ki daje šah, je vzeta. Možen je bil tudi umik kralja ali zapora napada.
+lesson.check.open.hint = Tri možnosti: {@}umakneš kralja, {@2}zapreš linijo ali {@3}vzameš mojo trdnjavo s skakačem.
 
 # ---- Chapter 4: checkmate ------------------------------------------------------------------------------------
 lesson.mate1.what = Mat: kralj je v šahu in nima izhoda. S tem je partija dobljena.
@@ -193,16 +218,34 @@ lesson.mate1.stuck = Moj kralj je ujet za {@}svojimi kmeti.
 lesson.mate1.ask = Daj mi mat v eni potezi!
 lesson.mate1.wrong = Skoraj! Daj šah na moji zadnji vrsti, kjer moj kralj ne more pobegniti.
 lesson.mate1.ok = Mat! To je mat na zadnji vrsti. Zapomni si ga!
+lesson.mate1.king = Tvoj kralj naj ostane, kjer je. Za šah uporabi trdnjavo.
+lesson.mate1.why = Vidiš? Trdnjava pokriva {@}vso mojo zadnjo vrsto, {@2}moji kmeti pa zapolnjujejo polja pred mojim kraljem.
 lesson.mate2.ask = Tvoj kralj in dama delujeta skupaj. Daj mi mat v eni potezi.
 lesson.mate2.wrong = Poišči šah, po katerem moj kralj nima nobenega polja več.
 lesson.mate2.ok = Mat! Tvoj kralj ščiti damo, zato je moj ne more vzeti.
 lesson.mate2.ok_rank = Mat na zadnji vrsti! Tvoj kralj pokriva vsa polja pred mojim.
+lesson.mate2.king = Tvoj kralj varuje polja ob mojem. Pusti ga tam in uporabi damo.
+lesson.mate2.half = To nadzoruje polje {sq}, a moj kralj lahko še vedno gre na polje {sq2}.
+lesson.mate2.why = Vidiš? Tvoja dama pokriva polji {sq} in {sq2}, tvoj kralj pa polja pred mojim. Moj kralj nima izhoda.
 lesson.mate3.edge = Tvoja trdnjava na sedmi vrsti drži mojega kralja na robu.
 lesson.mate3.ask = Zdaj daj mat {your:refl_with}.
 lesson.mate3.free = Šah, ampak sedma vrsta je zdaj prosta in moj kralj pobegne.
 lesson.mate3.takes = Moj kralj preprosto vzame tvojo trdnjavo.
 lesson.mate3.hint = Daj šah na zadnji vrsti s tisto trdnjavo, ki ne varuje sedme vrste.
 lesson.mate3.ok = Mat! Trdnjavi sta delovali kot lestev.
+lesson.mate3.why = Vidiš? Ena trdnjava odreže {@}sedmo vrsto, druga pa daje šah na {@2}zadnji vrsti. Moj kralj nima izhoda.
+lesson.mate4.look = Šah ni vedno mat. Poglejva, kaj se zgodi.
+lesson.mate4.ask = Daj mojemu kralju šah s trdnjavo.
+lesson.mate4.king = Tvoj kralj ostane, kjer je. Za šah uporabi trdnjavo.
+lesson.mate4.wrong = To ni šah. Tvoja trdnjava lahko napade mojega kralja z zadnje vrste.
+lesson.mate4.ok = Da, to je šah! A je tudi mat? Glej.
+lesson.mate4.after = Moj kmet na polju {sq} je mojemu kralju naredil prostor. Preden se razveseliš šaha, preštej polja, ki jih moj kralj še lahko uporabi.
+lesson.mate5.ask = Dve potezi tvoje trdnjave dasta šah, samo ena pa je mat. Preštej polja mojega kralja, nato izberi.
+lesson.mate5.king = Tvoj kralj že pokriva polji {sq} in {sq2}. Pusti ga tam in premakni trdnjavo.
+lesson.mate5.wrong = To ni šah. Poišči potezo s trdnjavo, ki napade mojega kralja.
+lesson.mate5.hint = Tvoj kralj pokriva polji {sq} in {sq2}. Kateri šah s trdnjavo vzame še polje {sq3}?
+lesson.mate5.why = Vidiš? Trdnjava pokriva polje {sq}, tvoj kralj pa drugi dve polji: moj kralj je ujet.
+lesson.mate5.ok = Mat! Polja mojega kralja so prešteta: nobenega ni ostalo.
 
 # ---- Chapter 5: castling ---------------------------------------------------------------------------------------
 lesson.castle.what = Rokada je posebna poteza, s katero spraviš kralja na varno. Kralj in trdnjava se premakneta skupaj.
@@ -219,6 +262,11 @@ lesson.castle2.bishop = Moj lovec napada polje {sq}. Zato je rokada na tej stran
 lesson.castle2.ask = Rokiraj na drugo stran.
 lesson.castle2.other = Rokiraj proti svoji drugi trdnjavi, na daminem krilu.
 lesson.castle2.ok = Pravilno! Po dolgi rokadi stoji tvoj kralj na polju {sq}.
+lesson.ep0.rule = En passant se začne z dvojnim korakom. Samo kmet, ki je {@}še doma, sme za dve polji. Kmet, ki se je {@2}že premaknil, gre po eno polje.
+lesson.ep0.rule.spoken = An pasan se začne z dvojnim korakom. Samo kmet, ki je {@}še doma, sme za dve polji. Kmet, ki se je {@2}že premaknil, gre po eno polje.
+lesson.ep0.ask = Premakni enega svojih kmetov za dve polji.
+lesson.ep0.moved = Ta kmet se je že premaknil, zato gre lahko le za eno polje. Uporabi kmeta, ki je še doma.
+lesson.ep0.ok = Prav: za dve polji sme samo kmet na začetnem polju.
 
 # ---- Chapter 6: en passant ------------------------------------------------------------------------------------
 lesson.ep.what = Posebnemu jemanju s kmetom pravimo en passant. To pomeni »mimogrede«.
@@ -231,6 +279,18 @@ lesson.ep.gone = Priložnost je mimo: jemanje en passant je mogoče samo takoj. 
 lesson.ep.gone.spoken = Priložnost je mimo: jemanje an pasan je mogoče samo takoj. Poskusiva znova.
 lesson.ep.ok = En passant! Moj kmet na polju {sq} je odstranjen.
 lesson.ep.ok.spoken = An pasan! Moj kmet na polju {sq} je odstranjen.
+lesson.ep2.old = Moj kmet na polju {sq} že dlje stoji ob tvojem. Za jemanje en passant je prepozno.
+lesson.ep2.old.spoken = Moj kmet na polju {sq} že dlje stoji ob tvojem. Za jemanje an pasan je prepozno.
+lesson.ep2.watch = Zdaj glej mojega drugega kmeta.
+lesson.ep2.ask = Dva moja kmeta stojita ob tvojem, a le eden se je pravkar premaknil za dve polji. Vzemi ga en passant!
+lesson.ep2.ask.spoken = Dva moja kmeta stojita ob tvojem, a le eden se je pravkar premaknil za dve polji. Vzemi ga an pasan!
+lesson.ep2.push = To samo potisne tvojega kmeta. Vzemi kmeta, ki se je pravkar premaknil za dve polji.
+lesson.ep2.wrong = Poišči kmeta, ki je pravkar naredil dvojni korak, in ga vzemi en passant.
+lesson.ep2.wrong.spoken = Poišči kmeta, ki je pravkar naredil dvojni korak, in ga vzemi an pasan.
+lesson.ep2.hint = Moj kmet na polju {sq} se je pravkar premaknil za dve polji. Vzemi ga en passant, na polje {sq2}.
+lesson.ep2.hint.spoken = Moj kmet na polju {sq} se je pravkar premaknil za dve polji. Vzemi ga an pasan, na polje {sq2}.
+lesson.ep2.ok = En passant! Mojega kmeta na polju {sq} ni bilo mogoče vzeti: njegova priložnost je minila.
+lesson.ep2.ok.spoken = An pasan! Mojega kmeta na polju {sq} ni bilo mogoče vzeti: njegova priložnost je minila.
 
 # ---- Chapter 7: promotion -------------------------------------------------------------------------------------
 lesson.promo.what = Ko kmet doseže zadnjo vrsto, se promovira: postane dama, trdnjava, lovec ali skakač.
@@ -239,12 +299,21 @@ lesson.promo.under = Dovoljeno! A dama je močnejša. Izberiva damo.
 lesson.promo.under_ok = V redu. Večina igralcev pa vseeno izbere damo.
 lesson.promo.push = Potisni svojega kmeta na zadnjo vrsto, na polje {sq}.
 lesson.promo.ok = Nova dama! Lahko imaš celo dve dami hkrati.
+lesson.promo2.ask = Kmet se lahko promovira tudi z jemanjem, diagonalno. Vzemi mojo trdnjavo in naredi damo!
+lesson.promo2.push = Tudi to je promocija, a moja trdnjava brani polje {sq}. Glej.
+lesson.promo2.lost = Moja trdnjava je vzela tvojo novo figuro. Najprej vzemi mojo trdnjavo.
+lesson.promo2.wrong = To ne vzame moje trdnjave. Tvoj kmet jemlje diagonalno, na polje {sq}.
+lesson.promo2.hint = Vzemi mojo trdnjavo s kmetom, na polje {sq}: promovira se, ko jemlje.
+lesson.promo2.ok = Vzeto in promovirano! Kmet lahko naredi oboje v eni potezi.
 
 # ---- Chapter 8: stalemate and draws -----------------------------------------------------------------------------
 lesson.stale.what = Na potezi sem jaz. Moj kralj ni v šahu, a {@}vsa polja okoli njega so napadena.
 lesson.stale.draw = Nimam nobene dovoljene poteze. To je pat in partija se konča z remijem.
 lesson.stale2.ask = Ko zmaguješ, pazi na pat. Daj mi mat v eni potezi, brez pata!
-lesson.stale2.wrong = Daj šah na moji zadnji vrsti, kjer moj kralj ne more pobegniti.
+lesson.stale2.wrong = Poišči šah, po katerem moj kralj nima nobenega polja. Pazi: mirna poteza me lahko spravi v pat.
+lesson.stale2.king = Tvoj kralj že pokriva polji {sq} in {sq2}. Pusti ga tam in uporabi damo.
+lesson.stale2.hint = Tvoj kralj pokriva polji {sq} in {sq2}. Daj mi šah vzdolž zadnje vrste in moj kralj nima kam.
+lesson.stale2.why = Vidiš? Moj kralj je {@}v šahu in nima prostega polja: to je mat. Brez šaha bi bil to pat.
 lesson.stale2.ok = Mat! Nasprotnemu kralju vedno pusti potezo, razen če mu daješ mat.
 lesson.draws.kings = Še drugi primeri remija: kadar nihče ne more dati mata, na primer ko ostaneta sama kralja, je partija remi.
 lesson.draws.agree = Igralca se lahko tudi dogovorita za remi.
@@ -295,29 +364,31 @@ lesson.opening.castle.wrong = Tvoj kralj je pripravljen. Rokiraj zdaj, dokler je
 lesson.opening.castle.ok = Rokirano! Tvoj kralj je na varnem, trdnjava pa vstopi v igro.
 lesson.opening.done = Središče, figure, rokada: to je dober začetek vsake partije.
 
-# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 11: review (the coach only asks; no teaching) --------------------------------------------------
+lesson.review.start = Hiter pregled, tokrat v drugačnem vrstnem redu. Ne bom razlagal: pokaži ti.
+lesson.review.promo.ask = Promoviraj tega kmeta.
+lesson.review.promo.ok = Dobro: nova dama in šah!
+lesson.review.check.ask = Tvoj kralj je v šahu. Reši se iz njega.
+lesson.review.check.ok = Šaha ni več. Dobro.
+lesson.review.castle.ask = Rokiraj kralja, na strani, kjer je to dovoljeno.
+lesson.review.castle.other = To ni rokada. Rokiraj na strani, kjer je dovoljeno.
+lesson.review.castle.ok = Rokirano, na varni strani!
+lesson.review.ep.ask = Vzemi mojega kmeta en passant.
+lesson.review.ep.ask.spoken = Vzemi mojega kmeta an pasan.
+lesson.review.ep.ok = En passant! Spomin ti dobro služi.
+lesson.review.ep.ok.spoken = An pasan! Spomin ti dobro služi.
+lesson.review.mate.ask = Daj mi mat v eni potezi.
+lesson.review.mate.ok = Mat! Pregled je končan.
+
+# ---- Chapter 12: how our games work (no clock, touch-move, handshake, and how the coach helps) ----------------
 lesson.talk.rules = Zdaj poznaš vsa šahovska pravila. Bravo!
-lesson.talk.real = Naj ti povem, kako potekajo prave partije.
-lesson.talk.elo = Igralci imajo rating, ki mu pravimo Elo. Ko zmagaš, se zviša, ko izgubiš, se zniža.
-lesson.talk.elo_gap = Zmaga proti močnejšemu igralcu prinese več točk, poraz proti šibkejšemu pa stane več.
-lesson.talk.elo_start = Tvoj rating se prikaže po petih partijah za rating. Partije s trenerjem so vadba, zato ne štejejo za rating.
-lesson.talk.clock = To je {@}šahovska ura. Vsak igralec ima svoj čas, ki teče le, ko je on na potezi.
-lesson.talk.press = Po svoji potezi pritisneš na uro z isto roko. S tem začne teči moj čas.
-lesson.talk.flag = Če ti zmanjka časa, izgubiš, razen če ti nikakor ne morem dati mata.
-lesson.talk.increment = Pet plus tri pomeni pet minut za vsakega in še tri sekunde po vsaki potezi.
-# The three speeds as the time controls of assets/i18n/sl.lang (tc.blitz / tc.rapid / tc.classical).
-lesson.talk.speeds = Kratke partije so hitropotezni šah, daljše pospešeni, najdaljše pa klasični.
-lesson.talk.no_clock = Z mano ura ne teče. Za razmislek si vzemi toliko časa, kolikor ga potrebuješ.
-lesson.talk.touch = V pravi partiji velja: če se dotakneš svoje figure, jo moraš premakniti.
-lesson.talk.touch_mine = Če se dotakneš moje figure, jo moraš vzeti, če je to mogoče.
-lesson.talk.adjust = Če želiš figuro samo poravnati, najprej reci »popravljam«.
-lesson.talk.release = Ko figuro izpustiš na novem polju, je poteza narejena.
-lesson.talk.sheet = Na turnirjih oba igralca vsako potezo zapišeta v {@}zapisnik.
-# {move:letters} shows the Slovenian scoresheet letters ("Sf3"), which is what this line teaches.
-lesson.talk.notation = Zapišemo črko figure in polje, na primer {move:letters}. Pri kmetu zapišemo samo polje.
-lesson.talk.robot = Tvoj robot zapisuje poteze namesto tebe. V hitrih partijah zapisovanje ni obvezno.
+lesson.talk.real = Naj ti povem, kako bodo potekale najine partije.
+lesson.talk.no_clock = Z mano ni ure in rating ne obstaja. Za razmislek si vzemi toliko časa, kolikor ga potrebuješ.
+lesson.talk.touch = Figuro, ki se je dotakneš, moraš premakniti, zato najprej poglej, nato se dotakni.
 lesson.talk.handshake = Partija se začne in konča s stiskom roke. To pomeni: dobra partija in hvala.
 lesson.talk.polite = Ne glede na izid ohrani vljudnost in nikoli ne moti nasprotnika, ko razmišlja.
-lesson.talk.tips = Trije nasveti za tvoje partije: {@}obvladuj center, {@2}razvij skakače in lovce ter {@3}zgodaj rokiraj.
-lesson.talk.next = Kadar želiš, izberi stopnjo »Prvi koraki«. Igral bom prizanesljivo in ti pomagal po vsaki napaki.
+lesson.talk.help = V najinih partijah ti bom pomagal. Če je katera tvoja figura napadena ali nezaščitena, ti bom povedal.
+lesson.talk.help_back = Po veliki napaki ti bom pokazal, zakaj, in ti ponudil, da vzameš potezo nazaj.
+lesson.talk.help_skip = Če preveč govorim, pritisni preslednico: nehal bom.
+lesson.talk.next = Kadar želiš, igraj stopnjo »Prvi koraki«. Igral bom prizanesljivo.
 lesson.talk.welcome = Svet šaha ti je zdaj odprt! Seziva si v roke.

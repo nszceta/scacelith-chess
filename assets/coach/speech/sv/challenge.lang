@@ -18,6 +18,10 @@
 # avdragsangrepp, avledning, lockning, mellandrag, instängd pjäs, tyst drag; "Philidors försvar" is
 # the rook-endgame defence here, as on the challenge page.
 
+# ---- Practice after the last game's theme ({theme}: an infinitive phrase with "att") --------------------
+ch.practise = Från ditt förra parti: {theme}. Den här uppsättningen är gjord för det.
+ch.practise.2 = Ditt förra parti hade en sak att jobba på: {theme}. Vi övar på det.
+ch.practise.3 = Förra partiets tips var {theme}. Här kommer lite övning.
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Matt i ett drag. Här kommer {n:position}, och varje gång sätter ett enda drag matt. Titta på varje schack.
 ch.intro.mate2 = Matt i två drag. Här kommer {n:position}: ditt första drag måste lämna mig utan försvar, sedan sätter du matt.

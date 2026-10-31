@@ -20,6 +20,11 @@
 # the formal imperative ("Nájdite únik", "Zastavte pešiaka") are quoted as titles after "Výzva", so
 # that the coach, who says "ty", does not seem to address the player formally.
 
+# ---- After a game: the challenge made for the theme of the last game ------------------------------
+ch.practise = Z tvojej poslednej partie: {theme}. Táto sada je na to vytvorená.
+ch.practise.2 = V tvojej poslednej partii bolo na čom pracovať: {theme}. Precvičme si to.
+ch.practise.3 = Rada z poslednej partie bola: {theme}. Tu je nejaký tréning.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Mat 1. ťahom. {n:position} a v každej dá mat jediný ťah. Preskúmaj všetky šachy.
 ch.intro.mate1.spoken = Mat prvým ťahom. {n:position} a v každej dá mat jediný ťah. Preskúmaj všetky šachy.

@@ -13,7 +13,9 @@
 # ---- Chapter titles (said inside "Continuăm lecția: {chapter}.") --------------------------------------
 # Lower case, with the article, always after a colon (see event.lesson.* in events.lang).
 lesson.title.welcome = tabla de șah
-lesson.title.pieces = cum se mută piesele
+lesson.title.pieces_lines = cum se mută turnul, nebunul și dama
+lesson.title.pieces_steps = cum se mută regele, calul și pionul
+lesson.title.values_setup = valoarea pieselor și primele mutări
 lesson.title.safety = capturile sigure și cele riscante
 lesson.title.check = șahul dat regelui
 lesson.title.mate = șahul mat
@@ -23,7 +25,8 @@ lesson.title.promotion = promovarea
 lesson.title.draws = patul și remiza
 lesson.title.before_move = verificarea înainte de mutare
 lesson.title.opening = deschiderea
-lesson.title.etiquette = ratingul, ceasul și bunele maniere în partidele adevărate
+lesson.title.review = o scurtă recapitulare
+lesson.title.etiquette = cum se desfășoară partidele noastre
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
 # After the coach demonstrated the solution.
@@ -93,7 +96,7 @@ lesson.rook.king = Acela e regele tău. Folosește {your}, din colț.
 lesson.rook.ok = Captură reușită! {my} iese de pe tablă.
 # Pieces don't jump
 lesson.jump.blocked = Piesele nu pot sări peste altele. Pionul tău de pe {sq} blochează drumul turnului.
-lesson.jump.knight = Doar calul poate sări. Îl vom cunoaște în curând.
+lesson.jump.all = La fel e și cu nebunul, și cu dama: nici ei nu pot sări peste alte piese.
 # Bishop
 lesson.bishop.intro = {your:dem} este {your}. Se mută pe diagonală, oricât de departe.
 lesson.bishop.colour = Un nebun rămâne mereu pe câmpuri de aceeași culoare.
@@ -138,7 +141,13 @@ lesson.pawncap.ok = Da! Drept ca să avansezi, pe diagonală ca să iei.
 lesson.values.pawn = Fiecare piesă are o valoare în puncte. Un pion valorează un punct.
 lesson.values.pieces = Un cal sau un {@}nebun, trei. Un {@2}turn, cinci. {@3}Dama, nouă.
 lesson.values.king = Regele e de neprețuit: nu-l poți da niciodată.
-lesson.values.trade = Încearcă să nu dai niciodată o piesă pe ceva ce valorează mai puțin decât ea.
+lesson.values.trade = Nu da o piesă mai mare pe una mai mică, decât dacă câștigi mai mult decât pierzi.
+# Practice: two pieces nothing defends ({sq} = the queen's square, {sq2} = the pawn's, {my} = the queen)
+lesson.values.two = Calul tău atacă două piese de-ale mele: {sq} și {sq2}. Niciuna nu e apărată.
+lesson.values.ask = Ia piesa care valorează mai mult!
+lesson.values.small = Acela e un pion, care valorează unu. Și {my} era gratis, iar ea valorează nouă.
+lesson.values.look = Uită-te la ce atacă calul tău și ia piesa care valorează mai mult.
+lesson.values.ok = Da! Dama valorează nouă. Când două piese sunt libere, ia-o pe cea mai mare.
 lesson.setup.corners = Orice partidă începe așa: turnurile în {@}colțuri, apoi {@2}caii, apoi {@3}nebunii.
 lesson.setup.queen = Dama stă pe câmpul de culoarea ei: dama ta e pe un câmp deschis la culoare.
 lesson.setup.king = Regele stă lângă ea. Albul mută întotdeauna primul.
@@ -159,6 +168,18 @@ lesson.safety.gave = Ți-ai dat dama, care valorează nouă, pe calul meu, care 
 lesson.safety.other = Încearcă cealaltă piesă.
 lesson.safety.look = Caută piesa pe care n-o apără nimic.
 lesson.safety.ok = Excelent! Întreabă-te mereu: piesa aceea e apărată?
+lesson.safety.pawns = Dama ta atacă doi pioni de-ai mei: {sq} și {sq2}.
+lesson.safety.pawns_ask = Ia pionul pe care îl poți lua fără risc.
+lesson.safety.gave_pawn = Ți-ai dat dama, care valorează nouă, pe un pion, care valorează unu.
+lesson.safety.pawns_other = Și un pion poate fi apărat. Încearcă celălalt pion.
+lesson.safety.pawns_ok = Corect! Nu-ți risca niciodată dama pentru un pion apărat.
+lesson.safety.small = Acum invers. {my} e apărată, dar pionul tău o atacă.
+lesson.safety.small_count = Dacă o iei, {@}pionul meu îl ia pe al tău înapoi. Dai un punct și câștigi nouă.
+lesson.safety.small_ask = Ia dama mea cu piesa potrivită!
+lesson.safety.small_other = Ia-o cu pionul tău: e cea mai ieftină piesă care o poate lua.
+lesson.safety.small_look = Pionul tău atacă dama mea. Ia-o cu el.
+lesson.safety.small_ok = Da! O piesă mică poate lua una mare, chiar apărată: pierzi un punct și câștigi nouă.
+lesson.safety.count = Înainte de fiecare captură, numără ce câștigi și ce ai putea pierde la schimb.
 
 # ---- Chapter 3: check and getting out of check -----------------------------------------------------------------
 lesson.danger.rank = Turnul meu controlează toată linia a doua.
@@ -180,6 +201,11 @@ lesson.capture.check = Dama mea dă șah, chiar lângă regele tău.
 lesson.capture.ask = Ia piesa care atacă!
 lesson.capture.king_ok = Da! Dama mea nu avea niciun apărător, așa că regele tău a putut s-o ia.
 lesson.capture.knight_ok = Da! Calul tău a eliminat piesa care ataca.
+lesson.check.open.ask = Iar șah! De data asta scapă de el oricum vrei.
+lesson.check.open.king = Ți-ai mutat regele din bătaie. Puteai și să blochezi cu o piesă, sau calul tău putea lua turnul meu.
+lesson.check.open.block = Ai blocat atacul. Regele tău putea și să se dea la o parte, sau calul tău putea lua turnul meu.
+lesson.check.open.take = Ai luat turnul meu, piesa care dădea șah. Ar fi mers și mutarea regelui, sau blocarea.
+lesson.check.open.hint = Trei posibilități: {@}muți regele, {@2}blochezi pe coloană sau {@3}iei turnul meu cu calul.
 
 # ---- Chapter 4: checkmate ------------------------------------------------------------------------------------
 lesson.mate1.what = Șah mat: regele e în șah și nu are nicio scăpare. Asta câștigă partida.
@@ -187,16 +213,34 @@ lesson.mate1.stuck = Regele meu e blocat în spatele {@}propriilor pioni.
 lesson.mate1.ask = Dă-mi mat într-o mutare!
 lesson.mate1.wrong = Aproape! Dă șah pe ultima linie, unde regele meu nu are scăpare.
 lesson.mate1.ok = Șah mat! Acesta e matul pe ultima linie. Ține-l minte!
+lesson.mate1.king = Regele tău e bine acolo unde e. Dă șah cu turnul.
+lesson.mate1.why = Vezi? Turnul controlează {@}toată ultima mea linie, iar {@2}propriii mei pioni ocupă câmpurile din fața regelui meu.
 lesson.mate2.ask = Regele tău și dama ta lucrează în echipă. Dă-mi mat într-o mutare.
 lesson.mate2.wrong = Găsește un șah care nu-i lasă regelui meu niciun câmp.
 lesson.mate2.ok = Șah mat! Regele tău apără dama, așa că al meu nu o poate lua.
 lesson.mate2.ok_rank = Mat pe ultima linie! Regele tău controlează toate câmpurile din fața regelui meu.
+lesson.mate2.king = Regele tău păzește câmpurile de lângă al meu. Lasă-l acolo și folosește dama.
+lesson.mate2.half = Așa controlezi {sq}, dar regele meu mai poate merge pe {sq2}.
+lesson.mate2.why = Vezi? Dama ta acoperă {sq} și {sq2}, iar regele tău acoperă câmpurile din fața regelui meu. Regele meu nu mai are scăpare.
 lesson.mate3.edge = Turnul tău de pe linia a șaptea îmi ține regele pe margine.
 lesson.mate3.ask = Acum folosește {your} ca să dai mat.
 lesson.mate3.free = Șah, dar linia a șaptea e acum liberă, iar regele meu scapă.
 lesson.mate3.takes = Regele meu îți ia pur și simplu turnul.
 lesson.mate3.hint = Dă șah pe ultima linie cu turnul care nu păzește linia a șaptea.
 lesson.mate3.ok = Șah mat! Cele două turnuri au lucrat împreună, ca o scară.
+lesson.mate3.why = Vezi? Un turn taie linia a {@}șaptea, iar celălalt dă șah pe {@2}ultima linie. Regele meu nu mai are scăpare.
+lesson.mate4.look = Șahul nu e mereu șah mat. Să vedem ce se întâmplă.
+lesson.mate4.ask = Dă șah regelui meu cu turnul.
+lesson.mate4.king = Regele tău rămâne unde e. Dă șah cu turnul.
+lesson.mate4.wrong = Asta nu e șah. Turnul tău poate ataca regele meu de pe ultima linie.
+lesson.mate4.ok = Da, e șah! Dar e și mat? Privește.
+lesson.mate4.after = Pionul meu de pe {sq} a lăsat loc regelui meu. Înainte să te bucuri de un șah, numără câmpurile pe care regele meu le mai poate folosi.
+lesson.mate5.ask = Două mutări de turn dau șah și doar una dă mat. Numără câmpurile regelui meu, apoi alege.
+lesson.mate5.king = Regele tău acoperă deja {sq} și {sq2}. Lasă-l acolo și mută turnul.
+lesson.mate5.wrong = Asta nu e șah. Caută o mutare de turn care atacă regele meu.
+lesson.mate5.hint = Regele tău acoperă {sq} și {sq2}. Care șah de turn îmi ia și câmpul {sq3}?
+lesson.mate5.why = Vezi? Turnul acoperă {sq}, regele tău acoperă celelalte două câmpuri, iar regele meu e blocat.
+lesson.mate5.ok = Șah mat! Ai numărat câmpurile regelui meu: nu mai rămăsese niciunul.
 
 # ---- Chapter 5: castling ---------------------------------------------------------------------------------------
 lesson.castle.what = Rocada e o mutare specială care îți pune regele la adăpost. Regele și turnul se mută împreună.
@@ -213,6 +257,10 @@ lesson.castle2.bishop = Nebunul meu atacă {sq}. Așa că rocada pe partea asta 
 lesson.castle2.ask = Fă rocada pe partea cealaltă.
 lesson.castle2.other = Fă rocada spre celălalt turn, pe flancul damei.
 lesson.castle2.ok = Corect! Rocada mare îți duce regele pe {sq}.
+lesson.ep0.rule = En passant începe cu pasul dublu. Doar un pion {@}rămas acasă poate avansa două câmpuri. Un pion care {@2}s-a mutat deja merge câte un câmp.
+lesson.ep0.ask = Mută unul dintre pionii tăi două câmpuri.
+lesson.ep0.moved = Pionul acela s-a mutat deja, așa că poate avansa doar un câmp. Folosește un pion rămas acasă.
+lesson.ep0.ok = Corect: doar un pion de pe câmpul de start poate avansa două.
 
 # ---- Chapter 6: en passant ------------------------------------------------------------------------------------
 lesson.ep.what = O captură specială cu pionul se numește en passant. Înseamnă „în trecere”.
@@ -221,6 +269,13 @@ lesson.ep.how = Pionul tău îl poate lua ca și cum ar fi avansat doar un câmp
 lesson.ep.now = Dar numai acum, la mutarea asta. Ia en passant!
 lesson.ep.gone = Ocazia a trecut: luarea en passant e posibilă doar imediat. Mai încercăm o dată.
 lesson.ep.ok = En passant! Pionul meu de pe {sq} iese de pe tablă.
+lesson.ep2.old = Pionul meu de pe {sq} stă lângă al tău de ceva vreme. E prea târziu să-l iei en passant.
+lesson.ep2.watch = Acum urmărește celălalt pion al meu.
+lesson.ep2.ask = Doi pioni de-ai mei stau lângă al tău, dar doar unul tocmai a avansat două câmpuri. Ia-l pe acela en passant!
+lesson.ep2.push = Asta doar îți avansează pionul. Ia pionul care tocmai a avansat două câmpuri.
+lesson.ep2.wrong = Caută pionul care tocmai a făcut pasul dublu și ia-l en passant.
+lesson.ep2.hint = Pionul meu de pe {sq} tocmai a avansat două câmpuri. Ia-l en passant, pe {sq2}.
+lesson.ep2.ok = En passant! Pionul meu de pe {sq} nu mai putea fi luat: ocazia lui trecuse.
 
 # ---- Chapter 7: promotion -------------------------------------------------------------------------------------
 lesson.promo.what = Când un pion ajunge pe ultima linie, este promovat: se transformă în damă, turn, nebun sau cal.
@@ -229,12 +284,21 @@ lesson.promo.under = E permis! Dar dama e mai puternică. Hai să alegem dama.
 lesson.promo.under_ok = Bine. Totuși, majoritatea jucătorilor aleg dama.
 lesson.promo.push = Avansează cu pionul până pe ultima linie, pe {sq}.
 lesson.promo.ok = O damă nouă! Poți avea chiar și două dame în același timp.
+lesson.promo2.ask = Un pion poate promova și luând, pe diagonală. Ia turnul meu și fă o damă!
+lesson.promo2.push = Și asta promovează, dar turnul meu apără {sq}. Privește.
+lesson.promo2.lost = Turnul meu ți-a luat piesa nouă. Ia mai întâi turnul meu.
+lesson.promo2.wrong = Asta nu ia turnul meu. Pionul tău ia pe diagonală, pe {sq}.
+lesson.promo2.hint = Ia turnul meu cu pionul, pe {sq}: promovează în timp ce ia.
+lesson.promo2.ok = Luat și promovat! Un pion poate face ambele într-o singură mutare.
 
 # ---- Chapter 8: stalemate and draws -----------------------------------------------------------------------------
 lesson.stale.what = E rândul meu. Regele meu nu e în șah, dar {@}toate câmpurile din jurul lui sunt atacate.
 lesson.stale.draw = Nu am nicio mutare legală. Asta e pat, iar partida e remiză.
 lesson.stale2.ask = Când ești pe câștig, ferește-te de pat. Dă-mi mat într-o mutare, fără pat!
-lesson.stale2.wrong = Dă șah pe ultima linie, unde regele meu nu are scăpare.
+lesson.stale2.wrong = Găsește un șah care nu-i lasă regelui meu niciun câmp. Atenție: o mutare liniștită mă poate pune pat.
+lesson.stale2.king = Regele tău acoperă deja {sq} și {sq2}. Lasă-l acolo și folosește dama.
+lesson.stale2.hint = Regele tău acoperă {sq} și {sq2}. Dă-mi șah pe ultima linie și regele meu nu mai are unde merge.
+lesson.stale2.why = Vezi? Regele meu e atacat {@}și nu are niciun câmp liber: e mat. Fără șah ar fi fost pat.
 lesson.stale2.ok = Șah mat! Lasă-i mereu regelui advers o mutare, în afară de cazul în care îi dai mat.
 lesson.draws.kings = Alte remize: când nimeni nu mai poate da mat, de exemplu când au rămas doar cei doi regi, partida e remiză.
 lesson.draws.agree = Jucătorii pot și să cadă de acord asupra remizei.
@@ -285,28 +349,29 @@ lesson.opening.castle.wrong = Regele tău e gata. Fă rocada acum, cât timp dru
 lesson.opening.castle.ok = Rocadă făcută! Regele tău e în siguranță, iar turnul intră în joc.
 lesson.opening.done = Centru, piese, rocadă: e un început bun pentru orice partidă.
 
-# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 11: review (no teaching: the coach only asks) ------------------------------------------------
+lesson.review.start = Recapitulare rapidă, de data asta în altă ordine. Nu explic nimic: tu îmi arăți.
+lesson.review.promo.ask = Promovează pionul acesta.
+lesson.review.promo.ok = Bine: o damă nouă, și cu șah!
+lesson.review.check.ask = Regele tău e în șah. Scapă de el.
+lesson.review.check.ok = Ai scăpat de șah. Bine.
+lesson.review.castle.ask = Fă rocada, pe partea unde e permisă.
+lesson.review.castle.other = Asta nu e rocadă. Fă rocada pe partea unde e permisă.
+lesson.review.castle.ok = Rocadă făcută, pe partea sigură!
+lesson.review.ep.ask = Ia pionul meu en passant.
+lesson.review.ep.ok = En passant! Ți-ai amintit.
+lesson.review.mate.ask = Dă-mi mat într-o mutare.
+lesson.review.mate.ok = Șah mat! Recapitularea s-a încheiat.
+
+# ---- Chapter 12: how our games work (no rating, no clock, touch-move, help, manners) ---------------------
 lesson.talk.rules = Acum cunoști toate regulile șahului. Bravo!
-lesson.talk.real = Hai să-ți spun cum se joacă partidele adevărate.
-lesson.talk.elo = Jucătorii au un rating, numit Elo. Crește când câștigi și scade când pierzi.
-lesson.talk.elo_gap = O victorie în fața unui jucător mai puternic aduce mai multe puncte; o înfrângere în fața unuia mai slab costă mai multe.
-lesson.talk.elo_start = Ratingul tău apare după cinci partide cu rating. Partidele cu antrenorul sunt de antrenament, așa că nu contează pentru rating.
-lesson.talk.clock = Acesta e un {@}ceas de șah. Fiecare jucător are timpul lui, care curge doar când e rândul lui la mutare.
-lesson.talk.press = După mutare, apeși ceasul cu aceeași mână. Așa pornește timpul meu.
-lesson.talk.flag = Dacă ți se termină timpul, pierzi, în afară de cazul în care nu am cum să-ți dau mat.
-lesson.talk.increment = Cinci plus trei înseamnă cinci minute pentru fiecare, plus trei secunde după fiecare mutare.
-lesson.talk.speeds = Partidele scurte se joacă în ritm blitz, partidele mai lungi în ritm rapid, iar cele mai lungi dintre toate în ritm clasic.
-lesson.talk.no_clock = Cu mine, ceasul e oprit. Gândește-te cât ai nevoie.
-lesson.talk.touch = Într-o partidă adevărată, dacă atingi una dintre piesele tale, trebuie s-o muți.
-lesson.talk.touch_mine = Dacă atingi una dintre piesele mele, trebuie s-o iei, dacă poți.
-lesson.talk.adjust = Ca să îndrepți o piesă fără s-o muți, spune mai întâi „aranjez”.
-lesson.talk.release = Imediat ce dai drumul unei piese pe un câmp nou, mutarea e făcută.
-lesson.talk.sheet = La turnee, ambii jucători notează fiecare mutare pe o {@}foaie de notație.
-# {move:letters} shows the Romanian scoresheet letters ("Cf3"), which is what this line teaches.
-lesson.talk.notation = Scriem litera piesei și câmpul, de exemplu {move:letters}. La pioni scriem doar câmpul.
-lesson.talk.robot = Robotul tău îți notează mutările. În partidele rapide, notarea nu e obligatorie.
+lesson.talk.real = Hai să-ți spun cum se vor desfășura partidele noastre.
+lesson.talk.no_clock = Cu mine nu există ceas și nici rating. Gândește-te cât ai nevoie.
+lesson.talk.touch = O piesă pe care ai atins-o trebuie mutată, așa că privește întâi, apoi atinge.
 lesson.talk.handshake = Partidele încep și se termină cu o strângere de mână. Înseamnă: partidă frumoasă și mulțumesc.
 lesson.talk.polite = Câștigi sau pierzi, politețea e pe primul loc. Și nu-ți deranja niciodată adversarul cât timp se gândește.
-lesson.talk.tips = Trei sfaturi pentru partidele tale: {@}controlează centrul, {@2}scoate caii și nebunii și {@3}fă rocada devreme.
-lesson.talk.next = Când ești gata, alege „Primii pași”. Voi juca blând și te voi ajuta după fiecare greșeală.
+lesson.talk.help = În partidele noastre te ajut. Dacă una dintre piesele tale e atacată sau rămâne fără apărare, îți spun.
+lesson.talk.help_back = După o greșeală mare, îți arăt de ce și îți ofer să iei mutarea înapoi.
+lesson.talk.help_skip = Iar dacă vorbesc prea mult, apasă Spațiu: mă opresc.
+lesson.talk.next = Când ești gata, joacă „Primii pași”. Voi juca blând.
 lesson.talk.welcome = Bun venit în lumea șahului! Hai să dăm mâna.

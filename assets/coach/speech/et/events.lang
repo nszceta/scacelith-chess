@@ -5,15 +5,23 @@
 # agrees with the sex of the coach or of the player.
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Tere! Mängime ühe sõbraliku partii. Ma aitan sind alati, kui midagi viltu läheb.
+event.greet.l1 = Tere! Mängime sõbraliku partii. Ütlen sulle, kui mõni sinu malend on ohus.
 event.greet.l1.2 = Hei! Ma mängin leebelt ja näitan sulle, millele tähelepanu pöörata.
 event.greet.l1.3 = Tere tulemast! Võta aega: ma ütlen sulle, kui mõni malend on ohus.
-event.greet.l2 = Tere! Mängime. Kui laual tekib kahvel või sidumine, näitan seda sulle.
+event.greet.l1.first = Tere! Enne iga käiku küsi: kas mu malend on turvaline? Mida mu käik ründab? Mida vastane ähvardab? Tuletan meelde.
+event.greet.l1.first.2 = Sinu esimene päris partii! Enne käiku: kas mu malend on turvaline, mida see ründab, mis on oht? Tuletan meelde.
+event.greet.l2 = Tere! Mängime. Kui minu käik loob kahvli või sidumise, ütlen sulle.
 event.greet.l2.2 = Hei! Too oma nupud mängu ja hoia oma kuningas ohust eemal. Ma aitan sind mängu ajal.
 event.greet.l2.3 = Tere tulemast tagasi malelaua taha! Jälgi kahvleid ja sidumisi: nendega võidetakse partiisid.
-event.greet.l3 = Tere! Mängime päris partii. Ma kommenteerin sinu plaane ja suuremaid vigu.
+event.greet.l3 = Tere! Mängime päris partii. Hoiatan sind suurte ohtude eest ja selgitan suuremaid vigu.
 event.greet.l3.2 = Hei! Mõtle välja plaan oma nuppudele. Ma ütlen, kui mõni käik jätab midagi tähelepanuta.
-event.greet.l3.3 = Mängime! Ma näitan sulle ainsaid käike ja käike, mis lähevad viltu.
+event.greet.l3.3 = Mängime! Ütlen, kui toimib vaid üks käik ja kui mõni käik läheb viltu.
+event.greet.l1.theme = Tere tulemast tagasi! Eelmise partii nõuanne oli: {theme}. Pea see täna meeles.
+event.greet.l1.theme.2 = Tere jälle! Pea meeles eelmise partii nõuannet: {theme}. Ma aitan sind.
+event.greet.l2.theme = Tere tulemast tagasi! Eelmise partii mõte oli: {theme}. Vaatame, kuidas täna läheb.
+event.greet.l2.theme.2 = Tere jälle! Midagi eelmisest partiist meelde jätta: {theme}.
+event.greet.l3.theme = Tere tulemast tagasi! Eelmise partii teema oli: {theme}. Pea see täna meeles.
+event.greet.l3.theme.2 = Tere jälle! Eelmisest partiist: {theme}. Vaatame, kuidas täna läheb.
 event.greet.l4 = Tere! Seekord annan seisule hinnanguid ja näitan paremaid kandidaatkäike.
 event.greet.l4.2 = Mängime. Pärast viga ütlen, mis oleks olnud täpsem.
 event.greet.l4.3 = Kas oled valmis klubipartiiks? Kommenteerin, kui hinnang muutub.
@@ -33,9 +41,9 @@ event.colour.black.2 = Seekord mängid sa mustadega: mina käin esimesena.
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names are those of the coach page (assets/i18n/et.lang coach.level.<n>.name): Esimesed
 # sammud, Algaja, Edasijõudnu, Klubimängija, Tugev klubimängija, Ekspert.
-event.level.l1 = Esimesed sammud: ma mängin leebelt ja selgitan iga viga lihtsate sõnadega.
-event.level.l2 = Algaja: ma mängin veidi tugevamalt ja nimetan lihtsaid taktikalisi võtteid, nagu kahvel ja sidumine.
-event.level.l3 = Edasijõudnu: ma räägin plaanidest ja etturistruktuurist ning näitan lühikesi variante.
+event.level.l1 = Esimesed sammud: ma mängin leebelt. Ütlen, kui mõni malend on rünnatud ja kaitseta, ja selgitan suuri vigu lihtsalt.
+event.level.l2 = Algaja: ma mängin veidi tugevamalt. Hoiatan kahvlite, sidumiste ja lipu ründamise eest ning tuletan meelde malendite väljatoomist.
+event.level.l3 = Edasijõudnu: hoiatan ainult mati ja lipu rünnaku eest ning siis, kui toimib vaid üks käik. Vigu selgitan ikka.
 event.level.l4 = Klubimängija: ma annan hinnangu etturites ja pakun välja kandidaatkäike.
 event.level.l5 = Tugev klubimängija: lühikesed kommentaarid ja pikemad variandid, kui see on oluline.
 event.level.l6 = Ekspert: ma mängin täie jõuga ja kommenteerin ainult kriitilisi hetki.
@@ -106,5 +114,7 @@ event.end.handshake = Surume kätt.
 # after a colon, or in quotes after "teemaga" / "teema" (a quoted title keeps its nominative).
 event.lesson.resume = Tere tulemast tagasi! Jätkame teemaga „{chapter}“.
 event.lesson.resume.2 = Tere jälle! Jäime pidama teema „{chapter}“ juures.
+event.lesson.start = Alustame teemaga „{chapter}“.
+event.lesson.start.2 = Algame teemaga „{chapter}“.
 event.lesson.next = Järgmisena: {chapter}.
 event.lesson.next.2 = Nüüd: {chapter}.

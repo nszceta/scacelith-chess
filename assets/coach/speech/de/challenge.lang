@@ -14,6 +14,12 @@
 # placeholder follows a colon (the program capitalises a piece only after . ! ?).
 # A challenge is a "Serie" of positions (the menus: assets/i18n/de.lang, coach.challenge.*).
 
+# ---- Eine Aufgabenserie, die von der Schlusskarte einer Partie aus gestartet wird: wird vor ihrer Einführung gesagt ----
+# {theme}: das Eine, das der Trainer am Ende dieser Partie genannt hat (ein Satzteil, steht nach einem Doppelpunkt).
+ch.practise = Aus deiner letzten Partie: {theme}. Dafür ist diese Serie gemacht.
+ch.practise.2 = In deiner letzten Partie gab es eine Sache zu üben: {theme}. Üben wir das.
+ch.practise.3 = Der Tipp der letzten Partie war: {theme}. Hier ist etwas Übung.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Matt in einem Zug. {n:position}, und jedes Mal setzt ein einziger Zug matt. Prüf jedes Schachgebot.
 ch.intro.mate2 = Matt in zwei Zügen. {n:position}: Dein erster Zug darf mir keine Verteidigung lassen, dann setzt du matt.

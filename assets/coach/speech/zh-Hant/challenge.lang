@@ -16,6 +16,11 @@
 # 車殘局, "{n}步殺" (mate in n).
 # The player always has the white pieces.
 
+# ---- Practising the theme of the last game ----------------------------------------------------------
+ch.practise = 來自你上一盤：{theme}。這組題正是為它而設。
+ch.practise.2 = 你上一盤有一件事要練習：{theme}。我們來練習。
+ch.practise.3 = 上一盤的提示是：{theme}。這裡有些練習。
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = 一步殺。一共{n:position}，每次只要一步就能將死。把每一步將軍都看一遍。
 ch.intro.mate2 = 兩步殺。一共{n:position}：你的第一步要讓我無法防守，然後將死我。

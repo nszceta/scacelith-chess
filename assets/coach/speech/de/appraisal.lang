@@ -280,6 +280,13 @@ appraisal.num.takebacks.b2 = Du hast {n:move_acc} zurückgenommen und {m:time} v
 appraisal.num.takebacks.b2.2 = {n:move_acc} zurückgenommen, {m:time} verbessert. Gut gelernt!
 appraisal.num.takebacks.b3 = Du hast {n:move_acc} zurückgenommen und {m:time} verbessert.
 appraisal.num.takebacks.b3.2 = {n:move_acc} zurückgenommen, davon {m:time} verbessert. Gut.
+# Grobe Fehler, die der Spieler zurückgenommen und durch einen Zug ohne Fehler ersetzt hat ({n}); statt der Rücknahmezeile gesagt (Stufen 1-3). Die Genauigkeit zählt diese Züge als zuerst gespielt.
+appraisal.num.retried.b1 = Du hast {n:mistake_acc} durch einen neuen Versuch behoben. So lernt man!
+appraisal.num.retried.b1.2 = Du hast {n:mistake_acc} durch erneutes Versuchen in einen guten Zug verwandelt. Super!
+appraisal.num.retried.b2 = Du hast {n:mistake_acc} durch einen neuen Versuch behoben. So lernt man.
+appraisal.num.retried.b2.2 = Durch einen neuen Versuch hast du {n:mistake_acc} behoben. Gut gelernt!
+appraisal.num.retried.b3 = Du hast {n:blunder_acc} durch einen neuen Versuch behoben.
+appraisal.num.retried.b3.2 = {n:blunder_acc} im zweiten Versuch behoben. Gut.
 # Level 2: big mistakes ({n} = mistakes and blunders), or the best moves found ({n}).
 appraisal.num.clean.b2 = Gar keine großen Fehler: super!
 appraisal.num.clean.b2.2 = Kein einziger großer Fehler in dieser Partie. Ausgezeichnet!
@@ -330,9 +337,27 @@ appraisal.improve.theme.b5 = Wiederkehrend: {theme}.
 appraisal.improve.theme.b5.2 = Thema der Partie: {theme}.
 appraisal.improve.theme.b6 = Wiederkehrend: {theme}.
 appraisal.improve.theme.b6.2 = Thema: {theme}.
+# Dasselbe Thema noch einmal: Die Auswertung einer der letzten zwei Partien (auf jeder Stufe) hat es auch genannt. Steht an den Stellen von appraisal.improve.theme oben. Nur {theme}.
+appraisal.improve.theme.again.b1 = Derselbe Tipp wie beim letzten Mal: {theme}. Behalte ihn im Kopf.
+appraisal.improve.theme.again.b1.2 = Das kam auch in der letzten Partie vor: {theme}. Arbeiten wir gemeinsam daran.
+appraisal.improve.theme.again.b1.3 = Wieder etwas zum Üben: {theme}. Mit jeder Partie wird es leichter.
+appraisal.improve.theme.again.b2 = Dieselbe Idee wie in der letzten Partie: {theme}. Das lohnt sich zu üben.
+appraisal.improve.theme.again.b2.2 = Das kam auch in der letzten Partie vor: {theme}.
+appraisal.improve.theme.again.b2.3 = Wieder etwas, woran du arbeiten kannst: {theme}.
+appraisal.improve.theme.again.b3 = Wieder ein Thema: {theme}. Es kam auch in der letzten Partie vor.
+appraisal.improve.theme.again.b3.2 = Dasselbe Thema wie zuletzt: {theme}. Das lohnt sich zu üben.
+appraisal.improve.theme.again.b4 = Ein wiederkehrendes Thema, auch in den letzten Partien: {theme}.
+appraisal.improve.theme.again.b4.2 = Dasselbe Thema wie zuletzt: {theme}.
+appraisal.improve.theme.again.b5 = Wiederkehrend, auch zuletzt: {theme}.
+appraisal.improve.theme.again.b5.2 = Dasselbe Thema wie in den letzten Partien: {theme}.
+appraisal.improve.theme.again.b6 = Wieder: {theme}.
+appraisal.improve.theme.again.b6.2 = Thema wiederholt: {theme}.
 # The critical moment (levels 2-6).
 appraisal.improve.critical.b2 = Bei Zug {crit_no} hat sich die Partie gedreht. Für nächstes Mal: {theme}.
 appraisal.improve.critical.b2.2 = Der entscheidende Moment war Zug {crit_no}, {crit_move}. Zum Üben: {theme}.
+# Stufe 2, wenn das Thema des kritischen Moments dasselbe ist wie in einer der letzten zwei Partien.
+appraisal.improve.critical.again.b2 = Bei Zug {crit_no} hat sich die Partie gedreht, und wieder gilt: {theme}.
+appraisal.improve.critical.again.b2.2 = Zug {crit_no} war der entscheidende Moment. Dieselbe Idee wie zuletzt: {theme}.
 appraisal.improve.critical.b3 = Der kritische Moment war Zug {crit_no}. Statt {crit_move} war {crit_best} besser.
 appraisal.improve.critical.b3.2 = Bei Zug {crit_no} war {crit_best} besser als {crit_move}. Prüf zuerst meine forcierenden Züge.
 appraisal.improve.critical.b4 = Kritischer Moment: Zug {crit_no}, {crit_move}. {crit_best} war besser.
@@ -389,6 +414,16 @@ appraisal.improve.clean.b5 = Keine kritischen Fehler.
 appraisal.improve.clean.b5.2 = Saubere Partie.
 appraisal.improve.clean.b6 = Saubere Partie.
 appraisal.improve.clean.b6.2 = Keine kritischen Fehler.
+
+# ---- Der nächste Schritt: die kritische Stellung noch einmal (Stufen 1-3, mit einem kritischen groben Fehler) ----
+# Vor der Ermutigung gesagt; der Abschlussbildschirm bietet „Diese Stellung noch einmal versuchen“ an.
+appraisal.next.retry.b1 = Wenn wir fertig sind, kannst du diese Stellung noch einmal versuchen.
+appraisal.next.retry.b1.2 = Danach kannst du diese knifflige Stellung noch einmal versuchen.
+appraisal.next.retry.b1.3 = Möchtest du diese Stellung noch einmal versuchen? Gleich kannst du es.
+appraisal.next.retry.b2 = Nächster Schritt: Versuch diese Stellung noch einmal und finde den besseren Zug.
+appraisal.next.retry.b2.2 = Danach kannst du diese Stellung noch einmal versuchen.
+appraisal.next.retry.b3 = Nächster Schritt: Versuch diese Stellung noch einmal und finde den besseren Zug.
+appraisal.next.retry.b3.2 = Du kannst diese Stellung auf dem Abschlussbildschirm noch einmal versuchen.
 
 # ---- 5. Encouragement and the level suggestion -----------------------------------------------------
 appraisal.end.b1 = Du wirst mit jeder Partie besser. Noch eine?

@@ -1058,14 +1058,14 @@ coach.level.0.name = The rules of chess
 coach.level.0.desc = An interactive lesson, one rule at a time.
 coach.level.0.detail = The coach sets up small positions and shows how each piece moves and captures, then castling, promotion, check and checkmate. You try each idea on the board yourself.
 coach.level.1.name = First steps
-coach.level.1.desc = What is attacked, what is left unprotected.
-coach.level.1.detail = The coach plays gently and speaks plainly: which of your pieces are attacked, which are left without protection, and how to keep them.
+coach.level.1.desc = Attacked and unprotected pieces, in plain words.
+coach.level.1.detail = The coach plays gently and speaks plainly. It warns you when one of your pieces or pawns is attacked and unprotected; the first time in a game, it asks you to find the danger yourself.
 coach.level.2.name = Beginner
-coach.level.2.desc = Simple tactics, development, king safety.
-coach.level.2.detail = Forks and pins are called by their names. The coach talks about bringing your pieces out and keeping your king safe.
+coach.level.2.desc = Forks, pins, development and king safety.
+coach.level.2.detail = The coach warns you when its move sets up a fork, a pin, an attack on your queen or a mate, and names the tactic. It reminds you to bring your pieces out and to keep your king safe.
 coach.level.3.name = Improver
-coach.level.3.desc = Plans, pawn structure, only moves.
-coach.level.3.detail = The coach explains plans and pawn structures, and warns you when only one move holds the position.
+coach.level.3.desc = Big threats and moments where one move works.
+coach.level.3.detail = No more questions or markers: the coach warns you only of a mate threat or an attack on your queen, and tells you when only one move holds the position.
 coach.level.4.name = Club player
 coach.level.4.desc = Candidate moves, evaluation in pawns.
 coach.level.4.detail = The coach weighs the candidate moves and gives the evaluation in pawns, as a club trainer would.
@@ -1075,6 +1075,9 @@ coach.level.5.detail = Short remarks, concrete lines and the vocabulary of posit
 coach.level.6.name = Expert
 coach.level.6.desc = Terse remarks, deep lines, evaluation figures.
 coach.level.6.detail = Few words, as between strong players: lines several moves deep and evaluation figures.
+# The goals of levels 1 and 2 on the level's card (a check mark and "Completed" once met)
+coach.goal.1 = Goal: no piece lost for nothing in two games in a row.
+coach.goal.2 = Goal: two wins in a row without a blunder.
 coach.note.clock = No clock: take all the time you need.
 coach.note.takeback = After a blunder, the coach shows what went wrong and offers to take the move back.
 coach.note.lesson = You play White; the coach sets up each exercise on the board.
@@ -1083,10 +1086,16 @@ coach.note.fallible = The coach is not infallible: it may sometimes misjudge a m
 coach.colour = Your colour
 coach.colour.help = The colour you play against the coach. Alternate: White, then Black, from one game to the next. The lesson on the rules is always played with White.
 coach.colour.alternate = Alternate
+coach.chapter = Chapter
+coach.chapter.help = The chapter the lesson starts at: the one you stopped at, or any other to go over it again. Completing the lesson stays recorded.
+coach.chapter.title = Start the lesson at
 coach.take_time = "Take your time" reminder
 coach.take_time.help = After a minute of thinking, the coach says there is no hurry. Levels 1 to 3 only.
 coach.danger_markers = Show pieces in danger
-coach.danger_markers.help = At levels 1 and 2, on your turn, a coloured square appears under each of your pieces the coach could win right now.
+coach.danger_markers.auto = Automatic
+coach.danger_markers.help = At levels 1 and 2, on your turn, a coloured square appears under each of your pieces the coach could win right now. Automatic: for your first three games at level 1 and your first game at level 2, then off. On: at both levels, every game.
+# Under the control above, when Automatic has switched the markers off
+coach.danger_markers.withdrawn = The markers are off now that you know the game. Choose On to keep them.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = The coach's voice is not installed or is switched off (Options > Audio): its words will be written on screen.
 # At the table
@@ -1109,9 +1118,17 @@ coach.confirm.leave = Return to the main menu? This game with the coach will be 
 coach.gameover.again = Play again
 coach.gameover.practise = Practise: {0}
 coach.gameover.unrated = This game with the coach is not rated.
+# "Try that position again" (levels 1-3, a game with a critical blunder), and its own end card
+coach.gameover.retry = Try that position again
+coach.retry.found = WELL FOUND
+coach.retry.found.line = That is the move that changes the game.
+coach.retry.shown = THE BETTER MOVE
+coach.retry.shown.line = Now you have seen it. Look for that idea in your next game.
+coach.retry.reason = The critical position
 coach.lesson.done = WELL DONE
 coach.lesson.done.line = You now know the rules of chess.
-coach.lesson.next = First game
+coach.lesson.done.next_line = First steps: I play gently and tell you when a piece is in danger.
+coach.lesson.next = Play First steps
 
 # ---- Coach challenges (src/ui/ui_coach.cpp; the coach's spoken lines are in assets/coach/speech/<lang>/challenge.lang)
 # The tabs of the Coach page: games with the coach, and short sets of positions to solve

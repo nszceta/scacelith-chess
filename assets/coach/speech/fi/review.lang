@@ -856,6 +856,10 @@ tip.centre.b2 = Taistele keskustasta: sellaiset ruudut kuin {sq} ovat tärkeitä
 tip.centre.b2.2 = Annat minulle keskustan. Katso ruutua {sq}.
 tip.centre.b3 = Et kilpaile keskustasta; ruutu {sq} on minun.
 tip.centre.b3.2 = Haasta keskusta ruudun {sq} ympärillä.
+tip.develop.b1 = Ratsusi ja lähettisi ovat yhä kotona. Tuo esiin vaikka {your}.
+tip.develop.b1.2 = Aika kehittää! Pienet nappulasi ovat yhä kotona. Kokeile {your:ade}.
+tip.develop.b2 = Yksikään kevyt upseerisi ei ole vielä liikkunut. Kehitä {your} ja muut.
+tip.develop.b2.2 = Nappulasi nukkuvat vielä. Aloita {your:ela}.
 # Endgame technique tips.
 tip.mate_technique.b1 = Kun jäljellä on yksinäinen kuningas, aja se laidalle ja tee sitten matti.
 tip.mate_technique.b1.2 = Vinkki: ahdista kuningastani kohti laitaa. Pidä myös oma kuninkaasi lähellä.
@@ -932,12 +936,46 @@ praise.excellent.b4.2 = Erinomaista.
 praise.excellent.b4.3 = Hyvä, {move} on tarkka.
 praise.castle.b1 = Hyvä! Linnoittauduit. Kuninkaasi on nyt turvallisemmassa paikassa.
 praise.castle.b1.2 = Hieno linnoittautuminen! Kuninkaasi on suojassa.
+praise.castle.b2 = Hyvä, linnoittauduit. Kuningas on turvassa, ja torni pääsee peliin.
+praise.castle.b2.2 = Linnoittautuminen: turvallinen kuningas ja torni mukana peliin. Hyvin tehty.
+praise.castle.b3 = Hyvä: linnoittauduit, kuningas turvassa.
+praise.castle.b3.2 = Aikainen linnoittautuminen. Järkevää.
 praise.saved.b1 = Hyvä! Pelastit nappulasi.
 praise.saved.b1.2 = Hienoa, siirsit sen turvaan.
+praise.saved.b2 = Hyvä, nappulasi oli uhattuna ja siirsit sen pois.
+praise.saved.b2.2 = Hyvin huomattu. Pelastit nappulan.
+praise.saved.b3 = Hyvä: siirsit uhatun nappulan turvaan.
+praise.saved.b3.2 = Hyvin huomattu. Nappula oli vaarassa.
+praise.check_threat.b1 = Hyvä! Näit, mitä siirtoni uhkasi, ja hoidit sen.
+praise.check_threat.b1.2 = Hienoa! Tarkistit uhkani ennen siirtoa.
+praise.check_threat.b1.3 = Kyllä! Katsoit, mitä uhkaan. Se on loistava tapa.
+praise.check_threat.b2 = Hyvä: näit uhkani ja vastasit siihen.
+praise.check_threat.b2.2 = Tarkistit, mitä siirtoni uhkaa. Hyvä tapa.
+praise.check_threat.b2.3 = Tuo torjuu uhkani. Hyvin huomattu.
+praise.protect.b1 = Hyvä! {your} oli uhattuna, ja nyt se on suojattu.
+praise.protect.b1.2 = Hienoa! Suojasit {your:acc} ennen kuin ehdin lyödä sen.
+praise.protect.b2 = Hyvä: {your} oli uhattuna, ja puolustit sen.
+praise.protect.b2.2 = Hyvin huomattu. {your} on nyt turvassa.
+praise.develop.b1 = Hyvä! Toit nappulan peliin. Nappulat tekevät siellä enemmän työtä.
+praise.develop.b1.2 = Hienoa! Nappuloiden tuominen aikaisin peliin on hyvä tapa.
+praise.develop.b2 = Hyvä, kehitit nappulan. Tuo muutkin esiin.
+praise.develop.b2.2 = Hyvin tehty: kehitä nappulat aikaisin.
 praise.book.b1 = Hyvä, se on tunnettu avaussiirto.
 praise.book.b1.2 = Hienoa, noin aloittavat vahvatkin pelaajat.
 
 # ---- The coach's own threats (levels 1-2, before the player moves) ------------------------------
+# The first threat of a game at levels 1-2 is asked about first, nothing pointed at: the player looks at the board for what my last move attacks.
+threat.ask.b1 = Siirtoni loi uhan. Näetkö, mikä nappuloistasi on vaarassa?
+threat.ask.b1.2 = Katso lautaa. Viimeisin siirtoni uhkaa jotakin nappuloistasi. Löydätkö sen?
+threat.ask.b1.3 = Odota, ennen kuin siirrät: siirtoni on uhka. Mikä nappuloistasi on vaarassa?
+threat.ask.b2 = Siirtoni loi uhan. Näetkö, mikä se on?
+threat.ask.b2.2 = Katso: mitä viimeisin siirtoni uhkaa?
+threat.ask.b2.3 = Tein juuri uhan. Löydätkö sen?
+threat.ask_mate.b1 = Siirtoni uhkaa kuningastasi. Näetkö, mitä aion tehdä?
+threat.ask_mate.b1.2 = Varo: suunnittelen jotain isoa. Näetkö, mitä aion tehdä?
+threat.ask_mate.b1.3 = Katso viimeisintä siirtoani. Uhkaan jotain vakavaa. Näetkö sen?
+threat.ask_mate.b2 = Viimeisin siirtoni on vakava uhka. Näetkö, mitä aion tehdä?
+threat.ask_mate.b2.2 = Katso viimeisintä siirtoani: se uhkaa jotain suurta. Näetkö sen?
 # A mate threat ({sq} = where it would mate, pointed at at level 1; {my} = the piece).
 threat.mate.b1 = Varovasti! Uhkaan mattia ruudussa {sq}.
 threat.mate.b1.2 = Varo: {my} haluaa mennä ruutuun {sq}. Se olisi matti.
@@ -945,6 +983,9 @@ threat.mate.b1.3 = Katso ruutua {sq}. Jos pääsen sinne, se on matti!
 threat.mate.b2 = Varovasti, uhkaan mattia.
 threat.mate.b2.2 = Varo: ruudussa {sq} on mattiuhka.
 threat.mate.b2.3 = Katso tarkkaan: uhkaan mattia.
+threat.mate.b3 = Varo, uhkaan mattia ruudussa {sq}.
+threat.mate.b3.2 = Mattiuhka: {my} haluaa ruutuun {sq}.
+threat.mate.b3.3 = Varo: uhkaan mattia.
 # A threat on a piece ({my} = my attacker, pointed at at level 1; {your} = the target, pointed at).
 threat.piece.b1 = Katso: {my} uhkaa {your:part}.
 threat.piece.b1.2 = Varovasti! {your} on {my:gen} uhkaamana.
@@ -952,6 +993,21 @@ threat.piece.b1.3 = Varo, {my} haluaa lyödä {your:acc}.
 threat.piece.b2 = Ole varovainen {your:gen} kanssa.
 threat.piece.b2.2 = {your} on uhattuna.
 threat.piece.b2.3 = Pidä silmällä {your:part}.
+threat.piece.b3 = {my} uhkaa {your:part}, ja sen lyöminen toisi minulle materiaalia.
+threat.piece.b3.2 = {your} on vaarassa: {my} uhkaa lyödä sen.
+threat.piece.b3.3 = Varo: viimeisin siirtoni uhkaa {your:part}.
+# A fork the coach's move sets up (level 2): {my} on {sq} attacks {t1} and {t2}.
+threat.fork.b2 = {my} ruudussa {sq} uhkaa yhtä aikaa {t1:part} ja {t2:part}. Se on haarukka!
+threat.fork.b2.2 = Varo, haarukka: {my} uhkaa {t1:part} ja {t2:part}.
+threat.fork.b2.3 = {my} haarukoi {t1:part} ja {t2:part}. Molempia ei ole helppo pelastaa.
+# A pin (level 2): {my} on {sq} holds {your} in front of {t1}, the piece behind it.
+threat.pin.b2 = {my} ruudussa {sq} kiinnittää {your:acc} {t1:ill}. Jos se liikkuu, lyön {t1:acc}.
+threat.pin.b2.2 = Varo: {my} kiinnittää {your:acc}. Jos se liikkuu, {t1} kaatuu.
+threat.pin.b2.3 = {your} on kiinnitetty: jos se lähtee, {my} lyö {t1:acc}.
+# Level 3: the position has one good move only (the engine's two best moves are far apart).
+threat.only.b3 = Tämä on ratkaiseva asema: vain yksi siirto on todella hyvä. Mieti rauhassa.
+threat.only.b3.2 = Varo, tässä on vain yksi hyvä siirto. Katso ensin kaikki.
+threat.only.b3.3 = Hidasta: useimmat siirrot menevät tässä asemassa pieleen.
 threat.punish.b1 = Edellinen siirtoni oli virhe. Osaatko rangaista siitä?
 threat.punish.b1.2 = Hmm, taisin tehdä virheen. Löydätkö sen?
 
@@ -967,6 +1023,9 @@ tb.hint.mate_missed.b1 = Katso kuningastani. Voitko tehdä sille matin?
 tb.hint.mate_missed.b1.2 = Kokeile ensin shakkeja. Ehkä löytyy matti!
 tb.hint.general.b1 = Ota aikaa ja katso koko lautaa.
 tb.hint.general.b1.2 = Yritä löytää turvallisempi siirto.
+# Level 3 names no piece: tb.hint.b3 is where to look when the fault's cause has no line of its own.
+tb.hint.b3 = Katso, mitä nappuloistasi vastaukseni uhkaa.
+tb.hint.b3.2 = Katso, mitä vastaukseni uhkaisi, ennen kuin pelaat.
 # The retry.
 tb.fixed.b1 = Paljon parempi!
 tb.fixed.b1.2 = Kyllä, tuo on parempi!
@@ -974,6 +1033,14 @@ tb.fixed.b1.3 = Hyvä, tuo toimii paljon paremmin.
 tb.fixed = Tuo on parempi.
 tb.fixed.2 = Parempi.
 tb.fixed.3 = Hyvä korjaus.
+# After a good retry of a move taken back for a fault with a named cause (levels 1-3), one line that
+# names the habit; {theme} is a phrase from appraisal.lang (theme.*), no full stop.
+tb.why.b1 = Muista ensi kertaa varten: {theme}.
+tb.why.b1.2 = Hyvä tapa: {theme}.
+tb.why.b2 = Tästä opimme: {theme}.
+tb.why.b2.2 = Tämä auttoi: {theme}.
+tb.why.b3 = Muistamisen arvoista: {theme}.
+tb.why.b3.2 = Opeteltava tapa: {theme}.
 tb.same = Sama siirto uudestaan? Selvä, katsotaan.
 tb.same.2 = Pidät tuosta siirrosta. Pelataan ja katsotaan.
 # The retry after a hint-only offer is the move the coach had in mind.
@@ -985,3 +1052,33 @@ tb.found.2 = Juuri niin, se on oikea.
 # where the offer would have been).
 tb.none_left = Valitettavasti tässä pelissä ei voi enää perua siirtoja.
 tb.none_left.2 = Sinulla ei ole tässä pelissä enää perumisia jäljellä.
+# ---- Trying the critical position again (levels 1-3) --------------------------------------------------
+# The end card's "Try that position again": the position before the game's biggest mistake is set up
+# and the player looks for a better move. {best} is the better move; the coach traces it on the board.
+retry.task.b1 = Palataan siihen hetkeen. Löydätkö paremman siirron?
+retry.task.b1.2 = Tässä on asema uudestaan. Löydätkö paremman siirron?
+retry.task.b2 = Tämä on asema ennen suurta virhettäsi. Etsi parempi siirto.
+retry.task.b2.2 = Katsotaan sitä hetkeä uudelleen. Mitä pelaisit sen sijaan?
+retry.task.b3 = Tämä on asema ennen ratkaisevaa siirtoa. Etsi parempi siirto.
+retry.task.b3.2 = Takaisin ratkaisevaan hetkeen. Mikä on parempi siirto?
+# A move that is no good: it is taken back, and the player looks again.
+retry.again.b1 = Ei tuo. Katso vielä kerran.
+retry.again.b1.2 = Se ei ole vielä oikea. Yritä uudelleen.
+retry.again.b2 = Ei tuo. Katso koko lautaa.
+retry.again.b2.2 = Ei vielä. Kokeile toista siirtoa.
+retry.again.b3 = Ei tuo. Katso, mitä vastaukseni tekisi.
+retry.again.b3.2 = Ei vieläkään. Mieti parasta vastaustani.
+# The better move is found.
+retry.found.b1 = Kyllä! Se on parempi siirto. Hyvin tehty!
+retry.found.b1.2 = Löysit sen! Tämä on paljon parempi.
+retry.found.b2 = Kyllä, se toimii. Hyvin tehty.
+retry.found.b2.2 = Juuri niin. Hyvä.
+retry.found.b3 = Oikein, se kestää. Hyvin tehty.
+retry.found.b3.2 = Se on se. Hyvä löytö.
+# The coach shows the better move ({best}).
+retry.reveal.b1 = Tässä on parempi siirto: {best}. Katso.
+retry.reveal.b1.2 = Näytän: {best} oli parempi.
+retry.reveal.b2 = Parempi siirto oli {best}. Katso.
+retry.reveal.b2.2 = Tässä se on: {best}.
+retry.reveal.b3 = Parempi siirto oli {best}.
+retry.reveal.b3.2 = {best} oli se siirto.

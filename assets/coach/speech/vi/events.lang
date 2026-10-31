@@ -5,15 +5,23 @@
 # Vietnamese has no gender agreement: nothing depends on the player's or the coach's gender.
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Xin chào! Chúng ta chơi một ván giao hữu nhé. Mỗi khi có gì không ổn, tôi sẽ giúp bạn.
+event.greet.l1 = Xin chào! Chúng ta chơi một ván giao hữu nhé. Khi quân nào của bạn gặp nguy hiểm, tôi sẽ báo cho bạn.
 event.greet.l1.2 = Chào bạn! Tôi sẽ chơi nhẹ nhàng và chỉ cho bạn những điều cần để ý.
 event.greet.l1.3 = Chào mừng bạn! Cứ thong thả nhé: khi có quân nào gặp nguy hiểm, tôi sẽ báo cho bạn.
-event.greet.l2 = Xin chào! Chúng ta chơi nào. Khi có đòn chĩa đôi hay đòn ghim, tôi sẽ chỉ cho bạn.
+event.greet.l1.first = Xin chào! Trước mỗi nước đi, hãy hỏi: quân của mình có an toàn không? Nước đi tấn công gì? Đối thủ đang dọa gì? Tôi sẽ nhắc bạn.
+event.greet.l1.first.2 = Ván thật đầu tiên của bạn! Trước mỗi nước đi: quân có an toàn không, nó tấn công gì, đối thủ dọa gì? Tôi sẽ nhắc bạn.
+event.greet.l2 = Xin chào! Chúng ta chơi nào. Nếu nước đi của tôi tạo ra đòn chĩa đôi hay đòn ghim, tôi sẽ báo cho bạn.
 event.greet.l2.2 = Chào bạn! Hãy ra quân và giữ an toàn cho Vua. Tôi sẽ giúp bạn trong suốt ván cờ.
 event.greet.l2.3 = Chào mừng bạn trở lại bàn cờ! Hãy để ý các đòn chĩa đôi và đòn ghim: chúng giúp thắng ván cờ.
-event.greet.l3 = Xin chào! Chúng ta chơi một ván thực sự nào. Tôi sẽ nhận xét về kế hoạch của bạn và những sai lầm lớn.
+event.greet.l3 = Xin chào! Chúng ta chơi một ván thực sự nào. Tôi sẽ cảnh báo những mối đe dọa lớn và giải thích các sai lầm lớn.
 event.greet.l3.2 = Chào bạn! Hãy nghĩ ra một kế hoạch cho các quân của mình. Khi một nước đi bỏ sót điều gì, tôi sẽ cho bạn biết.
-event.greet.l3.3 = Chơi thôi! Tôi sẽ chỉ ra những nước đi duy nhất và những nước đi sai.
+event.greet.l3.3 = Chơi thôi! Tôi sẽ báo khi chỉ có một nước đi đúng, và khi một nước đi sai.
+event.greet.l1.theme = Chào mừng bạn trở lại! Lời khuyên của ván trước là: {theme}. Hôm nay hãy nhớ nhé.
+event.greet.l1.theme.2 = Chào bạn lần nữa! Nhớ lời khuyên ván trước nhé: {theme}. Tôi sẽ giúp bạn.
+event.greet.l2.theme = Chào mừng bạn trở lại! Ý tưởng của ván trước là: {theme}. Hôm nay xem sao nhé.
+event.greet.l2.theme.2 = Chào bạn lần nữa! Một điều cần nhớ từ ván trước: {theme}.
+event.greet.l3.theme = Chào mừng bạn trở lại! Chủ đề của ván trước là: {theme}. Hôm nay hãy nhớ nhé.
+event.greet.l3.theme.2 = Chào bạn lần nữa! Từ ván trước: {theme}. Hôm nay xem sao nhé.
 event.greet.l4 = Xin chào! Lần này tôi sẽ đưa ra đánh giá và chỉ cho bạn những nước ứng viên hay hơn.
 event.greet.l4.2 = Chúng ta chơi nào. Sau một sai lầm, tôi sẽ cho bạn biết nước nào chính xác hơn.
 event.greet.l4.3 = Sẵn sàng cho một ván như ở câu lạc bộ chưa? Tôi sẽ nhận xét khi đánh giá thay đổi.
@@ -33,9 +41,9 @@ event.colour.black.2 = Lần này bạn chơi bên Đen: tôi đi trước.
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names are those of the coach page (assets/i18n/vi.lang coach.level.<n>.name); a line of
 # moves is "biến", as the level descriptions of that page say it.
-event.level.l1 = Bước đầu: tôi chơi nhẹ nhàng và giải thích mọi sai lầm bằng lời lẽ đơn giản.
-event.level.l2 = Người mới chơi: tôi chơi mạnh hơn một chút, và gọi tên các đòn chiến thuật đơn giản như chĩa đôi và ghim.
-event.level.l3 = Đang tiến bộ: tôi nói về kế hoạch và cấu trúc Tốt, và chỉ ra những biến ngắn.
+event.level.l1 = Bước đầu: tôi chơi nhẹ nhàng. Tôi báo khi quân của bạn bị tấn công mà không được bảo vệ, và giải thích sai lầm lớn bằng lời đơn giản.
+event.level.l2 = Người mới chơi: tôi chơi mạnh hơn một chút. Tôi cảnh báo đòn chĩa đôi, đòn ghim, đòn nhắm vào Hậu của bạn, và nhắc bạn đưa quân ra.
+event.level.l3 = Đang tiến bộ: tôi chỉ cảnh báo khi bị dọa chiếu hết hoặc Hậu bị tấn công, và khi chỉ một nước đi đúng. Tôi vẫn giải thích sai lầm của bạn.
 event.level.l4 = Kỳ thủ câu lạc bộ: tôi đưa ra đánh giá tính theo đơn vị Tốt và gợi ý các nước ứng viên.
 event.level.l5 = Kỳ thủ câu lạc bộ mạnh: nhận xét ngắn gọn, và những biến dài hơn khi cần thiết.
 event.level.l6 = Chuyên gia: tôi chơi hết sức và chỉ nhận xét những thời điểm then chốt.
@@ -106,5 +114,7 @@ event.end.handshake = Chúng ta bắt tay nhé.
 # "phần" ("phần nhập thành") or a colon.
 event.lesson.resume = Chào mừng bạn quay lại! Chúng ta tiếp tục với phần {chapter}.
 event.lesson.resume.2 = Chào bạn! Lần trước chúng ta dừng ở phần {chapter}.
+event.lesson.start = Chúng ta bắt đầu với phần {chapter}.
+event.lesson.start.2 = Chúng ta mở đầu bằng phần {chapter}.
 event.lesson.next = Tiếp theo: {chapter}.
 event.lesson.next.2 = Bây giờ đến phần {chapter}.

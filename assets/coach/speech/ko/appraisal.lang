@@ -289,6 +289,13 @@ appraisal.num.takebacks.b2 = {n:move}를 무르고, 그중 {m:move}를 더 좋�
 appraisal.num.takebacks.b2.2 = 무르신 {n:move} 중에서 {m:move}를 고치셨어요. 좋은 공부가 됐네요!
 appraisal.num.takebacks.b3 = {n:move}를 무르고, 그중 {m:move}를 고치셨어요.
 appraisal.num.takebacks.b3.2 = {n:move}를 무르셨고, 그중 {m:move}를 고치셨어요. 좋아요.
+# Big mistakes the player took back and replaced by a move that is no mistake.
+appraisal.num.retried.b1 = 다시 해서 {n:mistake}을 고치셨어요. 이렇게 배우는 거예요!
+appraisal.num.retried.b1.2 = 다시 도전해서 {n:mistake}을 좋은 수로 바꾸셨어요. 멋져요!
+appraisal.num.retried.b2 = 다시 해서 {n:mistake}을 고치셨어요. 이렇게 배우는 거죠.
+appraisal.num.retried.b2.2 = 다시 두어서 {n:mistake}을 고치셨어요. 좋은 공부예요!
+appraisal.num.retried.b3 = 다시 해서 {n:blunder}을 고치셨어요.
+appraisal.num.retried.b3.2 = 두 번째 시도로 {n:blunder}을 고치셨어요. 좋아요.
 # Level 2: big mistakes ({n} = mistakes and blunders), or the best moves found ({n}).
 appraisal.num.clean.b2 = 큰 실수가 하나도 없었어요. 훌륭해요!
 appraisal.num.clean.b2.2 = 이번 게임에서는 큰 실수가 단 한 번도 없었어요. 아주 훌륭해요!
@@ -341,9 +348,27 @@ appraisal.improve.theme.b5 = 반복된 주제: {theme}.
 appraisal.improve.theme.b5.2 = 이번 게임의 주제: {theme}.
 appraisal.improve.theme.b6 = 반복: {theme}.
 appraisal.improve.theme.b6.2 = 주제: {theme}.
+# The same theme again: the appraisal of one of the last two games (at any level) named it too.
+appraisal.improve.theme.again.b1 = 지난번과 같은 팁이에요: {theme}. 기억해 두세요.
+appraisal.improve.theme.again.b1.2 = 지난 게임에서도 나왔어요: {theme}. 같이 연습해 봐요.
+appraisal.improve.theme.again.b1.3 = 또 연습할 점 하나: {theme}. 게임마다 쉬워져요.
+appraisal.improve.theme.again.b2 = 지난 게임과 같은 아이디어예요: {theme}. 연습해 둘 만해요.
+appraisal.improve.theme.again.b2.2 = 지난 게임에도 나왔어요: {theme}.
+appraisal.improve.theme.again.b2.3 = 또 연습할 점이에요: {theme}.
+appraisal.improve.theme.again.b3 = 또 나온 주제: {theme}. 지난 게임에도 나왔어요.
+appraisal.improve.theme.again.b3.2 = 최근과 같은 주제: {theme}. 연습해 둘 만해요.
+appraisal.improve.theme.again.b4 = 최근 게임에도 반복된 주제: {theme}.
+appraisal.improve.theme.again.b4.2 = 최근과 같은 주제예요: {theme}.
+appraisal.improve.theme.again.b5 = 반복, 최근에도: {theme}.
+appraisal.improve.theme.again.b5.2 = 최근 게임과 같은 주제: {theme}.
+appraisal.improve.theme.again.b6 = 다시: {theme}.
+appraisal.improve.theme.again.b6.2 = 주제 반복: {theme}.
 # The critical moment (levels 2-6).
 appraisal.improve.critical.b2 = {crit_no:moveno}에 흐름이 바뀌었어요. 다음엔 이걸 연습해 보세요: {theme}.
 appraisal.improve.critical.b2.2 = {crit_no:moveno}의 {crit_move}, 여기가 결정적인 순간이었어요. 연습할 점: {theme}.
+# Level 2, when the critical moment's theme is the same as in one of the last two games.
+appraisal.improve.critical.again.b2 = {crit_no:moveno}에 흐름이 바뀌었어요. 이번에도 같은 주제였어요: {theme}.
+appraisal.improve.critical.again.b2.2 = {crit_no:moveno}가 결정적인 순간이었어요. 지난번과 같은 아이디어예요: {theme}.
 appraisal.improve.critical.b3 = 결정적인 순간은 {crit_no:moveno}였어요. {crit_move} 대신 {crit_best}, 이 수가 더 좋았어요.
 appraisal.improve.critical.b3.2 = {crit_no:moveno}에는 {crit_move} 말고 {crit_best}, 이 수가 더 좋았어요. 제가 둘 수 있는 체크, 잡기, 위협 같은 강제수부터 먼저 확인해 보세요.
 appraisal.improve.critical.b4 = 결정적인 순간: {crit_no:moveno} {crit_move}. {crit_best}, 이 수가 더 좋았어요.
@@ -399,6 +424,15 @@ appraisal.improve.clean.b5 = 결정적인 실수는 없었어요.
 appraisal.improve.clean.b5.2 = 깔끔한 게임.
 appraisal.improve.clean.b6 = 깔끔한 게임.
 appraisal.improve.clean.b6.2 = 결정적 실수 없음.
+
+# ---- The next step: the critical position again (levels 1-3, with a critical blunder) ----------------
+appraisal.next.retry.b1 = 게임이 끝나면 그 포지션을 다시 해 볼 수 있어요.
+appraisal.next.retry.b1.2 = 이게 끝나면 그 까다로운 포지션을 다시 해 볼 수 있어요.
+appraisal.next.retry.b1.3 = 그 포지션을 다시 해 보시겠어요? 곧 해 볼 수 있어요.
+appraisal.next.retry.b2 = 다음 단계: 그 포지션을 다시 해 보고 더 좋은 수를 찾아보세요.
+appraisal.next.retry.b2.2 = 이게 끝나면 그 포지션을 다시 해 볼 수 있어요.
+appraisal.next.retry.b3 = 다음 단계: 그 포지션을 다시 해 보고 더 좋은 수를 찾으세요.
+appraisal.next.retry.b3.2 = 종료 화면에서 그 포지션을 다시 해 볼 수 있어요.
 
 # ---- 5. Encouragement and the level suggestion -----------------------------------------------------
 appraisal.end.b1 = 게임할 때마다 실력이 늘고 있어요. 한 판 더 할까요?

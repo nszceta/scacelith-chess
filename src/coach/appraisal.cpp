@@ -49,7 +49,7 @@ std::vector<double> accuracyWeights(const std::vector<double>& w) {
     return weights;
 }
 
-SideAccuracy gameAccuracy(const std::vector<int>& cps, Color firstMover, int startCp) {
+SideAccuracy gameAccuracy(const std::vector<int>& cps, Color firstMover, int startCp, const std::vector<double>* moveOverride) {
     SideAccuracy out;
     if (cps.empty()) return out;
     // lila AccuracyPercent.gameAccuracy: W% series with the start position first.
@@ -65,7 +65,8 @@ SideAccuracy gameAccuracy(const std::vector<int>& cps, Color firstMover, int sta
         const Color c = i % 2 == 0 ? firstMover : opposite(firstMover);
         const double before = c == White ? w[i] : 100.0 - w[i];
         const double after = c == White ? w[i + 1] : 100.0 - w[i + 1];
-        const double acc = moveAccuracy(before, after);
+        double acc = moveAccuracy(before, after);
+        if (moveOverride && i < moveOverride->size() && (*moveOverride)[i] >= 0.0) acc = (*moveOverride)[i];
         const int s = c == White ? 0 : 1;
         wAcc[s] += acc * weights[i];
         wSum[s] += weights[i];
@@ -108,7 +109,12 @@ int suggestLevel(int level, const std::vector<GameRecord>& games) {
                 ++wins;
                 if (here[i].accuracy < typicalAccuracy(levelRating(level + 1))) accurate = false;
             }
-        if (wins >= 2 && accurate && last.result > 0) return level + 1;
+        // Level 1 is left once a game there was played without a first-try blunder or without the
+        // danger markers: wins with the scaffold on and pieces still lost for nothing prove little.
+        bool unscaffolded = level != 1;
+        for (const GameRecord& g : here)
+            if (g.blunders == 0 || !g.markers) unscaffolded = true;
+        if (wins >= 2 && accurate && last.result > 0 && unscaffolded) return level + 1;
     }
     if (level > 1 && here.size() >= 3 && last.result < 0) {
         bool down = true;
@@ -118,6 +124,39 @@ int suggestLevel(int level, const std::vector<GameRecord>& games) {
         if (down) return level - 1;
     }
     return level;
+}
+
+bool levelMastered(int level, const std::vector<GameRecord>& games) {
+    if (level != 1 && level != 2) return false;
+    std::vector<const GameRecord*> here;   // the games at this level, oldest first
+    for (const GameRecord& g : games)
+        if (g.level == level) here.push_back(&g);
+    if (here.size() < 2) return false;
+    for (size_t i = here.size() - 2; i < here.size(); ++i) {
+        if (here[i]->blunders != 0) return false;
+        if (level == 2 && here[i]->result <= 0) return false;
+    }
+    return true;
+}
+
+std::string recurringTheme(const std::vector<GameRecord>& games) {
+    const size_t from = games.size() > 3 ? games.size() - 3 : 0;
+    for (size_t i = games.size(); i-- > from;) {   // the newest first: it wins a tie
+        const std::string& t = games[i].theme;
+        if (t.empty()) continue;
+        int named = 0;
+        for (size_t k = from; k < games.size(); ++k)
+            if (games[k].theme == t) ++named;
+        if (named >= 2) return t;
+    }
+    return std::string();
+}
+
+ExType themeFromName(const std::string& name) {
+    if (name.empty()) return ExType::None;
+    for (int t = int(ExType::MateAllowed); t <= int(ExType::Material); ++t)
+        if (name == exTypeName(ExType(t))) return ExType(t);
+    return ExType::None;
 }
 
 // ---- Collection -------------------------------------------------------------------------------------
@@ -160,6 +199,14 @@ void Appraisal::addEval(size_t plies, const ai::Analysis& a) {
 }
 
 void Appraisal::truncate(size_t plies) {
+    // A reviewed human move that goes with the takeback is kept as a first try: the worst move
+    // played at its ply decides how the ply counts in stats().
+    for (size_t i = plies; i < humanVerdicts_.size(); ++i) {
+        const PlyVerdict& v = humanVerdicts_[i];
+        if (v.ply != int(i) || v.cls == MoveClass::Unjudged) continue;
+        if (firstTries_.size() <= i) firstTries_.resize(i + 1);
+        if (firstTries_[i].ply < 0 || v.delta > firstTries_[i].delta) firstTries_[i] = v;
+    }
     if (humanVerdicts_.size() > plies) humanVerdicts_.resize(plies);
     if (eval_.size() > plies + 1) {
         eval_.resize(plies + 1);
@@ -291,13 +338,33 @@ AppraisalStats Appraisal::stats(const Game& g) const {
         if (v.human) ++st.humanMoves;
     }
 
+    // Moves taken back count as first played: a ply whose move was taken back is scored with the
+    // worse of that move and the one that replaced it, never the better, so taking back every
+    // blunder cannot lift the accuracy (the replacement still shows in the classes and the streaks).
+    std::vector<double> firstTry(n, -1.0);   // the accuracy of a taken-back ply, negative: its own
+    for (const PlyVerdict& v : vs) {
+        if (!v.human) continue;
+        MoveClass worst = v.cls;
+        if (size_t(v.ply) < firstTries_.size() && firstTries_[size_t(v.ply)].ply == v.ply) {
+            const PlyVerdict& ft = firstTries_[size_t(v.ply)];
+            if (ft.cls == MoveClass::Blunder && v.cls != MoveClass::Unjudged && v.cls != MoveClass::Mistake &&
+                v.cls != MoveClass::Blunder)
+                ++st.fixedBlunders;
+            if (v.cls == MoveClass::Unjudged || ft.delta > v.delta) {
+                firstTry[size_t(v.ply)] = ft.accuracy;
+                worst = ft.cls;
+            }
+        }
+        if (worst == MoveClass::Blunder) ++st.firstTryBlunders;
+    }
+
     // Accuracy from the evaluation series.
     std::vector<bool> measured;
     const std::vector<int> ev = evalSeries(g, eval_, evalKnown_, &measured);
     if (n > 0) {
         const std::vector<int> cps(ev.begin() + 1, ev.end());
         const Color first = g.startPosition().sideToMove();
-        const SideAccuracy acc = gameAccuracy(cps, first, ev[0]);
+        const SideAccuracy acc = gameAccuracy(cps, first, ev[0], &firstTry);
         st.human.accuracy = acc.of(human_);
         st.coach.accuracy = acc.of(opposite(human_));
         // Phase accuracy: the same function on each Divider slice with >= 6 plies of the side.
@@ -311,8 +378,9 @@ AppraisalStats Appraisal::stats(const Game& g) const {
             if (phase == 2 && ph.endgame < 0) continue;
             if (to - from < 2) continue;
             const std::vector<int> slice(ev.begin() + from + 1, ev.begin() + to + 1);
+            const std::vector<double> sliceFirstTry(firstTry.begin() + from, firstTry.begin() + to);
             const Color sliceFirst = g.positionAt(size_t(from)).sideToMove();
-            const SideAccuracy pa = gameAccuracy(slice, sliceFirst, ev[size_t(from)]);
+            const SideAccuracy pa = gameAccuracy(slice, sliceFirst, ev[size_t(from)], &sliceFirstTry);
             int humanPlies = 0, coachPlies = 0;
             for (int k = from; k < to; ++k) (vs[size_t(k)].human ? humanPlies : coachPlies)++;
             if (humanPlies >= 6) st.human.phaseAccuracy[size_t(phase)] = pa.of(human_);
@@ -479,6 +547,25 @@ int rounded(double x) { return int(std::lround(x)); }
 
 }  // namespace
 
+RetryPoint Appraisal::retryPoint(const Game& g) const {
+    if (level_ > 3) return RetryPoint{};
+    return retryPointOf(g, stats(g), verdicts(g));
+}
+
+RetryPoint Appraisal::retryPointOf(const Game& g, const AppraisalStats& st, const std::vector<PlyVerdict>& vs) const {
+    RetryPoint out;
+    if (level_ > 3 || st.criticalPly < 0) return out;
+    const PlyVerdict& v = vs[size_t(st.criticalPly)];
+    // A blunder only, and the engine's better move must be one the position allows.
+    if (v.cls != MoveClass::Blunder || v.bestUci.empty()) return out;
+    const Position& before = g.positionAt(size_t(v.ply));
+    if (!before.parseUCI(v.bestUci).valid()) return out;
+    out.ply = v.ply;
+    out.fen = before.fen();
+    out.bestUci = v.bestUci;
+    return out;
+}
+
 Script Appraisal::script(const Game& g, const AppraisalContext& ctx, ExType* improvement) const {
     if (improvement) *improvement = ExType::None;
     Script out;
@@ -568,6 +655,12 @@ Script Appraisal::script(const Game& g, const AppraisalContext& ctx, ExType* imp
             b.line.with("n", Arg::ofNumber(st.human.piecesCaptured)).with("m", Arg::ofNumber(st.human.checks));
             parts.push_back({b, 4});
         }
+    } else if (L <= 3 && st.fixedBlunders > 0) {
+        // Blunders taken back and replaced by a move that is no mistake: said instead of the
+        // takebacks' count, which the accuracy no longer rewards.
+        Beat b = say(bandKey("appraisal.num.retried", L), Look::Player);
+        b.line.with("n", Arg::ofNumber(st.fixedBlunders));
+        parts.push_back({b, 4});
     } else if (L <= 3 && st.takebacks > 0 && st.fixed > 0) {
         Beat b = say(bandKey("appraisal.num.takebacks", L), Look::Player);
         b.line.with("n", Arg::ofNumber(st.takebacks)).with("m", Arg::ofNumber(st.fixed));
@@ -640,15 +733,20 @@ Script Appraisal::script(const Game& g, const AppraisalContext& ctx, ExType* imp
         if (crit && L == 1 && crit->cls != MoveClass::Blunder) crit = nullptr;   // level 1: blunders only
         Beat b;
         ExType named = ExType::None;   // the theme b says aloud
+        // The theme was named by the appraisal of one of the last two games too (any level).
+        const auto again = [&](ExType t) {
+            return t != ExType::None && std::find(ctx.recentThemes.begin(), ctx.recentThemes.end(), exTypeName(t)) != ctx.recentThemes.end();
+        };
         if (stalemated) {
             b = say(bandKey("appraisal.improve.stalemate", L), Look::Player);
         } else if (crit) {
             // "You were winning until move {crit_no}": the move threw the win away.
             const bool wasWinning = crit->wBest >= 70.0 && crit->wPlayed < 50.0;
-            b = say(bandKey(wasWinning ? "appraisal.improve.was_winning"
-                                       : (L == 1 ? "appraisal.improve.theme" : "appraisal.improve.critical"),
-                            L),
-                    Look::Player);
+            std::string family = "appraisal.improve.critical";
+            if (wasWinning) family = "appraisal.improve.was_winning";
+            else if (L == 1) family = again(crit->exType) ? "appraisal.improve.theme.again" : "appraisal.improve.theme";
+            else if (L == 2 && again(crit->exType)) family = "appraisal.improve.critical.again";
+            b = say(bandKey(family, L), Look::Player);
             const int sign = human_ == White ? 1 : -1;
             b.line.with("crit_no", Arg::ofNumber(moveNumberOf(g, crit->ply)))
                 .with("crit_move", Arg::ofMove(crit->san, crit->uci))
@@ -657,7 +755,7 @@ Script Appraisal::script(const Game& g, const AppraisalContext& ctx, ExType* imp
                 .with("eval", Arg::ofEval(sign * crit->cpWhiteBefore, 0));
             if (L <= 2) named = crit->exType;   // levels 3+ name the better move, not its theme
         } else if (st.themeRecurring) {
-            b = say(bandKey("appraisal.improve.theme", L), Look::Player);
+            b = say(bandKey(again(st.theme) ? "appraisal.improve.theme.again" : "appraisal.improve.theme", L), Look::Player);
             b.line.with("theme", Arg::ofText(themeKey(st.theme)));
             named = st.theme;
         } else if (st.coachHungPly >= 0 && L <= 3) {
@@ -670,11 +768,14 @@ Script Appraisal::script(const Game& g, const AppraisalContext& ctx, ExType* imp
         parts.push_back({b, 8, named});
         // Level 4: the recurring theme too, when the critical moment was about something else.
         if (crit && !stalemated && L == 4 && st.themeRecurring && st.theme != crit->exType) {
-            Beat t = say("appraisal.improve.theme.b4", Look::Player);
+            Beat t = say(again(st.theme) ? "appraisal.improve.theme.again.b4" : "appraisal.improve.theme.b4", Look::Player);
             t.line.with("theme", Arg::ofText(themeKey(st.theme)));
             parts.push_back({t, 2, st.theme});
         }
     }
+
+    // The next step (levels 1-3): the game's critical blunder, tried again from the end card.
+    if (engine && L <= 3 && retryPointOf(g, st, vs).valid()) parts.push_back({say(bandKey("appraisal.next.retry", L), Look::Player), 7});
 
     // 5. Encouragement and the level suggestion (never "down" after a win).
     {
@@ -714,8 +815,12 @@ const char* practiceChallenge(ExType theme) {
     case ExType::Trapped: return "trapped";
     case ExType::BackRank: return "backrank";
     case ExType::Hanging:
-    case ExType::MissedCapture: return "hanging";
+    case ExType::MissedCapture:
+    case ExType::Exchange: return "hanging";
     case ExType::PromotionRace: return "promotion";
+    case ExType::KingSafety: return "escape";
+    case ExType::Opening: return "opening";
+    case ExType::Stalemate: return "kq";
     case ExType::Endgame: return "endgame";
     default: return "";
     }

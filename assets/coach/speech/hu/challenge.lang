@@ -13,7 +13,15 @@
 #            "a huszárodat", {your:sub} "a huszárodra"); the coach points at it on that word
 #   {sq}     a square; never a suffix or an article on it ("ezt a mezőt: {sq}"); the coach points at
 #            it on that word
+#   {theme}  what the last game's appraisal named: an infinitive phrase in lower case (theme.* of
+#            appraisal.lang), "figyelni a kettős támadásokra"
 # The player always has the white pieces. The coach says "te" to the player.
+
+# ---- A challenge started from the end card of a game: said before its introduction ----------------
+# {theme}: the one thing the coach named at the end of that game.
+ch.practise = Az utolsó játszmádból: {theme}. Ez a feladatsor erre készült.
+ch.practise.2 = Az előző játszmádban egy dologon kellett dolgozni: {theme}. Gyakoroljuk.
+ch.practise.3 = Az előző játszma tippje ez volt: {theme}. Itt egy kis gyakorlás.
 
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Matt egy lépésben. {n:position}, és mindegyikben egyetlen lépés ad mattot. Nézz meg minden sakkot.

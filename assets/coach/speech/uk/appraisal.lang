@@ -280,6 +280,13 @@ appraisal.num.takebacks.b2 = Повернуто {n:move}, {m} з них випр
 appraisal.num.takebacks.b2.2 = {n:move} повернуто, {m} виправлено. Так і треба вчитися!
 appraisal.num.takebacks.b3 = Повернуто {n:move}, із них виправлено {m}.
 appraisal.num.takebacks.b3.2 = {n:move} повернуто, {m} з них виправлено. Добре.
+# Takebacks retried successfully ({n:mistake}/{n:blunder} = how many were fixed).
+appraisal.num.retried.b1 = Ще одна спроба, і виправлено {n:mistake}. Так ми й учимося!
+appraisal.num.retried.b1.2 = Повторною спробою виправлено {n:mistake}. Чудово!
+appraisal.num.retried.b2 = Новою спробою виправлено {n:mistake}. Так і вчаться.
+appraisal.num.retried.b2.2 = Після повторних спроб виправлено {n:mistake}. Гарне навчання!
+appraisal.num.retried.b3 = Повторною спробою виправлено {n:blunder}.
+appraisal.num.retried.b3.2 = Виправлено {n:blunder} з другої спроби. Добре.
 # Level 2: big mistakes ({n} = mistakes and blunders), or the best moves found ({n}).
 appraisal.num.clean.b2 = Жодної серйозної помилки: чудово!
 appraisal.num.clean.b2.2 = За всю партію — жодної великої помилки. Відмінно!
@@ -330,9 +337,26 @@ appraisal.improve.theme.b5 = Завдання на майбутнє: {theme}.
 appraisal.improve.theme.b5.2 = Головне в цій партії: {theme}.
 appraisal.improve.theme.b6 = Завдання: {theme}.
 appraisal.improve.theme.b6.2 = Над чим працювати: {theme}.
+# The same theme as in the previous game(s).
+appraisal.improve.theme.again.b1 = Та сама порада, що й минулого разу: {theme}. Пам’ятай про це.
+appraisal.improve.theme.again.b1.2 = Це було й минулої партії: {theme}. Попрацюймо над цим разом.
+appraisal.improve.theme.again.b1.3 = Знову одне, що варто потренувати: {theme}. З кожною партією легше.
+appraisal.improve.theme.again.b2 = Та сама ідея, що в минулій партії: {theme}. Варто потренуватися.
+appraisal.improve.theme.again.b2.2 = Це траплялося й минулої партії: {theme}.
+appraisal.improve.theme.again.b2.3 = Знову є над чим попрацювати: {theme}.
+appraisal.improve.theme.again.b3 = Знову тема: {theme}. Вона була й минулої партії.
+appraisal.improve.theme.again.b3.2 = Та сама тема, що нещодавно: {theme}. Варто потренуватися.
+appraisal.improve.theme.again.b4 = Тема повторюється й у недавніх партіях: {theme}.
+appraisal.improve.theme.again.b4.2 = Та сама тема, що нещодавно: {theme}.
+appraisal.improve.theme.again.b5 = Повторюється, і нещодавно теж: {theme}.
+appraisal.improve.theme.again.b5.2 = Та сама тема, що в недавніх партіях: {theme}.
+appraisal.improve.theme.again.b6 = Знову: {theme}.
+appraisal.improve.theme.again.b6.2 = Тема повторюється: {theme}.
 # The critical moment (levels 2-6).
 appraisal.improve.critical.b2 = Усе вирішив {crit_no:nth_move}. Наступного разу спробуй {theme}.
 appraisal.improve.critical.b2.2 = Ключовим був {crit_no:nth_move}, {crit_move}. Що тренувати: {theme}.
+appraisal.improve.critical.again.b2 = Усе вирішив {crit_no:nth_move}, і знову через те саме: {theme}.
+appraisal.improve.critical.again.b2.2 = Ключовим був {crit_no:nth_move}. Та сама ідея, що минулого разу: {theme}.
 appraisal.improve.critical.b3 = Критичний момент настав на {crit_no:nth_move_loc}. Краще було {crit_best}, а не {crit_move}.
 appraisal.improve.critical.b3.2 = На {crit_no:nth_move_loc} краще було {crit_best}, ніж {crit_move}. Спершу перевіряй мої шахи, взяття й загрози.
 appraisal.improve.critical.b4 = Критичний момент: {crit_move} на {crit_no:nth_move_loc}. Краще було {crit_best}.
@@ -388,6 +412,15 @@ appraisal.improve.clean.b5 = Критичних помилок немає.
 appraisal.improve.clean.b5.2 = Чиста партія.
 appraisal.improve.clean.b6 = Чиста партія.
 appraisal.improve.clean.b6.2 = Без критичних помилок.
+
+# The end card offers the retry of the biggest mistake.
+appraisal.next.retry.b1 = Коли завершимо, ти зможеш ще раз спробувати цю позицію.
+appraisal.next.retry.b1.2 = Після цього ти зможеш ще раз спробувати цю складну позицію.
+appraisal.next.retry.b1.3 = Хочеш ще раз спробувати цю позицію? Зараз можна.
+appraisal.next.retry.b2 = Далі: спробуй цю позицію ще раз і знайди кращий хід.
+appraisal.next.retry.b2.2 = Після цього можна ще раз спробувати цю позицію.
+appraisal.next.retry.b3 = Далі: спробуй цю позицію ще раз і знайди кращий хід.
+appraisal.next.retry.b3.2 = Ще раз спробувати цю позицію можна з екрана завершення.
 
 # ---- 5. Encouragement and the level suggestion -----------------------------------------------------
 appraisal.end.b1 = Ти граєш дедалі краще. Ще одну?

@@ -1068,14 +1068,14 @@ coach.level.0.name = Satranç kuralları
 coach.level.0.desc = Etkileşimli bir ders, her seferinde bir kural.
 coach.level.0.detail = Eğitmen küçük pozisyonlar kurar ve her taşın nasıl hareket ettiğini ve nasıl taş aldığını, ardından rok, terfi, şah çekme ve şah matı gösterir. Her fikri tahtada kendiniz denersiniz.
 coach.level.1.name = İlk adımlar
-coach.level.1.desc = Saldırı altındaki ve korumasız kalan taşlar.
-coach.level.1.detail = Eğitmen nazik oynar ve sade konuşur: taşlarınızdan hangilerinin saldırı altında olduğunu, hangilerinin korumasız kaldığını ve onları nasıl koruyacağınızı söyler.
+coach.level.1.desc = Saldırı altındaki ve korumasız taşlar, sade sözlerle.
+coach.level.1.detail = Eğitmen nazik oynar ve sade konuşur. Taşlarınızdan ya da piyonlarınızdan biri saldırı altında ve korumasızsa sizi uyarır; bir oyunda ilk seferinde tehlikeyi kendinizin bulmasını ister.
 coach.level.2.name = Başlangıç
-coach.level.2.desc = Basit taktikler, gelişim, şah güvenliği.
-coach.level.2.detail = Çatallar ve açmazlar adlarıyla anılır. Eğitmen taşlarınızı oyuna sokmaktan ve şahınızı güvende tutmaktan söz eder.
+coach.level.2.desc = Çatallar, açmazlar, gelişim ve şah güvenliği.
+coach.level.2.detail = Eğitmen, hamlesi bir çatal, açmaz, vezirinize saldırı ya da mat hazırladığında sizi uyarır ve taktiği adlandırır. Taşlarınızı oyuna sokmanızı ve şahınızı güvende tutmanızı hatırlatır.
 coach.level.3.name = Gelişen oyuncu
-coach.level.3.desc = Planlar, piyon yapısı, tek hamleler.
-coach.level.3.detail = Eğitmen planları ve piyon yapılarını açıklar; pozisyonu yalnızca tek bir hamle tutabiliyorsa sizi uyarır.
+coach.level.3.desc = Büyük tehditler ve tek hamlenin işe yaradığı anlar.
+coach.level.3.detail = Artık soru ve işaret yok: eğitmen yalnızca mat tehdidi ya da vezirinize saldırı konusunda uyarır ve pozisyonu yalnızca tek hamle tutuyorsa söyler.
 coach.level.4.name = Kulüp oyuncusu
 coach.level.4.desc = Aday hamleler, piyon cinsinden değerlendirme.
 coach.level.4.detail = Eğitmen aday hamleleri tartar ve değerlendirmeyi, bir kulüp antrenörünün yapacağı gibi piyon cinsinden verir.
@@ -1085,6 +1085,9 @@ coach.level.5.detail = Kısa yorumlar, somut varyantlar ve pozisyon oyununun ter
 coach.level.6.name = Uzman
 coach.level.6.desc = Çok kısa yorumlar, derin varyantlar, sayısal değerlendirme.
 coach.level.6.detail = Güçlü oyuncular arasındaki gibi az söz: birkaç hamle derinliğinde varyantlar ve sayısal değerlendirmeler.
+# The goals of levels 1 and 2 on the level's card
+coach.goal.1 = Hedef: üst üste iki oyunda boşuna taş kaybetmemek.
+coach.goal.2 = Hedef: büyük hata yapmadan üst üste iki galibiyet.
 coach.note.clock = Saat yok: istediğiniz kadar düşünün.
 coach.note.takeback = Büyük bir hatadan sonra eğitmen neyin yanlış gittiğini gösterir ve hamleyi geri almayı önerir.
 coach.note.lesson = Beyaz taşlarla oynarsınız; eğitmen her alıştırmayı tahtada kurar.
@@ -1093,10 +1096,16 @@ coach.note.fallible = Eğitmen yanılmaz değildir: bazen bir hamleyi yanlış d
 coach.colour = Renginiz
 coach.colour.help = Eğitmene karşı oynadığınız renk. Sırayla: bir oyunda beyaz, sonrakinde siyah. Kurallar dersi her zaman beyaz taşlarla oynanır.
 coach.colour.alternate = Sırayla
+coach.chapter = Bölüm
+coach.chapter.help = Dersin başladığı bölüm: kaldığınız bölüm ya da yeniden çalışmak için başka biri. Dersin tamamlanması kayıtlı kalır.
+coach.chapter.title = Dersi şu bölümden başlat
 coach.take_time = "Acele etmeyin" hatırlatması
 coach.take_time.help = Bir dakika düşündükten sonra eğitmen acele etmenize gerek olmadığını söyler. Yalnızca 1–3. seviyeler.
 coach.danger_markers = Tehlikedeki taşları göster
-coach.danger_markers.help = 1. ve 2. seviyelerde, sıra sizdeyken, eğitmenin hemen alabileceği her taşınızın altında renkli bir kare belirir.
+coach.danger_markers.auto = Otomatik
+coach.danger_markers.help = 1. ve 2. seviyelerde, sıra sizdeyken, eğitmenin hemen alabileceği her taşınızın altında renkli bir kare belirir. Otomatik: 1. seviyede ilk üç oyununuzda, 2. seviyede ilk oyununuzda, sonra kapalı. Açık: iki seviyede de her oyunda.
+# Under the control above, when Automatic has switched the markers off
+coach.danger_markers.withdrawn = Oyunu öğrendiğiniz için işaretler kapalı. Tutmak için Açık'ı seçin.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Eğitmenin sesi yüklü değil ya da kapalı (Seçenekler > Ses): sözleri ekranda yazılacak.
 # At the table
@@ -1119,9 +1128,17 @@ coach.confirm.leave = Ana menüye dönülsün mü? Eğitmenle oynadığınız bu
 coach.gameover.again = Yeniden oyna
 coach.gameover.practise = Alıştırma: {0}
 coach.gameover.unrated = Eğitmenle oynanan bu oyun puanlı değil.
+# "Try that position again" (levels 1-3, a game with a critical blunder), and its own end card
+coach.gameover.retry = Pozisyonu yeniden dene
+coach.retry.found = İYİ BULDUN
+coach.retry.found.line = Oyunu değiştiren hamle bu.
+coach.retry.shown = DAHA İYİ HAMLE
+coach.retry.shown.line = Artık gördünüz. Bir sonraki oyununuzda bu fikri arayın.
+coach.retry.reason = Kritik pozisyon
 coach.lesson.done = TEBRİKLER
 coach.lesson.done.line = Artık satranç kurallarını biliyorsunuz.
-coach.lesson.next = İlk oyun
+coach.lesson.done.next_line = İlk adımlar: seni zorlamadan oynarım ve bir taşın tehlikedeyse sana söylerim.
+coach.lesson.next = İlk adımları oyna
 
 # ---- Coach challenges (src/ui/ui_coach.cpp; the coach's spoken lines are in assets/coach/speech/<lang>/challenge.lang)
 # The tabs of the Coach page: games with the coach, and short sets of positions to solve

@@ -9,6 +9,7 @@
 #pragma once
 #include "../ai/analysis.h"
 #include "../chess/chess.h"
+#include "game_record.h"
 #include "review.h"
 #include "script.h"
 #include <array>
@@ -26,8 +27,10 @@ struct SideAccuracy {
     double white = -1.0, black = -1.0;
     double of(chess::Color c) const { return c == chess::White ? white : black; }
 };
+// 'moveOverride' (optional, one per move of the series, negative = none): the accuracy a move is
+// scored with instead of the one its evaluations give (a taken-back move counts as first played).
 SideAccuracy gameAccuracy(const std::vector<int>& cpsWhiteAfterEachPly, chess::Color firstMover = chess::White,
-                          int startCp = 15);
+                          int startCp = 15, const std::vector<double>* moveOverride = nullptr);
 // The volatility weights of that accuracy: one per move of a series of W% values (White's view,
 // the position before the first move first, one value per position): the standard deviation of
 // the W% in the window of positions the move belongs to (a tenth of the game, 2 to 8 positions),
@@ -40,17 +43,23 @@ std::vector<double> accuracyWeights(const std::vector<double>& winPercents);
 double typicalAccuracy(int rating);
 int levelRating(int level);   // 750, 1050, 1350, 1650, 1950, 2250
 
-// One finished Coach game, for the level suggestion.
-struct GameRecord {
-    int level = 1;
-    int result = 0;          // +1 the human won, 0 draw, -1 lost
-    double accuracy = -1.0;  // the human's game accuracy, -1 unknown
-};
 // Suggested level after the games so far (oldest first, the last one just finished): up after 2 wins
 // in the last 3 games at this level with accuracy >= the next level's typical accuracy; down after
 // 3 losses in a row at this level with accuracy below its typical accuracy; else the same level.
-// Never down right after a win. Returns 1..6.
+// Never down right after a win. Level 1 does not move up until one of its games was played without
+// a first-try blunder or without the danger markers (a win with the scaffold on proves little).
+// Returns 1..6.
 int suggestLevel(int level, const std::vector<GameRecord>& games);
+// The level's mastery goal, met by the games so far: level 1, the last two games at the level had
+// no first-try blunder (no piece lost for nothing); level 2, the last two games at the level were
+// won without one. False for the other levels (no goal) and when the games are too few or their
+// blunders unknown.
+bool levelMastered(int level, const std::vector<GameRecord>& games);
+// The theme the appraisals named in two of the last three games (any level), as GameRecord::theme
+// ("" = none); the most recent one when there are two. The Coach page recommends its challenge set.
+std::string recurringTheme(const std::vector<GameRecord>& games);
+// The ExType whose exTypeName() is 'name'; ExType::None for "" and for names this version does not know.
+ExType themeFromName(const std::string& name);
 
 // ---- Statistics ------------------------------------------------------------------------------------
 enum class BestMoment : uint8_t { None, Brilliant, Great, OnlyMove, WonMaterial, Streak, GoodCapture, Phase };
@@ -84,9 +93,23 @@ struct AppraisalStats {
     ExType theme = ExType::None;                   // recurring theme, else the critical moment's type
     bool themeRecurring = false;
     int offers = 0, takebacks = 0, fixed = 0;      // takeback offers, taken, replayed with Δ < 5
+    // Moves taken back count as first played: a ply whose move was taken back and replayed scores as
+    // the worse of the two (accuracy, firstTryBlunders); 'fixedBlunders' are the blunders taken back
+    // whose replacement is no mistake.
+    int firstTryBlunders = 0;                      // the human's blunders, taken-back ones included
+    int fixedBlunders = 0;
     int coachHungPly = -1;                         // a coach move that hung a piece of 3+ the human did not take
     chess::PieceType coachHungType = chess::NoPiece;
     double humanWinAtEnd = -1.0;                   // the human's W% at the last evaluated position (resignation)
+};
+
+// The critical position of a game, for the end card's "Try that position again" (levels 1-3): the
+// position before the human's critical blunder and the engine's better move there. ply -1: none (no
+// blunder was critical, or the review had no better move to name).
+struct RetryPoint {
+    int ply = -1;
+    std::string fen, bestUci;
+    bool valid() const { return ply >= 0; }
 };
 
 // ---- The appraisal script ----------------------------------------------------------------------------
@@ -96,6 +119,9 @@ struct AppraisalContext {
     std::string opening;            // opening id for Arg::ofOpening ("" = none): said from level 3
     int outOfBookMove = 0;          // the move number the game left the book (level 5), 0 = unknown
     int suggestedLevel = 0;         // suggestLevel() result; 0 or the current level = no suggestion
+    // GameRecord::theme of the last two finished games before this one, newest first (empty
+    // entries skipped): a theme named again wins the "again" wording ("The same tip as last time").
+    std::vector<std::string> recentThemes;
 };
 
 class Appraisal {
@@ -111,7 +137,7 @@ public:
     // analysis): its best line, side to move's view, as the analysis reports it.
     void addEval(size_t plies, const ai::Analysis& a);
     // After Game::undo (a takeback, or anything else that shortens the game): forget what lies past
-    // the current move list.
+    // the current move list. A human verdict that goes with it is kept as a first try (see stats).
     void truncate(size_t plies);
     // Positions after 1..moves().size() plies whose evaluation is still unknown, for background
     // analyses when the engine is free (the coach's moves are judged from these evaluations).
@@ -124,6 +150,8 @@ public:
     // The coach's verdict of every ply (the human's from the review, the coach's from the
     // neighbouring evaluations); Unjudged where nothing is known.
     std::vector<PlyVerdict> verdicts(const chess::Game& g) const;
+    // Levels 1-3: the position to offer again (see RetryPoint); empty at other levels.
+    RetryPoint retryPoint(const chess::Game& g) const;
     // *improvement (when given): the theme the "one improvement" sentence names aloud ("One thing
     // to practise: forks"), after the sentence cap; ExType::None when it names none (keep doing,
     // a critical move said without its theme, the coach's hung piece, stalemate, a dropped sentence).
@@ -133,6 +161,9 @@ private:
     int level_ = 1;
     chess::Color human_ = chess::White;
     std::vector<PlyVerdict> humanVerdicts_;   // index = ply; ply -1 = none
+    std::vector<PlyVerdict> firstTries_;       // index = ply; the worst human move taken back there (ply -1 = none)
+    // retryPoint() from the stats and verdicts of 'g' already computed.
+    RetryPoint retryPointOf(const chess::Game& g, const AppraisalStats& st, const std::vector<PlyVerdict>& vs) const;
     std::vector<int> eval_;                    // index = plies played; White's view cp
     std::vector<uint8_t> evalKnown_;           // 0 unknown, 1 from a move's line, 2 from a root analysis
     int offers_ = 0, takebacks_ = 0, fixed_ = 0;
@@ -140,8 +171,9 @@ private:
 };
 
 // The challenge set (assets/coach/challenges/challenges.txt) that practises a theme: "fork" for
-// Fork and MissedFork, "hanging" for Hanging and MissedCapture, ...; "" for a theme without one
-// (positional, exchange, king safety, opening, material, stalemate, none).
+// Fork and MissedFork, "hanging" for Hanging, MissedCapture and Exchange, "escape" for King safety,
+// "opening" for Opening, "kq" for Stalemate, ...; "" for a theme without one (positional, bad
+// trade, material, none).
 const char* practiceChallenge(ExType theme);
 
 }  // namespace coach

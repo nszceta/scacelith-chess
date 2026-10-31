@@ -385,6 +385,8 @@ void GameScene::enterMenu() {
     if (hotSeat()) mode_ = GameMode::Play;  // the New Game page chooses again
     if (coach()) {
         leaveCoachGame();
+        coachRetryFen_.clear();
+        coachRetryBest_.clear();
         mode_ = GameMode::Play;
     }
     world_.setCoachSeat(-1);
@@ -527,13 +529,16 @@ void GameScene::setupNewGame() {
     // A replay starts from the record's position (a FEN game), set up before the board is.
     if (replaying() && !replayRecord_.fen.empty() && !game_.resetFromFEN(replayRecord_.fen))
         LOGW("replay: the start position '%s' cannot be set up", replayRecord_.fen.c_str());
+    // A retry starts at the position before the critical move of the game just played.
+    if (retrying() && !game_.resetFromFEN(coachRetryFen_))
+        LOGW("coach: the position to retry '%s' cannot be set up", coachRetryFen_.c_str());
     arbiter_.reset(game_);
     // Opposite the windows in every mode, whichever colour the human plays (layout.h): the
     // player with Black has it at their left and plays with the left hand.
     const bool clockPosX = layout::CLOCK_ON_POSITIVE_X;
     world_.setClockSide(clockPosX);
     board_.reset(clockPosX);
-    if (replaying() && !replayRecord_.fen.empty()) board_.syncTo(game_.position());  // a FEN game
+    if ((replaying() && !replayRecord_.fen.empty()) || retrying()) board_.syncTo(game_.position());  // a FEN game
     clock_.setup(chosenTimeControl());
     clockAccumMs_ = 0.0;
     // White's clock runs first, as if Black had pressed: Black's half of the lever is down.
@@ -906,7 +911,7 @@ void GameScene::archiveGame(bool finished) {
     // Screenshot runs leave the player's saved games alone.
     if (archived_ || ctx_->screenshotMode) return;
     archived_ = true;
-    if (challenge()) return;   // a challenge leaves no game behind
+    if (challenge() || retrying()) return;   // a challenge or a retry leaves no game behind
     // The record: a direct match's from its authority (the local game may lag behind).
     chess::pgn::Record rec;
     archive::Mode mode;
@@ -935,8 +940,16 @@ ui::GameOverExtras GameScene::gameOverExtras() const {
             x.primaryLabel = i18n::tr("coach.challenge.next");
         } else if (lesson()) {
             x.line = i18n::tr("coach.lesson.done.line");
+            x.detail = i18n::tr("coach.lesson.done.next_line");
             x.primaryLabel = i18n::tr("coach.lesson.next");
+        } else if (retrying()) {
+            // Found: nothing more to say; shown the better move: it can be tried once more.
+            const bool found = coachRetryFound();
+            x.line = i18n::tr(found ? "coach.retry.found.line" : "coach.retry.shown.line");
+            x.primaryLabel = i18n::tr("coach.gameover.again");
+            if (!found) x.retryLabel = i18n::tr("coach.gameover.retry");
         } else {
+            if (coachRetryOffered()) x.retryLabel = i18n::tr("coach.gameover.retry");
             x.detail = i18n::tr("coach.gameover.unrated");
             x.primaryLabel = i18n::tr("coach.gameover.again");
             x.analyse = !game_.moves().empty();
@@ -1074,6 +1087,7 @@ bool GameScene::update(AppContext& ctx, float dt) {
             // from there (the command line's forced ones no longer apply).
             mode_ = GameMode::Coach;
             coachArgs_.level = coachArgs_.colour = -1;
+            coachArgs_.lessonChapter.clear();
             coachChallenge_.clear();
             state_ = State::FadeToGame;
             stateTime_ = 0.0f;
@@ -1221,17 +1235,27 @@ bool GameScene::update(AppContext& ctx, float dt) {
                 if (hotSeat()) swapHotSeatColours();  // the rematch swaps colours
                 if (coach()) {
                     // "Play again": the same level (the Coach page offers the one the coach
-                    // suggested); "First game" after the lesson: level 1; "Next challenge".
+                    // suggested); "Play First steps" after the lesson: level 1; "Next challenge".
                     if (challenge()) nextChallenge();
                     else if (!lesson()) coachArgs_.level = coachLevel_;
+                    coachRetryFen_.clear();   // a game, not the retry of a position
+                    coachRetryBest_.clear();
                     leaveCoachGame();
                 }
                 state_ = State::FadeToGame;
                 stateTime_ = 0.0f;
             } else if (a == ui::MenuAction::Practise) {
                 // "Practise: Forks": the challenge set for the theme the appraisal named, from its
-                // first position, as "Next challenge" starts one.
-                chainChallenge(practiseChallenge());
+                // first position, as "Next challenge" starts one; it opens by naming that theme.
+                chainChallenge(practiseChallenge(), practiseTheme());
+                leaveCoachGame();
+                state_ = State::FadeToGame;
+                stateTime_ = 0.0f;
+            } else if (a == ui::MenuAction::RetryPosition) {
+                // "Try that position again": the position before the game's critical blunder (or the
+                // retry's own again), at the same level.
+                chainRetry();
+                coachArgs_.level = coachLevel_;
                 leaveCoachGame();
                 state_ = State::FadeToGame;
                 stateTime_ = 0.0f;
@@ -1798,7 +1822,7 @@ void GameScene::humanTouch(int pieceId) {
     touchedId_ = pieceId;
     touchedSq_ = p->square;
     turn_ = Turn::HumanTouched;
-    if (coach()) coachPlayerTouched();
+    if (coach()) coachPlayerTouched(touchedSq_);
     // Hot-seat: touching a piece declines a draw offer, and the recording of the opponent's move
     // waits until after this move (updateHotSeatTurn).
     if (hotSeat() && drawCardFor_ == inputSeat()) answerHotSeatDraw(false);

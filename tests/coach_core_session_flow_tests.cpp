@@ -244,6 +244,53 @@ TEST(coach_core_session_suggests_the_next_level) {
     CHECK(t.rendersClean());
 }
 
+// The coach remembers the last game: at levels 1-3 its theme replaces the greeting, a name this
+// version does not know is not said, and the finished game is recorded with its first-try blunders
+// and whether the danger markers were on.
+TEST(coach_core_session_remembers_the_last_game) {
+    GameRecord last{2, -1, 60.0};
+    last.theme = "fork";
+    for (int level : {1, 2, 3, 4}) {
+        Table t;
+        t.game.resetFromFEN(kHangFen);
+        SessionConfig cfg = levelConfig(level);
+        cfg.history = {last};
+        t.start(cfg);
+        const std::string greeting = "event.greet.l" + std::to_string(level);
+        const std::string said = level <= 3 ? greeting + ".theme" : greeting;
+        CHECK(t.until([&] { return t.queued(said) == 1; }, 10.0f));
+        CHECK_EQ(t.queued(level <= 3 ? greeting : greeting + ".theme"), 0);
+        if (level <= 3) {
+            bool named = false;
+            for (const Line& l : t.lines)
+                if (l.key == said) named = l.arg("theme") && l.arg("theme")->text == "theme.fork";
+            CHECK(named);
+        }
+    }
+    Table unknown;
+    unknown.game.resetFromFEN(kHangFen);
+    SessionConfig cfg = levelConfig(2);
+    last.theme = "not_a_theme";
+    cfg.history = {last};
+    unknown.start(cfg);
+    CHECK(unknown.until([&] { return unknown.queued("event.greet.l2") == 1; }, 10.0f));
+
+    Table t;
+    t.game.resetFromFEN(kMateFen);
+    t.analyst.results[fenOf(kMateFen) + "|A0"] = analysisOf({pvl(0, "a1a8", 1), pvl(300, "g1f1 g8f8")});
+    SessionConfig played = levelConfig(1);
+    played.dangerMarkers = true;
+    t.start(played);
+    CHECK(t.quiet());
+    t.move("a1a8");
+    t.session.onGameOver(t.game, false);
+    CHECK(t.until([&] { return t.session.handshakeWanted(); }, 60.0f));
+    t.session.onHandshakeDone(t.game);
+    REQUIRE(t.session.history().size() == 1u);
+    CHECK(t.session.history().back().markers);
+    CHECK_EQ(t.session.history().back().blunders, 0);
+}
+
 TEST(coach_core_session_resignation_before_any_move) {
     Table t;
     hangTable(t);
@@ -361,7 +408,7 @@ TEST(coach_core_session_late_searches_given_up) {
 }
 
 TEST(coach_core_session_coach_move_gone_before_its_remark) {
-    // The coach's knight-winning threat would be pointed out at level 1, once its search is in; the
+    // The coach's knight-winning threat would be asked about at level 1, once its search is in; the
     // move is gone first (undone by the scene): nothing is said about it.
     const char* fen = "4k3/4p3/8/8/8/5N2/8/6K1 w - - 0 1";
     chess::Game after;
@@ -384,7 +431,7 @@ TEST(coach_core_session_coach_move_gone_before_its_remark) {
         t.run(3.0f);
         CHECK(t.quiet());
         CHECK_EQ(t.analyst.count("V", threat), 1);
-        CHECK_EQ(t.queued("threat.piece.b1"), undone ? 0 : 1);
+        CHECK_EQ(t.queued("threat.ask.b1"), undone ? 0 : 1);
     }
 }
 

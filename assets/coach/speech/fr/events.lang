@@ -5,15 +5,23 @@
 # player ("prêt", "battu"...), the coach's own agree in the masculine.
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Bonjour ! Faisons une partie amicale. Je t’aiderai chaque fois que quelque chose ne va pas.
+event.greet.l1 = Bonjour ! Faisons une partie amicale. Je te préviendrai quand une de tes pièces sera en danger.
 event.greet.l1.2 = Salut ! Je vais jouer en douceur et te montrer à quoi faire attention.
 event.greet.l1.3 = Bienvenue ! Prends ton temps : je te préviendrai quand une pièce sera en danger.
-event.greet.l2 = Bonjour ! Jouons. Si une fourchette ou un clouage apparaît, je te le montrerai.
+event.greet.l1.first = Bonjour ! Avant chaque coup : ma pièce est-elle en sécurité ? Qu’attaque mon coup ? Que menace mon adversaire ? Je te le rappellerai.
+event.greet.l1.first.2 = Ta première vraie partie ! Avant chaque coup : ma pièce est-elle en sécurité, qu’attaque-t-elle, quelle est la menace ? Je te le rappellerai.
+event.greet.l2 = Bonjour ! Jouons. Si mon coup prépare une fourchette ou un clouage, je te le dirai.
 event.greet.l2.2 = Salut ! Sors tes pièces et mets ton roi à l’abri. Je t’aiderai en chemin.
 event.greet.l2.3 = Bon retour ! Guette les fourchettes et les clouages : ils font gagner des parties.
-event.greet.l3 = Bonjour ! Jouons une vraie partie : je commenterai tes plans et tes grosses erreurs.
+event.greet.l3 = Bonjour ! Jouons une vraie partie. Je t’avertirai des grosses menaces et j’expliquerai les grosses erreurs.
 event.greet.l3.2 = Salut ! Pense à un plan pour tes pièces. Je te dirai quand un coup néglige quelque chose.
-event.greet.l3.3 = Jouons ! Je te signalerai les coups uniques et les coups qui ne marchent pas.
+event.greet.l3.3 = Jouons ! Je te dirai quand un seul coup marche, et quand un coup ne marche pas.
+event.greet.l1.theme = Bon retour ! Le conseil de la dernière partie : {theme}. Garde-le en tête aujourd’hui.
+event.greet.l1.theme.2 = Rebonjour ! Souviens-toi du conseil de la dernière partie : {theme}. Je t’aiderai.
+event.greet.l2.theme = Bon retour ! L’idée de la dernière partie : {theme}. Voyons ce que ça donne aujourd’hui.
+event.greet.l2.theme.2 = Rebonjour ! À retenir de la dernière partie : {theme}.
+event.greet.l3.theme = Bon retour ! Le thème de la dernière partie : {theme}. Garde-le en tête aujourd’hui.
+event.greet.l3.theme.2 = Salut ! De la dernière partie : {theme}. Voyons ce que ça donne aujourd’hui.
 event.greet.l4 = Bonjour ! Cette fois, je donne l’évaluation et je montre les meilleurs coups candidats.
 event.greet.l4.2 = Jouons. Après une erreur, je te dirai ce qui était plus précis.
 event.greet.l4.3 = Une partie comme au club ? Je commenterai quand l’évaluation changera.
@@ -32,9 +40,9 @@ event.colour.black.2 = Cette fois, tu joues les Noirs : je joue en premier.
 
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names are those of the coach page (assets/i18n/fr.lang coach.level.<n>.name).
-event.level.l1 = Premiers pas : je joue en douceur et j’explique chaque erreur avec des mots simples.
-event.level.l2 = Débutant : je joue un peu plus fort, et je nomme les fourchettes et les clouages.
-event.level.l3 = En progrès : je parle de plans et de structure de pions, avec de courtes variantes.
+event.level.l1 = Premiers pas : je joue en douceur. Je te dis quand une pièce est attaquée et sans protection, et j’explique les grosses erreurs simplement.
+event.level.l2 = Débutant : je joue un peu plus fort. Je signale fourchettes, clouages et attaques sur ta dame, et je te rappelle de sortir tes pièces.
+event.level.l3 = En progrès : je ne t’avertis que des mats et des attaques sur ta dame, et quand un seul coup marche. J’explique toujours tes erreurs.
 event.level.l4 = Joueur de club : je donne l’évaluation en pions et je propose des coups candidats.
 event.level.l5 = Bon joueur de club : commentaires courts, et variantes plus longues quand il le faut.
 event.level.l6 = Expert : je joue de mon mieux et je ne commente que les moments critiques.
@@ -105,5 +113,7 @@ event.end.handshake = Serrons-nous la main.
 # put it after "à" or "de" (no "au", "du" contraction is possible).
 event.lesson.resume = Te revoilà ! Continuons avec {chapter}.
 event.lesson.resume.2 = Rebonjour ! Reprenons où nous en étions : {chapter}.
+event.lesson.start = Commençons par {chapter}.
+event.lesson.start.2 = Nous débutons avec {chapter}.
 event.lesson.next = Chapitre suivant : {chapter}.
 event.lesson.next.2 = Maintenant, {chapter}.

@@ -16,6 +16,9 @@
 # ataque a la descubierta, rey ahogado, tablas, coronar).
 
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
+ch.practise = De tu última partida: {theme}. Esta serie está pensada para eso.
+ch.practise.2 = En tu última partida había algo que trabajar: {theme}. Practiquémoslo.
+ch.practise.3 = El consejo de la última partida: {theme}. Aquí tienes práctica.
 ch.intro.mate1 = Mate en una jugada. {n:position}, y cada vez una sola jugada da mate. Mira todos los jaques.
 ch.intro.mate2 = Mate en dos jugadas. {n:position}: tu primera jugada debe dejarme sin defensa, y luego das mate.
 ch.intro.mate3 = Mate en tres jugadas. {n:position}. Jaques, capturas y amenazas: calcula mi mejor respuesta cada vez.

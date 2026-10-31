@@ -103,7 +103,8 @@ enum class MenuAction {
     // scene analyses the game it holds)
     StartAnalysis,
     StartChallenge, // Coach page, Challenges tab: Start (CoachSetup::challenge names the set)
-    Practise        // coach game's end card: "Practise: Forks" (GameOverExtras::practiseLabel)
+    Practise,       // coach game's end card: "Practise: Forks" (GameOverExtras::practiseLabel)
+    RetryPosition   // coach game's end card: "Try that position again" (GameOverExtras::retryLabel)
 };
 
 // "Watch a Game" (viewer mode): two Stockfish players. The page starts from the last choices saved
@@ -127,7 +128,7 @@ int promotionPicker(bool playerIsWhite);
 void notify(const std::string& message, float seconds = 3.0f);
 void drawNotifications();
 // End of game card: result line ("1-0", "½-½"), reason, move count. Returns Rematch or BackToMainMenu
-// (and StartAnalysis, Report, Practise with the extras below).
+// (and StartAnalysis, Report, Practise, RetryPosition with the extras below).
 // The card can be folded away by the player to look at the final position.
 MenuAction gameOver(const std::string& result, const std::string& reason, bool playerWon, bool draw, int moveCount = -1);
 // Additions to the end of game card.
@@ -143,6 +144,9 @@ struct GameOverExtras {
     // Coach game, levels 1-3: "Practise: Forks" (returns Practise), a second row above the
     // buttons: the challenge set for the theme the appraisal named. "" = none.
     std::string practiseLabel;
+    // Coach game, levels 1-3, with a critical blunder: "Try that position again" (returns
+    // RetryPosition), a row above "Practise". "" = none.
+    std::string retryLabel;
 };
 MenuAction gameOver(const std::string& result, const std::string& reason, bool playerWon, bool draw, int moveCount,
                     const GameOverExtras& extras);
@@ -241,8 +245,9 @@ void setCoachLevels(const std::vector<CoachLevelInfo>& levels);
 // Choices of the coach page. The page starts from game::settings() [coach] and writes them back
 // (and saves the .ini) on Start.
 //
-// The page has two tabs. Training: the level and the colour of a game with the coach (Start
-// returns StartCoach). Challenges: the sets of positions of coach::ChallengeBook::shared(), by
+// The page has two tabs. Training: the level and the colour of a game with the coach (and, for the
+// rules lesson, the chapter to start at; Start returns StartCoach). Challenges: the sets of
+// positions of coach::ChallengeBook::shared(), by
 // group, each with its difficulty and a check mark once completed
 // (Settings::coachChallengesDone); Start returns StartChallenge, 'challenge' naming the set.
 struct CoachSetup {
@@ -250,9 +255,13 @@ struct CoachSetup {
     int level = 1;               // index into the coach levels: 0 = the rules lesson
     int colour = 2;              // the player's colour: 0 White, 1 Black, 2 alternate (the rules
                                  // lesson is always played with White: Settings::coachPlayerColour)
+    std::string lessonChapter;   // level 0: the chapter the lesson starts at (coach::LessonChapter::id, ""
+                                 // = the first); the saved one the lesson resumes at until the player picks
+                                 // another in the chapter list (Settings::coachLessonChapter)
+    bool lessonPicked = false;   // the player picked the chapter on this visit of the page
     std::string challenge;       // the challenge selected (coach::Challenge::id)
     bool takeYourTime = true;    // the coach's "Take your time." reminder (levels 1-3)
-    bool dangerMarkers = true;   // the pieces in danger shown on the board (levels 1-2)
+    int dangerMarkers = 0;       // the pieces in danger shown on the board (levels 1-2): game::Settings::DangerMarkerMode
     // Set by the game before mainMenu(): false when the coach's voice files (tts::modelFolder(),
     // <application data>/coach/) are missing or failed to load. The page then says in one line that
     // the coach will speak through subtitles only.

@@ -5,15 +5,23 @@
 # participles never agree with the player ("je hebt opgegeven", "verslagen"), so nothing shows gender.
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Hallo! Laten we een vriendschappelijke partij spelen. Ik help je telkens als er iets misgaat.
+event.greet.l1 = Hallo! Laten we een vriendschappelijke partij spelen. Ik zeg het je als een van je stukken in gevaar is.
 event.greet.l1.2 = Hoi! Ik speel rustig en laat je zien waar je op moet letten.
 event.greet.l1.3 = Welkom! Neem rustig de tijd: ik zeg het je als een stuk in gevaar is.
-event.greet.l2 = Hallo! Laten we spelen. Zodra er een vork of een penning opduikt, laat ik je die zien.
+event.greet.l1.first = Hallo! Vraag je vóór elke zet af: staat mijn stuk veilig? Wat valt mijn zet aan? Wat dreigt mijn tegenstander? Ik herinner je eraan.
+event.greet.l1.first.2 = Je eerste echte partij! Vraag je vóór elke zet: staat mijn stuk veilig, wat valt het aan, wat is de dreiging? Ik herinner je eraan.
+event.greet.l2 = Hallo! Laten we spelen. Als mijn zet een vork of een penning voorbereidt, zeg ik het je.
 event.greet.l2.2 = Hoi! Breng je stukken in het spel en houd je koning veilig. Onderweg help ik je.
 event.greet.l2.3 = Welkom terug aan het bord! Let op vorken en penningen: daarmee win je partijen.
-event.greet.l3 = Hallo! Laten we een echte partij spelen. Ik geef commentaar op je plannen en op de grotere fouten.
+event.greet.l3 = Hallo! Laten we een echte partij spelen. Ik waarschuw je voor de grote dreigingen en leg de grotere fouten uit.
 event.greet.l3.2 = Hoi! Bedenk een plan voor je stukken. Ik zeg het je als een zet iets mist.
-event.greet.l3.3 = Laten we spelen! Ik wijs je op de enige zetten en op de zetten die de mist ingaan.
+event.greet.l3.3 = Laten we spelen! Ik zeg het je als er maar één zet werkt, en als een zet de mist ingaat.
+event.greet.l1.theme = Welkom terug! De tip van de vorige partij: {theme}. Houd dat vandaag in gedachten.
+event.greet.l1.theme.2 = Hallo weer! Onthoud de tip van de vorige partij: {theme}. Ik help je.
+event.greet.l2.theme = Welkom terug! Het idee van de vorige partij: {theme}. Laten we zien hoe het vandaag gaat.
+event.greet.l2.theme.2 = Hallo weer! Iets om te onthouden uit de vorige partij: {theme}.
+event.greet.l3.theme = Welkom terug! Het thema van de vorige partij: {theme}. Houd dat vandaag in gedachten.
+event.greet.l3.theme.2 = Hoi weer! Uit de vorige partij: {theme}. Laten we zien hoe het vandaag gaat.
 event.greet.l4 = Hallo! Deze keer geef ik evaluaties en laat ik je de betere kandidaatzetten zien.
 event.greet.l4.2 = Laten we spelen. Na een fout vertel ik je wat nauwkeuriger was.
 event.greet.l4.3 = Klaar voor een clubpartij? Ik geef commentaar als de evaluatie verandert.
@@ -32,9 +40,9 @@ event.colour.black.2 = Deze keer speel je met zwart: ik doe de eerste zet.
 
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names are those of the coach page (assets/i18n/nl.lang coach.level.<n>.name).
-event.level.l1 = Eerste stappen: ik speel rustig en leg elke fout in eenvoudige woorden uit.
-event.level.l2 = Beginner: ik speel iets sterker en noem eenvoudige tactieken bij hun naam, zoals vorken en penningen.
-event.level.l3 = Halfgevorderd: ik praat over plannen en pionnenstructuur, en laat korte varianten zien.
+event.level.l1 = Eerste stappen: ik speel rustig. Ik zeg het als een stuk van je wordt aangevallen en niet gedekt staat, en ik leg grote fouten eenvoudig uit.
+event.level.l2 = Beginner: ik speel iets sterker. Ik waarschuw je voor vorken, penningen en aanvallen op je dame, en herinner je eraan je stukken uit te brengen.
+event.level.l3 = Halfgevorderd: ik waarschuw je alleen voor mat en aanvallen op je dame, en als maar één zet werkt. Je fouten leg ik nog steeds uit.
 event.level.l4 = Clubspeler: ik geef evaluaties in pionnen en stel kandidaatzetten voor.
 event.level.l5 = Sterke clubspeler: kort commentaar, en langere varianten als het ertoe doet.
 event.level.l6 = Expert: ik speel zo sterk als ik kan en geef alleen commentaar op de kritieke momenten.
@@ -107,5 +115,7 @@ event.end.handshake = Laten we elkaar de hand schudden.
 # after "met", "bij" and a colon.
 event.lesson.resume = Welkom terug! We gaan verder met {chapter}.
 event.lesson.resume.2 = Daar ben je weer! We waren gebleven bij {chapter}.
+event.lesson.start = We beginnen met {chapter}.
+event.lesson.start.2 = Laten we beginnen met {chapter}.
 event.lesson.next = Hierna: {chapter}.
 event.lesson.next.2 = En nu: {chapter}.

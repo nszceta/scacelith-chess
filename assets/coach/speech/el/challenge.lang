@@ -13,6 +13,10 @@
 # The player always has the white pieces. The coach says "εσύ" to the player and is male; the
 # player's gender is unknown: no adjective or participle agrees with the player.
 
+ch.practise = Από την τελευταία σου παρτίδα: {theme}. Αυτό το σετ είναι φτιαγμένο γι’ αυτό.
+ch.practise.2 = Η τελευταία σου παρτίδα είχε κάτι να δουλέψεις: {theme}. Ας το εξασκήσουμε.
+ch.practise.3 = Η συμβουλή της προηγούμενης παρτίδας ήταν: {theme}. Να λίγη εξάσκηση.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 # Each line starts with the challenge's name (assets/i18n/el.lang challenge.<id>.name); the two names
 # that are imperatives there in the polite plural ("Βρείτε", "Σταματήστε") take the coach's "εσύ".

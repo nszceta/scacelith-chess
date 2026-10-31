@@ -44,10 +44,17 @@ Script lessonLine(const char* key, const Lesson& lesson, int chapter) {
 
 }  // namespace
 
-Script greetingScript(int level, chess::Color human, bool introduceLevel) {
+Script greetingScript(int level, chess::Color human, bool introduceLevel, bool firstAfterLesson, const std::string& lastTheme) {
     level = std::max(1, std::min(6, level));
     Script s;
-    s.push_back(sayBeat("event.greet.l" + std::to_string(level), {gesture(GestureKind::Nod)}));
+    std::string greeting = "event.greet.l" + std::to_string(level);
+    const bool first = firstAfterLesson && level == 1;
+    const bool themed = !first && level <= 3 && !lastTheme.empty();
+    if (first) greeting += ".first";
+    else if (themed) greeting += ".theme";
+    Beat hello = sayBeat(greeting, {gesture(GestureKind::Nod)});
+    if (themed) hello.line.with("theme", Arg::ofText("theme." + lastTheme));
+    s.push_back(hello);
     if (introduceLevel) {
         Script intro = levelIntroScript(level);
         s.insert(s.end(), intro.begin(), intro.end());
@@ -102,17 +109,21 @@ Script gameEndScript(GameEnd end) {
 
 Script lessonResumeScript(const Lesson& lesson, int chapter) { return lessonLine("event.lesson.resume", lesson, chapter); }
 
+Script lessonStartScript(const Lesson& lesson, int chapter) { return lessonLine("event.lesson.start", lesson, chapter); }
+
 Script lessonNextScript(const Lesson& lesson, int chapter) { return lessonLine("event.lesson.next", lesson, chapter); }
 
 std::vector<std::string> eventKeys() {
     std::vector<std::string> k;
     for (int l = 1; l <= 6; ++l) k.push_back("event.greet.l" + std::to_string(l));
+    k.push_back("event.greet.l1.first");
+    for (int l = 1; l <= 3; ++l) k.push_back("event.greet.l" + std::to_string(l) + ".theme");
     for (int l = 1; l <= 6; ++l) k.push_back("event.level.l" + std::to_string(l));
     for (const char* s : {"event.colour.white", "event.colour.black", "event.your_move", "event.take_time", "event.filler",
                           "event.takeback.taken", "event.takeback.declined", "event.play_on", "event.encourage.mistake",
                           "event.encourage.behind", "event.encourage.well", "event.draw.accepted", "event.draw.declined",
                           "event.end.win", "event.end.loss", "event.end.draw", "event.end.resigned", "event.end.handshake",
-                          "event.lesson.resume", "event.lesson.next"})
+                          "event.lesson.resume", "event.lesson.start", "event.lesson.next"})
         k.push_back(s);
     return k;
 }

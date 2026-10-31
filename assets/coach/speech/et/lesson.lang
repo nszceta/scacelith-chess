@@ -12,7 +12,9 @@
 # ---- Chapter titles (said inside "Jätkame teemaga „{chapter}“.") ------------------------------------
 # Nominative, lower case (see event.lesson.* in events.lang).
 lesson.title.welcome = malelaud
-lesson.title.pieces = kuidas malendid käivad
+lesson.title.pieces_lines = kuidas vanker, oda ja lipp käivad
+lesson.title.pieces_steps = kuidas kuningas, ratsu ja ettur käivad
+lesson.title.values_setup = malendite väärtus ja esimesed käigud
 lesson.title.safety = ohutu ja ohtlik löömine
 lesson.title.check = tuli
 lesson.title.mate = matt
@@ -22,7 +24,8 @@ lesson.title.promotion = muundumine
 lesson.title.draws = patt ja viik
 lesson.title.before_move = vaatamine enne käiku
 lesson.title.opening = avamäng
-lesson.title.etiquette = päris partiid: reiting, kell ja head kombed
+lesson.title.review = kiire kordus
+lesson.title.etiquette = kuidas meie partiid käivad
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
 # After the coach demonstrated the solution.
@@ -93,7 +96,7 @@ lesson.rook.king = See on sinu kuningas. Kasuta {your:own_part}, mis on nurgas.
 lesson.rook.ok = Löödud! {my} lahkub lauast.
 # Pieces don't jump
 lesson.jump.blocked = Malendid ei saa teistest üle hüpata. Sinu ettur väljal {sq} tõkestab vankri tee.
-lesson.jump.knight = Ainult ratsu saab hüpata. Temaga kohtume varsti.
+lesson.jump.all = Sama kehtib oda ja lipu kohta: ka nemad ei saa teistest malenditest üle hüpata.
 # Bishop
 lesson.bishop.intro = See on {your}. Ta käib diagonaalis, nii kaugele kui tahab.
 lesson.bishop.colour = Oda jääb alati sama värvi väljadele.
@@ -138,7 +141,12 @@ lesson.pawncap.ok = Jah! Otse käimiseks, diagonaalis löömiseks.
 lesson.values.pawn = Igal malendil on väärtus punktides. Ettur on väärt ühe punkti.
 lesson.values.pieces = Ratsu või {@}oda – kolm. {@2}Vanker – viis. {@3}Lipp – üheksa.
 lesson.values.king = Kuningas on hindamatu: teda ei saa kunagi ära anda.
-lesson.values.trade = Püüa mitte kunagi anda malendit ära vähema eest, kui see väärt on.
+lesson.values.trade = Ära vaheta suuremat malendit väiksema vastu, kui sa just rohkem ei võida, kui kaotad.
+lesson.values.two = Sinu ratsu ründab kahte minu malendit: {sq} ja {sq2}. Kumbagi ei kaitse miski.
+lesson.values.ask = Löö see, mis on rohkem väärt!
+lesson.values.small = See on ettur, väärt ühe punkti. Ka {my} oli tasuta ja ta on väärt üheksa.
+lesson.values.look = Vaata, mida sinu ratsu ründab, ja löö see malend, mis on rohkem väärt.
+lesson.values.ok = Jah! Lipp on väärt üheksa. Kui kaks malendit on tasuta, löö suurem.
 lesson.setup.corners = Iga partii algab nii: vankrid {@}nurkades, siis {@2}ratsud, siis {@3}odad.
 lesson.setup.queen = Lipp seisab oma värvi väljal: sinu lipp on heledal väljal.
 lesson.setup.king = Kuningas seisab tema kõrval. Valge teeb alati esimese käigu.
@@ -159,6 +167,18 @@ lesson.safety.gave = Sa andsid oma lipu, mis on väärt üheksa, minu ratsu eest
 lesson.safety.other = Proovi teist malendit.
 lesson.safety.look = Otsi malendit, mida miski ei kaitse.
 lesson.safety.ok = Suurepärane! Küsi alati: kas see malend on kaitstud?
+lesson.safety.pawns = Sinu lipp ründab kahte minu etturit: {sq} ja {sq2}.
+lesson.safety.pawns_ask = Löö ettur, mida on ohutu lüüa.
+lesson.safety.gave_pawn = Sa andsid oma lipu, mis on väärt üheksa, ühe etturi eest, mis on väärt ühe.
+lesson.safety.pawns_other = Ka etturit võib kaitsta. Proovi teist etturit.
+lesson.safety.pawns_ok = Õige! Ära kunagi riskeeri lipuga kaitstud etturi pärast.
+lesson.safety.small = Nüüd vastupidi. {my} on kaitstud, aga sinu ettur ründab teda.
+lesson.safety.small_count = Kui sa ta lööd, lööb minu {@}ettur sinu oma tagasi. Sa annad ühe punkti ja võidad üheksa.
+lesson.safety.small_ask = Löö minu lipp õige malendiga!
+lesson.safety.small_other = Löö ta hoopis oma etturiga: odavaima malendiga, mis saab.
+lesson.safety.small_look = Sinu ettur ründab minu lippu. Löö ta sellega.
+lesson.safety.small_ok = Jah! Väike malend võib suure lüüa, ka kaitstud: sa kaotad ühe punkti ja võidad üheksa.
+lesson.safety.count = Enne iga löömist loe kokku, mida sa võidad ja mida võid tagasi kaotada.
 
 # ---- Chapter 3: check and getting out of check -----------------------------------------------------------------
 lesson.danger.rank = Minu vanker kontrollib kogu teist horisontaali.
@@ -180,6 +200,11 @@ lesson.capture.check = Minu lipp annab tuld, otse sinu kuninga kõrval.
 lesson.capture.ask = Löö ründaja!
 lesson.capture.king_ok = Jah! Minu lipul polnud kaitsjat, nii et sinu kuningas sai selle lüüa.
 lesson.capture.knight_ok = Jah! Sinu ratsu kõrvaldas ründaja.
+lesson.check.open.ask = Jälle tuli! Seekord pääse sellest mis tahes viisil.
+lesson.check.open.king = Sa käisid kuningaga eest ära. Võinuks ka malendi vahele panna või ratsuga minu vankri lüüa.
+lesson.check.open.block = Sa tõkestasid rünnaku. Kuningas oleks saanud ka kõrvale astuda või ratsu minu vankri lüüa.
+lesson.check.open.take = Sa lõid minu vankri, tuld andva malendi. Kuningaga käimine või tõkestamine oleks samuti sobinud.
+lesson.check.open.hint = Kolm võimalust: {@}käi kuningaga, {@2}tõkesta vertikaalil või {@3}löö minu vanker oma ratsuga.
 
 # ---- Chapter 4: checkmate ------------------------------------------------------------------------------------
 lesson.mate1.what = Matt: kuningas on tule all ja tal pole pääsu. Sellega on partii võidetud.
@@ -187,16 +212,34 @@ lesson.mate1.stuck = Minu kuningas on kinni {@}oma etturite taga.
 lesson.mate1.ask = Pane mulle matt ühe käiguga!
 lesson.mate1.wrong = Peaaegu! Anna tuld minu tagumisel real, kust mu kuningas ei pääse.
 lesson.mate1.ok = Matt! See on tagumise rea matt. Jäta see meelde!
+lesson.mate1.king = Sinu kuningas on seal hea, kus ta on. Anna tuld vankriga.
+lesson.mate1.why = Näed? Vanker kontrollib minu {@}kogu tagumist rida ja minu {@2}enda etturid täidavad väljad mu kuninga ees.
 lesson.mate2.ask = Sinu kuningas ja lipp teevad koostööd. Pane mulle matt ühe käiguga.
 lesson.mate2.wrong = Leia tuli, mis ei jäta mu kuningale ühtegi välja.
 lesson.mate2.ok = Matt! Sinu kuningas kaitseb lippu, nii et minu kuningas ei saa seda lüüa.
 lesson.mate2.ok_rank = Matt tagumisel real! Sinu kuningas valvab kõiki välju minu kuninga ees.
+lesson.mate2.king = Sinu kuningas valvab välju minu kuninga kõrval. Jäta ta sinna ja kasuta lippu.
+lesson.mate2.half = See valvab välja {sq}, aga mu kuningas pääseb veel väljale {sq2}.
+lesson.mate2.why = Näed? Sinu lipp katab välju {sq} ja {sq2} ning sinu kuningas välju minu kuninga ees. Mu kuningal pole pääsu.
 lesson.mate3.edge = Sinu vanker seitsmendal horisontaalil hoiab mu kuningat laua serval.
 lesson.mate3.ask = Nüüd pane matt {your:own_com}.
 lesson.mate3.free = Tuli, aga seitsmes horisontaal on nüüd vaba ja mu kuningas pääseb.
 lesson.mate3.takes = Minu kuningas lööb lihtsalt sinu vankri.
 lesson.mate3.hint = Anna tuld tagumisel real selle vankriga, mis ei valva seitsmendat horisontaali.
 lesson.mate3.ok = Matt! Kaks vankrit töötasid nagu redel.
+lesson.mate3.why = Näed? Üks vanker lõikab ära {@}seitsmenda horisontaali ja teine annab tuld {@2}tagumisel real. Mu kuningal pole pääsu.
+lesson.mate4.look = Tuli ei ole alati matt. Vaatame, mis juhtub.
+lesson.mate4.ask = Anna minu kuningale tuld oma vankriga.
+lesson.mate4.king = Sinu kuningas jääb, kus on. Anna tuld vankriga.
+lesson.mate4.wrong = See pole tuli. Sinu vanker saab mu kuningat rünnata tagumiselt realt.
+lesson.mate4.ok = Jah, see on tuli! Aga kas see on matt? Vaata.
+lesson.mate4.after = Minu ettur väljal {sq} andis mu kuningale ruumi. Enne kui tulele rõõmustad, loe kokku väljad, mida mu kuningas veel kasutada saab.
+lesson.mate5.ask = Kaks sinu vankrikäiku annavad tuld ja ainult üks on matt. Loe mu kuninga väljad kokku, siis vali.
+lesson.mate5.king = Sinu kuningas katab juba välju {sq} ja {sq2}. Jäta ta sinna ja käi vankriga.
+lesson.mate5.wrong = See pole tuli. Otsi vankrikäiku, mis ründab mu kuningat.
+lesson.mate5.hint = Sinu kuningas katab välju {sq} ja {sq2}. Milline vankritule võtab ära ka välja {sq3}?
+lesson.mate5.why = Näed? Vanker katab välja {sq}, sinu kuningas ülejäänud kaks välja ja mu kuningas on kinni.
+lesson.mate5.ok = Matt! Sa lugesid mu kuninga väljad kokku: ühtegi polnud järel.
 
 # ---- Chapter 5: castling ---------------------------------------------------------------------------------------
 lesson.castle.what = Vangerdus on erikäik, mis viib su kuninga ohutusse kohta. Kuningas ja vanker liiguvad koos.
@@ -213,6 +256,10 @@ lesson.castle2.bishop = Minu oda ründab välja {sq}. Seega on vangerdus sellele
 lesson.castle2.ask = Vangerda teisele poole.
 lesson.castle2.other = Vangerda oma teise vankri poole, liputiival.
 lesson.castle2.ok = Õige! Pika vangerduse järel on sinu kuningas väljal {sq}.
+lesson.ep0.rule = Möödaminnes löömine algab kahekäiguga. Ainult {@}veel kodus olev ettur võib käia kaks välja. Ettur, kes {@2}on juba käinud, liigub ühe kaupa.
+lesson.ep0.ask = Käi ühe oma etturiga kaks välja.
+lesson.ep0.moved = See ettur on juba käinud, seega saab ta käia vaid ühe välja. Kasuta etturit, mis on veel kodus.
+lesson.ep0.ok = Õige: ainult algväljal olev ettur võib käia kaks.
 
 # ---- Chapter 6: en passant ------------------------------------------------------------------------------------
 # The French name stays in parentheses in the subtitles only (glossary): the voice says the Estonian term.
@@ -223,6 +270,13 @@ lesson.ep.how = Sinu ettur võib selle lüüa nii, nagu oleks see käinud ainult
 lesson.ep.now = Aga ainult kohe, just sellel käigul. Löö möödaminnes!
 lesson.ep.gone = Võimalus on möödas: möödaminnes saab lüüa ainult kohe. Proovime uuesti.
 lesson.ep.ok = Möödaminnes löödud! Minu ettur väljalt {sq} eemaldatakse.
+lesson.ep2.old = Minu ettur väljal {sq} on juba mõnda aega sinu etturi kõrval seisnud. Seda on liiga hilja möödaminnes lüüa.
+lesson.ep2.watch = Nüüd vaata minu teist etturit.
+lesson.ep2.ask = Kaks minu etturit seisavad sinu etturi kõrval, aga ainult üks just käis kaks välja. Löö see möödaminnes!
+lesson.ep2.push = See ainult lükkab su etturit edasi. Löö ettur, mis just käis kaks välja.
+lesson.ep2.wrong = Otsi ettur, mis just tegi kahekäigu, ja löö see möödaminnes.
+lesson.ep2.hint = Minu ettur väljal {sq} just käis kaks välja. Löö see möödaminnes, väljale {sq2}.
+lesson.ep2.ok = Möödaminnes! Minu etturit väljal {sq} ei saanud lüüa: selle võimalus oli möödas.
 
 # ---- Chapter 7: promotion -------------------------------------------------------------------------------------
 lesson.promo.what = Kui ettur jõuab viimasele horisontaalile, ta muundub: temast saab lipp, vanker, oda või ratsu.
@@ -231,12 +285,21 @@ lesson.promo.under = Lubatud! Aga lipp on tugevam. Valime lipu.
 lesson.promo.under_ok = Hästi. Enamik mängijaid valib siiski lipu.
 lesson.promo.push = Lükka oma ettur viimasele horisontaalile, väljale {sq}.
 lesson.promo.ok = Uus lipp! Sul võib korraga olla isegi kaks lippu.
+lesson.promo2.ask = Ettur võib muunduda ka lüües, diagonaalis. Löö minu vanker ja tee lipp!
+lesson.promo2.push = Ka see muundab, aga minu vanker valvab välja {sq}. Vaata.
+lesson.promo2.lost = Minu vanker lõi sinu uue malendi. Löö kõigepealt minu vanker.
+lesson.promo2.wrong = See ei löö minu vankrit. Sinu ettur lööb diagonaalis, väljale {sq}.
+lesson.promo2.hint = Löö oma etturiga minu vanker, väljale {sq}: ta muundub lüües.
+lesson.promo2.ok = Löödud ja muundunud! Ettur saab mõlemat teha ühe käiguga.
 
 # ---- Chapter 8: stalemate and draws -----------------------------------------------------------------------------
 lesson.stale.what = Minu käik. Mu kuningas ei ole tule all, aga {@}iga väli tema ümber on rünnatud.
 lesson.stale.draw = Mul pole ühtegi lubatud käiku. See on patt ja partii lõpeb viigiga.
 lesson.stale2.ask = Kui sa oled võitmas, hoidu patist. Pane mulle matt ühe käiguga, ilma patita!
-lesson.stale2.wrong = Anna tuld minu tagumisel real, kust mu kuningas ei pääse.
+lesson.stale2.wrong = Leia tuli, mis ei jäta mu kuningale ühtegi välja. Ettevaatust: vaikne käik võib mulle patti panna.
+lesson.stale2.king = Sinu kuningas katab juba välju {sq} ja {sq2}. Jäta ta sinna ja kasuta lippu.
+lesson.stale2.hint = Sinu kuningas katab välju {sq} ja {sq2}. Anna tuld mööda tagumist rida ja mu kuningal pole kuhugi minna.
+lesson.stale2.why = Näed? Minu kuningas on {@}tule all ja tal pole vaba välja: see on matt. Ilma tuleta oleks see patt.
 lesson.stale2.ok = Matt! Jäta vastase kuningale alati käik, kui sa just matti ei pane.
 lesson.draws.kings = Muud viigid: kui keegi ei saa matti panna, näiteks kui laual on ainult kaks kuningat, on partii viik.
 lesson.draws.agree = Mängijad võivad ka viigis kokku leppida.
@@ -286,30 +349,28 @@ lesson.opening.castle.ask = Tee on vaba. Vangerda ja vii kuningas turvalisse koh
 lesson.opening.castle.wrong = Sinu kuningas on valmis. Vangerda nüüd, kuni tee on vaba.
 lesson.opening.castle.ok = Vangerdatud! Sinu kuningas on turvaline ja vanker astub mängu.
 lesson.opening.done = Tsenter, malendid, vangerdus: nii algab iga partii hästi.
+lesson.review.start = Kiire kordus, seekord teises järjekorras. Ma ei selgita: sina näitad mulle.
+lesson.review.promo.ask = Muunda see ettur.
+lesson.review.promo.ok = Hea: uus lipp ja tuli!
+lesson.review.check.ask = Sinu kuningas on tule all. Pääse sellest.
+lesson.review.check.ok = Tule alt väljas. Hea.
+lesson.review.castle.ask = Vangerda oma kuningas sellel poolel, kus see on lubatud.
+lesson.review.castle.other = See pole vangerdus. Vangerda sellel poolel, kus see on lubatud.
+lesson.review.castle.ok = Vangerdatud, turvalisel poolel!
+lesson.review.ep.ask = Löö minu ettur möödaminnes.
+lesson.review.ep.ok = Möödaminnes! Sa mäletasid.
+lesson.review.mate.ask = Pane mulle matt ühe käiguga.
+lesson.review.mate.ok = Matt! Kordus tehtud.
 
-# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 11: how our games work ------------------------------------
 lesson.talk.rules = Nüüd tead sa kõiki malereegleid. Tubli!
-lesson.talk.real = Las ma räägin, kuidas päris partiisid mängitakse.
-lesson.talk.elo = Mängijatel on reiting, mida nimetatakse Elo-reitinguks. See tõuseb, kui võidad, ja langeb, kui kaotad.
-lesson.talk.elo_gap = Tugevama mängija võitmine toob rohkem punkte, nõrgemale kaotamine maksab rohkem.
-lesson.talk.elo_start = Sinu reiting ilmub pärast viit reitinguga partiid. Partiid treeneriga on harjutamiseks, seega on need reitinguta.
-lesson.talk.clock = See on {@}malekell. Igal mängijal on oma aeg, mis jookseb ainult tema käigu ajal.
-lesson.talk.press = Pärast oma käiku vajutad kella sama käega. See paneb minu aja käima.
-lesson.talk.flag = Kui sinu aeg saab otsa, kaotad sa, välja arvatud juhul, kui ma ei saa sulle kuidagi matti panna.
-lesson.talk.increment = Viis pluss kolm tähendab viis minutit kummalegi ja lisaks kolm sekundit iga käigu järel.
-lesson.talk.speeds = Lühikesi partiisid nimetatakse välkmaleks, pikemaid kiirmaleks ja kõige pikemaid klassikaliseks maleks.
-lesson.talk.no_clock = Minuga on kell välja lülitatud. Mõtle nii kaua, kui vaja.
-lesson.talk.touch = Päris partiis, kui puudutad oma malendit, pead sellega käima.
-lesson.talk.touch_mine = Kui puudutad minu malendit, pead selle lööma, kui saad.
-# The Estonian formula for "j'adoube" is "parandan".
-lesson.talk.adjust = Kui tahad malendit väljal kohendada sellega käimata, ütle enne „parandan“.
-lesson.talk.release = Kui oled malendi uuel väljal lahti lasknud, on käik tehtud.
-lesson.talk.sheet = Turniiridel kirjutavad mõlemad mängijad iga käigu {@}partiiblanketile.
-# {move:letters} shows the Estonian scoresheet letters ("Rf3"), which is what this line teaches.
-lesson.talk.notation = Kirja pannakse malendi täht ja väli, näiteks {move:letters}. Etturi puhul ainult väli.
-lesson.talk.robot = Sinu robot kirjutab su käigud sinu eest üles. Kiirpartiides pole üleskirjutamine kohustuslik.
+lesson.talk.real = Las ma räägin, kuidas meie partiid käivad.
+lesson.talk.no_clock = Minuga ei ole kella ega reitingut. Mõtle nii kaua, kui vaja.
+lesson.talk.touch = Puudutatud malendiga tuleb käia, seega vaata kõigepealt, puuduta siis.
 lesson.talk.handshake = Partii algab ja lõpeb käepigistusega. See tähendab: hea partii ja aitäh.
 lesson.talk.polite = Võidad või kaotad, jää viisakaks ja ära sega kunagi vastast, kui ta mõtleb.
-lesson.talk.tips = Kolm nõuannet sinu partiideks: {@}kontrolli tsentrit, {@2}too ratsud ja odad mängu ning {@3}vangerda varakult.
-lesson.talk.next = Kui oled valmis, vali „Esimesed sammud“. Ma mängin leebelt ja aitan sind pärast iga viga.
+lesson.talk.help = Meie partiides ma aitan sind. Kui mõni sinu malend on rünnatud või kaitseta, ütlen sulle.
+lesson.talk.help_back = Pärast suurt viga näitan, miks, ja pakun sinu käigu tagasivõtmist.
+lesson.talk.help_skip = Ja kui ma räägin liiga palju, vajuta tühikut: ma jään vait.
+lesson.talk.next = Kui oled valmis, mängi „Esimesed sammud“. Ma mängin leebelt.
 lesson.talk.welcome = Tere tulemast malemaailma! Surume kätt.

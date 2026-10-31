@@ -16,6 +16,12 @@
 # menu's formal imperative is quoted as a title ("Výzva „Najděte únik“."), so the coach's "ty" stays
 # intact; the written "Mat 1. tahem" titles have a ".spoken" line with the ordinal in words.
 
+# ---- A challenge started from the end card of a game: said before its introduction ------------------
+# {theme}: the one thing the coach named at the end of that game.
+ch.practise = Z tvé poslední partie: {theme}. Tahle sada je na to jako stvořená.
+ch.practise.2 = V poslední partii bylo něco k procvičení: {theme}. Pojďme si to natrénovat.
+ch.practise.3 = Tip z poslední partie: {theme}. Tady je trocha cvičení.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Mat 1. tahem. {n:position} a v každé dá mat jediný tah. Prověř každý šach.
 ch.intro.mate1.spoken = Mat prvním tahem. {n:position} a v každé dá mat jediný tah. Prověř každý šach.

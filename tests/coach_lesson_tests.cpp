@@ -150,14 +150,15 @@ std::string renderEn(const Line& l, bool spoken = false) { return catalog().rend
 // exercises (each position matches its expectation), demonstrations and rewinds.
 TEST(coach_lesson_chapters_replay) {
     Lesson lesson;
-    CHECK_EQ(lesson.chapters().size(), size_t(12));
-    // The chapters of earlier versions keep their ids: a chapter saved by its old index is resumed
-    // through them (game/settings_coach.cpp).
-    for (const char* id : {"welcome", "pieces", "safety", "check", "mate", "castling", "en_passant", "promotion", "draws",
-                           "etiquette"})
-        CHECK(lesson.chapterIndex(id) >= 0);
-    CHECK_EQ(lesson.chapterIndex("before_move"), 9);
+    // The order the player meets the chapters in. A chapter saved by its id resumes at that id; the
+    // ids of earlier versions are read through game/settings_coach.cpp ("pieces" -> "pieces_lines").
+    std::vector<std::string> ids;
+    for (const LessonChapter& ch : lesson.chapters()) ids.push_back(ch.id);
+    CHECK(ids == std::vector<std::string>({"welcome", "pieces_lines", "pieces_steps", "values_setup", "safety", "check", "mate",
+                                           "castling", "en_passant", "promotion", "draws", "before_move", "opening", "review",
+                                           "etiquette"}));
     CHECK_EQ(lesson.chapterIndex("nope"), -1);
+    CHECK_EQ(lesson.chapterIndex("pieces"), -1);
     int says = 0, waits = 0, demos = 0;
     std::set<int> expects;
     for (size_t c = 0; c < lesson.chapters().size(); ++c) {
@@ -247,6 +248,7 @@ TEST(coach_lesson_exercises_judge_moves) {
         checkLine(e.success, where);
         checkLine(e.hint1, where);
         checkLine(e.hint2, where, {}, e.hint2Gestures, e.hint2Marks);
+        checkLine(e.afterDemo, where, {}, e.afterDemoGestures, e.afterDemoMarks);
         for (auto& s : e.successFor) checkLine(s.second, where);
         for (auto& r : e.acceptOnRetry) checkLine(r.line, where);
         for (auto& r : e.replies) checkReply(r, where);
@@ -266,8 +268,10 @@ TEST(coach_lesson_exercises_judge_moves) {
                 if (!r.before.empty())
                     CHECK(std::any_of(pre.begin(), pre.end(), [&](const Line& l) { return sameLine(l, r.before.front().line); }));
                 Position p = pos;
+                p.makeMove(m);   // an accepted move's demonstration (the king's escape) follows it on the board
                 std::vector<Position> demos;
                 playBeats(r.before, p, demos, where);
+                CHECK(demos.empty());
                 continue;
             }
             ++wrong;
@@ -348,6 +352,28 @@ TEST(coach_lesson_specific_reactions) {
     CHECK(hasKey(bad.before, "lesson.safety.gave"));
     CHECK(hasKey(bad.after, "lesson.safety.other"));
     CHECK_EQ(bad.undo, 1);
+    // The values: the pawn instead of the free queen is answered by what the queen is worth.
+    int values = find("7k/8/4q3/1p6/3N4/8/8/6K1 w");
+    CHECK(values >= 0);
+    CHECK(judge(values, "d4e6").accepted);
+    LessonReaction pawn = judge(values, "d4b5");
+    CHECK(!pawn.accepted);
+    CHECK(hasKey(pawn.before, "lesson.values.small"));
+    CHECK_EQ(renderEn(pawn.before[0].line), std::string("That's a pawn, worth one. My queen was free too, and she's worth nine."));
+    // The defended pawn: the queen is shown lost for a pawn; the free pawn is accepted.
+    int pawns = find("6k1/7p/6p1/1p6/8/3Q4/8/4K3 w");
+    CHECK(pawns >= 0);
+    CHECK(judge(pawns, "d3b5").accepted);
+    LessonReaction lost = judge(pawns, "d3g6");
+    CHECK(hasDemo(lost.before, "h7g6"));
+    CHECK(hasKey(lost.before, "lesson.safety.gave_pawn"));
+    CHECK(hasKey(lost.after, "lesson.safety.pawns_other"));
+    // The other way round: only the pawn's capture is right, the queen taking the defended pawn is shown lost.
+    int small = find("6k1/1p4pp/2p5/3q4/4P3/8/8/2Q3K1 w");
+    CHECK(small >= 0);
+    CHECK(judge(small, "e4d5").accepted);
+    LessonReaction greedy = judge(small, "c1c6");
+    CHECK(!greedy.accepted && hasDemo(greedy.before, "b7c6") && hasKey(greedy.after, "lesson.safety.small_other"));
     // Chapter 3.3: blocking with the queen is accepted from the second try on.
     int block = find("4r2k/8/8/8/8/8/3P1P2/3QKB2 w");
     CHECK(!judge(block, "d1e2", 0).accepted);
@@ -405,6 +431,70 @@ TEST(coach_lesson_specific_reactions) {
     CHECK(hasDemo(f2.after, "a1a8"));
     CHECK(hasKey(f2.after, "lesson.now_you"));
     CHECK(hasKey(judge(back, "g1f1", 3).before, "lesson.almost"));
+    // The stalemate exercise: its own answer to a king move, and the why-line after the demonstration.
+    CHECK(hasKey(judge(stale, "g6f6").before, "lesson.stale2.king"));
+    LessonReaction staleShown = judge(stale, "g6f6", 2);
+    CHECK(hasKey(staleShown.after, "lesson.stale2.why") && hasKey(staleShown.after, "lesson.now_you"));
+    // Chapter 3.5: every way out of check is accepted and named (king, block, capture).
+    int open = find("4r2k/8/3N4/8/8/8/8/4KB2 w");
+    CHECK(open >= 0);
+    CHECK(hasKey(judge(open, "e1d1").before, "lesson.check.open.king"));
+    CHECK(hasKey(judge(open, "f1e2").before, "lesson.check.open.block"));
+    CHECK(hasKey(judge(open, "d6e4").before, "lesson.check.open.block"));
+    CHECK(hasKey(judge(open, "d6e8").before, "lesson.check.open.take"));
+    // Chapter 4.4: a check that is not mate is accepted, then the coach's escape is shown.
+    int luft = find("6k1/5pp1/7p/8/8/8/8/R5K1 w");
+    CHECK(luft >= 0);
+    LessonReaction notMate = judge(luft, "a1a8");
+    CHECK(notMate.accepted);
+    CHECK(hasKey(notMate.before, "lesson.check_escape"));
+    CHECK(hasDemo(notMate.before, "g8h7"));
+    CHECK(!judge(luft, "a1a2").accepted);
+    // Chapter 4.5: of two checks only one is mate; the other is answered with its escape.
+    int corner = find("k7/8/1K6/8/8/8/8/7R w");
+    CHECK(corner >= 0);
+    CHECK(judge(corner, "h1h8").accepted);
+    LessonReaction cornerCheck = judge(corner, "h1a1");
+    CHECK(!cornerCheck.accepted);
+    CHECK(hasDemo(cornerCheck.before, "a8b8"));
+    CHECK(hasKey(judge(corner, "b6c6").before, "lesson.mate5.king"));
+    // Chapter 6: a pawn that has moved may not step two squares; of two pawns beside yours only the
+    // one that just made its double step can be taken, and the other attempt is "too late".
+    int doubleStep = find("4k3/8/8/8/8/4P3/P7/4K3 w");
+    CHECK(doubleStep >= 0);
+    CHECK(judge(doubleStep, "a2a4").accepted);
+    Position stepPos;
+    CHECK(stepPos.setFEN(lesson.expectation(doubleStep).fen));
+    Script moved = lesson.explainIllegal(doubleStep, stepPos, parseSquare("e3"), parseSquare("e5"));
+    CHECK(!moved.empty() && moved[0].line.key == "lesson.ep0.moved");
+    int twoPawns = find("4k3/8/8/3pPp2/8/8/8/4K3 w");
+    CHECK(twoPawns >= 0);
+    CHECK(judge(twoPawns, "e5f6").accepted);
+    Position epPos;
+    CHECK(epPos.setFEN(lesson.expectation(twoPawns).fen));
+    Script late = lesson.explainIllegal(twoPawns, epPos, parseSquare("e5"), parseSquare("d6"));
+    CHECK(!late.empty() && late[0].line.key == "why.EnPassantExpired");
+    CHECK(!late.empty() && !late[0].gestures.empty() && late[0].gestures[0].square == parseSquare("d5"));
+    // Chapter 7: promoting with a capture; the push is guarded and shown lost.
+    int capturePromo = find("3r3k/4P3/8/8/8/8/8/4K3 w");
+    CHECK(capturePromo >= 0);
+    CHECK(judge(capturePromo, "e7d8q").accepted);
+    LessonReaction pushed = judge(capturePromo, "e7e8q");
+    CHECK(!pushed.accepted && hasDemo(pushed.before, "d8e8"));
+    CHECK(judge(capturePromo, "e7d8n", 1).accepted);
+    // The review chapter: only the queen side may castle (a rook guards g1, and the refusal says so),
+    // and the queen move that stalemates is not mate.
+    int review = find("4k1r1/8/8/8/8/8/PPPP1P1P/R3K2R w");
+    CHECK(review >= 0);
+    CHECK(judge(review, "e1c1").accepted);
+    CHECK(!judge(review, "h1g1").accepted);
+    Position rp;
+    CHECK(rp.setFEN(lesson.expectation(review).fen));
+    CHECK(hasKey(lesson.explainIllegal(review, rp, parseSquare("e1"), parseSquare("g1")), "why.KingIntoCheck"));
+    int queenMate = find("7k/8/5K2/8/8/8/8/6Q1 w");
+    CHECK(queenMate >= 0);
+    CHECK(judge(queenMate, "g1g7").accepted);
+    CHECK(hasKey(judge(queenMate, "g1g6").before, "lesson.stalemate"));
 }
 
 // Why a move is illegal, on the classic cases.
@@ -569,6 +659,8 @@ TEST(coach_events_scripts) {
         }
     }
     CHECK_EQ(greetingScript(1, chess::White, true).size(), size_t(3));
+    CHECK_EQ(greetingScript(1, chess::White, false, true)[0].line.key, std::string("event.greet.l1.first"));
+    CHECK_EQ(greetingScript(2, chess::White, false, true)[0].line.key, std::string("event.greet.l2"));
     CHECK_EQ(greetingScript(3, chess::Black, false).size(), size_t(2));
     CHECK_EQ(greetingScript(3, chess::Black, false)[1].line.key, std::string("event.colour.black"));
     CHECK(takeYourTimeScript(5)[0].priority == Priority::Low);

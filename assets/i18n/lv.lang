@@ -1073,14 +1073,14 @@ coach.level.0.name = Šaha noteikumi
 coach.level.0.desc = Interaktīva nodarbība, pa vienam noteikumam.
 coach.level.0.detail = Treneris izkārto nelielas pozīcijas un parāda, kā katra figūra iet un ņem, pēc tam rokādi, bandinieka pārvēršanu, šahu un matu. Katru ideju jūs izmēģināsiet uz galdiņa.
 coach.level.1.name = Pirmie soļi
-coach.level.1.desc = Kam uzbrūk, kas palicis neaizsargāts.
-coach.level.1.detail = Treneris spēlē saudzīgi un runā vienkārši: kurām jūsu figūrām uzbrūk, kuras palikušas bez aizsardzības un kā tās paglābt.
+coach.level.1.desc = Uzbrukta un neaizsargāta figūra, vienkāršiem vārdiem.
+coach.level.1.detail = Treneris spēlē saudzīgi un runā vienkārši. Viņš brīdina, kad jūsu figūra vai bandinieks ir uzbrukts un neaizsargāts; pirmo reizi partijā aicina pašiem atrast briesmas.
 coach.level.2.name = Iesācējs
-coach.level.2.desc = Vienkārša taktika, attīstība, karaļa drošība.
-coach.level.2.detail = Dakšas un piesaistes tiek sauktas to īstajos vārdos. Treneris runā par figūru attīstīšanu un karaļa drošību.
+coach.level.2.desc = Dakšas, piesaistes, attīstība, karaļa drošība.
+coach.level.2.detail = Treneris brīdina, kad viņa gājiens rada dakšu, piesaisti, uzbrukumu dāmai vai matu, un nosauc paņēmienu. Viņš atgādina izvest figūras un sargāt karali.
 coach.level.3.name = Turpinātājs
-coach.level.3.desc = Plāni, bandinieku struktūra, vienīgie gājieni.
-coach.level.3.detail = Treneris skaidro plānus un bandinieku struktūras, kā arī brīdina, kad pozīciju notur tikai viens gājiens.
+coach.level.3.desc = Lieli draudi un brīži, kad der tikai viens gājiens.
+coach.level.3.detail = Vairs nekādu jautājumu un marķieru: treneris brīdina tikai par mata draudiem vai uzbrukumu dāmai un pasaka, kad pozīciju notur tikai viens gājiens.
 coach.level.4.name = Kluba spēlētājs
 coach.level.4.desc = Kandidātgājieni, novērtējums bandiniekos.
 coach.level.4.detail = Treneris izvērtē kandidātgājienus un sniedz novērtējumu bandiniekos, kā to darītu kluba treneris.
@@ -1090,6 +1090,8 @@ coach.level.5.detail = Īsas piezīmes, konkrēti varianti un pozicionālās sp�
 coach.level.6.name = Eksperts
 coach.level.6.desc = Lakoniskas piezīmes, dziļi varianti, novērtējuma skaitļi.
 coach.level.6.detail = Maz vārdu, kā starp spēcīgiem spēlētājiem: vairāku gājienu dziļi varianti un novērtējuma skaitļi.
+coach.goal.1 = Mērķis: divās partijās pēc kārtas nav veltīgi zaudētas figūras.
+coach.goal.2 = Mērķis: divas uzvaras pēc kārtas bez rupjas kļūdas.
 coach.note.clock = Bez pulksteņa: domājiet tik ilgi, cik nepieciešams.
 coach.note.takeback = Pēc rupjas kļūdas treneris parāda, kas nogāja greizi, un piedāvā atsaukt gājienu.
 coach.note.lesson = Jūs spēlējat ar baltajiem; treneris katru vingrinājumu izkārto uz galdiņa.
@@ -1098,10 +1100,16 @@ coach.note.fallible = Treneris nav nekļūdīgs: reizēm viņš var nepareizi no
 coach.colour = Jūsu krāsa
 coach.colour.help = Krāsa, ar kuru spēlējat pret treneri. Pārmaiņus: vienā partijā ar baltajiem, nākamajā ar melnajiem. Nodarbību par noteikumiem vienmēr spēlē ar baltajiem.
 coach.colour.alternate = Pārmaiņus
+coach.chapter = Nodaļa
+coach.chapter.help = Nodaļa, ar kuru sākas nodarbība: kur apstājāties vai jebkura cita, lai to atkārtotu. Nodarbības pabeigšana paliek saglabāta.
+coach.chapter.title = Sākt nodarbību ar
 coach.take_time = Atgādinājums “Nesteidzieties”
 coach.take_time.help = Pēc minūtes domāšanas treneris saka, ka nav jāsteidzas. Tikai 1.–3. līmenī.
 coach.danger_markers = Rādīt apdraudētās figūras
-coach.danger_markers.help = 1. un 2. līmenī, kad esat gājienā, zem katras jūsu figūras, ko treneris tagad varētu paņemt, parādās krāsains lauciņš.
+coach.danger_markers.auto = Automātiski
+coach.danger_markers.help = 1. un 2. līmenī, kad esat gājienā, zem katras jūsu figūras, ko treneris tagad varētu paņemt, parādās krāsains lauciņš. Automātiski: pirmajās trijās partijās 1. līmenī un pirmajā partijā 2. līmenī, pēc tam izslēgti. Ieslēgts: abos līmeņos katrā partijā.
+# Under the control above, when Automatic has switched the markers off
+coach.danger_markers.withdrawn = Marķieri ir izslēgti, jo jūs jau pazīstat spēli. Izvēlieties „Ieslēgts”, lai tos paturētu.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Trenera balss nav instalēta vai ir izslēgta (Opcijas > Skaņa): viņa vārdi tiks rakstīti ekrānā.
 # At the table
@@ -1124,9 +1132,16 @@ coach.confirm.leave = Atgriezties galvenajā izvēlnē? Šī partija ar treneri 
 coach.gameover.again = Spēlēt vēlreiz
 coach.gameover.practise = Trenēties: {0}
 coach.gameover.unrated = Šī partija ar treneri reitingu neietekmē.
+coach.gameover.retry = Mēģināt šo pozīciju vēlreiz
+coach.retry.found = LABI ATRASTS
+coach.retry.found.line = Šis ir gājiens, kas maina partiju.
+coach.retry.shown = LABĀKAIS GĀJIENS
+coach.retry.shown.line = Tagad jūs to redzējāt. Meklējiet šo ideju nākamajā partijā.
+coach.retry.reason = Kritiskā pozīcija
 coach.lesson.done = LIELISKI
 coach.lesson.done.line = Tagad jūs zināt šaha noteikumus.
-coach.lesson.next = Pirmā partija
+coach.lesson.done.next_line = Pirmie soļi: es spēlēju saudzīgi un pasaku, kad kāda figūra ir briesmās.
+coach.lesson.next = Spēlēt „Pirmie soļi”
 
 # ---- Coach challenges (src/ui/ui_coach.cpp; the coach's spoken lines are in assets/coach/speech/<lang>/challenge.lang)
 # The tabs of the Coach page: games with the coach, and short sets of positions to solve

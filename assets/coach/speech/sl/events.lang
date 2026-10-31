@@ -8,15 +8,23 @@
 # ("Igrajva", "Seziva si v roke", "sva se ustavila").
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Živjo! Odigrajva prijateljsko partijo. Kadar gre kaj narobe, ti bom pomagal.
+event.greet.l1 = Živjo! Odigrajva prijateljsko partijo. Povedal ti bom, kadar bo kakšna tvoja figura v nevarnosti.
 event.greet.l1.2 = Zdravo! Igral bom prizanesljivo in ti pokazal, na kaj moraš paziti.
 event.greet.l1.3 = Lepo, da si tu! Vzemi si čas: povedal ti bom, kadar bo kakšna figura v nevarnosti.
-event.greet.l2 = Živjo! Igrajva. Ko se na šahovnici pojavijo vilice ali vezava, ti bom to pokazal.
+event.greet.l1.first = Živjo! Pred vsako potezo se vprašaj: je moja figura varna? Kaj napada moja poteza? Kaj mi grozi nasprotnik? Opomnil te bom.
+event.greet.l1.first.2 = Tvoja prva prava partija! Pred vsako potezo: je moja figura varna, kaj napada, kakšna je grožnja? Opomnil te bom.
+event.greet.l2 = Živjo! Igrajva. Če bo moja poteza pripravila vilice ali vezavo, ti bom to povedal.
 event.greet.l2.2 = Zdravo! Razvij svoje figure in poskrbi za varnost svojega kralja. Sproti ti bom pomagal.
 event.greet.l2.3 = Spet sva za šahovnico! Pazi na vilice in vezave: z njimi se dobivajo partije.
-event.greet.l3 = Živjo! Odigrajva pravo partijo. Komentiral bom tvoje načrte in večje napake.
+event.greet.l3 = Živjo! Odigrajva pravo partijo. Opozoril te bom na velike grožnje in razložil večje napake.
 event.greet.l3.2 = Zdravo! Razmisli o načrtu za svoje figure. Povedal ti bom, kadar poteza kaj spregleda.
-event.greet.l3.3 = Začniva! Opozoril te bom na edine poteze in na poteze, ki so zgrešene.
+event.greet.l3.3 = Začniva! Povedal ti bom, kadar deluje samo ena poteza, in kadar je poteza zgrešena.
+event.greet.l1.theme = Lepo, da si spet tu! Nasvet iz zadnje partije: {theme}. Ohrani ga v mislih tudi danes.
+event.greet.l1.theme.2 = Spet zdravo! Spomni se nasveta iz zadnje partije: {theme}. Pomagal ti bom.
+event.greet.l2.theme = Lepo, da si spet tu! Zamisel iz zadnje partije: {theme}. Poglejva, kako bo šlo danes.
+event.greet.l2.theme.2 = Spet zdravo! Nekaj za v spomin iz zadnje partije: {theme}.
+event.greet.l3.theme = Lepo, da si spet tu! Tema zadnje partije: {theme}. Ohrani jo v mislih tudi danes.
+event.greet.l3.theme.2 = Spet živjo! Iz zadnje partije: {theme}. Poglejva, kako bo šlo danes.
 event.greet.l4 = Živjo! Tokrat bom navajal ocene in ti pokazal boljše kandidatne poteze.
 event.greet.l4.2 = Igrajva. Po napaki ti bom povedal, kaj je bilo natančnejše.
 event.greet.l4.3 = Partija kot v klubu? Komentiral bom, kadar se ocena spremeni.
@@ -36,9 +44,9 @@ event.colour.black.2 = Tokrat igraš s črnimi: prvo potezo naredim jaz.
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names are those of the coach page (assets/i18n/sl.lang coach.level.<n>.name): Prvi koraki,
 # Začetnik, Nadaljevalec, Klubski igralec, Močan klubski igralec, Strokovnjak.
-event.level.l1 = Prvi koraki: igram prizanesljivo in vsako napako razložim s preprostimi besedami.
-event.level.l2 = Začetnik: igram nekoliko močneje in poimenujem preproste taktične prijeme, kot so vilice in vezave.
-event.level.l3 = Nadaljevalec: govorim o načrtih in kmečki strukturi ter pokažem kratke variante.
+event.level.l1 = Prvi koraki: igram prizanesljivo. Povem ti, kadar je tvoja figura napadena in nezaščitena, velike napake pa razložim preprosto.
+event.level.l2 = Začetnik: igram nekoliko močneje. Opozorim te na vilice, vezave in napade na tvojo damo ter te spomnim, da spraviš figure v igro.
+event.level.l3 = Nadaljevalec: opozorim te samo na mat in napade na tvojo damo ter kadar deluje samo ena poteza. Napake še vedno razložim.
 event.level.l4 = Klubski igralec: oceno podajam v kmetih in predlagam kandidatne poteze.
 event.level.l5 = Močan klubski igralec: kratki komentarji in daljše variante, kadar je to pomembno.
 event.level.l6 = Strokovnjak: igram, kolikor najbolje znam, in komentiram le kritične trenutke.
@@ -109,5 +117,7 @@ event.end.handshake = Seziva si v roke.
 # comes after a colon (no case form of the titles exists).
 event.lesson.resume = Lepo, da si spet tu! Nadaljujva s poglavjem: {chapter}.
 event.lesson.resume.2 = Spet zdravo! Ustavila sva se pri poglavju: {chapter}.
+event.lesson.start = Začniva s poglavjem: {chapter}.
+event.lesson.start.2 = Začenjava s poglavjem: {chapter}.
 event.lesson.next = Naslednje poglavje: {chapter}.
 event.lesson.next.2 = Zdaj pa: {chapter}.

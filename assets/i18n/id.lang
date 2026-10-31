@@ -1057,14 +1057,14 @@ coach.level.0.name = Aturan catur
 coach.level.0.desc = Pelajaran interaktif, aturan demi aturan.
 coach.level.0.detail = Pelatih menyiapkan posisi-posisi kecil dan menunjukkan cara setiap buah bergerak dan memakan, lalu rokade, promosi, skak, dan skakmat. Anda mencoba sendiri setiap gagasan di papan.
 coach.level.1.name = Langkah awal
-coach.level.1.desc = Apa yang diserang, apa yang tak terlindungi.
-coach.level.1.detail = Pelatih bermain dengan lembut dan berbicara dengan sederhana: buah Anda mana saja yang diserang, mana yang dibiarkan tanpa perlindungan, dan cara menjaganya.
+coach.level.1.desc = Buah terserang dan tak terlindungi, dengan kata sederhana.
+coach.level.1.detail = Pelatih bermain dengan lembut dan berbicara sederhana. Ia memperingatkan Anda jika buah atau pion Anda diserang dan tak terlindungi; pada kali pertama dalam satu permainan, Anda diminta menemukan bahayanya sendiri.
 coach.level.2.name = Pemula
-coach.level.2.desc = Taktik sederhana, pengembangan buah, keamanan raja.
-coach.level.2.detail = Garpu dan kunci disebut dengan namanya. Pelatih membahas cara mengeluarkan buah-buah Anda dan menjaga raja Anda tetap aman.
+coach.level.2.desc = Garpu, kunci, pengembangan buah, keamanan raja.
+coach.level.2.detail = Pelatih memperingatkan Anda ketika langkahnya menyiapkan garpu, kunci, serangan ke menteri, atau mat, dan menyebut nama taktiknya. Ia mengingatkan Anda mengeluarkan buah dan menjaga raja tetap aman.
 coach.level.3.name = Menengah
-coach.level.3.desc = Rencana, struktur pion, langkah satu-satunya.
-coach.level.3.detail = Pelatih menjelaskan rencana dan struktur pion, dan memperingatkan Anda ketika hanya ada satu langkah yang dapat mempertahankan posisi.
+coach.level.3.desc = Ancaman besar dan saat hanya satu langkah yang berhasil.
+coach.level.3.detail = Tak ada lagi pertanyaan atau penanda: pelatih hanya memperingatkan ancaman mat atau serangan ke menteri, dan memberi tahu kalau hanya satu langkah yang mempertahankan posisi.
 coach.level.4.name = Pemain klub
 coach.level.4.desc = Langkah kandidat, evaluasi dalam satuan pion.
 coach.level.4.detail = Pelatih menimbang langkah-langkah kandidat dan memberikan evaluasi dalam satuan pion, seperti yang dilakukan pelatih klub.
@@ -1074,6 +1074,8 @@ coach.level.5.detail = Komentar singkat, variasi konkret, dan kosakata permainan
 coach.level.6.name = Ahli
 coach.level.6.desc = Komentar sangat ringkas, variasi dalam, angka evaluasi.
 coach.level.6.detail = Sedikit kata, seperti di antara pemain kuat: variasi sedalam beberapa langkah dan angka evaluasi.
+coach.goal.1 = Sasaran: tidak ada buah yang hilang percuma dalam dua permainan berturut-turut.
+coach.goal.2 = Sasaran: dua kemenangan berturut-turut tanpa blunder.
 coach.note.clock = Tanpa jam: gunakan waktu sebanyak yang Anda perlukan.
 coach.note.takeback = Setelah blunder, pelatih menunjukkan letak kesalahannya dan menawarkan untuk mengambil kembali langkah itu.
 coach.note.lesson = Anda bermain sebagai Putih; pelatih menyiapkan setiap latihan di papan.
@@ -1082,10 +1084,16 @@ coach.note.fallible = Pelatih tidak selalu benar: terkadang ia bisa salah menila
 coach.colour = Warna Anda
 coach.colour.help = Warna yang Anda mainkan melawan pelatih. Bergantian: Putih, lalu Hitam, dari satu permainan ke permainan berikutnya. Pelajaran tentang aturan selalu dimainkan dengan Putih.
 coach.colour.alternate = Bergantian
+coach.chapter = Bab
+coach.chapter.help = Bab tempat pelajaran dimulai: bab terakhir yang Anda capai, atau bab lain untuk mengulanginya. Penyelesaian pelajaran tetap tercatat.
+coach.chapter.title = Mulai pelajaran dari
 coach.take_time = Pengingat "Santai saja"
 coach.take_time.help = Setelah satu menit berpikir, pelatih mengatakan bahwa Anda tidak perlu terburu-buru. Hanya tingkat 1 sampai 3.
 coach.danger_markers = Tampilkan buah yang terancam
-coach.danger_markers.help = Pada tingkat 1 dan 2, saat giliran Anda, sebuah petak berwarna muncul di bawah setiap buah Anda yang bisa dimakan pelatih saat ini.
+coach.danger_markers.auto = Otomatis
+coach.danger_markers.help = Pada tingkat 1 dan 2, saat giliran Anda, sebuah petak berwarna muncul di bawah setiap buah Anda yang bisa dimakan pelatih saat ini. Otomatis: untuk tiga permainan pertama Anda di tingkat 1 dan permainan pertama di tingkat 2, lalu mati. Aktif: di kedua tingkat, setiap permainan.
+# Under the control above, when Automatic has switched the markers off
+coach.danger_markers.withdrawn = Penanda mati sekarang karena Anda sudah mengenal permainannya. Pilih Aktif untuk tetap menampilkannya.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Suara pelatih belum terpasang atau dinonaktifkan (Opsi > Audio): ucapannya akan ditulis di layar.
 # At the table
@@ -1108,9 +1116,16 @@ coach.confirm.leave = Kembali ke menu utama? Permainan dengan pelatih ini akan d
 coach.gameover.again = Main lagi
 coach.gameover.practise = Latihan: {0}
 coach.gameover.unrated = Permainan dengan pelatih ini tidak dinilai.
+coach.gameover.retry = Coba posisi itu lagi
+coach.retry.found = DITEMUKAN
+coach.retry.found.line = Itulah langkah yang mengubah permainan.
+coach.retry.shown = LANGKAH YANG LEBIH BAIK
+coach.retry.shown.line = Sekarang Anda sudah melihatnya. Cari ide itu di permainan berikutnya.
+coach.retry.reason = Posisi kritis
 coach.lesson.done = BAGUS SEKALI
 coach.lesson.done.line = Sekarang Anda sudah mengetahui aturan catur.
-coach.lesson.next = Permainan pertama
+coach.lesson.done.next_line = Langkah awal: aku bermain dengan lembut dan memberi tahu kalau ada buah yang dalam bahaya.
+coach.lesson.next = Mainkan Langkah awal
 
 # ---- Coach challenges (src/ui/ui_coach.cpp; the coach's spoken lines are in assets/coach/speech/<lang>/challenge.lang)
 # The tabs of the Coach page: games with the coach, and short sets of positions to solve

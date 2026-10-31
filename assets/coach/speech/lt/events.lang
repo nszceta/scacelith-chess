@@ -6,15 +6,23 @@
 # sugrįžimu!" (never "Sveikas!" / "Sveika!", "Sveikas sugrįžęs", "tu pasiruošęs", "būk ramus").
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Labas! Sužaiskime draugišką partiją. Kai tik kas nors nepasiseks, aš padėsiu.
+event.greet.l1 = Labas! Sužaiskime draugišką partiją. Pasakysiu, kai kuri nors tavo figūra bus pavojuje.
 event.greet.l1.2 = Sveikinu! Žaisiu švelniai ir parodysiu, į ką atkreipti dėmesį.
 event.greet.l1.3 = Malonu tave matyti! Neskubėk: pasakysiu, kai kuriai nors figūrai grės pavojus.
-event.greet.l2 = Labas! Žaiskime. Kai atsiras šakutė ar surišimas, aš tau parodysiu.
+event.greet.l1.first = Labas! Prieš kiekvieną ėjimą paklausk: ar mano figūra saugi? Ką puola mano ėjimas? Kuo man grasina priešininkas? Aš priminsiu.
+event.greet.l1.first.2 = Tavo pirmoji tikra partija! Prieš kiekvieną ėjimą: ar figūra saugi, ką ji puola, kokia grėsmė? Aš priminsiu.
+event.greet.l2 = Labas! Žaiskime. Jei mano ėjimas paruoš šakutę ar surišimą, pasakysiu.
 event.greet.l2.2 = Sveikinu! Vystyk figūras ir saugok savo karalių. Padėsiu tau partijos eigoje.
 event.greet.l2.3 = Vėl prie lentos! Atidžiai sek šakutes ir surišimus: jais laimimos partijos.
-event.greet.l3 = Labas! Sužaiskime tikrą partiją. Komentuosiu tavo planus ir didesnes klaidas.
+event.greet.l3 = Labas! Sužaiskime tikrą partiją. Įspėsiu apie didelius pavojus ir paaiškinsiu didesnes klaidas.
 event.greet.l3.2 = Sveikinu! Pagalvok apie planą savo figūroms. Pasakysiu, kai ėjimu ką nors praleisi.
-event.greet.l3.3 = Žaiskime! Atkreipsiu tavo dėmesį į vienintelius ėjimus ir į klaidingus ėjimus.
+event.greet.l3.3 = Žaiskime! Pasakysiu, kai tinka tik vienas ėjimas ir kai ėjimas klaidingas.
+event.greet.l1.theme = Su sugrįžimu! Praėjusios partijos patarimas buvo toks: {theme}. Prisimink jį šiandien.
+event.greet.l1.theme.2 = Vėl labas! Prisimink praėjusios partijos patarimą: {theme}. Padėsiu tau.
+event.greet.l2.theme = Su sugrįžimu! Praėjusios partijos idėja buvo tokia: {theme}. Pažiūrėkime, kaip seksis šiandien.
+event.greet.l2.theme.2 = Vėl labas! Kai ką verta prisiminti iš praėjusios partijos: {theme}.
+event.greet.l3.theme = Su sugrįžimu! Praėjusios partijos tema buvo tokia: {theme}. Prisimink ją šiandien.
+event.greet.l3.theme.2 = Vėl labas! Iš praėjusios partijos: {theme}. Pažiūrėkime, kaip seksis šiandien.
 event.greet.l4 = Labas! Šį kartą pateiksiu įvertinimus ir parodysiu geresnius ėjimus kandidatus.
 event.greet.l4.2 = Žaiskime. Po klaidos pasakysiu, kas būtų buvę tiksliau.
 event.greet.l4.3 = Sužaidžiame kaip klube? Komentuosiu, kai pasikeis įvertinimas.
@@ -34,9 +42,9 @@ event.colour.black.2 = Šį kartą tu žaidi juodosiomis: pirmas einu aš.
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names (coach.level.<n>.name) chosen for assets/i18n/lt.lang: Pirmieji žingsniai,
 # Pradedantysis, Mėgėjas, Klubo žaidėjas, Stiprus klubo žaidėjas, Ekspertas.
-event.level.l1 = Pirmieji žingsniai: žaidžiu švelniai ir kiekvieną klaidą paaiškinu paprastais žodžiais.
-event.level.l2 = Pradedantysis: žaidžiu kiek stipriau ir įvardiju paprastus taktinius motyvus, pavyzdžiui, šakutes ir surišimus.
-event.level.l3 = Mėgėjas: kalbu apie planus ir pėstininkų struktūrą, rodau trumpus variantus.
+event.level.l1 = Pirmieji žingsniai: žaidžiu švelniai. Pasakau, kai tavo figūra puolama ir neapginta, o didesnes klaidas paaiškinu paprastais žodžiais.
+event.level.l2 = Pradedantysis: žaidžiu kiek stipriau. Įspėju apie šakutes, surišimus ir puolimą prieš valdovę bei primenu išvesti figūras.
+event.level.l3 = Mėgėjas: įspėju tik dėl mato ir puolimo prieš valdovę, taip pat kai tinka tik vienas ėjimas. Klaidas vis tiek paaiškinu.
 event.level.l4 = Klubo žaidėjas: įvertinimus pateikiu pėstininkais ir siūlau ėjimus kandidatus.
 event.level.l5 = Stiprus klubo žaidėjas: trumpi komentarai, o kai svarbu, ir ilgesni variantai.
 event.level.l6 = Ekspertas: žaidžiu iš visų jėgų ir komentuoju tik kritinius momentus.
@@ -107,5 +115,7 @@ event.end.handshake = Paspauskime rankas.
 # after a colon or a dash, or in quotes after "tema" (a quoted title keeps its nominative).
 event.lesson.resume = Su sugrįžimu! Tęskime pamoką: {chapter}.
 event.lesson.resume.2 = Vėl labas! Sustojome ties tema „{chapter}“.
+event.lesson.start = Pradėkime nuo temos „{chapter}“.
+event.lesson.start.2 = Pradedame nuo: {chapter}.
 event.lesson.next = Toliau: {chapter}.
 event.lesson.next.2 = Dabar – {chapter}.

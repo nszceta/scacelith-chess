@@ -17,6 +17,11 @@
 # positions are 問 / 問題 (as the lesson's 練習問題), a board position is 局面.
 # The player always has the white pieces.
 
+# ---- Practice of the last game's theme ({theme}: a "〜こと" phrase) ---------------------------------
+ch.practise = 前回の対局から：{theme}。この問題集は、そのために作られています。
+ch.practise.2 = 前回の対局で、練習したいことがひとつありました：{theme}。練習しましょう。
+ch.practise.3 = 前回のヒントは、{theme}でした。練習をどうぞ。
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = 1手メイトです。全部で{n:position}、どれも1手でチェックメイトになります。チェックを全部調べましょう。
 ch.intro.mate1.spoken = いってメイトです。全部で{n:position}、どれもいってでチェックメイトになります。チェックを全部調べましょう。

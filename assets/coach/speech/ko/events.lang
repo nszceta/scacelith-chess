@@ -6,15 +6,23 @@
 # Level names as on the coach page (assets/i18n/ko.lang coach.level.<n>.name).
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = 안녕하세요! 편하게 한 판 둬요. 뭔가 잘못되면 언제든 도와 드릴게요.
+event.greet.l1 = 안녕하세요! 편하게 한 판 둬요. 기물이 위험해지면 제가 알려 드릴게요.
 event.greet.l1.2 = 반가워요! 살살 두면서 어떤 걸 조심해야 하는지 알려 드릴게요.
 event.greet.l1.3 = 어서 오세요! 천천히 두세요. 기물이 위험해지면 말씀드릴게요.
-event.greet.l2 = 안녕하세요! 시작해 볼까요? 포크나 핀이 나오면 보여 드릴게요.
+event.greet.l1.first = 안녕하세요! 두기 전에 물어보세요. 내 기물은 안전한가? 내 수는 무엇을 공격하나? 상대는 무엇을 노리나? 제가 일깨워 드릴게요.
+event.greet.l1.first.2 = 첫 실전 게임이에요! 두기 전에, 내 기물은 안전한지, 무엇을 공격하는지, 위협은 무엇인지 살펴보세요. 제가 일깨워 드릴게요.
+event.greet.l2 = 안녕하세요! 시작해 볼까요? 제 수가 포크나 핀을 만들면 알려 드릴게요.
 event.greet.l2.2 = 반가워요! 기물을 전개하고 킹을 안전하게 지키세요. 두는 동안 도와 드릴게요.
 event.greet.l2.3 = 다시 체스판 앞에 오셨네요! 포크와 핀을 잘 살펴보세요. 게임을 이기게 해 주는 무기예요.
-event.greet.l3 = 안녕하세요! 제대로 한 판 둬 봐요. 세우신 계획과 큰 실수를 짚어 드릴게요.
+event.greet.l3 = 안녕하세요! 제대로 한 판 둬 봐요. 큰 위협은 경고하고, 큰 실수는 설명해 드릴게요.
 event.greet.l3.2 = 반가워요! 기물을 어떻게 쓸지 계획을 세워 보세요. 뭔가를 놓친 수가 나오면 알려 드릴게요.
-event.greet.l3.3 = 시작해요! 유일한 수, 그리고 잘못된 수를 짚어 드릴게요.
+event.greet.l3.3 = 시작해요! 유일한 수만 통할 때, 그리고 수가 잘못됐을 때 알려 드릴게요.
+event.greet.l1.theme = 다시 오셨네요! 지난 게임의 팁은 이거였어요: {theme}. 오늘도 기억해 두세요.
+event.greet.l1.theme.2 = 또 만났네요! 지난 게임의 팁을 기억하세요: {theme}. 제가 도와 드릴게요.
+event.greet.l2.theme = 다시 오셨네요! 지난 게임의 아이디어는 이거였어요: {theme}. 오늘은 어떨지 볼까요.
+event.greet.l2.theme.2 = 또 만났네요! 지난 게임에서 기억할 점: {theme}.
+event.greet.l3.theme = 다시 오셨네요! 지난 게임의 주제는 이거였어요: {theme}. 오늘도 기억해 두세요.
+event.greet.l3.theme.2 = 또 만났네요! 지난 게임에서 남은 점: {theme}. 오늘은 어떨지 볼까요.
 event.greet.l4 = 안녕하세요! 이번에는 평가치를 알려 드리고, 더 좋은 후보수도 보여 드릴게요.
 event.greet.l4.2 = 시작해 볼까요? 실수가 나오면 무엇이 더 정확했는지 알려 드릴게요.
 event.greet.l4.3 = 클럽에서처럼 한 판 둘 준비되셨어요? 평가치가 바뀌면 코멘트할게요.
@@ -33,9 +41,9 @@ event.colour.black.2 = 이번에는 흑으로 두시네요. 제가 먼저 둘게
 
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names are those of the coach page (assets/i18n/ko.lang coach.level.<n>.name).
-event.level.l1 = 첫걸음: 살살 두면서 모든 실수를 쉬운 말로 설명해 드려요.
-event.level.l2 = 초보자: 조금 더 세게 두고, 포크나 핀 같은 간단한 전술을 이름으로 짚어 드려요.
-event.level.l3 = 중급자: 계획과 폰 구조를 이야기하고, 짧은 수순을 보여 드려요.
+event.level.l1 = 첫걸음: 살살 두어요. 기물이 공격받고 지켜지지 않으면 알려 드리고, 큰 실수는 쉬운 말로 설명해 드려요.
+event.level.l2 = 초보자: 조금 더 세게 두어요. 포크, 핀, 퀸에 대한 공격을 경고하고, 기물을 내보내라고 일깨워 드려요.
+event.level.l3 = 중급자: 메이트와 퀸에 대한 공격, 그리고 유일한 수만 통할 때만 경고해요. 실수는 계속 설명해 드려요.
 event.level.l4 = 클럽 플레이어: 평가치를 폰 단위로 알려 드리고, 후보수를 제안해요.
 event.level.l5 = 강한 클럽 플레이어: 코멘트는 짧게 하고, 중요할 때는 더 긴 수순을 보여 드려요.
 event.level.l6 = 전문가: 최선을 다해 두고, 승부처에서만 코멘트해요.
@@ -106,5 +114,7 @@ event.end.handshake = 악수해요.
 # varies: only invariant particles follow it (부터, 에서, 에 대해).
 event.lesson.resume = 다시 오셨네요! {chapter}부터 이어서 해 봐요.
 event.lesson.resume.2 = 또 만났네요! 지난번엔 {chapter}에서 멈췄어요.
+event.lesson.start = {chapter}부터 시작해 봐요.
+event.lesson.start.2 = {chapter}에서 시작할게요.
 event.lesson.next = 다음은 {chapter}.
 event.lesson.next.2 = 이제 {chapter}에 대해 알아봐요.

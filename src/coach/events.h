@@ -25,7 +25,12 @@ enum class GameEnd : uint8_t { Win, Loss, Draw, Resigned };   // from the player
 
 // Start of a coach game at 'level' (1 First steps .. 6 Expert): the greeting, who starts, and the
 // level's introduction when 'introduceLevel' (the first game at that level, or after a change).
-Script greetingScript(int level, chess::Color human, bool introduceLevel);
+// 'firstAfterLesson' (level 1 only): the first real game after the rules lesson; the greeting then
+// recalls the lesson's three questions instead of the generic level 1 greeting. Otherwise, at
+// levels 1-3, 'lastTheme' (the exTypeName of the theme the last game's appraisal named, "" = none)
+// turns the greeting into "last time we looked at <theme>".
+Script greetingScript(int level, chess::Color human, bool introduceLevel, bool firstAfterLesson = false,
+                      const std::string& lastTheme = std::string());
 // A level's introduction alone (1 .. 6).
 Script levelIntroScript(int level);
 
@@ -48,8 +53,10 @@ Script drawAnswerScript(bool accepted);
 // said: Session::handshakeWanted).
 Script gameEndScript(GameEnd end);
 
-// The rules lesson: resuming at 'chapter' (the chapter is named), or going on to it.
+// The rules lesson: resuming at 'chapter' (the chapter is named), starting at the chapter the player
+// picked on the Coach page (even one never played before), or going on to the next one.
 Script lessonResumeScript(const Lesson& lesson, int chapter);
+Script lessonStartScript(const Lesson& lesson, int chapter);
 Script lessonNextScript(const Lesson& lesson, int chapter);
 
 // Every catalog key the helpers above may say (base keys; the catalog adds the variants), for

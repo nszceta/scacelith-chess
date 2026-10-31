@@ -15,6 +15,9 @@
 # binding, spid, afdækket angreb, afledning, tiltrækning, mellemtræk, fanget brik, stille træk.
 # Commas as the glossary says: no comma before a subordinate clause that follows its main clause.
 
+ch.practise = Fra dit sidste parti: {theme}. Dette sæt er lavet til det.
+ch.practise.2 = Dit sidste parti havde én ting at arbejde med: {theme}. Lad os øve det.
+ch.practise.3 = Sidste partis tip var: {theme}. Her er lidt øvelse.
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Mat i ét træk. {n:position}, og hver gang er ét træk nok til at sætte mat. Se på alle skakkerne.
 ch.intro.mate2 = Mat i to træk. {n:position}: dit første træk skal efterlade mig uden forsvar, og så sætter du mat.

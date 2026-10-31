@@ -854,6 +854,10 @@ tip.centre.b2 = Perebutkan pusat: petak seperti {sq} itu penting.
 tip.centre.b2.2 = Kamu menyerahkan pusat kepadaku. Lihat petak {sq}.
 tip.centre.b3 = Kamu tidak memperebutkan pusat; petak {sq} milikku.
 tip.centre.b3.2 = Perebutkan pusat di sekitar petak {sq}.
+tip.develop.b1 = Kuda dan gajahmu masih di tempat awal. Keluarkan {your}, misalnya.
+tip.develop.b1.2 = Saatnya mengembangkan buah! Buah kecilmu masih di rumah. Coba {your}.
+tip.develop.b2 = Belum ada buah kecilmu yang bergerak. Kembangkan {your} dan teman-temannya.
+tip.develop.b2.2 = Buah-buahmu masih tertidur. Mulailah dengan {your}.
 # Endgame technique tips.
 tip.mate_technique.b1 = Kalau tinggal raja sendirian, dorong raja itu ke tepi papan, lalu beri skakmat.
 tip.mate_technique.b1.2 = Tips: desak rajaku ke tepi. Dekatkan juga rajamu.
@@ -930,10 +934,43 @@ praise.excellent.b4.2 = Luar biasa.
 praise.excellent.b4.3 = Bagus, {move} akurat.
 praise.castle.b1 = Bagus! Kamu sudah melakukan rokade. Rajamu lebih aman sekarang.
 praise.castle.b1.2 = Rokade yang bagus! Rajamu tersimpan aman.
+praise.castle.b2 = Bagus, kamu sudah rokade. Rajamu aman, dan benteng ikut bermain.
+praise.castle.b2.2 = Rokade: raja aman dan benteng ikut bermain. Bagus sekali.
+praise.castle.b3 = Bagus: rokade, raja aman.
+praise.castle.b3.2 = Rokade lebih awal. Masuk akal.
 praise.saved.b1 = Bagus! Kamu menyelamatkan buahmu.
 praise.saved.b1.2 = Bagus sekali, kamu memindahkannya ke tempat aman.
+praise.saved.b2 = Bagus, buah itu tadi diserang dan kamu memindahkannya.
+praise.saved.b2.2 = Jeli. Kamu menyelamatkan buah itu.
+praise.saved.b3 = Bagus: kamu memindahkan buah yang diserang ke tempat aman.
+praise.saved.b3.2 = Jeli. Buah itu tadi dalam bahaya.
+praise.check_threat.b1 = Bagus! Kamu melihat apa yang diserang langkahku, dan kamu mengatasinya.
+praise.check_threat.b1.2 = Bagus sekali! Kamu memeriksa ancamanku sebelum melangkah.
+praise.check_threat.b1.3 = Ya! Kamu melihat apa yang kuserang. Itu kebiasaan yang hebat.
+praise.check_threat.b2 = Bagus: kamu melihat ancamanku dan menjawabnya.
+praise.check_threat.b2.2 = Kamu memeriksa apa yang diserang langkahku. Kebiasaan yang baik.
+praise.check_threat.b2.3 = Itu mengatasi ancamanku. Jeli.
+praise.protect.b1 = Bagus! {your} tadi diserang, dan sekarang terlindungi.
+praise.protect.b1.2 = Bagus sekali! Kamu melindungi {your} sebelum sempat kumakan.
+praise.protect.b2 = Bagus: {your} tadi diserang, dan kamu mempertahankannya.
+praise.protect.b2.2 = Jeli. {your} aman sekarang.
+praise.develop.b1 = Bagus! Kamu mengeluarkan sebuah buah ke dalam permainan. Di sana buah bekerja lebih banyak.
+praise.develop.b1.2 = Bagus! Mengeluarkan buah lebih awal adalah kebiasaan yang baik.
+praise.develop.b2 = Bagus, kamu mengembangkan sebuah buah. Keluarkan yang lain juga.
+praise.develop.b2.2 = Bagus sekali: kembangkan buahmu lebih awal.
 praise.book.b1 = Bagus, itu langkah pembukaan yang terkenal.
 praise.book.b1.2 = Bagus, pemain kuat juga memulai seperti itu.
+threat.ask.b1 = Langkahku tadi membuat ancaman. Bisakah kamu lihat buahmu yang mana yang dalam bahaya?
+threat.ask.b1.2 = Lihat papan. Langkah terakhirku menyerang sesuatu milikmu. Bisakah kamu menemukannya?
+threat.ask.b1.3 = Tunggu, sebelum melangkah: langkahku tadi adalah ancaman. Buahmu yang mana yang dalam bahaya?
+threat.ask.b2 = Langkahku tadi membuat ancaman. Bisakah kamu melihat apa itu?
+threat.ask.b2.2 = Coba lihat: apa yang diserang langkah terakhirku?
+threat.ask.b2.3 = Aku baru membuat ancaman. Bisakah kamu menemukannya?
+threat.ask_mate.b1 = Langkah terakhirku adalah ancaman terhadap rajamu. Bisakah kamu lihat apa yang kuinginkan?
+threat.ask_mate.b1.2 = Hati-hati: aku merencanakan sesuatu yang besar. Bisakah kamu lihat apa yang kuinginkan?
+threat.ask_mate.b1.3 = Lihat langkah terakhirku. Aku mengancam sesuatu yang serius. Bisakah kamu melihatnya?
+threat.ask_mate.b2 = Langkah terakhirku adalah ancaman serius. Bisakah kamu lihat apa yang kuinginkan?
+threat.ask_mate.b2.2 = Lihat langkah terakhirku: itu mengancam sesuatu yang besar. Bisakah kamu melihatnya?
 
 # ---- The coach's own threats (levels 1-2, before the player moves) ------------------------------
 # A mate threat ({sq} = where it would mate, pointed at at level 1; {my} = the piece).
@@ -943,6 +980,9 @@ threat.mate.b1.3 = Lihat petak {sq}. Kalau aku sampai di sana, itu skakmat!
 threat.mate.b2 = Hati-hati, aku mengancam skakmat.
 threat.mate.b2.2 = Awas: ada ancaman skakmat di {sq}.
 threat.mate.b2.3 = Perhatikan baik-baik: aku mengancam skakmat.
+threat.mate.b3 = Hati-hati, aku mengancam skakmat di {sq}.
+threat.mate.b3.2 = Ada ancaman skakmat: {my} ingin ke {sq}.
+threat.mate.b3.3 = Awas: aku mengancam skakmat.
 # A threat on a piece ({my} = my attacker, pointed at at level 1; {your} = the target, pointed at).
 threat.piece.b1 = Lihat: {my} sedang menyerang {your}.
 threat.piece.b1.2 = Hati-hati! {your} diserang oleh {my}.
@@ -950,6 +990,21 @@ threat.piece.b1.3 = Awas, {my} ingin memakan {your}.
 threat.piece.b2 = Hati-hati dengan {your}.
 threat.piece.b2.2 = {your} sedang diserang.
 threat.piece.b2.3 = Perhatikan {your}.
+threat.piece.b3 = {my} menyerang {your}, dan memakannya akan menambah keuntungan materi.
+threat.piece.b3.2 = {your} dalam bahaya: {my} mengancam memakannya.
+threat.piece.b3.3 = Hati-hati: langkah terakhirku menyerang {your}.
+# A fork the coach's move sets up (level 2): {my} on {sq} attacks {t1} and {t2}.
+threat.fork.b2 = {my} di {sq} menyerang {t1} dan {t2} sekaligus. Itu garpu!
+threat.fork.b2.2 = Awas, itu garpu: {my} menyerang {t1} dan {t2}.
+threat.fork.b2.3 = {my} menggarpu {t1} dan {t2}. Kamu tidak mudah menyelamatkan keduanya.
+# A pin (level 2): {my} on {sq} holds {your} in front of {t1}, the piece behind it.
+threat.pin.b2 = {my} di {sq} mengunci {your} terhadap {t1}. Kalau ia bergerak, aku memakan {t1}.
+threat.pin.b2.2 = Hati-hati: {your} terkunci oleh {my}. Kalau bergerak, {t1} jatuh.
+threat.pin.b2.3 = {your} terkunci: kalau ia pergi, {my} memakan {t1}.
+# Level 3: the position has one good move only (the engine's two best moves are far apart).
+threat.only.b3 = Ini posisi kritis: hanya satu langkah yang benar-benar bagus. Luangkan waktu.
+threat.only.b3.2 = Hati-hati, hanya ada satu langkah bagus di sini. Lihat semuanya dulu.
+threat.only.b3.3 = Pelan-pelan: kebanyakan langkah keliru di posisi ini.
 threat.punish.b1 = Langkah terakhirku adalah kesalahan. Bisakah kamu menghukum kesalahan itu?
 threat.punish.b1.2 = Hmm, sepertinya aku membuat kesalahan. Bisakah kamu menemukannya?
 
@@ -965,6 +1020,8 @@ tb.hint.mate_missed.b1 = Lihat rajaku. Bisakah kamu memberinya skakmat?
 tb.hint.mate_missed.b1.2 = Coba langkah-langkah skak dulu. Mungkin ada skakmat!
 tb.hint.general.b1 = Tidak usah terburu-buru, lihat seluruh papan.
 tb.hint.general.b1.2 = Coba cari langkah yang lebih aman.
+tb.hint.b3 = Periksa buahmu yang mana yang diserang balasanku.
+tb.hint.b3.2 = Lihat apa yang akan diserang balasanku sebelum kamu melangkah.
 # The retry.
 tb.fixed.b1 = Jauh lebih baik!
 tb.fixed.b1.2 = Ya, itu lebih baik!
@@ -972,6 +1029,12 @@ tb.fixed.b1.3 = Bagus, langkah itu jauh lebih baik.
 tb.fixed = Itu lebih baik.
 tb.fixed.2 = Lebih baik.
 tb.fixed.3 = Koreksi yang bagus.
+tb.why.b1 = Ingat untuk lain kali: {theme}.
+tb.why.b1.2 = Kebiasaan yang baik: {theme}.
+tb.why.b2 = Pelajarannya: {theme}.
+tb.why.b2.2 = Yang membantu: {theme}.
+tb.why.b3 = Layak diingat: {theme}.
+tb.why.b3.2 = Kebiasaan yang perlu dibangun: {theme}.
 tb.same = Langkah yang sama lagi? Baiklah, kita lihat.
 tb.same.2 = Kamu suka langkah itu, ya. Ayo kita lihat kelanjutannya.
 # The retry after a hint-only offer is the move the coach had in mind.
@@ -983,3 +1046,29 @@ tb.found.2 = Tepat, itu dia.
 # where the offer would have been).
 tb.none_left = Sayang sekali, kesempatan ambil kembali langkah di permainan ini sudah habis.
 tb.none_left.2 = Kamu tidak punya kesempatan ambil kembali langkah lagi di permainan ini.
+
+# ---- Trying the critical position again (levels 1-3) ------------------------------------------------
+retry.task.b1 = Ayo kita kembali ke momen itu. Bisakah kamu menemukan langkah yang lebih baik?
+retry.task.b1.2 = Ini posisinya lagi. Bisakah kamu menemukan langkah yang lebih baik?
+retry.task.b2 = Ini posisi sebelum kesalahan besarmu. Temukan langkah yang lebih baik.
+retry.task.b2.2 = Ayo kita lihat momen itu lagi. Apa yang akan kamu mainkan?
+retry.task.b3 = Ini posisi sebelum langkah kritis. Temukan langkah yang lebih baik.
+retry.task.b3.2 = Kembali ke momen kritis. Apa langkah yang lebih baik?
+retry.again.b1 = Bukan yang itu. Lihat sekali lagi.
+retry.again.b1.2 = Itu belum tepat. Coba lagi.
+retry.again.b2 = Bukan yang itu. Lihat seluruh papan.
+retry.again.b2.2 = Belum. Coba langkah lain.
+retry.again.b3 = Bukan yang itu. Lihat apa yang akan dilakukan balasanku.
+retry.again.b3.2 = Masih belum. Pikirkan balasan terbaikku.
+retry.found.b1 = Ya! Itu langkah yang lebih baik. Bagus sekali!
+retry.found.b1.2 = Kamu menemukannya! Itu jauh lebih baik.
+retry.found.b2 = Ya, itu berhasil. Bagus sekali.
+retry.found.b2.2 = Itu idenya. Kerja bagus.
+retry.found.b3 = Benar, itu bertahan. Bagus sekali.
+retry.found.b3.2 = Itu dia. Temuan bagus.
+retry.reveal.b1 = Ini langkah yang lebih baik: {best}. Perhatikan.
+retry.reveal.b1.2 = Biar kutunjukkan: {best} lebih baik.
+retry.reveal.b2 = Langkah yang lebih baik adalah {best}. Lihat.
+retry.reveal.b2.2 = Ini dia: {best}.
+retry.reveal.b3 = Langkah yang lebih baik adalah {best}.
+retry.reveal.b3.2 = {best} adalah langkahnya.

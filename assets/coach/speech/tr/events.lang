@@ -6,15 +6,23 @@
 # Turkish coach files. Level names (event.level.*) are coach.level.N.name of assets/i18n/tr.lang.
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Merhaba! Dostça bir oyun oynayalım. Ters giden bir şey olursa sana yardım ederim.
+event.greet.l1 = Merhaba! Dostça bir oyun oynayalım. Taşlarından biri tehlikedeyse sana söylerim.
 event.greet.l1.2 = Selam! Seni zorlamadan oynayacağım ve neye dikkat etmen gerektiğini göstereceğim.
 event.greet.l1.3 = Hoş geldin! Acele etme: bir taş tehlikeye girince sana söylerim.
-event.greet.l2 = Merhaba! Hadi oynayalım. Bir çatal ya da açmaz çıkınca sana gösteririm.
+event.greet.l1.first = Merhaba! Her hamleden önce sor: taşım güvende mi? Hamlem neye saldırıyor? Rakibim neyi tehdit ediyor? Sana hatırlatırım.
+event.greet.l1.first.2 = İlk gerçek oyunun! Her hamleden önce: taşım güvende mi, neye saldırıyor, tehdit ne? Sana hatırlatırım.
+event.greet.l2 = Merhaba! Hadi oynayalım. Hamlem bir çatal ya da açmaz hazırlarsa sana söylerim.
 event.greet.l2.2 = Selam! Taşlarını oyuna sok ve şahını güvende tut. Oyun boyunca sana yardım ederim.
 event.greet.l2.3 = Tahtaya tekrar hoş geldin! Çatallara ve açmazlara dikkat et: oyun kazandırırlar.
-event.greet.l3 = Merhaba! Gerçek bir oyun oynayalım. Planlarını ve önemli hataları yorumlayacağım.
+event.greet.l3 = Merhaba! Gerçek bir oyun oynayalım. Büyük tehditleri sana bildireceğim ve büyük hataları açıklayacağım.
 event.greet.l3.2 = Selam! Taşların için bir plan düşün. Bir hamle bir şeyi kaçırınca sana söylerim.
-event.greet.l3.3 = Hadi oynayalım! Tek hamlelerin olduğu anları ve ters giden hamleleri göstereceğim.
+event.greet.l3.3 = Hadi oynayalım! Yalnızca tek hamlenin işe yaradığı anları ve ters giden hamleleri söylerim.
+event.greet.l1.theme = Tekrar hoş geldin! Geçen oyunun ipucu şuydu: {theme}. Bugün de aklında tut.
+event.greet.l1.theme.2 = Yeniden merhaba! Geçen oyunun ipucunu hatırla: {theme}. Sana yardım ederim.
+event.greet.l2.theme = Tekrar hoş geldin! Geçen oyunun fikri şuydu: {theme}. Bakalım bugün nasıl gidecek.
+event.greet.l2.theme.2 = Yeniden merhaba! Geçen oyundan aklında kalsın: {theme}.
+event.greet.l3.theme = Tekrar hoş geldin! Geçen oyunun teması şuydu: {theme}. Bugün de aklında tut.
+event.greet.l3.theme.2 = Yeniden selam! Geçen oyundan: {theme}. Bakalım bugün nasıl gidecek.
 event.greet.l4 = Merhaba! Bu sefer değerlendirme vereceğim ve daha iyi aday hamleleri göstereceğim.
 event.greet.l4.2 = Oynayalım. Bir hatadan sonra neyin daha isabetli olduğunu söyleyeceğim.
 event.greet.l4.3 = Bir kulüp oyununa hazır mısın? Değerlendirme değiştiğinde yorum yapacağım.
@@ -32,9 +40,9 @@ event.colour.black = Beyaz bende, o yüzden ben başlıyorum.
 event.colour.black.2 = Bu sefer Siyah sensin: ilk hamleyi ben yapıyorum.
 
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
-event.level.l1 = İlk adımlar: seni zorlamadan oynarım ve her hatayı basit sözlerle açıklarım.
-event.level.l2 = Başlangıç: biraz daha güçlü oynarım ve çatal, açmaz gibi basit taktikleri adlarıyla anarım.
-event.level.l3 = Gelişen oyuncu: planlardan ve piyon yapısından söz ederim, kısa varyantlar gösteririm.
+event.level.l1 = İlk adımlar: seni zorlamadan oynarım. Saldırı altındaki korumasız taşını söylerim, büyük hataları basit sözlerle açıklarım.
+event.level.l2 = Başlangıç: biraz daha güçlü oynarım. Çatal, açmaz ve vezirine saldırıyı söylerim; taşlarını çıkarmanı hatırlatırım.
+event.level.l3 = Gelişen oyuncu: yalnızca mat ve vezirine saldırı için, bir de tek hamle işe yarıyorsa uyarırım. Hatalarını yine açıklarım.
 event.level.l4 = Kulüp oyuncusu: değerlendirmeyi piyon cinsinden veririm ve aday hamleler öneririm.
 event.level.l5 = Güçlü kulüp oyuncusu: kısa yorumlar, gerektiğinde daha uzun varyantlar.
 event.level.l6 = Uzman: var gücümle oynarım ve yalnızca kritik anları yorumlarım.
@@ -105,5 +113,7 @@ event.end.handshake = Hadi tokalaşalım.
 # suffix after it; "ile", "konusunda" and the colon keep it unchanged.
 event.lesson.resume = Tekrar hoş geldin! Şimdi {chapter} ile devam edelim.
 event.lesson.resume.2 = Yeniden merhaba! {chapter} konusunda kalmıştık.
+event.lesson.start = {chapter} ile başlayalım.
+event.lesson.start.2 = {chapter} ile başlıyoruz.
 event.lesson.next = Sıradaki konu: {chapter}.
 event.lesson.next.2 = Şimdi sırada {chapter} var.

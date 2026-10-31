@@ -138,6 +138,7 @@ on Windows, `./scacelith <options>` on Linux, `/Applications/Scacelith.app/Conte
 | `--start [--human white\|black] [--tc N]` | a game against Stockfish at once, with your colour and the time control (its index in the New game list, from 0) |
 | `--start --hotseat` | a game between two players on one PC at once: `--white-name <name>`, `--black-name <name>`, `--rated`, `--handover <seconds>` (0: an instant cut) |
 | `--start --coach [--coach-level 0..6] [--coach-colour white\|black]` | a coach game at once (level 0 is the rules lesson) |
+| `--start --coach --coach-lesson-chapter <id>` | the rules lesson at once, starting at that chapter (`castling`, `en_passant`, ...: the ids in `src/coach/lesson.cpp`; an unknown one is logged and ignored) |
 | `--start --coach --coach-challenge <id> [--coach-challenge-position N]` | a challenge of the Coach page at once (its ids are the `challenge` lines of `assets/coach/challenges/challenges.txt`), at its position N, from 1 |
 | `--viewer [--white-preset N] [--black-preset N] [--viewpoint 0..9]` | Watch a Game at once |
 | `--analyse <file.pgn> [--game G] [--analysis-at P]` | game G of a PGN file (the first by default) in the Analysis mode, at the position after P plies |

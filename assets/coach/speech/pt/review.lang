@@ -859,6 +859,12 @@ tip.centre.b2 = Luta pelo centro: casas como {sq} contam.
 tip.centre.b2.2 = Estás a dar-me o centro. Olha para a casa {sq}.
 tip.centre.b3 = Não estás a disputar o centro; a casa {sq} é minha.
 tip.centre.b3.2 = Disputa o centro, à volta de {sq}.
+# A reminder once per game at levels 1-2 when no knight or bishop has left its home square by the
+# player's fifth move ({your} = a knight to start with).
+tip.develop.b1 = Os teus cavalos e bispos ainda estão em casa. Põe {your} em jogo, por exemplo.
+tip.develop.b1.2 = Hora de desenvolver! As tuas peças pequenas ainda estão em casa. Experimenta {your}.
+tip.develop.b2 = Nenhuma das tuas peças menores se mexeu. Desenvolve {your} e as restantes.
+tip.develop.b2.2 = As tuas peças ainda dormem. Começa por {your}.
 # Endgame technique tips.
 tip.mate_technique.b1 = Contra um rei sozinho, empurra-o para a borda e depois dá mate.
 tip.mate_technique.b1.2 = Dica: encosta o meu rei à borda. Mantém o teu rei perto também.
@@ -936,12 +942,48 @@ praise.excellent.b4.2 = Excelente.
 praise.excellent.b4.3 = Bem, {move} é exato.
 praise.castle.b1 = Boa! Fizeste o roque. Agora o teu rei está mais seguro.
 praise.castle.b1.2 = Belo roque! O teu rei está bem abrigado.
+praise.castle.b2 = Boa, fizeste o roque. O rei está seguro, e a torre entra em jogo.
+praise.castle.b2.2 = Roque: um rei seguro e uma torre em jogo. Muito bem.
+praise.castle.b3 = Boa: roque feito, rei seguro.
+praise.castle.b3.2 = Roque cedo. Sensato.
 praise.saved.b1 = Boa! Salvaste a tua peça.
 praise.saved.b1.2 = Muito bem, puseste a peça a salvo.
+praise.saved.b2 = Boa, essa peça estava atacada e afastaste-a.
+praise.saved.b2.2 = Bem visto. Salvaste a peça.
+praise.saved.b3 = Boa: puseste a peça atacada a salvo.
+praise.saved.b3.2 = Bem visto. A peça estava em perigo.
+praise.check_threat.b1 = Boa! Viste o que o meu lance atacava, e resolveste.
+praise.check_threat.b1.2 = Muito bem! Verificaste a minha ameaça antes de jogares.
+praise.check_threat.b1.3 = Sim! Olhaste para o que eu ataco. É um ótimo hábito.
+praise.check_threat.b2 = Boa: viste a minha ameaça e respondeste-lhe.
+praise.check_threat.b2.2 = Verificaste o que o meu lance ataca. Bom hábito.
+praise.check_threat.b2.3 = Isso resolve a minha ameaça. Bem visto.
+praise.protect.b1 = Boa! {your} estava atacad{your:o}, e agora está protegid{your:o}.
+praise.protect.b1.2 = Muito bem! Protegeste {your} antes de eu poder tomá-{your:lo}.
+praise.protect.b2 = Boa: {your} estava atacad{your:o}, e defendeste-{your:o}.
+praise.protect.b2.2 = Bem visto. {your} está em segurança agora.
+praise.develop.b1 = Boa! Puseste uma peça em jogo. As peças fazem mais ali.
+praise.develop.b1.2 = Bonito! Pôr as peças em jogo cedo é um bom hábito.
+praise.develop.b2 = Boa, desenvolveste uma peça. Põe as outras em jogo também.
+praise.develop.b2.2 = Muito bem: desenvolve as peças cedo.
 praise.book.b1 = Boa, é um lance teórico bem conhecido.
 praise.book.b1.2 = Boa, é assim que os jogadores fortes também começam.
 
 # ---- The coach's own threats (levels 1-2, before the player moves) ------------------------------
+# The first threat of a game at levels 1-2 is asked about first, nothing pointed at: the player is
+# to look at the board for what my last move attacks.
+threat.ask.b1 = O meu último lance fez uma ameaça. Consegues ver qual das tuas peças está em perigo?
+threat.ask.b1.2 = Olha para o tabuleiro. O meu último lance ataca uma peça tua. Consegues encontrá-la?
+threat.ask.b1.3 = Espera, antes de jogares: o meu último lance é uma ameaça. Qual das tuas peças está em perigo?
+threat.ask.b2 = O meu último lance fez uma ameaça. Consegues ver qual é?
+threat.ask.b2.2 = Repara: o que ataca o meu último lance?
+threat.ask.b2.3 = Acabei de fazer uma ameaça. Consegues encontrá-la?
+# The same when the threat is a checkmate.
+threat.ask_mate.b1 = O meu último lance é uma ameaça ao teu rei. Consegues ver o que quero fazer?
+threat.ask_mate.b1.2 = Cuidado: estou a preparar algo grande. Consegues ver o que quero fazer?
+threat.ask_mate.b1.3 = Olha para o meu último lance. Estou a ameaçar algo sério. Consegues vê-lo?
+threat.ask_mate.b2 = O meu último lance é uma ameaça séria. Consegues ver o que quero fazer?
+threat.ask_mate.b2.2 = Olha para o meu último lance: ameaça algo grande. Consegues vê-lo?
 # A mate threat ({sq} = where it would mate, pointed at at level 1; {my} = the piece).
 threat.mate.b1 = Cuidado! Estou a ameaçar xeque-mate em {sq}.
 threat.mate.b1.2 = Atenção: {my} quer ir para {sq}. Isso seria xeque-mate.
@@ -949,6 +991,9 @@ threat.mate.b1.3 = Olha para a casa {sq}. Se eu lá chegar, é xeque-mate!
 threat.mate.b2 = Cuidado, ameaço mate.
 threat.mate.b2.2 = Atenção: há uma ameaça de mate em {sq}.
 threat.mate.b2.3 = Olha bem: estou a ameaçar xeque-mate.
+threat.mate.b3 = Cuidado, ameaço mate em {sq}.
+threat.mate.b3.2 = Há uma ameaça de mate: {my} quer ir para {sq}.
+threat.mate.b3.3 = Atenção: ameaço xeque-mate.
 # A threat on a piece ({my} = my attacker, pointed at at level 1; {your} = the target, pointed at).
 threat.piece.b1 = Olha: {my} está a atacar {your}.
 threat.piece.b1.2 = Cuidado! {your} está a ser atacad{your:o} {my:por}.
@@ -956,6 +1001,21 @@ threat.piece.b1.3 = Atenção, {my} quer tomar {your}.
 threat.piece.b2 = Cuidado com {your}.
 threat.piece.b2.2 = {your} está sob ataque.
 threat.piece.b2.3 = Vigia {your}.
+threat.piece.b3 = {my} ataca {your}, e tomá-{your:lo} ganharia material.
+threat.piece.b3.2 = {your} está em perigo: {my} ameaça tomá-{your:lo}.
+threat.piece.b3.3 = Cuidado: o meu último lance ataca {your}.
+# A fork the coach's move sets up (level 2): {my} on {sq} attacks {t1} and {t2}.
+threat.fork.b2 = {my} em {sq} ataca {t1} e {t2} ao mesmo tempo. É um garfo!
+threat.fork.b2.2 = Atenção, é um garfo: {my} ataca {t1} e {t2}.
+threat.fork.b2.3 = {my} faz um garfo {t1:a} e {t2:a}. Não é fácil salvar as duas peças.
+# A pin (level 2): {my} on {sq} holds {your} in front of {t1}, the piece behind it.
+threat.pin.b2 = {my} em {sq} crava {your} contra {t1}. Se se mover, eu tomo {t1}.
+threat.pin.b2.2 = Cuidado: {your} está cravad{your:o} {my:por}. Se se mover, {t1} cai.
+threat.pin.b2.3 = {your} está cravad{your:o}: se sair, {my} toma {t1}.
+# Level 3: the position has one good move only.
+threat.only.b3 = Esta é uma posição crítica: só um lance é realmente bom. Não tenhas pressa.
+threat.only.b3.2 = Cuidado, aqui só há um bom lance. Olha primeiro para tudo.
+threat.only.b3.3 = Devagar: quase todos os lances correm mal nesta posição.
 threat.punish.b1 = O meu último lance foi um erro. Consegues castigá-lo?
 threat.punish.b1.2 = Hum, acho que cometi um erro. Consegues encontrá-lo?
 
@@ -971,6 +1031,8 @@ tb.hint.mate_missed.b1 = Olha para o meu rei. Consegues dar-lhe xeque-mate?
 tb.hint.mate_missed.b1.2 = Experimenta primeiro os xeques. Talvez haja um xeque-mate!
 tb.hint.general.b1 = Não tenhas pressa e olha para o tabuleiro todo.
 tb.hint.general.b1.2 = Tenta encontrar um lance mais seguro.
+tb.hint.b3 = Vê quais das tuas peças a minha resposta ataca.
+tb.hint.b3.2 = Olha para o que a minha resposta atacaria antes de jogares.
 # The retry.
 tb.fixed.b1 = Muito melhor!
 tb.fixed.b1.2 = Sim, assim está melhor!
@@ -978,6 +1040,14 @@ tb.fixed.b1.3 = Boa, isso resulta muito melhor.
 tb.fixed = Assim está melhor.
 tb.fixed.2 = Melhor.
 tb.fixed.3 = Boa correção.
+# After a good retry of a move taken back for a fault with a named cause: one line that names the
+# habit; {theme} is a phrase from appraisal.lang (theme.*), no full stop.
+tb.why.b1 = Lembra-te para a próxima: {theme}.
+tb.why.b1.2 = Um bom hábito: {theme}.
+tb.why.b2 = A lição aqui: {theme}.
+tb.why.b2.2 = O que ajudou: {theme}.
+tb.why.b3 = Vale a pena lembrar: {theme}.
+tb.why.b3.2 = O hábito a criar: {theme}.
 tb.same = O mesmo lance outra vez? Está bem, vamos ver.
 tb.same.2 = Gostas desse lance. Vamos jogá-lo até ao fim.
 # The retry after a hint-only offer is the move the coach had in mind.
@@ -989,3 +1059,34 @@ tb.found.2 = Exatamente, é esse.
 # where the offer would have been).
 tb.none_left = Lamento, mas já não podes anular mais lances nesta partida.
 tb.none_left.2 = Já não tens lances para anular nesta partida.
+
+# ---- Trying the critical position again (levels 1-3) --------------------------------------------------
+# The end card's "Try that position again": the board is set to the position before the game's biggest
+# mistake and the player looks for a better move. {best} is the better move.
+retry.task.b1 = Vamos voltar a esse momento. Consegues encontrar um lance melhor?
+retry.task.b1.2 = Aqui está a posição outra vez. Consegues encontrar um lance melhor?
+retry.task.b2 = Esta é a posição antes do teu grande erro. Encontra um lance melhor.
+retry.task.b2.2 = Vamos ver esse momento outra vez. O que jogarias em vez disso?
+retry.task.b3 = Esta é a posição antes do lance crítico. Encontra o melhor lance.
+retry.task.b3.2 = De volta ao momento crítico. Qual é o melhor lance?
+# A move that is no good: it is taken back, and the player looks again.
+retry.again.b1 = Esse não. Olha outra vez.
+retry.again.b1.2 = Ainda não é esse. Tenta de novo.
+retry.again.b2 = Esse não. Olha para o tabuleiro todo.
+retry.again.b2.2 = Ainda não. Experimenta outro lance.
+retry.again.b3 = Esse não. Olha para o que a minha resposta faria.
+retry.again.b3.2 = Ainda não é esse. Pensa na minha melhor resposta.
+# The player found a move that is no mistake.
+retry.found.b1 = Sim! Esse é o melhor lance. Muito bem!
+retry.found.b1.2 = Encontraste! Isso é muito melhor.
+retry.found.b2 = Sim, esse resulta. Muito bem.
+retry.found.b2.2 = É essa a ideia. Bom trabalho.
+retry.found.b3 = Correto, esse aguenta. Muito bem.
+retry.found.b3.2 = É esse. Bem encontrado.
+# The second miss: the coach shows the better move.
+retry.reveal.b1 = Aqui está o melhor lance: {best}. Repara.
+retry.reveal.b1.2 = Deixa-me mostrar: {best} era melhor.
+retry.reveal.b2 = O melhor lance era {best}. Olha.
+retry.reveal.b2.2 = Aqui está: {best}.
+retry.reveal.b3 = O melhor lance era {best}.
+retry.reveal.b3.2 = {best} era o lance.

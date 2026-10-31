@@ -9,7 +9,10 @@
 #include "ui_screens_game.h"
 #include "ui_theme.h"
 #include "ui_widgets.h"
+#include "../coach/appraisal.h"
+#include "../coach/catalog.h"
 #include "../coach/challenge.h"
+#include "../coach/lesson.h"
 #include "../game/settings.h"
 #include "../i18n/i18n.h"
 #include "../i18n/unicode.h"
@@ -48,10 +51,16 @@ std::string levelName(int i) {
     std::string n = levelText(i, "name");
     return n.empty() ? bandText(levelInfo(i)) : n;
 }
-// The level whose band holds the player's rating (once the player has rated games), else -1.
-int recommendedLevel() {
+// The level the page recommends: with rated games, the one whose band holds the player's rating;
+// a player of the coach alone (no rated game, which is what moves the rating), the level the
+// coach's own suggestion after the last game names (coach::suggestLevel); -1 when neither exists.
+int computeRecommendedLevel() {
     const game::Settings& g = game::settings();
-    if (g.playerGames <= 0) return -1;
+    if (g.playerGames <= 0) {
+        if (g.coachHistory.empty()) return -1;
+        const int last = std::max(1, g.coachHistory.back().level);
+        return std::clamp(coach::suggestLevel(last, g.coachHistory), 1, std::max(1, levelCount() - 1));
+    }
     int best = -1;
     for (int i = 0; i < levelCount(); ++i) {
         const CoachLevelInfo& l = levelInfo(i);
@@ -62,28 +71,81 @@ int recommendedLevel() {
     return best;
 }
 
+// ---- The lesson's chapters ------------------------------------------------------------------------
+const coach::Lesson& lessonBook() { return coach::Lesson::shared(); }
+// The chapter an id names (0, the first, for "" or an id the lesson no longer has).
+int chapterIndex(const std::string& id) { return id.empty() ? 0 : std::max(0, lessonBook().chapterIndex(id)); }
+// The id the page keeps for a chapter: "" for the first one, as Settings::coachLessonChapter does.
+std::string chapterId(int index) {
+    const std::vector<coach::LessonChapter>& c = lessonBook().chapters();
+    return index > 0 && index < int(c.size()) ? c[size_t(index)].id : std::string();
+}
+// The chapters' titles in the UI language, the lesson's own words (lesson.title.<id> of the coach's
+// speech catalog, written rendering: lower case noun phrases) with a capital first letter. Kept
+// for the language they were made in.
+const std::vector<std::string>& chapterTitles() {
+    static std::vector<std::string> titles;
+    static std::string language;
+    if (titles.empty() || language != i18n::language()) {
+        language = i18n::language();
+        titles.clear();
+        for (const coach::LessonChapter& c : lessonBook().chapters()) {
+            std::u32string t = uni::decode(coach::Catalog::shared().render(c.title, language, false, 0).text);
+            for (char32_t& ch : t) {
+                if (ch == ' ' || ch == 0x200E) continue;
+                ch = uni::toUpper(ch, language == "tr");
+                break;
+            }
+            titles.push_back(uni::encode(t));
+        }
+    }
+    return titles;
+}
+
+// What the coach's history says, worked out when the page opens (the history changes only when a
+// game ends, never while the page is up): the recommended level (-1 none), the levels whose goal is
+// met, and the challenge set of the theme the appraisals named in two of the last three games ("" none).
+struct CoachMemory {
+    int level = -1;
+    bool mastered[3] = {false, false, false};   // levels 0..2 (the rules lesson has no goal)
+    std::string challenge;
+};
+CoachMemory g_memory;
+int recommendedLevel() { return g_memory.level; }
+bool levelMastered(int level) { return level >= 1 && level <= 2 && g_memory.mastered[level]; }
+const std::string& recommendedChallenge() { return g_memory.challenge; }
+
 void loadCoach(CoachSetup& c) {
     const game::Settings& g = game::settings();
+    g_memory.level = computeRecommendedLevel();
+    for (int level = 1; level <= 2; ++level) g_memory.mastered[level] = coach::levelMastered(level, g.coachHistory);
+    g_memory.challenge = coach::practiceChallenge(coach::themeFromName(coach::recurringTheme(g.coachHistory)));
     c.tab = std::clamp(g.coachTab, 0, 1);
     c.level = std::clamp(g.coachLevel, 0, std::max(0, levelCount() - 1));
     c.colour = std::clamp(g.coachColour, 0, 2);
+    c.lessonChapter = chapterId(chapterIndex(g.coachLessonChapter));
+    c.lessonPicked = false;
     c.challenge = g.coachChallenge;
     c.takeYourTime = g.coachTakeYourTime;
-    c.dangerMarkers = g.coachDangerMarkers;
+    c.dangerMarkers = g.coachDangerMarkerMode;
 }
 void storeCoach(const CoachSetup& c) {
     game::Settings& g = game::settings();
     g.coachTab = c.tab;
     g.coachLevel = c.level;
     g.coachColour = c.colour;
+    g.coachLessonChapter = c.lessonChapter;
     g.coachChallenge = c.challenge;
     g.coachTakeYourTime = c.takeYourTime;
-    g.coachDangerMarkers = c.dangerMarkers;
+    g.coachDangerMarkerMode = c.dangerMarkers;
     g.save();
 }
 
-// One row of the level list: name and band, description, the "recommended" tag.
-bool levelRow(int i, bool sel, bool recommended, const Rect& r) {
+void checkMark(vec2 c, float s, vec4 color);
+
+// One row of the level list: name and band, description, the "recommended" tag, and a check mark
+// after the name when the level's mastery goal is met.
+bool levelRow(int i, bool sel, bool recommended, bool mastered, const Rect& r) {
     im::Item it = im::item(im::makeId(i), r);
     if (sel) {
         if (im::rtl()) gfx::fillH(r, withAlpha(gold, 0.04f), withAlpha(gold, 0.13f), 2.0f);
@@ -103,6 +165,7 @@ bool levelRow(int i, bool sel, bool recommended, const Rect& r) {
     std::string name = levelName(i);
     ns.size = gfx::fitSize(name, ns, r.w - 40.0f - bandW);
     gfx::text(name, im::flipX(r, r.x + 22.0f), nameBase, ns);
+    if (mastered) checkMark(vec2(im::flipX(r, r.x + 22.0f + gfx::textWidth(name, ns) + 22.0f), nameBase - 9.0f), 15.0f, green);
     if (!band.empty()) gfx::text(band, im::flipX(r, r.r() - 18.0f), nameBase, es);
     float tagW = 0.0f;
     if (recommended) {
@@ -121,11 +184,35 @@ bool levelRow(int i, bool sel, bool recommended, const Rect& r) {
 }
 
 // A note of the lesson column: a gold diamond and a wrapped line. Returns the height used.
-float note(const std::string& text, const Rect& col, float x, float y, float w, vec4 color) {
+// 'lineH' and 'gap' (the space after it) tighten the column when its height is short.
+constexpr float kNoteLine = 27.0f, kNoteGap = 9.0f;
+float note(const std::string& text, const Rect& col, float x, float y, float w, vec4 color, float lineH = kNoteLine,
+           float gap = kNoteGap) {
     TextStyle ns = style(font::FACE_ITALIC, 21.0f, color, im::startAlign());
     gfx::diamond(vec2(im::flipX(col, x + 6.0f), y - 7.0f), 3.2f, withAlpha(gold, 0.75f));
-    int lines = gfx::textWrapped(text, im::flipX(col, x + 22.0f), y, w - 22.0f, ns, 27.0f);
-    return float(lines) * 27.0f + 9.0f;
+    int lines = gfx::textWrapped(text, im::flipX(col, x + 22.0f), y, w - 22.0f, ns, lineH);
+    return float(lines) * lineH + gap;
+}
+// The height note() or goalNote() uses for 'text' (a goal met adds the line "Completed").
+float noteHeight(const std::string& text, float w, bool met, float lineH, float gap) {
+    TextStyle ns = style(font::FACE_ITALIC, 21.0f, ivoryDim, im::startAlign());
+    return float(gfx::wrapLineCount(text, w - 22.0f, ns) + (met ? 1 : 0)) * lineH + gap;
+}
+
+// The mastery goal of a level, in the same column: a gold diamond, or a green check mark and the
+// word "Completed" under the goal once it is met. Returns the height used.
+float goalNote(const std::string& text, bool met, const Rect& col, float x, float y, float w, float lineH = kNoteLine,
+               float gap = kNoteGap) {
+    TextStyle gs = style(font::FACE_ITALIC, 21.0f, met ? green : ivoryDim, im::startAlign());
+    if (met) checkMark(vec2(im::flipX(col, x + 7.0f), y - 7.0f), 14.0f, green);
+    else gfx::diamond(vec2(im::flipX(col, x + 6.0f), y - 7.0f), 3.2f, withAlpha(gold, 0.75f));
+    int lines = gfx::textWrapped(text, im::flipX(col, x + 22.0f), y, w - 22.0f, gs, lineH);
+    float h = float(lines) * lineH + gap;
+    if (met) {
+        gfx::text(T("coach.completed"), im::flipX(col, x + 22.0f), y + h - gap, gs);
+        h += lineH;
+    }
+    return h;
 }
 
 // ---- Challenges -----------------------------------------------------------------------------------
@@ -193,7 +280,7 @@ void checkMark(vec2 c, float s, vec4 color) {
 
 // One row of the challenge list: name and difficulty, the one-line description, and in a column
 // of its own at the end, the check mark of a completed challenge.
-void challengeRow(const coach::Challenge& c, bool sel, bool done, float hoverT, const Rect& r) {
+void challengeRow(const coach::Challenge& c, bool sel, bool done, bool recommended, float hoverT, const Rect& r) {
     if (sel) {
         if (im::rtl()) gfx::fillH(r, withAlpha(gold, 0.04f), withAlpha(gold, 0.13f), 2.0f);
         else gfx::fillH(r, withAlpha(gold, 0.13f), withAlpha(gold, 0.04f), 2.0f);
@@ -214,6 +301,12 @@ void challengeRow(const coach::Challenge& c, bool sel, bool done, float hoverT, 
     if (!desc.empty()) {
         TextStyle ds = style(font::FACE_ITALIC, 19.0f, sel ? ivoryDim : muted, im::startAlign());
         float descW = r.w - 22.0f - checkW;
+        if (recommended) {   // "RECOMMENDED" at the end of the description's line
+            TextStyle rs = style(font::FACE_TITLE, 14.0f, goldBright, im::endAlign(), 0.18f);
+            const std::string tag = uni::toUpper(T("coach.recommended"), i18n::language());
+            gfx::text(tag, im::flipX(r, r.r() - 18.0f), r.y + 49.0f, rs);
+            descW = r.w - 22.0f - (18.0f + gfx::textWidth(tag, rs) + 24.0f);
+        }
         ds.size = gfx::fitSize(desc, ds, descW, 0.8f);
         gfx::text(im::elideToFit(desc, ds, descW), im::flipX(r, r.x + 22.0f), r.y + 48.0f, ds);
     }
@@ -285,16 +378,19 @@ std::string challengeProgress(const std::string& id, int index, int count) {
 namespace detail {
 namespace {
 
+// The chapter list of the lesson column is open (a dialog over the page).
+bool g_pickChapter = false;
+
 // The Training tab: the levels on the start side, the lesson of the selected one and the colour on
 // the end side.
-void trainingTab(CoachSetup& setup, float lx, float rx, float colW, float top) {
+void trainingTab(CoachSetup& setup, float lx, float rx, float colW, float top, float bottom) {
     const Rect lcol(lx, 0, colW, 0), rcol(rx, 0, colW, 0);
     int n = levelCount();
 
     // ---- Levels.
     im::sectionLabel(T("coach.section.level"), lx, top + 8.0f, colW);
     int recommended = recommendedLevel();
-    if (recommended >= 0) {  // the player's rating at the end of the heading
+    if (recommended >= 0 && game::settings().playerGames > 0) {  // the player's rating at the end of the heading
         TextStyle es = style(font::FACE_ITALIC, 21.0f, ivoryDim, im::endAlign());
         std::string elo = i18n::trf("elo.yours", {num(game::settings().playerElo)});
         TextStyle label = style(font::FACE_TITLE, kSection, gold, HAlign::Left, 0.2f);
@@ -312,7 +408,8 @@ void trainingTab(CoachSetup& setup, float lx, float rx, float colW, float top) {
     im::pushId("levels");
     for (int i = 0; i < n; ++i) {
         Rect r(lx, top + 30.0f + float(i) * rowH, colW, rowH - 5.0f);
-        if (levelRow(i, setup.level == i, i == recommended, r) && setup.level != i) {
+        if (levelRow(i, setup.level == i, i == recommended, levelMastered(i), r) &&
+            setup.level != i) {
             setup.level = i;
             im::sound(Sound::Toggle);
         }
@@ -332,12 +429,19 @@ void trainingTab(CoachSetup& setup, float lx, float rx, float colW, float top) {
     }
     {
         const bool marks = setup.level >= 1 && setup.level <= 2;
-        int on = setup.dangerMarkers ? 1 : 0;
-        if (im::selectorRow(L("coach.danger_markers"), on, {T("common.off"), T("common.on")}, Rect(lx, hy, colW, 46.0f), marks) &&
-            marks)
-            setup.dangerMarkers = on == 1;
+        im::selectorRow(L("coach.danger_markers"), setup.dangerMarkers,
+                        {T("coach.danger_markers.auto"), T("common.on"), T("common.off")}, Rect(lx, hy, colW, 46.0f), marks);
         im::tooltip(T("coach.danger_markers.help"));
         hy += 46.0f;
+        // Auto has withdrawn the markers (the player has played the games it shows them for): said once, in a line.
+        if (marks && setup.dangerMarkers == game::Settings::DangerMarkersAuto &&
+            !coach::dangerMarkersAuto(setup.level, game::settings().coachHistory)) {
+            TextStyle ns = style(font::FACE_ITALIC, 20.0f, muted, im::startAlign());
+            std::string text = T("coach.danger_markers.withdrawn");
+            ns.size = gfx::fitSize(text, ns, colW - 8.0f, 0.8f);
+            gfx::text(im::elideToFit(text, ns, colW - 8.0f), im::flipX(lcol, lx + 2.0f), hy + 22.0f, ns);
+            hy += 30.0f;
+        }
     }
     // Without its voice files the coach still teaches, in writing.
     if (!setup.voiceAvailable) {
@@ -372,13 +476,51 @@ void trainingTab(CoachSetup& setup, float lx, float rx, float colW, float top) {
         }
     }
     gfx::hlineFade(rx, rx + colW, y + 2.0f, withAlpha(gold, 0.25f), 0.25f);
-    y += 38.0f;
-    y += note(T("coach.note.clock"), rcol, rx, y, colW, ivoryDim);
-    y += note(T(lessonNow ? "coach.note.lesson" : "coach.note.takeback"), rcol, rx, y, colW, ivoryDim);
-    y += note(T("coach.note.unrated"), rcol, rx, y, colW, ivoryDim);
-    // The coach judges the player's moves in games (the lesson has none): it can misjudge one.
-    if (!lessonNow) y += note(T("coach.note.fallible"), rcol, rx, y, colW, ivoryDim);
-    y += 12.0f;
+    // What follows the paragraph: the notes, the chapter row (lesson), the colour row and its two
+    // lines. The column ends at 'bottom'; when a long language or a long paragraph would run past it,
+    // the spacing tightens, and then the second colour line (the colour row says "Alternate" already)
+    // goes. Measured before anything is drawn, so the result is the same on every frame.
+    const bool goal = setup.level == 1 || setup.level == 2;   // the level's mastery goal, ticked once met
+    const bool goalMet = goal && levelMastered(setup.level);
+    const std::string goalText = goal ? T(setup.level == 1 ? "coach.goal.1" : "coach.goal.2") : std::string();
+    std::vector<std::string> notes = {T("coach.note.clock"), T(lessonNow ? "coach.note.lesson" : "coach.note.takeback"),
+                                      T("coach.note.unrated")};
+    if (!lessonNow) notes.push_back(T("coach.note.fallible"));   // the lesson has no judged moves
+    const bool nextColour = !lessonNow && setup.colour == 2;
+    struct Spacing { float line, gap, rule, before, colour; bool next; };
+    const Spacing steps[] = {{kNoteLine, kNoteGap, 38.0f, 12.0f, 30.0f, true},
+                             {24.0f, 4.0f, 26.0f, 6.0f, 26.0f, true},
+                             {24.0f, 4.0f, 26.0f, 6.0f, 26.0f, false}};
+    Spacing sp = steps[2];
+    for (const Spacing& s : steps) {
+        float end = y + s.rule;
+        if (goal) end += noteHeight(goalText, colW, goalMet, s.line, s.gap);
+        for (const std::string& n : notes) end += noteHeight(n, colW, false, s.line, s.gap);
+        end += s.before + (lessonNow ? 56.0f : 0.0f) + 50.0f + s.colour + (nextColour && s.next ? 28.0f : 0.0f);
+        if (end <= bottom - 6.0f || &s == &steps[2]) {
+            sp = s;
+            break;
+        }
+    }
+    y += sp.rule;
+    if (goal) y += goalNote(goalText, goalMet, rcol, rx, y, colW, sp.line, sp.gap);
+    for (const std::string& n : notes) y += note(n, rcol, rx, y, colW, ivoryDim, sp.line, sp.gap);
+    y += sp.before;
+    // The chapter to start the lesson at: the one it was left at (the first when it was completed or
+    // not begun), any other to go over it again. Completing the lesson once stays recorded whatever
+    // chapter it starts at (Settings::coachRulesDone).
+    if (lessonNow) {
+        const std::vector<std::string>& titles = chapterTitles();
+        int chapter = chapterIndex(setup.lessonChapter);
+        bool openList = false;
+        if (im::selectorRow(L("coach.chapter"), chapter, titles, Rect(rx, y, colW, 50.0f), true, 400.0f, &openList)) {
+            setup.lessonChapter = chapterId(chapter);
+            setup.lessonPicked = true;
+        }
+        if (openList) g_pickChapter = true;
+        im::tooltip(T("coach.chapter.help"));
+        y += 50.0f + 6.0f;
+    }
     // Colour: White in the lesson; else White, Black or alternating (the next colour is shown).
     {
         int colour = lessonNow ? 0 : setup.colour;
@@ -387,7 +529,7 @@ void trainingTab(CoachSetup& setup, float lx, float rx, float colW, float top) {
             !lessonNow)
             setup.colour = colour;
         im::tooltip(T("coach.colour.help"));
-        y += 50.0f + 30.0f;
+        y += 50.0f + sp.colour;
         game::Settings preview = game::settings();
         preview.coachLevel = setup.level;
         preview.coachColour = setup.colour;
@@ -396,7 +538,7 @@ void trainingTab(CoachSetup& setup, float lx, float rx, float colW, float top) {
         TextStyle cs = style(font::FACE_ITALIC, 22.0f, ivoryDim, im::startAlign());
         cs.size = gfx::fitSize(line, cs, colW - 8.0f);
         gfx::text(line, im::flipX(rcol, rx + 2.0f), y, cs);
-        if (!lessonNow && setup.colour == 2) {
+        if (!lessonNow && setup.colour == 2 && sp.next) {
             std::string next = T("newgame.colour_alternate");
             TextStyle ns = style(font::FACE_ITALIC, 22.0f, muted, im::startAlign());
             ns.size = gfx::fitSize(next, ns, colW - 8.0f);
@@ -442,6 +584,7 @@ im::Id challengesTab(CoachSetup& setup, float lx, float rx, float colW, float to
     const bool revealed = im::keyboardMode() && !s.keyboard;
     s.keyboard = im::keyboardMode();
     std::string newSel;
+    const std::string& recommendedId = recommendedChallenge();
     bool clickedRow = false;
     gfx::pushClip(Rect(area.x - 12.0f, area.y, area.w + 24.0f, area.h));
     im::pushId("challenges");
@@ -474,7 +617,8 @@ im::Id challengesTab(CoachSetup& setup, float lx, float rx, float colW, float to
             if (isSel) start = true;  // Enter on the selected challenge
             else newSel = c.id;
         }
-        if (visible) challengeRow(c, isSel, game::settings().coachChallengeDone(c.id), it.hoverT, r);
+        if (visible)
+            challengeRow(c, isSel, game::settings().coachChallengeDone(c.id), c.id == recommendedId, it.hoverT, r);
     }
     if (!newSel.empty()) {
         setup.challenge = newSel;
@@ -503,11 +647,15 @@ MenuAction coachPage(CoachSetup& setup, float t, bool opened, bool& back) {
         if (g_forcedTab >= 0) setup.tab = g_forcedTab;
         g_forcedTab = -1;
         g_list.shown = false;
+        g_pickChapter = false;
     }
     setup.tab = std::clamp(setup.tab, 0, 1);
     setup.level = std::clamp(setup.level, 0, std::max(0, levelCount() - 1));
     setup.colour = std::clamp(setup.colour, 0, 2);
 
+    // The chapter list over the page: the page below does not react to the pointer or the keys.
+    const bool modal = g_pickChapter;
+    if (modal) im::pushBlock();
     dimBackground(t);
     float w = std::min(1480.0f, v.x - 80.0f), h = 990.0f;
     Rect p(v.x * 0.5f - w * 0.5f, v.y * 0.5f - h * 0.5f + (1.0f - t) * 14.0f, w, h);
@@ -530,7 +678,7 @@ MenuAction coachPage(CoachSetup& setup, float t, bool opened, bool& back) {
     if (challenges) {
         rowId = challengesTab(setup, lx, rx, colW, top, footer - 20.0f, opened, startRow);
     } else {
-        trainingTab(setup, lx, rx, colW, top);
+        trainingTab(setup, lx, rx, colW, top, footer - 20.0f);
         g_list.shown = false;
     }
 
@@ -561,6 +709,8 @@ MenuAction coachPage(CoachSetup& setup, float t, bool opened, bool& back) {
         summary = levelName(setup.level);
         std::string band = bandText(levelInfo(setup.level));
         if (!band.empty()) summary += "  \xC2\xB7  " + band;
+        if (isLesson(levelInfo(setup.level)) && chapterIndex(setup.lessonChapter) > 0)
+            summary += "  \xC2\xB7  " + chapterTitles()[size_t(chapterIndex(setup.lessonChapter))];
     }
     if (!summary.empty()) {
         TextStyle ss = style(font::FACE_ITALIC, 22.0f, ivoryDim, im::endAlign());
@@ -571,7 +721,16 @@ MenuAction coachPage(CoachSetup& setup, float t, bool opened, bool& back) {
     im::setDefaultFocus(rowId ? rowId : startId);
     im::popId();
     gfx::popAlpha();
-    if (backPressed || im::consumeBack()) {
+    if (modal) im::popBlock();
+    if (g_pickChapter) {
+        int r = im::choiceDialog("##chapters", T("coach.chapter.title"), chapterTitles(), chapterIndex(setup.lessonChapter), 2);
+        if (r >= 0 && r != chapterIndex(setup.lessonChapter)) {
+            setup.lessonChapter = chapterId(r);
+            setup.lessonPicked = true;
+        }
+        if (r != -1) g_pickChapter = false;
+    }
+    if (backPressed || (!modal && im::consumeBack())) {
         if (!backPressed) im::sound(Sound::Back);
         back = true;
     }

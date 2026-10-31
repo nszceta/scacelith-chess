@@ -1,6 +1,7 @@
 // The [coach] and [tts] sections of Scacelith.ini (see settings.h). Engine-free and GL-free: in the
 // core library, so that tests/coach_scene_tests.cpp checks their round trip.
 #include "settings.h"
+#include <cctype>
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
@@ -8,11 +9,14 @@
 
 namespace game {
 
-std::string encodeCoachHistory(const std::vector<Settings::CoachGame>& games) {
+// A game of the history: "level:result:accuracy:theme:blunders:markers" ("-" for an unknown accuracy,
+// no theme, unknown blunders; markers 0 / 1). Earlier versions wrote the first three fields only:
+// the others then read as unknown / none / no markers.
+std::string encodeCoachHistory(const std::vector<coach::GameRecord>& games) {
     std::string out;
     size_t first = games.size() > size_t(Settings::kCoachHistoryMax) ? games.size() - size_t(Settings::kCoachHistoryMax) : 0;
     for (size_t i = first; i < games.size(); ++i) {
-        const Settings::CoachGame& g = games[i];
+        const coach::GameRecord& g = games[i];
         char buf[64];
         if (g.accuracy >= 0.0 && std::isfinite(g.accuracy))
             std::snprintf(buf, sizeof(buf), "%d:%d:%.1f", g.level, g.result, g.accuracy);
@@ -20,27 +24,42 @@ std::string encodeCoachHistory(const std::vector<Settings::CoachGame>& games) {
             std::snprintf(buf, sizeof(buf), "%d:%d:-", g.level, g.result);
         if (!out.empty()) out += ' ';
         out += buf;
+        out += ':';
+        out += g.theme.empty() ? std::string("-") : g.theme;
+        out += g.blunders >= 0 ? ':' + std::to_string(g.blunders) : std::string(":-");
+        out += g.markers ? ":1" : ":0";
     }
     return out;
 }
 
-std::vector<Settings::CoachGame> decodeCoachHistory(const std::string& text) {
-    std::vector<Settings::CoachGame> out;
+std::vector<coach::GameRecord> decodeCoachHistory(const std::string& text) {
+    std::vector<coach::GameRecord> out;
     size_t i = 0;
     while (i < text.size()) {
         size_t end = text.find(' ', i);
         if (end == std::string::npos) end = text.size();
-        std::string entry = text.substr(i, end - i);
+        const std::string entry = text.substr(i, end - i);
         i = end + 1;
         if (entry.empty()) continue;
-        size_t c1 = entry.find(':'), c2 = c1 == std::string::npos ? std::string::npos : entry.find(':', c1 + 1);
-        if (c2 == std::string::npos) continue;  // malformed: skipped
-        Settings::CoachGame g;
-        g.level = std::clamp(std::atoi(entry.substr(0, c1).c_str()), 0, 6);
-        g.result = std::clamp(std::atoi(entry.substr(c1 + 1, c2 - c1 - 1).c_str()), -1, 1);
-        std::string acc = entry.substr(c2 + 1);
+        std::vector<std::string> field;
+        for (size_t from = 0;;) {
+            const size_t colon = entry.find(':', from);
+            field.push_back(entry.substr(from, colon == std::string::npos ? std::string::npos : colon - from));
+            if (colon == std::string::npos) break;
+            from = colon + 1;
+        }
+        if (field.size() < 3) continue;  // malformed: skipped
+        coach::GameRecord g;
+        g.level = std::clamp(std::atoi(field[0].c_str()), 0, 6);
+        g.result = std::clamp(std::atoi(field[1].c_str()), -1, 1);
+        const std::string& acc = field[2];
         const double a = std::atof(acc.c_str());  // "nan" would pass the clamp: unknown, as "-"
         g.accuracy = acc.empty() || acc == "-" || std::isnan(a) ? -1.0 : std::clamp(a, 0.0, 100.0);
+        if (field.size() > 3 && field[3] != "-" &&
+            std::all_of(field[3].begin(), field[3].end(), [](char c) { return (c >= 'a' && c <= 'z') || c == '_'; }))
+            g.theme = field[3];
+        if (field.size() > 4 && !field[4].empty() && field[4] != "-") g.blunders = std::clamp(std::atoi(field[4].c_str()), 0, 99);
+        g.markers = field.size() > 5 && field[5] == "1";
         out.push_back(g);
     }
     if (out.size() > size_t(Settings::kCoachHistoryMax)) out.erase(out.begin(), out.end() - Settings::kCoachHistoryMax);
@@ -81,6 +100,13 @@ static std::string legacyLessonChapterId(int index) {
     return index > 0 && index < int(sizeof kIds / sizeof *kIds) ? kIds[index] : "";
 }
 
+// A chapter id saved by an earlier version, as the lesson names it now: "pieces" was split in
+// three, and a player who left inside it resumes at the first of them. Other ids are kept (an id
+// the lesson no longer knows starts it over, see GameScene's lessonChapterIndex).
+static std::string currentLessonChapterId(const std::string& id) {
+    return id == "pieces" ? "pieces_lines" : id;
+}
+
 void readCoachSettings(const IniFile& ini, Settings& s) {
     s.coachLevel = std::max(0, ini.getInt("coach.level", s.coachLevel));  // the UI clamps to its list
     s.coachColour = std::clamp(ini.getInt("coach.colour", s.coachColour), 0, 2);
@@ -89,9 +115,18 @@ void readCoachSettings(const IniFile& ini, Settings& s) {
     if (ini.has("coach.history")) s.coachHistory = decodeCoachHistory(ini.getString("coach.history"));
     s.coachAccuracyExplained = ini.getBool("coach.accuracy_explained", s.coachAccuracyExplained);
     s.coachTakeYourTime = ini.getBool("coach.take_your_time", s.coachTakeYourTime);
-    s.coachDangerMarkers = ini.getBool("coach.danger_markers", s.coachDangerMarkers);
-    if (ini.has("coach.lesson_chapter_id")) s.coachLessonChapter = ini.getString("coach.lesson_chapter_id");
-    else if (ini.has("coach.lesson_chapter")) s.coachLessonChapter = legacyLessonChapterId(ini.getInt("coach.lesson_chapter", 0));
+    if (ini.has("coach.danger_markers_mode")) {
+        std::string mode = ini.getString("coach.danger_markers_mode");
+        for (char& c : mode) c = char(std::tolower((unsigned char)c));
+        s.coachDangerMarkerMode = mode == "on"    ? Settings::DangerMarkersOn
+                                  : mode == "off" ? Settings::DangerMarkersOff
+                                                  : Settings::DangerMarkersAuto;
+    } else if (ini.has("coach.danger_markers")) {   // the on / off switch of earlier versions
+        s.coachDangerMarkerMode = ini.getBool("coach.danger_markers", true) ? Settings::DangerMarkersAuto : Settings::DangerMarkersOff;
+    }
+    if (ini.has("coach.lesson_chapter_id")) s.coachLessonChapter = currentLessonChapterId(ini.getString("coach.lesson_chapter_id"));
+    else if (ini.has("coach.lesson_chapter"))
+        s.coachLessonChapter = currentLessonChapterId(legacyLessonChapterId(ini.getInt("coach.lesson_chapter", 0)));
     s.coachTab = std::clamp(ini.getInt("coach.tab", s.coachTab), 0, 1);
     s.coachChallenge = ini.getString("coach.challenge", s.coachChallenge);
     if (ini.has("coach.challenges_done")) s.coachChallengesDone = decodeChallengeIds(ini.getString("coach.challenges_done"));
@@ -124,7 +159,9 @@ void writeCoachSettings(IniFile& ini, const Settings& s) {
     ini.set("coach.history", encodeCoachHistory(s.coachHistory));
     ini.setBool("coach.accuracy_explained", s.coachAccuracyExplained);
     ini.setBool("coach.take_your_time", s.coachTakeYourTime);
-    ini.setBool("coach.danger_markers", s.coachDangerMarkers);
+    ini.set("coach.danger_markers_mode", s.coachDangerMarkerMode == Settings::DangerMarkersOn    ? "on"
+                                         : s.coachDangerMarkerMode == Settings::DangerMarkersOff ? "off"
+                                                                                                 : "auto");
     ini.set("coach.lesson_chapter_id", s.coachLessonChapter);
     ini.setInt("coach.tab", s.coachTab);
     ini.set("coach.challenge", s.coachChallenge);

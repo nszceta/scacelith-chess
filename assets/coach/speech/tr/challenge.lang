@@ -15,6 +15,11 @@
 # Theme names follow the usual Turkish puzzle terms: çatal, açmaz, şiş, açarak saldırı, saptırma,
 # cezbetme, ara hamle, sessiz hamle, koridor matı.
 
+# ---- From the last game: a set made for its theme ({theme}: an infinitive phrase, no full stop) ----------
+ch.practise = Son oyunundan: {theme}. Bu set tam bunun için hazırlandı.
+ch.practise.2 = Son oyununda çalışılacak bir şey vardı: {theme}. Hadi bunu çalışalım.
+ch.practise.3 = Geçen oyunun ipucu şuydu: {theme}. İşte biraz alıştırma.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Tek hamlede mat. {n:position} var ve her birinde tek bir hamle mat ediyor. Şah çeken bütün hamlelere bak.
 ch.intro.mate2 = İki hamlede mat. {n:position}: ilk hamlen bana hiçbir savunma bırakmamalı, sonra mat edersin.

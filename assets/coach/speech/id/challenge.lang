@@ -13,6 +13,11 @@
 # "Mate in N" uses "mat" ("mat dalam 2 langkah"), as Indonesian puzzle books do; a mate given on
 # the board is "skakmat".
 
+# ---- Practice after a game: the theme of the player's last game ({theme}: a phrase, no full stop) ----
+ch.practise = Dari permainan terakhirmu: {theme}. Rangkaian ini dibuat untuk itu.
+ch.practise.2 = Di permainan terakhirmu ada satu hal yang perlu dilatih: {theme}. Ayo kita latih.
+ch.practise.3 = Tips permainan lalu adalah {theme}. Ini latihannya.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Mat dalam satu langkah. {n:position}, dan di setiap posisi ada satu langkah yang langsung memberi skakmat. Periksa semua skak.
 ch.intro.mate2 = Mat dalam dua langkah. {n:position}: langkah pertamamu harus membuatku tak bisa bertahan, lalu kamu memberi skakmat.

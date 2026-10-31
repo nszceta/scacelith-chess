@@ -16,6 +16,9 @@
 # not "Ben difeso!").
 
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
+ch.practise = Dalla tua ultima partita: {theme}. Questa serie è fatta apposta.
+ch.practise.2 = Nella tua ultima partita c’era una cosa su cui lavorare: {theme}. Allenamoci.
+ch.practise.3 = Il consiglio dell’ultima partita era: {theme}. Ecco un po’ di pratica.
 ch.intro.mate1 = Matto in una. {n:position}, e ogni volta una sola mossa dà scacco matto. Guarda tutti gli scacchi.
 ch.intro.mate2 = Matto in due. {n:position}: la tua prima mossa non deve lasciarmi difese, poi dai matto.
 ch.intro.mate3 = Matto in tre. {n:position}. Scacchi, catture e minacce: calcola ogni volta la mia risposta migliore.

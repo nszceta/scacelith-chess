@@ -11,7 +11,9 @@
 
 # ---- Chapter titles (said inside "Lad os fortsætte med {chapter}.": lower case) ---------------------
 lesson.title.welcome = brættet
-lesson.title.pieces = brikkernes gang
+lesson.title.pieces_lines = tårnets, løberens og dronningens gang
+lesson.title.pieces_steps = kongens, springerens og bondens gang
+lesson.title.values_setup = brikkernes værdi og de første træk
 lesson.title.safety = sikre og usikre slag
 lesson.title.check = skak
 lesson.title.mate = skakmat
@@ -21,7 +23,8 @@ lesson.title.promotion = bondeforvandling
 lesson.title.draws = pat og remis
 lesson.title.before_move = tjek før du flytter
 lesson.title.opening = åbningen
-lesson.title.etiquette = rigtige partier: rating, skakur og god skik
+lesson.title.review = en hurtig repetition
+lesson.title.etiquette = reglerne for vores partier
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
 # After the coach demonstrated the solution.
@@ -93,7 +96,7 @@ lesson.rook.king = Det er din konge. Brug {your} i hjørnet.
 lesson.rook.ok = Slået! {my} forlader brættet.
 # Pieces don't jump
 lesson.jump.blocked = Brikker kan ikke springe over andre. Din bonde på {sq} spærrer vejen for tårnet.
-lesson.jump.knight = Kun springeren kan springe. Den møder vi snart.
+lesson.jump.all = Det er det samme for løberen og dronningen: de kan heller ikke springe over brikker.
 # Bishop
 lesson.bishop.intro = Det her er {your}. {your:den} går diagonalt, så langt du vil.
 lesson.bishop.colour = En løber bliver altid på felter med samme farve.
@@ -138,7 +141,12 @@ lesson.pawncap.ok = Ja! Lige frem når den går, diagonalt når den slår.
 lesson.values.pawn = Hver brik har en værdi i point. En bonde er ét point værd.
 lesson.values.pieces = En springer eller en {@}løber: tre. Et {@2}tårn: fem. {@3}Dronningen: ni.
 lesson.values.king = Kongen er uvurderlig: du kan aldrig give den væk.
-lesson.values.trade = Prøv aldrig at give en brik væk for mindre end den er værd.
+lesson.values.trade = Byt ikke en større brik for en mindre, medmindre du vinder mere end du taber.
+lesson.values.two = Din springer angriber to af mine brikker: {sq} og {sq2}. Ingen af dem er dækket.
+lesson.values.ask = Slå den der er mest værd!
+lesson.values.small = Det er en bonde, der er ét point værd. {my} stod også gratis, og {my:den} er ni værd.
+lesson.values.look = Se på hvad din springer angriber, og slå den brik der er mest værd.
+lesson.values.ok = Ja! En dronning er ni værd. Når to brikker står gratis, så slå den største.
 lesson.setup.corners = Hvert parti begynder sådan: tårnene i {@}hjørnerne, så {@2}springerne, så {@3}løberne.
 lesson.setup.queen = Dronningen står på sin egen farve: din dronning står på et lyst felt.
 lesson.setup.king = Kongen står ved siden af dronningen. Hvid trækker altid først.
@@ -159,6 +167,18 @@ lesson.safety.gave = Du gav din dronning, der er ni værd, for min springer, der
 lesson.safety.other = Prøv den anden brik.
 lesson.safety.look = Find den brik som ingenting dækker.
 lesson.safety.ok = Fremragende! Spørg altid dig selv: er den brik dækket?
+lesson.safety.pawns = Din dronning angriber to af mine bønder: {sq} og {sq2}.
+lesson.safety.pawns_ask = Slå den bonde der er sikker at tage.
+lesson.safety.gave_pawn = Du gav din dronning, der er ni værd, for en bonde, der er ét værd.
+lesson.safety.pawns_other = Også en bonde kan være dækket. Prøv den anden bonde.
+lesson.safety.pawns_ok = Rigtigt! Risikér aldrig din dronning for en dækket bonde.
+lesson.safety.small = Nu omvendt. {my} er dækket, men din bonde angriber {my:den}.
+lesson.safety.small_count = Tager du dronningen, slår min {@}bonde din tilbage. Du giver ét point og vinder ni.
+lesson.safety.small_ask = Slå min dronning med den rigtige brik!
+lesson.safety.small_other = Tag den med din bonde i stedet: den billigste brik der kan.
+lesson.safety.small_look = Din bonde angriber min dronning. Slå den med bonden.
+lesson.safety.small_ok = Ja! En lille brik må gerne slå en stor, selv en dækket: du mister ét point og vinder ni.
+lesson.safety.count = Før hvert slag skal du tælle hvad du vinder, og hvad du kan miste igen.
 
 # ---- Chapter 3: check and getting out of check -----------------------------------------------------------------
 lesson.danger.rank = Mit tårn kontrollerer hele anden række.
@@ -180,6 +200,11 @@ lesson.capture.check = Min dronning giver skak, lige ved siden af din konge.
 lesson.capture.ask = Slå angriberen!
 lesson.capture.king_ok = Ja! Min dronning havde ingen forsvarer, så din konge kunne slå den.
 lesson.capture.knight_ok = Ja! Din springer fjernede angriberen.
+lesson.check.open.ask = Skak igen! Denne gang må du komme ud af den på den måde du vil.
+lesson.check.open.king = Du flyttede kongen væk. Du kunne også have sat en brik imellem, eller din springer kunne have slået mit tårn.
+lesson.check.open.block = Du spærrede angrebet. Din konge kunne også have flyttet sig, eller din springer kunne have slået mit tårn.
+lesson.check.open.take = Du slog mit tårn, brikken der gav skak. Kongetræk eller spærring ville også have virket.
+lesson.check.open.hint = Tre måder: {@}flyt kongen, {@2}spær på linjen eller {@3}slå mit tårn med din springer.
 
 # ---- Chapter 4: checkmate ------------------------------------------------------------------------------------
 lesson.mate1.what = Skakmat: kongen står i skak og har ingen vej ud. Det vinder partiet.
@@ -187,16 +212,34 @@ lesson.mate1.stuck = Min konge sidder fast bag sine {@}egne bønder.
 lesson.mate1.ask = Sæt mig mat i ét træk!
 lesson.mate1.wrong = Tæt på! Giv skak på min grundrække, hvor min konge ikke kan slippe væk.
 lesson.mate1.ok = Skakmat! Det kaldes grundrækkemat. Husk det!
+lesson.mate1.king = Din konge står fint hvor den er. Brug tårnet til at give skak.
+lesson.mate1.why = Se? Tårnet dækker min {@}hele grundrække, og mine {@2}egne bønder fylder felterne foran min konge.
 lesson.mate2.ask = Din konge og din dronning arbejder sammen. Sæt mig mat i ét træk.
 lesson.mate2.wrong = Find en skak der ikke efterlader min konge et eneste felt.
 lesson.mate2.ok = Skakmat! Din konge dækker dronningen, så min konge ikke kan slå den.
 lesson.mate2.ok_rank = Skakmat på grundrækken! Din konge dækker alle felterne foran min.
+lesson.mate2.king = Din konge vogter felterne ved siden af min. Lad den stå, og brug dronningen.
+lesson.mate2.half = Det overvåger {sq}, men min konge kan stadig gå til {sq2}.
+lesson.mate2.why = Se? Din dronning dækker {sq} og {sq2}, og din konge dækker felterne foran min. Min konge har ingen vej ud.
 lesson.mate3.edge = Dit tårn på syvende række holder min konge ude på kanten.
 lesson.mate3.ask = Brug nu {your} til at sætte mat.
 lesson.mate3.free = Skak, men nu er syvende række fri, og min konge slipper væk.
 lesson.mate3.takes = Min konge slår bare dit tårn.
 lesson.mate3.hint = Giv skak på grundrækken med det tårn der ikke holder syvende række.
 lesson.mate3.ok = Skakmat! De to tårne arbejdede sammen som en stige.
+lesson.mate3.why = Se? Det ene tårn afskærer {@}syvende række, og det andet giver skak på {@2}grundrækken. Min konge har ingen vej ud.
+lesson.mate4.look = Skak er ikke altid skakmat. Lad os se hvad der sker.
+lesson.mate4.ask = Giv min konge skak med dit tårn.
+lesson.mate4.king = Din konge bliver hvor den er. Brug tårnet til at give skak.
+lesson.mate4.wrong = Det er ikke skak. Dit tårn kan angribe min konge fra grundrækken.
+lesson.mate4.ok = Ja, det er skak! Men er det skakmat? Se her.
+lesson.mate4.after = Min bonde på {sq} gav min konge plads. Før du glæder dig over et skak, så tæl de felter min konge stadig kan bruge.
+lesson.mate5.ask = To af dine tårntræk giver skak, og kun ét er skakmat. Tæl min konges felter, og vælg så.
+lesson.mate5.king = Din konge dækker allerede {sq} og {sq2}. Lad den stå, og flyt tårnet.
+lesson.mate5.wrong = Det er ikke skak. Find et tårntræk der angriber min konge.
+lesson.mate5.hint = Din konge dækker {sq} og {sq2}. Hvilket tårnskak tager også {sq3} væk?
+lesson.mate5.why = Se? Tårnet dækker {sq}, din konge dækker de to andre felter, og min konge sidder fast.
+lesson.mate5.ok = Skakmat! Du talte min konges felter: der var ingen tilbage.
 
 # ---- Chapter 5: castling ---------------------------------------------------------------------------------------
 # Kingside castling is "kort rokade" (kongefløjen), queenside "lang rokade" (dronningefløjen).
@@ -214,6 +257,10 @@ lesson.castle2.bishop = Min løber angriber {sq}. Derfor er rokade til denne sid
 lesson.castle2.ask = Rokér til den anden side.
 lesson.castle2.other = Rokér mod dit andet tårn, på dronningefløjen.
 lesson.castle2.ok = Korrekt! Lang rokade sætter din konge på {sq}.
+lesson.ep0.rule = En passant begynder med dobbelttrækket. Kun en bonde der {@}stadig står hjemme, må gå to felter. En bonde der {@2}har flyttet sig, går ét felt ad gangen.
+lesson.ep0.ask = Flyt en af dine bønder to felter frem.
+lesson.ep0.moved = Den bonde har allerede flyttet sig, så den kan kun gå ét felt. Brug en bonde der stadig står hjemme.
+lesson.ep0.ok = Rigtigt: kun en bonde på sit startfelt må gå to.
 
 # ---- Chapter 6: en passant ------------------------------------------------------------------------------------
 lesson.ep.what = Et særligt bondeslag hedder en passant. Det betyder »i forbifarten«.
@@ -222,6 +269,13 @@ lesson.ep.how = Din bonde må slå den som om den kun var gået ét felt: til {s
 lesson.ep.now = Men kun lige nu, i dette træk. Slå en passant!
 lesson.ep.gone = Chancen er væk: en passant virker kun med det samme. Lad os prøve igen.
 lesson.ep.ok = En passant! Min bonde på {sq} er fjernet.
+lesson.ep2.old = Min bonde på {sq} har stået ved siden af din et stykke tid. Det er for sent at slå den en passant.
+lesson.ep2.watch = Se nu på min anden bonde.
+lesson.ep2.ask = To af mine bønder står ved siden af dine, men kun én er lige gået to felter. Slå den en passant!
+lesson.ep2.push = Det rykker bare din bonde frem. Slå bonden der lige er gået to felter.
+lesson.ep2.wrong = Find bonden der lige har gjort sit dobbelttræk, og slå den en passant.
+lesson.ep2.hint = Min bonde på {sq} er lige gået to felter. Slå den en passant, til {sq2}.
+lesson.ep2.ok = En passant! Min bonde på {sq} kunne ikke slås: chancen var forbi.
 
 # ---- Chapter 7: promotion -------------------------------------------------------------------------------------
 lesson.promo.what = Når en bonde når sidste række, bliver den forvandlet: den bliver til en dronning, et tårn, en løber eller en springer.
@@ -230,12 +284,21 @@ lesson.promo.under = Det er tilladt! Men en dronning er stærkere. Lad os tage d
 lesson.promo.under_ok = Fint. De fleste spillere vælger dog dronningen.
 lesson.promo.push = Før din bonde frem til sidste række, til {sq}.
 lesson.promo.ok = En ny dronning! Du kan endda have to dronninger på én gang.
+lesson.promo2.ask = En bonde kan også forvandles ved at slå, diagonalt. Slå mit tårn, og lav en dronning!
+lesson.promo2.push = Det forvandler også, men mit tårn dækker {sq}. Se her.
+lesson.promo2.lost = Mit tårn slog din nye brik. Slå først mit tårn.
+lesson.promo2.wrong = Det slår ikke mit tårn. Din bonde slår diagonalt, på {sq}.
+lesson.promo2.hint = Slå mit tårn med din bonde, hen på {sq}: den forvandles mens den slår.
+lesson.promo2.ok = Slået og forvandlet! En bonde kan gøre begge dele i ét træk.
 
 # ---- Chapter 8: stalemate and draws -----------------------------------------------------------------------------
 lesson.stale.what = Det er min tur. Min konge står ikke i skak, men {@}alle felterne omkring den er angrebet.
 lesson.stale.draw = Jeg har intet lovligt træk. Det er pat, og partiet er remis.
 lesson.stale2.ask = Når du står til gevinst, skal du passe på pat. Sæt mig mat i ét træk uden at det bliver pat!
-lesson.stale2.wrong = Giv skak på min grundrække, hvor min konge ikke kan slippe væk.
+lesson.stale2.wrong = Find et skak der ikke efterlader min konge et eneste felt. Pas på: et stille træk kan gøre mig pat.
+lesson.stale2.king = Din konge dækker allerede {sq} og {sq2}. Lad den stå, og brug dronningen.
+lesson.stale2.hint = Din konge dækker {sq} og {sq2}. Giv mig skak langs grundrækken, så har min konge ingen steder at gå hen.
+lesson.stale2.why = Se? Min konge er angrebet {@}og har intet frit felt: det er skakmat. Uden skakken var det blevet pat.
 lesson.stale2.ok = Skakmat! Lad altid modstanderens konge have et træk medmindre du sætter mat.
 lesson.draws.kings = Andre former for remis: når ingen kan sætte mat, som med to konger alene, er partiet remis.
 lesson.draws.agree = Spillerne kan også aftale remis.
@@ -285,29 +348,29 @@ lesson.opening.castle.ask = Vejen er fri. Rokér din konge i sikkerhed.
 lesson.opening.castle.wrong = Din konge er klar. Rokér nu, mens vejen er fri.
 lesson.opening.castle.ok = Rokeret! Din konge er i sikkerhed, og dit tårn er med i spillet.
 lesson.opening.done = Centrum, brikker, rokade: det er en god start på hvert parti.
+lesson.review.start = Hurtig repetition, i en anden rækkefølge denne gang. Jeg forklarer ikke: du viser mig det.
+lesson.review.promo.ask = Forvandl denne bonde.
+lesson.review.promo.ok = Godt: en ny dronning, og skak!
+lesson.review.check.ask = Din konge står i skak. Kom ud af den.
+lesson.review.check.ok = Ude af skak. Godt.
+lesson.review.castle.ask = Rokér din konge, på den side hvor det er tilladt.
+lesson.review.castle.other = Det er ikke rokade. Rokér på den side hvor det er tilladt.
+lesson.review.castle.ok = Rokeret, på den sikre side!
+lesson.review.ep.ask = Slå min bonde en passant.
+lesson.review.ep.ok = En passant! Du huskede det.
+lesson.review.mate.ask = Sæt mig mat i ét træk.
+lesson.review.mate.ok = Skakmat! Repetitionen er færdig.
 
-# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 12: how our games work (no clock, touch-move, handshake, how the coach helps) ----------
 lesson.talk.rules = Nu kender du alle skakkens regler. Godt gået!
-lesson.talk.real = Lad mig fortælle dig hvordan rigtige partier foregår.
-lesson.talk.elo = Spillere har en rating, der kaldes Elo. Den stiger når du vinder, og den falder når du taber.
-lesson.talk.elo_gap = Slår du en stærkere spiller, får du flere point; taber du til en svagere, koster det flere.
-lesson.talk.elo_start = Din rating vises efter fem ratede partier. Partier mod mig er træning, så de er ikke ratede.
-lesson.talk.clock = Det her er et {@}skakur. Hver spiller har sin egen tid, som kun løber mens spilleren er i trækket.
-lesson.talk.press = Efter dit træk trykker du på uret med den samme hånd. Så starter min tid.
-lesson.talk.flag = Hvis din tid løber ud, taber du medmindre jeg slet ikke kan sætte dig mat.
-lesson.talk.increment = Fem plus tre betyder fem minutter til hver, plus tre sekunder efter hvert træk.
-lesson.talk.speeds = Korte partier kaldes lynskak, længere partier hurtigskak og de længste klassisk skak.
-lesson.talk.no_clock = Når du spiller mod mig, er uret slået fra. Tag al den tid du har brug for til at tænke.
-lesson.talk.touch = Rører du en af dine brikker i et rigtigt parti, skal du flytte den.
-lesson.talk.touch_mine = Rører du en af mine brikker, skal du slå den hvis du kan.
-lesson.talk.adjust = Vil du rette på en brik uden at flytte den, skal du først sige »jeg retter«.
-lesson.talk.release = Så snart du slipper en brik på et nyt felt, er trækket udført.
-lesson.talk.sheet = I turneringer skriver begge spillere hvert træk ned på en {@}noteringsblanket.
+lesson.talk.real = Lad mig fortælle dig hvordan vores partier kommer til at foregå.
+lesson.talk.no_clock = Med mig er der intet ur og ingen rating. Tag al den tid du har brug for til at tænke.
+lesson.talk.touch = En brik du rører, skal flyttes, så kig først, og rør så.
 # {move:letters} shows the Danish scoresheet letters ("Sf3"), which is what this line teaches.
-lesson.talk.notation = Vi skriver brikkens bogstav og feltet, som {move:letters}. Ved bønder skriver man kun feltet.
-lesson.talk.robot = Din robot noterer dine træk for dig. I hurtige partier behøver man ikke at notere.
 lesson.talk.handshake = Partier begynder og slutter med et håndtryk. Det betyder: godt parti, og tak.
 lesson.talk.polite = Uanset om du vinder eller taber, så vær høflig, og forstyr aldrig en modstander der sidder og tænker.
-lesson.talk.tips = Tre råd til dine partier: {@}kontrollér centrum, {@2}få springere og løbere ud, og {@3}rokér tidligt.
-lesson.talk.next = Når du er klar, så vælg »Første skridt«. Jeg spiller ikke for hårdt og hjælper dig efter hver fejl.
+lesson.talk.help = I vores partier hjælper jeg dig. Hvis en af dine brikker er angrebet eller står uden dækning, siger jeg til.
+lesson.talk.help_back = Efter en stor fejl viser jeg dig hvorfor og tilbyder at tage dit træk tilbage.
+lesson.talk.help_skip = Og hvis jeg taler for meget, så tryk på mellemrum: så stopper jeg.
+lesson.talk.next = Når du er klar, så spil »Første skridt«. Jeg spiller ikke for hårdt.
 lesson.talk.welcome = Velkommen til skakkens verden! Lad os give hånd.

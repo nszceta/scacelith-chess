@@ -182,7 +182,9 @@ screenshots of a game in progress, for instance the hand-over halfway (`--start 
 
 Coach mode: `--start --coach` starts a coach game at once, at the level and colour of the Coach
 page unless `--coach-level 0..6` (0 = the rules lesson) or `--coach-colour white|black` say
-otherwise; `--coach-dir <folder>` reads (and downloads) the voice model files in that folder instead
+otherwise; `--coach-lesson-chapter <id>` starts the rules lesson at that chapter (a chapter id of
+`src/coach/lesson.cpp`; level 0 unless `--coach-level` says another, an unknown id is logged and the
+lesson resumes where it was left). `--coach-dir <folder>` reads (and downloads) the voice model files in that folder instead
 of the default one (`--coach-dir build/coach`: the copy a development build prepares).
 `SCACELITH_COACH_SOURCE=archive` in the environment skips Supertone's repository (Supertone's
 archive copy only, to try the fallback), `SCACELITH_COACH_SOURCE=official` never falls back to the

@@ -6,15 +6,23 @@
 # present or future tense and nouns instead ("Zaslúžená výhra", "Partia je vzdaná").
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Ahoj! Zahrajme si priateľskú partiu. Vždy, keď sa niečo pokazí, pomôžem ti.
+event.greet.l1 = Ahoj! Zahrajme si priateľskú partiu. Poviem ti, keď bude niektorá tvoja figúra v ohrození.
 event.greet.l1.2 = Zdravím ťa! Budem hrať jemne a ukážem ti, na čo si treba dávať pozor.
 event.greet.l1.3 = Vitaj! Nikam sa neponáhľaj: keď bude niektorá figúra v ohrození, poviem ti to.
-event.greet.l2 = Ahoj! Poďme hrať. Keď sa objaví vidlička alebo väzba, ukážem ti ju.
+event.greet.l1.first = Ahoj! Pred každým ťahom sa pýtaj: je moja figúra v bezpečí? Čo napáda môj ťah? Čo mi hrozí? Pripomeniem ti to.
+event.greet.l1.first.2 = Tvoja prvá poriadna partia! Pred každým ťahom: je moja figúra v bezpečí, čo napáda, aká je hrozba? Pripomeniem ti to.
+event.greet.l2 = Ahoj! Poďme hrať. Ak mojím ťahom vznikne vidlička alebo väzba, poviem ti to.
 event.greet.l2.2 = Zdravím ťa! Vyvíjaj svoje figúry a maj kráľa v bezpečí. Počas partie ti budem pomáhať.
 event.greet.l2.3 = Vitaj späť pri šachovnici! Sleduj vidličky a väzby: tie vyhrávajú partie.
-event.greet.l3 = Ahoj! Zahrajme si poriadnu partiu. Budem komentovať tvoje plány a väčšie chyby.
+event.greet.l3 = Ahoj! Zahrajme si poriadnu partiu. Upozorním ťa na veľké hrozby a vysvetlím väčšie chyby.
 event.greet.l3.2 = Zdravím ťa! Premysli si plán pre svoje figúry. Keď ti pri ťahu niečo ujde, poviem ti to.
-event.greet.l3.3 = Poďme hrať! Upozorním ťa na jediné ťahy aj na ťahy, ktoré nevyjdú.
+event.greet.l3.3 = Poďme hrať! Poviem ti, keď funguje len jeden ťah a keď ťah nevyjde.
+event.greet.l1.theme = Vitaj späť! Rada z poslednej partie bola: {theme}. Maj ju na pamäti aj dnes.
+event.greet.l1.theme.2 = Ahoj znova! Pamätaj na radu z poslednej partie: {theme}. Pomôžem ti.
+event.greet.l2.theme = Vitaj späť! Myšlienka z poslednej partie: {theme}. Pozrime sa, ako to pôjde dnes.
+event.greet.l2.theme.2 = Ahoj znova! Z poslednej partie si zapamätaj: {theme}.
+event.greet.l3.theme = Vitaj späť! Téma poslednej partie: {theme}. Maj ju dnes na pamäti.
+event.greet.l3.theme.2 = Ahoj znova! Z poslednej partie: {theme}. Pozrime sa, ako to pôjde dnes.
 event.greet.l4 = Ahoj! Tentoraz budem uvádzať hodnotenie pozície a ukazovať ti lepšie kandidátske ťahy.
 event.greet.l4.2 = Poďme hrať. Po chybe ti poviem, čo bolo presnejšie.
 event.greet.l4.3 = Čo tak klubová partia? Ozvem sa, keď sa zmení hodnotenie.
@@ -34,9 +42,9 @@ event.colour.black.2 = Tentoraz hráš čiernymi: prvý ťah je môj.
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names are those of assets/i18n/sk.lang (coach.level.<n>.name): Prvé kroky,
 # Začiatočník, Mierne pokročilý, Klubový hráč, Silný klubový hráč, Expert.
-event.level.l1 = Prvé kroky: hrám jemne a každú chybu vysvetlím jednoduchými slovami.
-event.level.l2 = Začiatočník: hrám o niečo silnejšie a pomenúvam jednoduché taktické motívy, ako sú vidličky a väzby.
-event.level.l3 = Mierne pokročilý: hovorím o plánoch a pešiakovej štruktúre a ukazujem krátke varianty.
+event.level.l1 = Prvé kroky: hrám jemne. Poviem ti, keď je niektorá tvoja figúra napadnutá a nekrytá, a veľké chyby vysvetlím jednoduchými slovami.
+event.level.l2 = Začiatočník: hrám o niečo silnejšie. Upozorním ťa na vidličky, väzby a útoky na dámu a pripomeniem ti vyvádzať figúry.
+event.level.l3 = Mierne pokročilý: upozorním ťa len na mat a útoky na dámu a keď funguje len jeden ťah. Chyby ti stále vysvetlím.
 event.level.l4 = Klubový hráč: hodnotenie uvádzam v pešiakoch a navrhujem kandidátske ťahy.
 event.level.l5 = Silný klubový hráč: krátke komentáre a dlhšie varianty, keď na tom záleží.
 event.level.l6 = Expert: hrám naplno a komentujem len kritické momenty.
@@ -107,5 +115,7 @@ event.end.handshake = Podajme si ruky.
 # comes after a colon, or in quotes after "témou" / "pri téme" (a quoted title keeps its nominative).
 event.lesson.resume = Vitaj späť! Pokračujeme témou „{chapter}“.
 event.lesson.resume.2 = Zdravím ťa znova! Skončili sme pri téme „{chapter}“.
+event.lesson.start = Začnime témou „{chapter}“.
+event.lesson.start.2 = Začíname témou „{chapter}“.
 event.lesson.next = Ďalej: {chapter}.
 event.lesson.next.2 = A teraz: {chapter}.

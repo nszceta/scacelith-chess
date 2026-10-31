@@ -19,6 +19,12 @@
 # assets/i18n/lv.lang), with the menus' "jūs" imperative said in the "tu" form ("Atrodi izeju",
 # "Aptur bandinieku" for "Atrodiet izeju", "Apturiet bandinieku").
 
+# ---- A challenge started from the end card of a game: said before its introduction ----------------
+# {theme}: the one thing the coach named at the end of that game.
+ch.practise = No tavas pēdējās partijas: {theme}. Šis komplekts ir veidots tieši tam.
+ch.practise.2 = Tavā pēdējā partijā bija viena lieta, pie kuras pastrādāt: {theme}. Patrenēsimies.
+ch.practise.3 = Pagājušās partijas padoms bija: {theme}. Lūk, treniņš.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Mats vienā gājienā. {n:position}: katrā matu var pieteikt ar vienu gājienu. Pārbaudi visus šahus.
 ch.intro.mate2 = Mats divos gājienos. {n:position}: tavam pirmajam gājienam jāatstāj mani bez aizsardzības, pēc tam tu piesaki matu.

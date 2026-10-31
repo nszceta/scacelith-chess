@@ -1057,14 +1057,14 @@ coach.level.0.name = Schackets regler
 coach.level.0.desc = En interaktiv lektion, en regel i taget.
 coach.level.0.detail = Tränaren ställer upp små ställningar och visar hur varje pjäs går och slår, sedan rockad, förvandling, schack och schackmatt. Du prövar varje idé själv på brädet.
 coach.level.1.name = Första stegen
-coach.level.1.desc = Vad som är angripet, vad som står oskyddat.
-coach.level.1.detail = Tränaren spelar försiktigt och talar enkelt: vilka av dina pjäser som är angripna, vilka som står utan skydd och hur du behåller dem.
+coach.level.1.desc = Angripna och oskyddade pjäser, med enkla ord.
+coach.level.1.detail = Tränaren spelar försiktigt och talar enkelt. Den varnar när en av dina pjäser eller bönder är angripen och oskyddad; första gången i ett parti ber den dig hitta faran själv.
 coach.level.2.name = Nybörjare
-coach.level.2.desc = Enkel taktik, utveckling, kungens säkerhet.
-coach.level.2.detail = Gafflar och bindningar nämns vid namn. Tränaren pratar om att få ut pjäserna och hålla kungen säker.
+coach.level.2.desc = Gafflar, bindningar, utveckling och kungens säkerhet.
+coach.level.2.detail = Tränaren varnar när dess drag skapar en gaffel, en bindning, ett angrepp på din dam eller ett matthot, och namnger motivet. Den påminner dig om att få ut pjäserna och hålla kungen säker.
 coach.level.3.name = Fortsättare
-coach.level.3.desc = Planer, bondestruktur, enda drag som håller.
-coach.level.3.detail = Tränaren förklarar planer och bondestrukturer, och varnar dig när bara ett enda drag håller ställningen.
+coach.level.3.desc = Stora hot och lägen där bara ett drag fungerar.
+coach.level.3.detail = Inga fler frågor eller markeringar: tränaren varnar bara för matthot och angrepp på din dam, och säger till när bara ett drag håller ställningen.
 coach.level.4.name = Klubbspelare
 coach.level.4.desc = Kandidatdrag, värdering i bönder.
 coach.level.4.detail = Tränaren väger kandidatdragen mot varandra och anger värderingen i bönder, som en klubbtränare skulle göra.
@@ -1074,6 +1074,9 @@ coach.level.5.detail = Korta kommentarer, konkreta varianter och positionsspelet
 coach.level.6.name = Expert
 coach.level.6.desc = Kortfattade kommentarer, djupa varianter, värderingssiffror.
 coach.level.6.detail = Få ord, som mellan starka spelare: varianter som går flera drag djupt och värderingar i siffror.
+# The goals of levels 1 and 2 on the level's card (a check mark and "Completed" once met)
+coach.goal.1 = Mål: ingen pjäs förlorad i onödan i två partier i rad.
+coach.goal.2 = Mål: två segrar i rad utan blunder.
 coach.note.clock = Ingen klocka: ta all tid du behöver.
 coach.note.takeback = Efter en blunder visar tränaren vad som gick fel och erbjuder dig att ta tillbaka draget.
 coach.note.lesson = Du spelar med vit; tränaren ställer upp varje övning på brädet.
@@ -1082,10 +1085,16 @@ coach.note.fallible = Tränaren är inte ofelbar: han kan ibland bedöma ett dra
 coach.colour = Din färg
 coach.colour.help = Färgen du spelar med mot tränaren. Växla: vit, sedan svart, från parti till parti. Lektionen om reglerna spelas alltid med vit.
 coach.colour.alternate = Växla
+coach.chapter = Kapitel
+coach.chapter.help = Kapitlet som lektionen börjar vid: det du slutade vid, eller något annat för att gå igenom det igen. Att slutföra lektionen sparas ändå.
+coach.chapter.title = Starta lektionen vid
 coach.take_time = Påminnelsen ”Ta god tid”
 coach.take_time.help = Efter en minuts betänketid säger tränaren att det inte är bråttom. Endast nivå 1 till 3.
 coach.danger_markers = Visa pjäser i fara
-coach.danger_markers.help = På nivå 1 och 2 visas, när det är din tur, en färgad ruta under varje pjäs som tränaren kan vinna just nu.
+coach.danger_markers.auto = Automatiskt
+coach.danger_markers.help = På nivå 1 och 2 visas, när det är din tur, en färgad ruta under varje pjäs som tränaren kan vinna just nu. Automatiskt: under dina tre första partier på nivå 1 och ditt första parti på nivå 2, därefter av. På: på båda nivåerna, i varje parti.
+# Under the control above, when Automatic has switched the markers off
+coach.danger_markers.withdrawn = Markeringarna är avstängda nu när du kan spelet. Välj På för att behålla dem.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Tränarens röst är inte installerad eller är avstängd (Inställningar > Ljud): hans ord skrivs ut på skärmen.
 # At the table
@@ -1108,9 +1117,17 @@ coach.confirm.leave = Vill du gå tillbaka till huvudmenyn? Det här partiet med
 coach.gameover.again = Spela igen
 coach.gameover.practise = Öva: {0}
 coach.gameover.unrated = Det här partiet med tränaren räknas inte in i ratingen.
+# "Try that position again" (levels 1-3, a game with a critical blunder), and its own end card
+coach.gameover.retry = Försök med den ställningen igen
+coach.retry.found = BRA HITTAT
+coach.retry.found.line = Det är draget som ändrar partiet.
+coach.retry.shown = DET BÄTTRE DRAGET
+coach.retry.shown.line = Nu har du sett det. Leta efter den idén i ditt nästa parti.
+coach.retry.reason = Den kritiska ställningen
 coach.lesson.done = BRA GJORT
 coach.lesson.done.line = Nu kan du schackets regler.
-coach.lesson.next = Första partiet
+coach.lesson.done.next_line = Första stegen: jag spelar snällt och säger till när en pjäs är i fara.
+coach.lesson.next = Spela Första stegen
 
 # ---- Coach challenges (src/ui/ui_coach.cpp; the coach's spoken lines are in assets/coach/speech/<lang>/challenge.lang)
 # The tabs of the Coach page: games with the coach, and short sets of positions to solve

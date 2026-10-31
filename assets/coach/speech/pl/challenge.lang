@@ -15,6 +15,9 @@
 # "będę się bronił"); the player's gender is unknown: no past tense or adjective about the player.
 
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
+ch.practise = Z twojej ostatniej partii: {theme}. Ten zestaw jest do tego stworzony.
+ch.practise.2 = W ostatniej partii było coś do przećwiczenia: {theme}. Poćwiczmy to.
+ch.practise.3 = Rada z ostatniej partii: {theme}. Oto trochę ćwiczeń.
 ch.intro.mate1 = Mat w jednym ruchu. {n:position}, a w każdej jeden ruch daje mata. Sprawdź wszystkie szachy.
 ch.intro.mate2 = Mat w dwóch ruchach. {n:position}: twój pierwszy ruch musi odebrać mi wszelką obronę, a potem dajesz mata.
 ch.intro.mate3 = Mat w trzech ruchach. {n:position}. Szachy, bicia i groźby: za każdym razem wylicz moją najlepszą odpowiedź.

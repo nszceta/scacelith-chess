@@ -1058,14 +1058,14 @@ coach.level.0.name = As regras do xadrez
 coach.level.0.desc = Uma lição interativa, uma regra de cada vez.
 coach.level.0.detail = O treinador monta pequenas posições e mostra como cada peça se move e captura e, depois, o roque, a promoção, o xeque e o xeque-mate. Experimente cada ideia no tabuleiro.
 coach.level.1.name = Primeiros passos
-coach.level.1.desc = O que está atacado, o que ficou sem proteção.
-coach.level.1.detail = O treinador joga com brandura e fala de forma simples: quais das suas peças estão atacadas, quais ficaram sem proteção e como as conservar.
+coach.level.1.desc = Peças atacadas e sem proteção, em palavras simples.
+coach.level.1.detail = O treinador joga com brandura e fala de forma simples. Avisa-o quando uma das suas peças ou um dos seus peões está atacado e sem proteção; da primeira vez numa partida, pede-lhe que encontre o perigo sozinho.
 coach.level.2.name = Principiante
-coach.level.2.desc = Tática simples, desenvolvimento, segurança do rei.
-coach.level.2.detail = Os garfos e as cravadas são chamados pelo nome. O treinador fala de desenvolver as suas peças e de manter o seu rei em segurança.
+coach.level.2.desc = Garfos, cravadas, desenvolvimento e segurança do rei.
+coach.level.2.detail = O treinador avisa quando o seu lance prepara um garfo, uma cravada, um ataque à sua dama ou um mate, e dá nome à tática. Lembra-o de pôr as peças em jogo e de manter o rei em segurança.
 coach.level.3.name = Intermédio
-coach.level.3.desc = Planos, estrutura de peões, lances únicos.
-coach.level.3.detail = O treinador explica planos e estruturas de peões e avisa quando só um lance segura a posição.
+coach.level.3.desc = Grandes ameaças e momentos em que só um lance resulta.
+coach.level.3.detail = Sem perguntas nem marcadores: o treinador avisa apenas de uma ameaça de mate ou de um ataque à sua dama, e diz quando só um lance segura a posição.
 coach.level.4.name = Jogador de clube
 coach.level.4.desc = Lances candidatos, avaliação em peões.
 coach.level.4.detail = O treinador pondera os lances candidatos e dá a avaliação em peões, como faria um treinador de clube.
@@ -1075,6 +1075,8 @@ coach.level.5.detail = Comentários curtos, variantes concretas e o vocabulário
 coach.level.6.name = Especialista
 coach.level.6.desc = Comentários secos, variantes longas, avaliações em números.
 coach.level.6.detail = Poucas palavras, como entre jogadores fortes: variantes com vários lances de profundidade e avaliações em números.
+coach.goal.1 = Objetivo: nenhuma peça perdida por nada em duas partidas seguidas.
+coach.goal.2 = Objetivo: duas vitórias seguidas sem um erro grave.
 coach.note.clock = Sem relógio: tome o tempo que precisar.
 coach.note.takeback = Depois de um erro grave, o treinador mostra o que correu mal e propõe anular o lance.
 coach.note.lesson = Joga com as brancas; o treinador monta cada exercício no tabuleiro.
@@ -1083,10 +1085,16 @@ coach.note.fallible = O treinador não é infalível: por vezes, pode avaliar ma
 coach.colour = A sua cor
 coach.colour.help = A cor com que joga contra o treinador. Alternar: brancas e depois pretas, de uma partida para a seguinte. A lição sobre as regras joga-se sempre com as brancas.
 coach.colour.alternate = Alternar
+coach.chapter = Capítulo
+coach.chapter.help = O capítulo em que a lição começa: aquele em que parou, ou qualquer outro para o rever. Concluir a lição fica registado.
+coach.chapter.title = Começar a lição em
 coach.take_time = Lembrete «Sem pressa»
 coach.take_time.help = Após um minuto de reflexão, o treinador diz que não há pressa. Apenas nos níveis 1 a 3.
 coach.danger_markers = Mostrar as peças em perigo
-coach.danger_markers.help = Nos níveis 1 e 2, na sua vez, aparece uma casa colorida sob cada uma das suas peças que o treinador poderia ganhar já.
+coach.danger_markers.auto = Automático
+coach.danger_markers.help = Nos níveis 1 e 2, na sua vez, aparece uma casa colorida sob cada uma das suas peças que o treinador poderia ganhar já. Automático: nas suas três primeiras partidas no nível 1 e na primeira no nível 2, depois desligado. Ativado: nos dois níveis, em todas as partidas.
+# Under the control above, when Automatic has switched the markers off
+coach.danger_markers.withdrawn = Os marcadores estão desligados, agora que já conhece o jogo. Escolha Ativado para os manter.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = A voz do treinador não está instalada ou está desativada (Opções > Áudio): as palavras do treinador serão escritas no ecrã.
 # At the table
@@ -1109,9 +1117,17 @@ coach.confirm.leave = Voltar ao menu principal? Esta partida com o treinador ser
 coach.gameover.again = Jogar de novo
 coach.gameover.practise = Praticar: {0}
 coach.gameover.unrated = Esta partida com o treinador não conta para o Elo.
+# "Try that position again" (levels 1-3, a game with a critical blunder), and its own end card
+coach.gameover.retry = Tentar essa posição outra vez
+coach.retry.found = BEM ENCONTRADO
+coach.retry.found.line = É esse o lance que muda a partida.
+coach.retry.shown = O MELHOR LANCE
+coach.retry.shown.line = Agora já o viu. Procure essa ideia na próxima partida.
+coach.retry.reason = A posição crítica
 coach.lesson.done = MUITO BEM
 coach.lesson.done.line = Já conhece as regras do xadrez.
-coach.lesson.next = Primeira partida
+coach.lesson.done.next_line = Primeiros passos: jogo com calma e digo-te quando uma peça está em perigo.
+coach.lesson.next = Jogar Primeiros passos
 
 # ---- Coach challenges (src/ui/ui_coach.cpp; the coach's spoken lines are in assets/coach/speech/<lang>/challenge.lang)
 # The tabs of the Coach page: games with the coach, and short sets of positions to solve

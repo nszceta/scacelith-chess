@@ -284,6 +284,14 @@ appraisal.num.takebacks.b2 = You took back {n:move} and fixed {m} of them. That'
 appraisal.num.takebacks.b2.2 = Of the {n:move} you took back, you fixed {m}. Good learning!
 appraisal.num.takebacks.b3 = You took back {n:move} and fixed {m} of them.
 appraisal.num.takebacks.b3.2 = {n:move} taken back, {m} of them fixed. Good.
+# Big mistakes (blunders) the player took back and replaced by a move that is no mistake ({n}); said
+# instead of the takebacks line (levels 1-3). The accuracy counts those moves as first played.
+appraisal.num.retried.b1 = You fixed {n:mistake} by trying again. That's how we learn!
+appraisal.num.retried.b1.2 = You turned {n:mistake} into a good move by trying again. Great!
+appraisal.num.retried.b2 = You fixed {n:mistake} by trying again. That's how we learn.
+appraisal.num.retried.b2.2 = By trying again, you fixed {n:mistake}. Good learning!
+appraisal.num.retried.b3 = You fixed {n:blunder} by trying again.
+appraisal.num.retried.b3.2 = {n:blunder} fixed on the second try. Good.
 # Level 2: big mistakes ({n} = mistakes and blunders), or the best moves found ({n}).
 appraisal.num.clean.b2 = No big mistakes at all: great!
 appraisal.num.clean.b2.2 = Not a single big mistake this game. Excellent!
@@ -334,9 +342,28 @@ appraisal.improve.theme.b5 = Recurring: {theme}.
 appraisal.improve.theme.b5.2 = Theme of the game: {theme}.
 appraisal.improve.theme.b6 = Recurring: {theme}.
 appraisal.improve.theme.b6.2 = Theme: {theme}.
+# The same theme again: the appraisal of one of the last two games (at any level) named it too. Said in the
+# places of appraisal.improve.theme above. {theme} only.
+appraisal.improve.theme.again.b1 = The same tip as last time: {theme}. Keep it in mind.
+appraisal.improve.theme.again.b1.2 = This came up last game too: {theme}. Let's work on it together.
+appraisal.improve.theme.again.b1.3 = Again, one thing to practise: {theme}. It gets easier each game.
+appraisal.improve.theme.again.b2 = The same idea as last game: {theme}. Worth practising.
+appraisal.improve.theme.again.b2.2 = This one came up last game too: {theme}.
+appraisal.improve.theme.again.b2.3 = Again something to work on: {theme}.
+appraisal.improve.theme.again.b3 = A theme again: {theme}. It came up last game too.
+appraisal.improve.theme.again.b3.2 = Same theme as recently: {theme}. Worth practising.
+appraisal.improve.theme.again.b4 = A recurring theme, also in recent games: {theme}.
+appraisal.improve.theme.again.b4.2 = The same theme as recently: {theme}.
+appraisal.improve.theme.again.b5 = Recurring, also recently: {theme}.
+appraisal.improve.theme.again.b5.2 = Same theme as recent games: {theme}.
+appraisal.improve.theme.again.b6 = Again: {theme}.
+appraisal.improve.theme.again.b6.2 = Theme repeated: {theme}.
 # The critical moment (levels 2-6).
 appraisal.improve.critical.b2 = The game turned at move {crit_no}. Next time, work on {theme}.
 appraisal.improve.critical.b2.2 = The key moment was move {crit_no}, {crit_move}. Something to practise: {theme}.
+# Level 2, when the critical moment's theme is the same as in one of the last two games.
+appraisal.improve.critical.again.b2 = The game turned at move {crit_no}, and again it was about {theme}.
+appraisal.improve.critical.again.b2.2 = Move {crit_no} was the key moment. The same idea as last time: {theme}.
 appraisal.improve.critical.b3 = The critical moment was move {crit_no}. Instead of {crit_move}, {crit_best} was better.
 appraisal.improve.critical.b3.2 = At move {crit_no}, {crit_best} was better than {crit_move}. Check my forcing moves first.
 appraisal.improve.critical.b4 = Critical moment: move {crit_no}, {crit_move}. {crit_best} was the better move.
@@ -392,6 +419,16 @@ appraisal.improve.clean.b5 = No critical mistakes.
 appraisal.improve.clean.b5.2 = Clean game.
 appraisal.improve.clean.b6 = Clean game.
 appraisal.improve.clean.b6.2 = No critical errors.
+
+# ---- The next step: the critical position again (levels 1-3, with a critical blunder) ----------------
+# Said before the encouragement; the end screen offers "Try that position again".
+appraisal.next.retry.b1 = When we finish, you can try that position again.
+appraisal.next.retry.b1.2 = After this, you can try that tricky position again.
+appraisal.next.retry.b1.3 = Do you want to try that position again? You can, in a moment.
+appraisal.next.retry.b2 = Next step: try that position again and find the better move.
+appraisal.next.retry.b2.2 = After this, you can try that position again.
+appraisal.next.retry.b3 = Next step: try that position again and find the better move.
+appraisal.next.retry.b3.2 = You can try that position again from the end screen.
 
 # ---- 5. Encouragement and the level suggestion -----------------------------------------------------
 appraisal.end.b1 = You're getting better every game. Another one?

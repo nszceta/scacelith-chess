@@ -113,6 +113,20 @@ const char* exTypeName(ExType t) {
     return "none";
 }
 
+// Praise that names a habit. The player's first moves are reinforced more often at level 1 (a praise
+// every second move instead of every third, for this many human moves); the habits praised by name
+// are capped per game so a beginner is not told the same thing at every move.
+constexpr int kEarlyPraiseMoves = 10;
+constexpr int kEarlyPraiseEvery = 2;
+constexpr int kDevelopPraises = 2;
+constexpr int kProtectPraises = 2;
+
+// The coach's warnings before the player's move: level 3 says "only one move is good" at most once
+// per this many human moves; levels 1-2 remind of development once, after the player's move of this number
+// when no minor piece has left its home square yet.
+constexpr int kOnlyWarningEvery = 8;
+constexpr int kDevelopReminderMove = 5;
+
 Band band(int level) {
     level = std::clamp(level, 1, 6);
     // level, full demo, demo, line, mate line, missed mate, lookahead, sentences, remarks/10, praise
@@ -1088,6 +1102,7 @@ Review Reviewer::review(const ReviewInput& in) {
     if (!in.game || in.game->moves().empty()) return out;
     const Game& g = *in.game;
     const Band bd = band(level_);
+    ask_ = Ask{};   // the player has moved: the question about the coach's threat is over
 
     Ctx c;
     c.b = bd;
@@ -1343,7 +1358,14 @@ Review Reviewer::review(const ReviewInput& in) {
         for (int i = 1; i <= std::min(2, int(c.r.size())); ++i)
             keptAtOnce = keptAtOnce || (c.lossAfter(i) >= 1 && c.lossAfter(std::min(int(c.r.size()), i + 4)) >= 1);
         switch (level_) {
-        case 1: voice = cls == MoveClass::Blunder && ((found && ex.concrete) || hintOnly); break;
+        case 1:
+            // A blunder with a reason the coach can show, and the one mistake worth a short line: a
+            // piece or pawn left without a protector that the coach takes at once.
+            voice = (cls == MoveClass::Blunder && ((found && ex.concrete) || hintOnly)) ||
+                    (cls == MoveClass::Mistake && found && ex.type == ExType::Hanging && ex.concrete &&
+                     c.lossWithin(2) >= 1 && keptAtOnce);
+            isRemark = cls != MoveClass::Blunder;
+            break;
         case 2:
             voice = (cls == MoveClass::Blunder && ((found && ex.concrete) || hintOnly)) ||
                     (cls == MoveClass::Mistake && found && ex.concrete && c.lossWithin(2) >= 1 && keptAtOnce);
@@ -1372,6 +1394,16 @@ Review Reviewer::review(const ReviewInput& in) {
     if (!voice && !topMove && !(retry && out.takeback.same) && !decidedLoss && !decidedWin && remarkAllowed())
         tip = findTip(c, tipsSaid_, tipEx) && (level_ <= 3 || c.j.delta >= 10.0);
 
+    // The move dealt with the coach's threat from its last move (levels 1-2, the threat search of
+    // coachMoved): along the move's own line the coach's reply no longer wins what it threatened (a
+    // mate threat: the reply is not the mating move; a material one: the balance after the reply
+    // stays within a pawn of where it was). A fault does not count: the threat may be gone, the move
+    // is no example.
+    const bool answeredThreat = level_ <= 2 && !retry && !fault && threat_.ply >= 0 && threat_.ply == c.ply - 1 &&
+                                c.playedLine.size() >= 2 && c.playedLine[1].mover == c.coach &&
+                                (threat_.mate ? c.playedLine[1].uci != threat_.uci && !c.playedLine[1].mate
+                                              : c.playedLine[1].balance >= c.base - 1);
+    out.answeredThreat = answeredThreat;
     Script s;
     const int ply = c.ply;
     // The takeback offered: its line said and the card shown; the move remembered for the replay.
@@ -1412,6 +1444,13 @@ Review Reviewer::review(const ReviewInput& in) {
                 Beat b = sayBeat(level_ <= 2 && !retry_.dubious ? "tb.fixed.b1" : "tb.fixed", Look::Player, ply);
                 b.gestures.push_back(Gesture{GestureKind::Nod, NoSquare, {}, "", 0.0f, false});
                 s.push_back(b);
+                // The cause the first move had (levels 1-3): one line naming the habit, so the
+                // better move is understood and not only found.
+                if (level_ <= 3 && !retry_.dubious && !retry_.hintOnly && retry_.firstType != ExType::None) {
+                    Beat w = sayBeat(bandKey("tb.why", level_), Look::Player, ply);
+                    w.line.with("theme", Arg::ofText(std::string("theme.") + exTypeName(retry_.firstType)));
+                    s.push_back(w);
+                }
             }
         }
     }
@@ -1535,7 +1574,7 @@ Review Reviewer::review(const ReviewInput& in) {
                 cause.push_back(betterBeat());
             }
         }
-        if (level_ == 2 && cls == MoveClass::Mistake) {   // "one sentence"
+        if (level_ <= 2 && cls == MoveClass::Mistake) {   // "one sentence"
             if (cause.size() > 1) cause.resize(1);
             tip.clear();
         }
@@ -1738,6 +1777,25 @@ Review Reviewer::review(const ReviewInput& in) {
                               hasBit(c.f.forks, c.playedLine[2].move.to);
         double lastW = -1.0;   // the human's W% after their previous judged move
         for (size_t i = humanW_.size(); i-- > 0 && lastW < 0.0;) lastW = humanW_[i];
+        // Habits praised by name (levels 1-2): a minor piece brought out from its home square in the
+        // opening's first moves (landing safe, nothing else left en prise)...
+        const int homeRank = human_ == White ? 0 : 7;
+        const PieceType mover = c.p0.at(c.played.from).type;
+        const bool developing = humanMoves_ <= kEarlyPraiseMoves && (mover == Knight || mover == Bishop) &&
+                                rankOf(c.played.from) == homeRank && rankOf(c.played.to) != homeRank &&
+                                c.f.captured == NoPiece && !flatSettled && !hangingPieces(c.p1, human_, false);
+        // ... and an attacked piece of the player's (a piece, not a pawn, with no protector, one the
+        // coach could win) that another move of theirs defends: it stands guarded afterwards and
+        // nothing else hangs.
+        Square protectedSq = NoSquare;
+        if (level_ <= 2 && !flatSettled && !hangingPieces(c.p1, human_, false)) {
+            const uint64_t attacked = hangingPieces(c.p0, human_, true) & ~squareBit(c.played.from);
+            for (int i = 0; i < 64 && protectedSq == NoSquare; ++i) {
+                const Square sq = Square(i);
+                if (hasBit(attacked, sq) && c.p0.at(sq).type != Pawn && wonWhereItStood(c.p0, sq) && pieceKept(c, sq))
+                    protectedSq = sq;
+            }
+        }
         std::string key;
         // A sacrifice in a game already won is praised only when it wins far more than the second move.
         const bool sacrificeLead = c.isBest && (A.wLead() >= 15.0 || (A.wdl && A.eLead() >= kOnlyLead));
@@ -1758,6 +1816,11 @@ Review Reviewer::review(const ReviewInput& in) {
             } else if (level_ <= 2 && captureKept && unprotected && !flatSettled) {
                 key = bandKey("praise.capture", level_);
                 v.goodCapture = true;
+            } else if (answeredThreat && !flatSettled) {
+                // The coach threatened something and the move dealt with it: the habit the coach teaches
+                // (look at what my last move attacks), named where the player has just practised it, ahead
+                // of the plain "good move".
+                key = bandKey("praise.check_threat", level_);
             } else if (level_ <= 3 && c.isBest && (lineGain(3) >= 2 || c.l1->score.mate > 0 || farBest) && (level_ < 3 || tricky) &&
                        !flatSettled && !flat) {
                 key = bandKey("praise.best", level_);
@@ -1767,15 +1830,19 @@ Review Reviewer::review(const ReviewInput& in) {
             } else if ((level_ == 3 || level_ == 4) && c.j.delta < 2.0 && c.f.captured == NoPiece && !c.f.check && tricky &&
                        !flat && !shallowEqual && !flatSettled) {
                 key = bandKey("praise.excellent", level_);
-            } else if (level_ == 1 && (c.f.castleKing || c.f.castleQueen) && !castlePraised_) {
-                key = "praise.castle.b1";
+            } else if (level_ <= 3 && (c.f.castleKing || c.f.castleQueen) && !castlePraised_) {
+                key = bandKey("praise.castle", level_);
                 castlePraised_ = true;
-            } else if (level_ == 1 && c.p0.at(c.played.from).type != Pawn &&
+            } else if (level_ <= 3 && c.p0.at(c.played.from).type != Pawn &&
                        hasBit(hangingPieces(c.p0, human_, true), c.played.from) && wonWhereItStood(c.p0, c.played.from) &&
                        !hangingPieces(c.p1, human_, false) && !flatSettled && !flat && pieceKept(c, c.played.to)) {
                 // Saved only when nothing else is left en prise (Rb1 while the queen on b3 hangs to a rook),
                 // and only a piece: the line says "piece", and a pawn is none.
-                key = "praise.saved.b1";
+                key = bandKey("praise.saved", level_);
+            } else if (level_ <= 2 && protectedSq != NoSquare && protectPraises_ < kProtectPraises) {
+                key = bandKey("praise.protect", level_);
+            } else if (level_ <= 2 && developing && developPraises_ < kDevelopPraises) {
+                key = bandKey("praise.develop", level_);
             } else if (level_ <= 2 && in.inBook && bookPraises_ < 2) {
                 key = "praise.book.b1";
                 ++bookPraises_;
@@ -1783,10 +1850,18 @@ Review Reviewer::review(const ReviewInput& in) {
         }
         v.only = only;
         v.goodCapture = v.goodCapture || captureKept;
-        if (!key.empty() && humanMoves_ - lastPraise_ >= bd.praiseEvery && remarkAllowed() && !retry) {
+        // Early in a game a beginner is reinforced more often: every second move for the first moves.
+        const int every = level_ == 1 && humanMoves_ <= kEarlyPraiseMoves ? kEarlyPraiseEvery : bd.praiseEvery;
+        if (!key.empty() && humanMoves_ - lastPraise_ >= every && remarkAllowed() && !retry) {
             Beat b = sayBeat(key, Look::Player, ply);
             if (c.f.captured != NoPiece) b.line.with("my", Arg::ofPiece(c.f.captured, c.coach, false, NoSquare));
             b.line.with("move", Arg::ofMove(c.playedSan, c.playedUci));
+            if (key.rfind("praise.protect", 0) == 0) {
+                b.line.with("your", Arg::ofPiece(c.p0.at(protectedSq).type, human_, true, protectedSq));
+                ++protectPraises_;
+            } else if (key.rfind("praise.develop", 0) == 0) {
+                ++developPraises_;
+            }
             b.gestures.push_back(Gesture{GestureKind::Nod, NoSquare, {}, "", 0.0f, false});
             s.push_back(b);
             lastPraise_ = humanMoves_;
@@ -1795,13 +1870,30 @@ Review Reviewer::review(const ReviewInput& in) {
         }
     }
 
+    // A reminder once at levels 1-2: five moves in and every knight and bishop still at home. Said
+    // only where the move had nothing else to hear, and in the habit's words, with the pieces marked.
+    if (level_ <= 2 && !developReminded_ && !retry && s.empty() && humanMoves_ >= kDevelopReminderMove && c.ply < 30 &&
+        !g.isOver() && undevelopedMinors(c.p1, human_) == 4 && remarkAllowed()) {
+        const int home = human_ == White ? 0 : 7;
+        const Square knight = makeSquare(6, home);
+        Beat b = sayBeat(bandKey("tip.develop", level_), Look::Target, ply, Priority::Low);
+        b.line.with("your", pieceArg(c.p1, knight, human_));
+        pointPiece(b, knight, "your");
+        for (int f : {1, 2, 5}) markPiece(b, makeSquare(f, home), "your");
+        limitPointing(b);
+        s.push_back(b);
+        developReminded_ = true;
+        noteRemark();
+        v.voiced = true;
+    }
+
     humanW_.push_back(c.j.wPlayed);
     out.script = s;
     return out;
 }
 
 std::string Reviewer::threatKey(const Game& g) const {
-    if (g.moves().empty() || level_ > 2 || g.isOver()) return std::string();
+    if (g.moves().empty() || level_ > 3 || g.isOver()) return std::string();
     if (g.positionAt(g.moves().size() - 1).sideToMove() == human_) return std::string();
     Position turn = g.position();
     return turn.passTurn() ? turn.fen() : std::string();
@@ -1846,9 +1938,47 @@ EngineThreat engineThreat(const Position& turn, const ai::Analysis* threat, Colo
 
 }  // namespace
 
+bool Reviewer::answersAsk(const Position& now, const Move& m) const {
+    Position q = now;
+    q.makeMove(m);
+    const Color coach = opposite(human_);
+    switch (ask_.kind) {
+    case Ask::Kind::Mate: return !mateThreat(q, coach);
+    case Ask::Kind::Piece: return !hasBit(hangingPieces(q, human_, false), ask_.target);   // no longer won by the capture
+    case Ask::Kind::Fork: {
+        const Piece f = q.at(ask_.attacker);
+        return f.empty() || f.color != coach || squareCount(forkTargets(q, ask_.attacker)) < 2;
+    }
+    case Ask::Kind::Pin:
+        for (const Pin& pn : pins(q, human_))
+            if (pn.pinner == ask_.attacker && pn.pinned == ask_.target) return false;
+        return true;
+    }
+    return false;
+}
+
+Script Reviewer::threatReveal(const Game& g, Square touched) {
+    Script s;
+    if (ask_.ply < 0) return s;
+    if (int(g.moves().size()) != ask_.ply + 1 || g.isOver()) {
+        ask_ = Ask{};
+        return s;
+    }
+    if (touched != NoSquare) {
+        // The player is on the threat's track: one of the pieces it is about, or one that can deal with it.
+        if (hasBit(ask_.targets, touched)) return s;
+        for (const Move& m : g.position().legalMovesFrom(touched))
+            if (answersAsk(g.position(), m)) return s;
+    }
+    s.push_back(ask_.reveal);
+    ask_ = Ask{};
+    return s;
+}
+
 Script Reviewer::coachMoved(const Game& g, const ai::Analysis* before, const ai::Analysis* threat) {
     Script s;
-    if (g.moves().empty() || level_ > 2 || g.isOver()) return s;
+    ask_ = Ask{};   // a question about an earlier position is closed
+    if (g.moves().empty() || level_ > 3 || g.isOver()) return s;
     const int ply = int(g.moves().size()) - 1;
     const Position& now = g.position();
     const Position& prev = g.positionAt(size_t(ply));
@@ -1890,21 +2020,42 @@ Script Reviewer::coachMoved(const Game& g, const ai::Analysis* before, const ai:
         }
     }
     if (!remarkAllowed()) return s;
+
+    // A warning said: told at once, or, the first threat of a game at levels 1-2, asked about first
+    // (nothing pointed at: scanning the board for what the coach's move attacks is the habit
+    // practised) with the statement kept for threatReveal().
+    auto warn = [&](const Beat& statement, Ask::Kind kind, uint64_t targets, Square attacker, Square target) {
+        noteRemark();
+        if (level_ <= 2 && !askedOnce_) {
+            askedOnce_ = true;
+            ask_.ply = ply;
+            ask_.kind = kind;
+            ask_.reveal = statement;
+            ask_.reveal.priority = Priority::Normal;   // said on a touch: not dropped as the player acts
+            ask_.targets = targets;
+            ask_.attacker = attacker;
+            ask_.target = target;
+            s.push_back(sayBeat(bandKey(kind == Ask::Kind::Mate ? "threat.ask_mate" : "threat.ask", level_), Look::Board,
+                                ply, Priority::Low));
+        } else {
+            s.push_back(statement);
+        }
+    };
+
     // A mate threat first (the threat search, when there is one, mates as well).
     Move mate;
     if (mateThreat(now, coach, &mate) && (!et.known || et.mate)) {
         Beat b = sayBeat(bandKey("threat.mate", level_), Look::Target, ply, Priority::Low);
         b.line.with("sq", Arg::ofSquare(mate.to)).with("my", pieceArg(now, mate.from, human_));
         if (level_ == 1) pointSquare(b, mate.to, "sq");
-        s.push_back(b);
-        noteRemark();
+        warn(b, Ask::Kind::Mate, 0, mate.from, NoSquare);
         return s;
     }
-    // New threats against the human's pieces (level 1: 3+ points; level 2: the queen), by a capture
-    // the coach could make next: never by a piece pinned to its king.
     Position turn = now;
     const bool passed = turn.passTurn();
     const std::vector<Move> next = passed ? turn.legalMoves() : std::vector<Move>();
+    // The coach's pieces that could capture on 't' next, by a capture it could make: never a piece
+    // pinned to its king.
     auto takers = [&](Square t) {
         uint64_t out = 0;
         for (Square a : squaresOf(now.attackersTo(t, coach))) {
@@ -1914,36 +2065,112 @@ Script Reviewer::coachMoved(const Game& g, const ai::Analysis* before, const ai:
         }
         return out;
     };
-    const uint64_t fresh = hangingPieces(now, human_, true) & ~hangingPieces(prev, human_, true);
+
+    // Level 2 names what the coach's move sets up against the player: a fork, a pin (not the check
+    // that already says so, nor a pin to the king).
+    const Square moved = g.moves().back().to;
+    if (level_ == 2 && !now.inCheck() && now.at(moved).color == coach) {
+        // The forking piece attacks two pieces of the player's, one of them winnable at once; not two
+        // pawns, not the king. The threat search, when there is one, wins material along its first
+        // capture of a target.
+        const uint64_t ft = forkTargets(now, moved);
+        std::vector<Square> ts = squaresOf(ft);
+        std::stable_sort(ts.begin(), ts.end(), [&](Square a, Square b) { return points(now.at(a).type) > points(now.at(b).type); });
+        bool isFork = ts.size() >= 2 && !hasBit(ft, now.kingSquare(human_)) && points(now.at(ts[0]).type) > 1;
+        if (isFork && et.known) {
+            const Move first = turn.parseUCI(et.uci);
+            isFork = et.gain >= 2 && first.valid() && hasBit(ft, first.to);
+        }
+        if (isFork) {
+            Beat b = sayBeat(bandKey("threat.fork", level_), Look::Target, ply, Priority::Low);
+            b.line.with("my", pieceArg(now, moved, human_))
+                .with("sq", Arg::ofSquare(moved))
+                .with("t1", pieceArg(now, ts[0], human_))
+                .with("t2", pieceArg(now, ts[1], human_));
+            pointPiece(b, ts[0], "t1");
+            pointPiece(b, ts[1], "t2");
+            limitPointing(b);
+            warn(b, Ask::Kind::Fork, ft, moved, NoSquare);
+            return s;
+        }
+        // A pin the move creates on a piece the coach can win: it cannot step away without the
+        // piece behind it falling.
+        const std::vector<Pin> old = pins(prev, human_);
+        const uint64_t winnable = hangingPieces(now, human_, false);
+        for (const Pin& pn : pins(now, human_)) {
+            if (pn.absolute || !hasBit(winnable, pn.pinned) || !takers(pn.pinned)) continue;
+            if (std::any_of(old.begin(), old.end(), [&](const Pin& o) { return o.pinned == pn.pinned && o.behind == pn.behind; }))
+                continue;
+            if (et.known && et.gain < 2) continue;
+            Beat b = sayBeat(bandKey("threat.pin", level_), Look::Target, ply, Priority::Low);
+            b.line.with("my", pieceArg(now, pn.pinner, human_))
+                .with("sq", Arg::ofSquare(pn.pinner))
+                .with("your", pieceArg(now, pn.pinned, human_))
+                .with("t1", pieceArg(now, pn.behind, human_));
+            pointPiece(b, pn.pinned, "your", true);
+            pointPiece(b, pn.behind, "t1");
+            limitPointing(b);
+            warn(b, Ask::Kind::Pin, squareBit(pn.pinned) | squareBit(pn.behind), pn.pinner, pn.pinned);
+            return s;
+        }
+    }
+
+    // New threats against the human's pieces by a capture the coach could make next: at level 1 any
+    // piece or pawn left without a protector, at levels 2-3 the queen, protected or not, whenever
+    // the capture wins material (a knight or pawn attacking a defended queen).
+    const bool queenOnly = level_ >= 2;
+    const uint64_t fresh = queenOnly ? hangingPieces(now, human_, false) & ~hangingPieces(prev, human_, false)
+                                     : hangingPieces(now, human_, true) & ~hangingPieces(prev, human_, true);
     Square target = NoSquare;
     for (Square t : squaresOf(fresh)) {
         const PieceType tt = now.at(t).type;
-        if (level_ == 2 && tt != Queen) continue;
-        if (points(tt) < 3 || !takers(t)) continue;
+        if (queenOnly && tt != Queen) continue;
+        if (!takers(t)) continue;
         if (target == NoSquare || points(tt) > points(now.at(target).type)) target = t;
     }
-    if (target == NoSquare) return s;
-    // The threat search, when there is one, wins that piece or as much: a piece the rules find en
-    // prise that a tactic defends is no threat. Its first move is the coach's, read with the turn
-    // passed (`turn`; `now` has the player to move and knows no such move).
-    if (et.known) {
+    // The threat search, when there is one, wins that piece or as much (a pawn: the pawn): a piece the
+    // rules find en prise that a tactic defends is no threat. Its first move is the coach's, read with
+    // the turn passed (`turn`; `now` has the player to move and knows no such move).
+    if (target != NoSquare && et.known) {
         const Move first = turn.parseUCI(et.uci);
         const bool takesIt = first.valid() && first.to == target;
-        if (et.gain < 2 || (!takesIt && et.gain < points(now.at(target).type) - 1)) return s;
+        const int worth = points(now.at(target).type);
+        if (et.gain < std::min(2, worth) || (!takesIt && et.gain < worth - 1)) target = NoSquare;
     }
-    // The attacker: the coach's moved piece when it is one of them, else the cheapest.
-    const uint64_t attackers = takers(target);
-    Square att = hasBit(attackers, g.moves().back().to) ? g.moves().back().to : NoSquare;
-    if (att == NoSquare)
-        for (Square a : squaresOf(attackers))
-            if (att == NoSquare || points(now.at(a).type) < points(now.at(att).type)) att = a;
-    Beat b = sayBeat(bandKey("threat.piece", level_), Look::Target, ply, Priority::Low);
-    b.line.with("my", pieceArg(now, att, human_)).with("your", pieceArg(now, target, human_));
-    if (level_ == 1) traceMove(b, now.at(att).type, att, target, "my");
-    pointPiece(b, target, "your", true);
-    limitPointing(b);
-    s.push_back(b);
-    noteRemark();
+    if (target != NoSquare) {
+        // The attacker: the coach's moved piece when it is one of them, else the cheapest.
+        const uint64_t attackers = takers(target);
+        Square att = hasBit(attackers, moved) ? moved : NoSquare;
+        if (att == NoSquare)
+            for (Square a : squaresOf(attackers))
+                if (att == NoSquare || points(now.at(a).type) < points(now.at(att).type)) att = a;
+        Beat b = sayBeat(bandKey("threat.piece", level_), Look::Target, ply, Priority::Low);
+        b.line.with("my", pieceArg(now, att, human_)).with("your", pieceArg(now, target, human_));
+        if (level_ == 1) traceMove(b, now.at(att).type, att, target, "my");
+        pointPiece(b, target, "your", true);
+        limitPointing(b);
+        warn(b, Ask::Kind::Piece, squareBit(target), att, target);
+        return s;
+    }
+
+    // Level 3: a position where only one move is good, said from what A0 of the player's turn
+    // proves: its two best lines exact and far apart (the second best 20 win-percent points worse,
+    // and with the engine's WDL a different result), more than two moves to choose from. Not a
+    // forced mate for the player (the move is then plain to see), and not at every move.
+    if (level_ == 3 && before && before->ok && before->lines.size() >= 2 &&
+        humanMoves_ - lastOnlyWarning_ >= kOnlyWarningEvery) {
+        const ai::PvLine& l1 = before->lines[0];
+        const ai::PvLine& l2 = before->lines[1];
+        const Assessment a = assess(before->lines, l1.score, true);
+        const bool exact = l1.score.bound == ai::Score::Bound::Exact && l2.score.bound == ai::Score::Bound::Exact;
+        if (exact && l1.score.mate <= 0 && now.legalMoves().size() >= 3 &&
+            winPercent(l1.score) - winPercent(l2.score) >= 20.0 && winPercent(l1.score) >= 25.0 &&
+            (!a.wdl || a.eLead() >= kOnlyLead)) {
+            s.push_back(sayBeat("threat.only.b3", Look::Board, ply, Priority::Low));
+            lastOnlyWarning_ = humanMoves_;
+            noteRemark();
+        }
+    }
     return s;
 }
 
@@ -1954,8 +2181,8 @@ Script Reviewer::takebackAccepted(const Game& g, bool fromOffer) {
     retry_ = offered_;
     // The card answered yes: one of the level's takebacks gone (levels 4-6, not for a mate).
     if (fromOffer && offerUsesTakeback()) ++takebacks_;
-    // A dubious move: no hint, the player looks again on their own.
-    if (level_ > 2 || offered_.dubious) return s;
+    // A dubious move: no hint, the player looks again on their own. Nor from level 4 on.
+    if (level_ > 3 || offered_.dubious) return s;
     const int ply = int(g.moves().size());
     const Position& p = g.position();
     // A hint-only offer named the piece with the better move: the hint stays on it.
@@ -1970,6 +2197,9 @@ Script Reviewer::takebackAccepted(const Game& g, bool fromOffer) {
         b.line.with("your", pieceArg(p, k, human_));
         pointPiece(b, k, "your");
         s.push_back(b);
+    } else if (level_ == 3 && !offered_.hintOnly) {
+        // Level 3 names no piece: where to look, for a fault whose cause has no line of its own.
+        s.push_back(sayBeat("tb.hint.b3", Look::Player, ply));
     } else if (offeredHint_ != NoSquare && !p.at(offeredHint_).empty() && p.at(offeredHint_).color == human_) {
         Beat b = sayBeat("tb.hint.b1", Look::Target, ply);
         b.line.with("your", pieceArg(p, offeredHint_, human_));
@@ -1987,6 +2217,41 @@ Script Reviewer::takebackDeclined() {
     // The better move a hint-only offer kept back: said now, once.
     if (offered_.hintOnly && !offeredReveal_.line.key.empty()) s.push_back(offeredReveal_);
     offeredReveal_ = Beat{};
+    return s;
+}
+
+Script Reviewer::positionRetry(const Game& g, const std::string& bestUci, RetryStep step) const {
+    Script s;
+    const int ply = int(g.moves().size());
+    const Position& p = g.position();
+    const Move m = p.parseUCI(bestUci);
+    switch (step) {
+    case RetryStep::Start: {
+        if (!m.valid()) return s;
+        s.push_back(sayBeat(bandKey("retry.task", level_), Look::Board, ply));
+        // The scaffold of an explanation: the piece that has the better move.
+        Beat h = sayBeat(bandKey("ex.hint", level_), Look::Target, ply);
+        h.line.with("your", pieceArg(p, m.from, human_));
+        pointPiece(h, m.from, "your");
+        s.push_back(h);
+        break;
+    }
+    case RetryStep::Again: s.push_back(sayBeat(bandKey("retry.again", level_), Look::Player, ply)); break;
+    case RetryStep::Found: {
+        Beat b = sayBeat(bandKey("retry.found", level_), Look::Player, ply);
+        b.gestures.push_back(Gesture{GestureKind::Nod, NoSquare, {}, "", 0.0f, false});
+        s.push_back(b);
+        break;
+    }
+    case RetryStep::Reveal: {
+        if (!m.valid()) return s;
+        Beat b = sayBeat(bandKey("retry.reveal", level_), Look::Target, ply);
+        b.line.with("best", moveArg(p, m));
+        traceMove(b, p.at(m.from).type, m.from, m.to, "best");
+        s.push_back(b);
+        break;
+    }
+    }
     return s;
 }
 

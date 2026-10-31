@@ -7,15 +7,23 @@
 # The level names are those of the coach page (assets/i18n/pt.lang coach.level.<n>.name).
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Olá! Vamos jogar uma partida amigável. Ajudo-te sempre que alguma coisa correr mal.
+event.greet.l1 = Olá! Vamos jogar uma partida amigável. Digo-te quando uma das tuas peças estiver em perigo.
 event.greet.l1.2 = Viva! Vou jogar com calma e mostrar-te onde é preciso ter cuidado.
 event.greet.l1.3 = Boas-vindas! Não tenhas pressa: eu aviso-te quando uma peça estiver em perigo.
-event.greet.l2 = Olá! Vamos jogar. Quando aparecer um garfo ou uma cravada, eu mostro-te.
+event.greet.l1.first = Olá! Antes de cada lance, pergunta: a minha peça está segura? O que ataca o meu lance? O que ameaça o adversário? Eu lembro-te.
+event.greet.l1.first.2 = A tua primeira partida a sério! Antes de cada lance: a minha peça está segura, o que ataca, qual é a ameaça? Eu lembro-te.
+event.greet.l2 = Olá! Vamos jogar. Se o meu lance preparar um garfo ou uma cravada, eu digo-te.
 event.greet.l2.2 = Viva! Põe as tuas peças em jogo e mantém o teu rei em segurança. Eu ajudo-te pelo caminho.
 event.greet.l2.3 = De volta ao tabuleiro! Atenção aos garfos e às cravadas: são eles que ganham partidas.
-event.greet.l3 = Olá! Vamos jogar uma partida a sério. Vou comentar os teus planos e os erros mais importantes.
+event.greet.l3 = Olá! Vamos jogar uma partida a sério. Aviso-te das grandes ameaças e explico os erros mais importantes.
 event.greet.l3.2 = Viva! Pensa num plano para as tuas peças. Eu digo-te quando um lance deixar escapar alguma coisa.
-event.greet.l3.3 = Vamos jogar! Vou assinalar os lances únicos e os lances que não resultam.
+event.greet.l3.3 = Vamos jogar! Digo-te quando só um lance resulta e quando um lance corre mal.
+event.greet.l1.theme = Boas-vindas de volta! A dica da última partida foi: {theme}. Tem-na presente hoje.
+event.greet.l1.theme.2 = Olá de novo! Lembra-te da dica da última partida: {theme}. Eu ajudo-te.
+event.greet.l2.theme = Boas-vindas de volta! A ideia da última partida foi: {theme}. Vamos ver como corre hoje.
+event.greet.l2.theme.2 = Olá de novo! Algo para lembrar da última partida: {theme}.
+event.greet.l3.theme = Boas-vindas de volta! O tema da última partida foi: {theme}. Tem-no presente hoje.
+event.greet.l3.theme.2 = Olá outra vez! Da última partida: {theme}. Vamos ver como corre hoje.
 event.greet.l4 = Olá! Desta vez vou dar avaliações e mostrar-te os melhores lances candidatos.
 event.greet.l4.2 = Vamos jogar. Depois de um erro, digo-te o que era mais preciso.
 event.greet.l4.3 = Que tal uma partida como no clube? Comento sempre que a avaliação mudar.
@@ -33,9 +41,9 @@ event.colour.black = Eu tenho as brancas, por isso começo eu.
 event.colour.black.2 = Desta vez jogas com as pretas: eu jogo primeiro.
 
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
-event.level.l1 = Primeiros passos: jogo com calma e explico cada erro por palavras simples.
-event.level.l2 = Principiante: jogo um pouco mais forte e dou nome às táticas simples, como os garfos e as cravadas.
-event.level.l3 = Intermédio: falo de planos e de estrutura de peões, e mostro variantes curtas.
+event.level.l1 = Primeiros passos: jogo com calma. Digo-te quando uma peça tua está atacada e sem proteção, e explico os erros graves por palavras simples.
+event.level.l2 = Principiante: jogo um pouco mais forte. Aviso-te de garfos, cravadas e ataques à tua dama, e lembro-te de pores as peças em jogo.
+event.level.l3 = Intermédio: só te aviso de mates e de ataques à tua dama, e de quando só um lance resulta. Continuo a explicar os teus erros.
 event.level.l4 = Jogador de clube: dou a avaliação em peões e sugiro lances candidatos.
 event.level.l5 = Jogador de clube forte: comentários curtos, e variantes mais longas quando for importante.
 event.level.l6 = Especialista: jogo o melhor que sei e só comento os momentos críticos.
@@ -106,5 +114,7 @@ event.end.handshake = Vamos dar um aperto de mão.
 # put de, a, em or por right before it (they would have to merge with the article).
 event.lesson.resume = Que bom ver-te outra vez! Vamos continuar com {chapter}.
 event.lesson.resume.2 = Olá de novo! Tínhamos ficado aqui: {chapter}.
+event.lesson.start = Vamos começar com {chapter}.
+event.lesson.start.2 = Começamos com {chapter}.
 event.lesson.next = A seguir: {chapter}.
 event.lesson.next.2 = Agora, {chapter}.

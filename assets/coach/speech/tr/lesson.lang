@@ -13,7 +13,9 @@
 # ---- Chapter titles (said inside "Şimdi {chapter} ile devam edelim.") ---------------------------------
 # Nominative, lower case (see event.lesson.* in events.lang).
 lesson.title.welcome = satranç tahtası
-lesson.title.pieces = taşların hareketi
+lesson.title.pieces_lines = kale, fil ve vezirin hareketi
+lesson.title.pieces_steps = şah, at ve piyonun hareketi
+lesson.title.values_setup = taş değerleri ve ilk hamleler
 lesson.title.safety = güvenli ve riskli taş alma
 lesson.title.check = şah çekme
 lesson.title.mate = şah mat
@@ -23,7 +25,8 @@ lesson.title.promotion = piyon terfisi
 lesson.title.draws = pat ve beraberlik
 lesson.title.before_move = hamle yapmadan önce
 lesson.title.opening = açılış
-lesson.title.etiquette = gerçek oyunlarda puan, saat ve görgü kuralları
+lesson.title.review = kısa bir tekrar
+lesson.title.etiquette = oyunlarımızın işleyişi
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
 # After the coach demonstrated the solution.
@@ -94,7 +97,7 @@ lesson.rook.king = Bu senin şahın. Köşedeki {your:acc} kullan.
 lesson.rook.ok = Aldın! {my} tahtadan çıkıyor.
 # Pieces don't jump
 lesson.jump.blocked = Taşlar başka taşların üzerinden atlayamaz. {sq} karesindeki piyonun kalenin yolunu kesiyor.
-lesson.jump.knight = Yalnızca at atlayabilir. Onunla birazdan tanışacağız.
+lesson.jump.all = Fil ve vezir için de aynı: onlar da taşların üzerinden atlayamaz.
 # Bishop
 lesson.bishop.intro = İşte {your}. Çapraz olarak istediği kadar gider.
 lesson.bishop.colour = Fil hep aynı renkteki karelerde kalır.
@@ -139,7 +142,12 @@ lesson.pawncap.ok = Evet! İlerlemek için düz, almak için çapraz.
 lesson.values.pawn = Her taşın puan olarak bir değeri vardır. Piyon bir puan eder.
 lesson.values.pieces = At ya da {@}fil üç puan. {@2}Kale beş. {@3}Vezir dokuz.
 lesson.values.king = Şaha paha biçilemez: onu asla veremezsin.
-lesson.values.trade = Bir taşı asla değerinden ucuza vermemeye çalış.
+lesson.values.trade = Büyük bir taşı daha küçük bir taşa verme; yalnızca kazancın kaybından fazlaysa olur.
+lesson.values.two = Atın, {sq} ve {sq2} karelerindeki iki taşıma saldırıyor. İkisini de koruyan yok.
+lesson.values.ask = Değeri daha yüksek olanı al!
+lesson.values.small = Bu bir piyon, bir puan eder. {my:nom_da} bedavaydı ve dokuz puan eder.
+lesson.values.look = Atının neye saldırdığına bak ve değeri daha yüksek taşı al.
+lesson.values.ok = Evet! Vezir dokuz puan eder. İki taş da bedavaysa büyük olanı al.
 lesson.setup.corners = Her oyun böyle başlar: {@}köşelerde kaleler, sonra {@2}atlar, sonra {@3}filler.
 lesson.setup.queen = Vezir kendi rengindeki kareye konur: senin vezirin açık renkli bir karede.
 lesson.setup.king = Şah onun yanında durur. İlk hamleyi her zaman Beyaz yapar.
@@ -160,6 +168,18 @@ lesson.safety.gave = Dokuz puanlık vezirini, üç puanlık atım için verdin.
 lesson.safety.other = Öbür taşı dene.
 lesson.safety.look = Hiçbir şeyin korumadığı taşı ara.
 lesson.safety.ok = Harika! Kendine hep şunu sor: bu taş korunuyor mu?
+lesson.safety.pawns = Vezirin, {sq} ve {sq2} karelerindeki iki piyonuma saldırıyor.
+lesson.safety.pawns_ask = Alması güvenli olan piyonu al.
+lesson.safety.gave_pawn = Dokuz puanlık vezirini, bir puanlık bir piyon için verdin.
+lesson.safety.pawns_other = Bir piyon bile korunuyor olabilir. Öbür piyonu dene.
+lesson.safety.pawns_ok = Doğru! Vezirini asla korunan bir piyon için tehlikeye atma.
+lesson.safety.small = Şimdi tersi. {my} korunuyor, ama senin piyonun ona saldırıyor.
+lesson.safety.small_count = Onu alırsan {@}piyonum seninkini geri alır. Bir puan verirsin, dokuz puan kazanırsın.
+lesson.safety.small_ask = Vezirimi doğru taşla al!
+lesson.safety.small_other = Bunun yerine onu piyonunla al: alabilen en ucuz taşla.
+lesson.safety.small_look = Piyonun vezirime saldırıyor. Onu piyonunla al.
+lesson.safety.small_ok = Evet! Küçük bir taş, korunan bile olsa büyük bir taşı alabilir: bir puan kaybedip dokuz puan kazanırsın.
+lesson.safety.count = Her almadan önce ne kazandığını ve geri ne kaybedebileceğini say.
 
 # ---- Chapter 3: check and getting out of check -----------------------------------------------------------------
 lesson.danger.rank = Kalem ikinci yatayın tamamını kontrol ediyor.
@@ -181,6 +201,11 @@ lesson.capture.check = Vezirim, şahının hemen yanında şah çekiyor.
 lesson.capture.ask = Saldıran taşı al!
 lesson.capture.king_ok = Evet! Vezirimi koruyan yoktu, bu yüzden şahın onu alabildi.
 lesson.capture.knight_ok = Evet! Atın saldıran taşı ortadan kaldırdı.
+lesson.check.open.ask = Yine şah! Bu sefer istediğin yolla kurtul.
+lesson.check.open.king = Şahını kaçırdın. Araya bir taş da koyabilirdin ya da atınla kalemi alabilirdin.
+lesson.check.open.block = Saldırıyı kestin. Şahını da kaçırabilirdin ya da atınla kalemi alabilirdin.
+lesson.check.open.take = Şah çeken taşı, kalemi aldın. Şahı kaçırmak ya da araya girmek de işe yarardı.
+lesson.check.open.hint = Üç yol var: {@}şahı kaçır, {@2}dikeyde araya gir ya da {@3}atınla kalemi al.
 
 # ---- Chapter 4: checkmate ------------------------------------------------------------------------------------
 lesson.mate1.what = Şah mat: şaha şah çekilmiştir ve kurtuluş yolu yoktur. Bu, oyunu kazandırır.
@@ -188,16 +213,34 @@ lesson.mate1.stuck = Şahım {@}kendi piyonlarının arkasında sıkışmış.
 lesson.mate1.ask = Beni tek hamlede mat et!
 lesson.mate1.wrong = Yaklaştın! Son yatayımda şah çek; şahım oradan kaçamaz.
 lesson.mate1.ok = Şah mat! Buna koridor matı denir. Aklında tut!
+lesson.mate1.king = Şahın olduğu yerde iyi. Şah çekmek için kaleyi kullan.
+lesson.mate1.why = Gördün mü? Kale {@}bütün son yatayımı kontrol ediyor, {@2}kendi piyonlarım da şahımın önündeki kareleri dolduruyor.
 lesson.mate2.ask = Şahın ve vezirin takım olarak çalışıyor. Beni tek hamlede mat et.
 lesson.mate2.wrong = Şahıma hiç kare bırakmayan bir şah bul.
 lesson.mate2.ok = Şah mat! Şahın vezirini koruyor, bu yüzden benimki onu alamaz.
 lesson.mate2.ok_rank = Son yatayda şah mat! Şahın, benimkinin önündeki bütün kareleri kontrol ediyor.
+lesson.mate2.king = Şahın, benimkinin yanındaki kareleri koruyor. Onu yerinde bırak ve veziri kullan.
+lesson.mate2.half = O {sq} karesini izliyor, ama şahım hâlâ {sq2} karesine gidebilir.
+lesson.mate2.why = Gördün mü? Vezirin {sq} ve {sq2} karelerini kontrol ediyor, şahın da şahımın önündeki kareleri. Şahımın çıkış yolu yok.
 lesson.mate3.edge = Yedinci yataydaki kalen şahımı kenarda tutuyor.
 lesson.mate3.ask = Şimdi mat etmek için {your:acc} kullan.
 lesson.mate3.free = Şah çektin, ama yedinci yatay artık boş ve şahım kaçıyor.
 lesson.mate3.takes = Şahım kaleni alıveriyor.
 lesson.mate3.hint = Yedinci yatayı korumayan kalenle son yatayda şah çek.
 lesson.mate3.ok = Şah mat! İki kale merdiven gibi çalıştı.
+lesson.mate3.why = Gördün mü? Bir kale {@}yedinci yatayı kesiyor, öbürü {@2}son yatayda şah çekiyor. Şahımın çıkış yolu yok.
+lesson.mate4.look = Şah çekmek her zaman şah mat değildir. Bakalım ne olacak.
+lesson.mate4.ask = Kalenle şahıma şah çek.
+lesson.mate4.king = Şahın olduğu yerde kalıyor. Şah çekmek için kaleyi kullan.
+lesson.mate4.wrong = Bu şah değil. Kalen şahıma son yataydan saldırabilir.
+lesson.mate4.ok = Evet, şah! Ama şah mat mı? İzle.
+lesson.mate4.after = {sq} karesindeki piyonum şahıma yer açtı. Şah çektiğinde sevinmeden önce şahımın kullanabileceği kareleri say.
+lesson.mate5.ask = Kalenin iki hamlesi şah çeker, ama yalnızca biri şah mat. Şahımın karelerini say, sonra seç.
+lesson.mate5.king = Şahın zaten {sq} ve {sq2} karelerini kontrol ediyor. Onu yerinde bırak ve kaleyi oyna.
+lesson.mate5.wrong = Bu şah değil. Şahıma saldıran bir kale hamlesi ara.
+lesson.mate5.hint = Şahın {sq} ve {sq2} karelerini kontrol ediyor. Hangi kale şahı {sq3} karesini de elinden alır?
+lesson.mate5.why = Gördün mü? Kale {sq} karesini, şahın da öbür iki kareyi kontrol ediyor; şahım sıkıştı.
+lesson.mate5.ok = Şah mat! Şahımın karelerini saydın: hiçbiri kalmadı.
 
 # ---- Chapter 5: castling ---------------------------------------------------------------------------------------
 lesson.castle.what = Rok, şahını güvende tutan özel bir hamledir. Şah ve kale birlikte hareket eder.
@@ -214,6 +257,10 @@ lesson.castle2.bishop = Filim {sq} karesini tehdit ediyor. Bu yüzden şu anda b
 lesson.castle2.ask = Öbür tarafa rok at.
 lesson.castle2.other = Öbür kalene doğru, vezir kanadına rok at.
 lesson.castle2.ok = Doğru! Uzun rok şahını {sq} karesine götürür.
+lesson.ep0.rule = Geçerken alma çifte adımla başlar. Yalnızca {@}hâlâ yerinde duran bir piyon iki kare gidebilir. {@2}Hareket etmiş bir piyon birer kare ilerler.
+lesson.ep0.ask = Piyonlarından birini iki kare sür.
+lesson.ep0.moved = Bu piyon zaten hareket etti, o yüzden yalnızca bir kare gidebilir. Hâlâ yerinde duran piyonu kullan.
+lesson.ep0.ok = Doğru: yalnızca başlangıç karesindeki piyon iki kare gidebilir.
 
 # ---- Chapter 6: en passant ------------------------------------------------------------------------------------
 # "Geçerken alma" already says "taking in passing", so the second sentence explains the name.
@@ -223,6 +270,13 @@ lesson.ep.how = Piyonun onu, sanki yalnızca bir kare ilerlemiş gibi alabilir: 
 lesson.ep.now = Ama yalnızca şimdi, bu hamlede. Geçerken al!
 lesson.ep.gone = Fırsat kaçtı: geçerken alma yalnızca hemen yapılabilir. Tekrar deneyelim.
 lesson.ep.ok = Geçerken aldın! {sq} karesindeki piyonum tahtadan kalkıyor.
+lesson.ep2.old = {sq} karesindeki piyonum bir süredir seninkinin yanında duruyor. Onu geçerken almak için artık çok geç.
+lesson.ep2.watch = Şimdi öbür piyonuma bak.
+lesson.ep2.ask = İki piyonum seninkinin yanında duruyor, ama yalnızca biri az önce iki kare gitti. Onu geçerken al!
+lesson.ep2.push = Bu yalnızca piyonunu ilerletir. Az önce iki kare giden piyonu al.
+lesson.ep2.wrong = Çifte adım yapan piyonu bul ve onu geçerken al.
+lesson.ep2.hint = {sq} karesindeki piyonum az önce iki kare gitti. Onu {sq2} karesine giderek geçerken al.
+lesson.ep2.ok = Geçerken alma! {sq} karesindeki piyonum alınamazdı: fırsatı geçmişti.
 
 # ---- Chapter 7: promotion -------------------------------------------------------------------------------------
 lesson.promo.what = Son yataya ulaşan piyon terfi eder: vezir, kale, fil ya da at olur.
@@ -231,12 +285,21 @@ lesson.promo.under = Kurallara uygun! Ama vezir daha güçlü. Veziri seçelim.
 lesson.promo.under_ok = Peki. Yine de çoğu oyuncu veziri seçer.
 lesson.promo.push = Piyonunu son yataya, {sq} karesine sür.
 lesson.promo.ok = Yeni bir vezir! Aynı anda iki vezirin bile olabilir.
+lesson.promo2.ask = Piyon çapraz alarak da terfi edebilir. Kalemi al ve vezir yap!
+lesson.promo2.push = O da terfi ettirir, ama kalem {sq} karesini koruyor. İzle.
+lesson.promo2.lost = Kalem yeni taşını aldı. Önce kalemi al.
+lesson.promo2.wrong = Bu kalemi almıyor. Piyonun {sq} karesinde çapraz alır.
+lesson.promo2.hint = Kalemi piyonunla {sq} karesinde al: alırken terfi eder.
+lesson.promo2.ok = Alıp terfi ettin! Piyon ikisini tek hamlede yapabilir.
 
 # ---- Chapter 8: stalemate and draws -----------------------------------------------------------------------------
 lesson.stale.what = Sıra bende. Şahım şah tehdidi altında değil, ama çevresindeki {@}bütün kareler tehdit altında.
 lesson.stale.draw = Oynayabileceğim kurallara uygun bir hamle yok. Buna pat denir ve oyun berabere biter.
 lesson.stale2.ask = Kazanırken pata dikkat et. Beni tek hamlede mat et, ama pat etmeden!
-lesson.stale2.wrong = Son yatayımda şah çek; şahım oradan kaçamaz.
+lesson.stale2.wrong = Şahıma hiç kare bırakmayan bir şah çek. Dikkat: sakin bir hamle beni pat edebilir.
+lesson.stale2.king = Şahın zaten {sq} ve {sq2} karelerini kontrol ediyor. Onu yerinde bırak ve veziri kullan.
+lesson.stale2.hint = Şahın {sq} ve {sq2} karelerini kontrol ediyor. Son yatayda şah çek, şahımın gidecek yeri kalmaz.
+lesson.stale2.why = Gördün mü? Şahıma {@}şah çekildi ve boş karesi yok: bu şah mat. Şah çekmeseydin pat olurdu.
 lesson.stale2.ok = Şah mat! Mat etmiyorsan rakip şaha her zaman bir hamle bırak.
 lesson.draws.kings = Başka beraberlikler de var: yalnız iki şahın kalması gibi, kimse mat edemiyorsa oyun berabere biter.
 lesson.draws.agree = Oyuncular beraberlikte de anlaşabilir.
@@ -287,28 +350,30 @@ lesson.opening.castle.wrong = Şahın hazır. Yol açıkken şimdi rok yap.
 lesson.opening.castle.ok = Rok yapıldı! Şahın güvende, kalen de oyuna katıldı.
 lesson.opening.done = Merkez, taşlar, rok: her oyun için iyi bir başlangıç.
 
-# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 11: a quick review (no teaching: the coach only asks; the positions come in a different order) ----
+lesson.review.start = Kısa bir tekrar, bu sefer farklı sırayla. Açıklamayacağım: sen göster.
+lesson.review.promo.ask = Bu piyonu terfi ettir.
+lesson.review.promo.ok = Güzel: yeni bir vezir ve şah!
+lesson.review.check.ask = Şahına şah çekildi. Kurtul.
+lesson.review.check.ok = Şahtan kurtuldun. Güzel.
+lesson.review.castle.ask = Şahına rok at, izin verilen tarafta.
+lesson.review.castle.other = Bu rok değil. İzin verilen tarafa rok at.
+lesson.review.castle.ok = Rok attın, güvenli tarafa!
+lesson.review.ep.ask = Piyonumu geçerken al.
+lesson.review.ep.ok = Geçerken alma! Hatırladın.
+lesson.review.mate.ask = Beni tek hamlede mat et.
+lesson.review.mate.ok = Şah mat! Tekrar bitti.
+
+# ---- Chapter 12: how our games work (no clock, no rating, touch-move, help, manners) ----
 lesson.talk.rules = Artık satrancın bütün kurallarını biliyorsun. Bravo!
-lesson.talk.real = Sana gerçek oyunların nasıl oynandığını anlatayım.
-lesson.talk.elo = Oyuncuların Elo denen bir puanı vardır. Kazanınca artar, kaybedince düşer.
-lesson.talk.elo_gap = Daha güçlü bir oyuncuyu yenmek daha çok puan kazandırır; daha zayıf birine yenilmek daha çok puan kaybettirir.
-lesson.talk.elo_start = Puanın, puanlı oyunlardan beşini oynadıktan sonra görünür. Benimle oynadığın oyunlar alıştırmadır, bu yüzden puanlı değildir.
-lesson.talk.clock = Bu bir {@}satranç saati. Her oyuncunun kendi süresi vardır ve bu süre yalnızca kendi sırasında akar.
-lesson.talk.press = Hamleni yaptıktan sonra saate aynı elinle basarsın. Böylece benim sürem başlar.
-lesson.talk.flag = Süren biterse kaybedersin; yalnızca seni mat etmem imkânsızsa kaybetmezsin.
-lesson.talk.increment = Beş artı üç, her oyuncuya beş dakika ve her hamleden sonra üç saniye ek süre demektir.
-lesson.talk.speeds = Kısa oyunlara yıldırım, daha uzunlarına hızlı, en uzunlarına da klasik denir.
-lesson.talk.no_clock = Benimle oynarken saat kapalı. Düşünmek için ne kadar zaman gerekiyorsa kullan.
-lesson.talk.touch = Gerçek bir oyunda taşlarından birine dokunursan onu oynamak zorundasın.
-lesson.talk.touch_mine = Benim taşlarımdan birine dokunursan, alabiliyorsan onu almak zorundasın.
-lesson.talk.adjust = Bir taşı oynamadan düzeltmek istersen önce "düzeltiyorum" de.
-lesson.talk.release = Taşı yeni bir kareye bırakıp elini çektiğin anda hamle yapılmış olur.
-lesson.talk.sheet = Turnuvalarda iki oyuncu da her hamleyi bir {@}notasyon kâğıdına yazar.
+lesson.talk.real = Oyunlarımızın nasıl işleyeceğini anlatayım.
+lesson.talk.no_clock = Benimle oynarken ne saat var ne puan. Düşünmek için ne kadar zaman gerekiyorsa kullan.
+lesson.talk.touch = Dokunduğun taşı oynamak zorundasın: önce bak, sonra dokun.
 # {move:letters} shows the Turkish scoresheet letters ("Af3"), which is what this line teaches.
-lesson.talk.notation = Taşın harfini ve kareyi yazarız, {move:letters} gibi. Piyonlarda yalnızca kare yazılır.
-lesson.talk.robot = Hamlelerini senin yerine robotun yazar. Hızlı oyunlarda yazmak zorunlu değildir.
 lesson.talk.handshake = Oyunlar tokalaşmayla başlar ve biter. Anlamı şudur: iyi oyun ve teşekkürler.
 lesson.talk.polite = Kazan ya da kaybet, kibar ol ve rakibin düşünürken onu asla rahatsız etme.
-lesson.talk.tips = Oyunların için üç öneri: {@}merkezi kontrol et, {@2}atlarını ve fillerini oyuna sok, {@3}erken rok at.
-lesson.talk.next = Hazır olduğunda İlk adımlar seviyesini seç. Seni zorlamadan oynayacağım ve her hatandan sonra yardım edeceğim.
+lesson.talk.help = Oyunlarımızda sana yardım edeceğim. Taşlarından biri saldırı altındaysa ya da korumasız kaldıysa sana söylerim.
+lesson.talk.help_back = Büyük bir hatadan sonra nedenini göstereceğim ve hamleni geri almayı önereceğim.
+lesson.talk.help_skip = Çok konuşursam Boşluk tuşuna bas: susarım.
+lesson.talk.next = Hazır olduğunda İlk adımlar seviyesini oyna. Seni zorlamadan oynayacağım.
 lesson.talk.welcome = Satranca hoş geldin! Hadi tokalaşalım.

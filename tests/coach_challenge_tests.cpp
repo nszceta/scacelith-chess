@@ -90,7 +90,9 @@ struct Run {
             if (!b.line.key.empty()) lines.push_back(b.line);
         });
     }
-    void start(const Challenge& ch, int from = 0) { run.start(ch, director, stage, analyst, from); }
+    void start(const Challenge& ch, int from = 0, const std::string& practiseTheme = std::string()) {
+        run.start(ch, director, stage, analyst, from, practiseTheme);
+    }
     void step() {
         if (space) director.skipCurrent();
         stage.advance(dt);
@@ -276,6 +278,27 @@ TEST(challenge_accepted_moves) {
     const ChallengePosition& one = bookChallenge(b, "mate1").positions[0];
     CHECK(one.start(p));
     CHECK(one.accepts(0, p, "a1a8"));
+}
+
+// A set started from a game's end card opens by naming the error it practises, before its introduction;
+// started from the page it does not.
+TEST(challenge_run_names_the_practised_theme) {
+    const ChallengeBook b = ChallengeBook::parse(kBook);
+    Run t;
+    t.start(bookChallenge(b, "mate1"), 0, "back_rank");
+    CHECK(t.ready());
+    int practise = -1, intro = -1;
+    for (size_t i = 0; i < t.lines.size(); ++i) {
+        if (t.lines[i].key == "ch.practise") practise = int(i);
+        if (t.lines[i].key == "ch.intro.mate1") intro = int(i);
+    }
+    REQUIRE(practise >= 0 && intro > practise);
+    REQUIRE(t.lines[size_t(practise)].arg("theme") != nullptr);
+    CHECK_EQ(t.lines[size_t(practise)].arg("theme")->text, std::string("theme.back_rank"));
+    Run plain;
+    plain.start(bookChallenge(b, "mate1"));
+    CHECK(plain.ready());
+    CHECK(plain.queued("ch.practise") == 0);
 }
 
 TEST(challenge_run_line_wrong_moves_and_hints) {

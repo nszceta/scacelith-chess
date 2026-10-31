@@ -14,6 +14,11 @@
 # Each intro starts with the challenge's name as the coach page shows it (assets/i18n/vi.lang
 # challenge.<id>.name).
 
+# Practice built from the last game's improvement theme.
+ch.practise = Từ ván trước của bạn: {theme}. Bộ bài này được làm cho điều đó.
+ch.practise.2 = Ván trước của bạn có một điều cần luyện: {theme}. Chúng ta luyện nhé.
+ch.practise.3 = Lời khuyên của ván trước là: {theme}. Đây là bài luyện tập.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Chiếu hết sau một nước. Có {n:position}, và ở mỗi thế cờ, chỉ cần một nước là chiếu hết. Hãy xem xét mọi nước chiếu.
 ch.intro.mate2 = Chiếu hết sau hai nước. Có {n:position}: nước đầu tiên của bạn phải khiến tôi không còn cách phòng thủ, rồi bạn chiếu hết.

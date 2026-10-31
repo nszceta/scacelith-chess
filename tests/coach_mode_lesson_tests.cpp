@@ -3,13 +3,13 @@
 // their rewinds, the wrong moves taken back by hand, the hold while the window is in the
 // background, the idle hints, an illegal placement explained, endLesson and the lesson's end card,
 // the chapter kept when the lesson is left), src/game/game_scene.cpp (the LessonWait turns, the end
-// card's "First game") and, through them, src/coach/session.cpp and lesson.cpp. The voice folder is
+// card's "Play First steps") and, through them, src/coach/session.cpp and lesson.cpp. The voice folder is
 // empty: the coach speaks through subtitles.
 //
 // The whole lesson is played once from its first chapter by --play: every exercise solved, after
 // wrong moves where the coach answers with a demonstration (a capture, a king's escape, the
 // solution itself after the third wrong move: en passant, a promotion) or with words only. Then
-// the end card's "First game". A second App resumes the lesson where a player left it ([coach]
+// the end card's "Play First steps". A second App resumes the lesson where a player left it ([coach]
 // lesson_chapter): the idle hints, an illegal move refused and explained, the mate played by hand,
 // the lesson left during the chapter that follows.
 #include "test.h"
@@ -28,18 +28,21 @@ namespace {
 // is taken back by the coach's hand before the next one is played.
 const char* kLessonMoves =
     "e1d1,e1e2,"                                             // 0 the board: a wrong king move first
-    "a1a3,a1a6,f1b5,d1h5,e1e2,g1f3,e2e4,e4d5,e2e4,g1f3,"     // 1 the pieces (the rook falls short first)
-    "d1d5,d1a4,"                                             // 2 safety: the queen taken by the pawn, shown
-    "e1d1,e1d1,d1e2,d1e2,c3e2,"                              // 3 check: the queen's block accepted at the 2nd try
-    "a1a8,h7h5,h7e7,a7a8,b1b8,"                              // 4 mate: a check the king escapes, shown
-    "e1f1,e1g1,e1c1,"                                        // 5 castling
-    "e1d1,e1d1,e1d1,e5d6,"                                   // 6 en passant, shown after three wrong moves
-    "e7e8r,e1d1,e1d1,e7e8q,"                                 // 7 promotion: a rook first, then shown
-    "f2f7,f2f8,"                                             // 8 stalemate, then the mate
-    "d4c6,d4f3,a1a7,h3g4,d1e2,d1h5,"                         // 9 before you move: each trap taken, shown
-    "e2e4,g1h3,g1f3,f3e5,e1g1";                              // 10 the opening: the knight on the rim, the knight lost
+    "a1a3,a1a6,f1b5,d1h5,"                                   // 1 the lines: the rook falls short first
+    "e1e2,g1f3,e2e4,e4d5,"                                   // 2 the steps: king, knight, pawn push, pawn capture
+    "d4b5,d4e6,e2e4,g1f3,"                                   // 3 values (the pawn instead of the queen), the first moves
+    "d1d5,d1a4,d3g6,d3b5,c1c6,e4d5,"                         // 4 safety: a queen taken by a pawn, by another pawn, a capture refused
+    "e1d1,e1d1,d1e2,d1e2,c3e2,d6e8,"                         // 5 check: the queen's block accepted at the 2nd try, then any way out
+    "a1a8,h7h5,h7e7,a7a8,b1b8,a1a2,a1a8,h1a1,h1h8,"          // 6 mate: a check the king escapes, shown; a check that is no mate; the check that is
+    "e1f1,e1g1,e1c1,"                                        // 7 castling
+    "e3e4,a2a4,e1d1,e1d1,e1d1,e5d6,e5e6,e5f6,"               // 8 en passant: a moved pawn's step; shown after three wrong moves; the expired chance
+    "e7e8r,e1d1,e1d1,e7e8q,e7e8q,e7d8q,"                     // 9 promotion: a rook first, then shown; the push the rook takes, the capture
+    "f2f7,f2f8,"                                             // 10 stalemate, then the mate
+    "d4c6,d4f3,a1a7,h3g4,d1e2,d1h5,"                         // 11 before you move: each trap taken, shown
+    "e2e4,g1h3,g1f3,f3e5,e1g1,"                              // 12 the opening: the knight on the rim, the knight lost
+    "a7a8r,a7a8q,e1d1,h1g1,e1c1,b5b6,b5c6,g1g6,g1g7";         // 13 review: a rook promotion, a rook step in castling, a pawn push, a stalemate
 
-constexpr int kWrongMoves = 19;   // the wrong moves above: each one taken back once
+constexpr int kWrongMoves = 31;   // the wrong moves above: each one taken back once
 
 const std::string& lessonIni() {
     static headless::TempDir dir("coach-lesson-ini");
@@ -144,7 +147,7 @@ TEST(coach_mode_lesson_played_to_its_end_card) {
     CHECK(app->runUntil([&] { return subtitles(log.since(held)) >= 1; }, 400, 0.1f));
 
     // Every exercise, Space skipping the talk: the end card offers the first real game.
-    REQUIRE(runSkipping(*app, [&] { return app->hasLabel("First game"); }, 30000));
+    REQUIRE(runSkipping(*app, [&] { return app->hasLabel("Play First steps"); }, 30000));
     const std::string text = log.text();
     // The coach's own moves of the lesson, played by its hand.
     CHECK(log.has("coach: lesson move e7e5"));
@@ -153,7 +156,10 @@ TEST(coach_mode_lesson_played_to_its_end_card) {
     // from a check, the solutions after three wrong moves (en passant, the promotion), and the
     // pieces moved onto guarded squares taken (before you move, the opening). The under-promotion
     // was taken back too: the rook back beside the board, the pawn on e7.
-    for (const char* demo : {"e1g1", "e6d5", "e8d8", "e8e7", "e5d6", "e7e8q", "b7c6", "a8a7", "d4e2", "c6e5"})
+    // The king's step after a check that is no mate (g8h7 on a rook check the player was right to give,
+    // a8b8 on the wrong one), the rook taking the pawn that promoted by pushing (d8e8).
+    for (const char* demo : {"e1g1", "e6d5", "h7g6", "e8d8", "e8e7", "e5d6", "e7e8q", "b7c6", "a8a7", "d4e2", "c6e5", "g8h7",
+                             "a8b8", "d8e8"})
         CHECK(log.has(std::string("coach: demonstrates ") + demo + " on the table"));
     CHECK(!log.has("is not legal on the table"));
     CHECK(!log.has("does not show the position after the rewind"));
@@ -184,7 +190,7 @@ TEST(coach_mode_lesson_played_to_its_end_card) {
     g_lessonDone = true;
 }
 
-// "First game": a level 1 game with the coach, the player with White, then back to the title page.
+// "Play First steps": a level 1 game with the coach, the player with White, then back to the title page.
 TEST(coach_mode_lesson_end_card_starts_the_first_game) {
     coachtest::VoiceFolder voice;
     coachtest::LogCapture log;
@@ -192,7 +198,7 @@ TEST(coach_mode_lesson_end_card_starts_the_first_game) {
     REQUIRE(app);
     if (!g_lessonDone) SKIP("follows coach_mode_lesson_played_to_its_end_card");
     app->frames(30);
-    REQUIRE(app->clickLabel("First game"));
+    REQUIRE(app->clickLabel("Play First steps"));
     REQUIRE(coachtest::waitLog(*app, log, "New game (coach): level 1, human plays White", 600));
     CHECK(!log.has("New game (coach): level 0"));
     app->frames(60, 1.0f / 20.0f);   // seated: the pause menu opens once the game is played

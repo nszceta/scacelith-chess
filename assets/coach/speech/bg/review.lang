@@ -859,6 +859,12 @@ tip.centre.b2 = Бори се за центъра: полета като {sq} с
 tip.centre.b2.2 = Отстъпваш ми центъра. Погледни полето {sq}.
 tip.centre.b3 = Не се бориш за центъра; полето {sq} е мое.
 tip.centre.b3.2 = Оспорвай центъра, около {sq}.
+# A reminder once per game at levels 1-2 when no knight or bishop has left its home square by the
+# player's fifth move ({your} = a knight to start with).
+tip.develop.b1 = Конете и офицерите ти още са по местата си. Изкарай например {your:obj}.
+tip.develop.b1.2 = Време е за развитие! Леките ти фигури още са по местата си. Започни с {your:obj}.
+tip.develop.b2 = Нито една лека фигура не е мръднала. Развий {your:obj} и другите.
+tip.develop.b2.2 = Фигурите ти още спят. Започни с {your:obj}.
 # Endgame technique tips.
 tip.mate_technique.b1 = Когато остане сам цар, избутай го към края и тогава дай мат.
 tip.mate_technique.b1.2 = Съвет: притискай царя ми към края. И дръж царя си наблизо.
@@ -935,13 +941,52 @@ praise.excellent.b4.2 = Отлично.
 praise.excellent.b4.3 = Добре, {move} е точен ход.
 praise.castle.b1 = Добре, рокада! Сега царят ти е в по-голяма безопасност.
 praise.castle.b1.2 = Хубава рокада! Царят ти е на сигурно място.
+praise.castle.b2 = Добре, направи рокада. Царят е в безопасност, а топът влиза в играта.
+praise.castle.b2.2 = Рокада: царят е на сигурно място, а топът е в играта. Браво.
+praise.castle.b3 = Добре: рокада, царят е в безопасност.
+praise.castle.b3.2 = Ранна рокада. Разумно.
 praise.saved.b1 = Добре! Фигурата ти е спасена.
 praise.saved.b1.2 = Браво, отдръпна фигурата на сигурно място.
 praise.saved.b1.2.spoken = Браво, отдръпна́ фигурата на сигурно място.
+praise.saved.b2 = Добре, фигурата беше нападната и я спаси.
+praise.saved.b2.2 = Добре забелязано. Спаси фигурата.
+praise.saved.b3 = Добре: нападнатата фигура е на безопасно място.
+praise.saved.b3.2 = Добре забелязано. Фигурата беше в опасност.
+# A habit named: the player's move dealt with what the coach attacked (the coach's last threat).
+praise.check_threat.b1 = Добре! Видя какво напада ходът ми и се справи с това.
+praise.check_threat.b1.2 = Браво! Провери заплахата ми, преди да ходиш.
+praise.check_threat.b1.3 = Да! Погледна какво нападам. Това е чудесен навик.
+praise.check_threat.b2 = Добре: видя заплахата ми и отговори на нея.
+praise.check_threat.b2.2 = Провери какво напада ходът ми. Добър навик.
+praise.check_threat.b2.3 = Това отговаря на заплахата ми. Добре забелязано.
+# A piece of the player's was attacked and the move defended it.
+praise.protect.b1 = Добре! {your} беше под удар, а сега е защитен{your:a}.
+praise.protect.b1.2 = Браво! Защити {your:obj}, преди да мога да {your:pron_obj} взема.
+praise.protect.b2 = Добре: {your} беше под удар и ти {your:pron_obj} защити.
+praise.protect.b2.2 = Добре забелязано. {your} вече е в безопасност.
+# A minor piece brought out from its first square in the opening.
+praise.develop.b1 = Добре! Изкара фигура в играта. Там фигурите вършат повече работа.
+praise.develop.b1.2 = Хубаво! Ранното изкарване на фигурите е добър навик.
+praise.develop.b2 = Добре, развиваш фигура. Изкарай и другите.
+praise.develop.b2.2 = Браво: развивай фигурите си рано.
 praise.book.b1 = Добре, това е добре известен дебютен ход.
 praise.book.b1.2 = Хубаво, така започват и силните играчи.
 
 # ---- The coach's own threats (levels 1-2, before the player moves) ------------------------------
+# The first threat of a game at levels 1-2 is asked about first, nothing pointed at: the player is
+# to look at the board for what my last move attacks.
+threat.ask.b1 = Последният ми ход създаде заплаха. Виждаш ли коя от фигурите ти е в опасност?
+threat.ask.b1.2 = Погледни дъската. Последният ми ход напада нещо твое. Можеш ли да го откриеш?
+threat.ask.b1.3 = Чакай, преди да ходиш: последният ми ход е заплаха. Коя твоя фигура е в опасност?
+threat.ask.b2 = Последният ми ход създаде заплаха. Виждаш ли каква е?
+threat.ask.b2.2 = Погледни: какво напада последният ми ход?
+threat.ask.b2.3 = Току-що направих заплаха. Можеш ли да я откриеш?
+# The same when the threat is a checkmate.
+threat.ask_mate.b1 = Последният ми ход е заплаха срещу царя ти. Виждаш ли какво искам да направя?
+threat.ask_mate.b1.2 = Внимавай: готвя нещо голямо. Виждаш ли какво искам да направя?
+threat.ask_mate.b1.3 = Погледни последния ми ход. Заплашвам с нещо сериозно. Виждаш ли го?
+threat.ask_mate.b2 = Последният ми ход е сериозна заплаха. Виждаш ли какво искам да направя?
+threat.ask_mate.b2.2 = Погледни последния ми ход: заплашва с нещо голямо. Виждаш ли го?
 # A mate threat ({sq} = where it would mate, pointed at at level 1; {my} = the piece).
 threat.mate.b1 = Внимавай! Заплашвам мат на {sq}.
 threat.mate.b1.2 = Внимавай: {my} иска да отиде на {sq}. Това ще бъде мат.
@@ -949,6 +994,9 @@ threat.mate.b1.3 = Погледни полето {sq}. Ако стигна та�
 threat.mate.b2 = Внимавай, заплашвам мат.
 threat.mate.b2.2 = Внимавай: има заплаха от мат на {sq}.
 threat.mate.b2.3 = Гледай внимателно: заплашвам мат.
+threat.mate.b3 = Внимавай, заплашвам мат на {sq}.
+threat.mate.b3.2 = Има заплаха от мат: {my} иска да отиде на {sq}.
+threat.mate.b3.3 = Пази се: заплашвам с мат.
 # A threat on a piece ({my} = my attacker, pointed at at level 1; {your} = the target, pointed at).
 threat.piece.b1 = Виж: {my} напада {your:obj}.
 threat.piece.b1.2 = Внимавай! {your} е нападнат{your:a} от {my:obj}.
@@ -956,6 +1004,21 @@ threat.piece.b1.3 = Внимавай, {my} иска да вземе {your:obj}.
 threat.piece.b2 = Внимавай с {your:refl}.
 threat.piece.b2.2 = {your} е под удар.
 threat.piece.b2.3 = Пази {your:refl}.
+threat.piece.b3 = {my} напада {your:obj}, а вземането {your:pron_dat} печели материал.
+threat.piece.b3.2 = {your} е в опасност: {my} заплашва да {your:pron_obj} вземе.
+threat.piece.b3.3 = Внимавай: последният ми ход напада {your:obj}.
+# A fork the coach's move sets up (level 2): {my} on {sq} attacks {t1} and {t2}.
+threat.fork.b2 = {my} на {sq} напада {t1:obj} и {t2:obj} едновременно. Това е вилица!
+threat.fork.b2.2 = Внимавай, вилица е: {my} напада {t1:obj} и {t2:obj}.
+threat.fork.b2.3 = {my} прави вилица на {t1:obj} и {t2:obj}. Трудно ще спасиш и двете.
+# A pin (level 2): {my} on {sq} holds {your} in front of {t1}, the piece behind it.
+threat.pin.b2 = {my} на {sq} свързва {your:obj} с {t1:obj}. Ако се премести, вземам {t1:obj}.
+threat.pin.b2.2 = Внимавай: {your} е свързан{your:a} от {my:obj}. Ако се премести, {t1} пада.
+threat.pin.b2.3 = {your} е свързан{your:a}: ако се махне, {my} взема {t1:obj}.
+# Level 3: the position has one good move only (the engine's two best moves are far apart).
+threat.only.b3 = Позицията е критична: наистина добър е само един ход. Не бързай.
+threat.only.b3.2 = Внимавай, тук има само един добър ход. Първо огледай всичко.
+threat.only.b3.3 = Бавно: в тази позиция повечето ходове вървят зле.
 threat.punish.b1 = Последният ми ход беше грешка. Можеш ли да ме накажеш за нея?
 threat.punish.b1.2 = Хм, мисля, че сгреших. Можеш ли да откриеш грешката?
 
@@ -971,6 +1034,8 @@ tb.hint.mate_missed.b1 = Погледни царя ми. Можеш ли да м
 tb.hint.mate_missed.b1.2 = Първо опитай шаховете. Може би има мат!
 tb.hint.general.b1 = Не бързай и погледни цялата дъска.
 tb.hint.general.b1.2 = Опитай да намериш по-сигурен ход.
+tb.hint.b3 = Виж кои твои фигури напада отговорът ми.
+tb.hint.b3.2 = Виж какво ще напада отговорът ми, преди да ходиш.
 # The retry.
 tb.fixed.b1 = Много по-добре!
 tb.fixed.b1.2 = Да, така е по-добре!
@@ -978,6 +1043,14 @@ tb.fixed.b1.3 = Добре, така става много по-добре.
 tb.fixed = Така е по-добре.
 tb.fixed.2 = По-добре.
 tb.fixed.3 = Добра поправка.
+# After a good retry of a move taken back for a fault with a named cause (levels 1-3), one line that
+# names the habit; {theme} is a phrase from appraisal.lang (theme.*), no full stop.
+tb.why.b1 = Запомни за следващия път: {theme}.
+tb.why.b1.2 = Добър навик: {theme}.
+tb.why.b2 = Урокът тук: {theme}.
+tb.why.b2.2 = Какво помага: {theme}.
+tb.why.b3 = Струва си да запомниш: {theme}.
+tb.why.b3.2 = Навикът, който да изградиш: {theme}.
 tb.same = Пак същият ход? Добре, да видим.
 tb.same.2 = Харесва ти този ход. Да видим докъде ще ни отведе.
 # The retry after a hint-only offer is the move the coach had in mind.
@@ -989,3 +1062,29 @@ tb.found.2 = Точно така, това е ходът.
 # where the offer would have been).
 tb.none_left = Боя се, че в тази партия не остават повече връщания на ход.
 tb.none_left.2 = В тази партия нямаш повече връщания на ход.
+
+# ---- The retry (the player is asked to find the better move on the position before the mistake) ---
+retry.task.b1 = Да се върнем към този момент. Можеш ли да намериш по-добър ход?
+retry.task.b1.2 = Ето позицията отново. Можеш ли да намериш по-добър ход?
+retry.task.b2 = Това е позицията преди голямата ти грешка. Намери по-добър ход.
+retry.task.b2.2 = Да погледнем този момент отново. Какво ще изиграеш вместо това?
+retry.task.b3 = Това е позицията преди критичния ход. Намери по-добрия ход.
+retry.task.b3.2 = Обратно към критичния момент. Кой е по-добрият ход?
+retry.again.b1 = Не е този. Погледни пак.
+retry.again.b1.2 = Още не е това. Опитай отново.
+retry.again.b2 = Не е този. Огледай цялата дъска.
+retry.again.b2.2 = Още не. Опитай друг ход.
+retry.again.b3 = Не е този. Виж какво ще направи отговорът ми.
+retry.again.b3.2 = Пак не е. Помисли за най-добрия ми отговор.
+retry.found.b1 = Да! Това е по-добрият ход. Браво!
+retry.found.b1.2 = Откри го! Това е много по-добре.
+retry.found.b2 = Да, това върши работа. Браво.
+retry.found.b2.2 = Точно така. Добра работа.
+retry.found.b3 = Правилно, ходът държи. Браво.
+retry.found.b3.2 = Това е. Добра находка.
+retry.reveal.b1 = Ето по-добрия ход: {best}. Гледай.
+retry.reveal.b1.2 = Ще ти покажа: по-добър беше {best}.
+retry.reveal.b2 = По-добрият ход беше {best}. Виж.
+retry.reveal.b2.2 = Ето го: {best}.
+retry.reveal.b3 = По-добрият ход беше {best}.
+retry.reveal.b3.2 = {best} беше ходът.

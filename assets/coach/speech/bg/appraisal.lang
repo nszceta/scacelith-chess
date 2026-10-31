@@ -286,6 +286,12 @@ appraisal.num.takebacks.b2.2.spoken = Върна́ {n:move} и поправи {m
 appraisal.num.takebacks.b3 = Върна {n:move} и поправи {m:m} от тях.
 appraisal.num.takebacks.b3.spoken = Върна́ {n:move} и поправи {m:m} от тях.
 appraisal.num.takebacks.b3.2 = Върнати ходове: {n:m}, поправени: {m:m}. Добре.
+appraisal.num.retried.b1 = Поправи {n:mistake}, като опита отново. Така се учим!
+appraisal.num.retried.b1.2 = Превърна {n:mistake} в добър ход, като опита отново. Чудесно!
+appraisal.num.retried.b2 = Поправи {n:mistake}, като опита отново. Така се учим.
+appraisal.num.retried.b2.2 = Като опита отново, поправи {n:mistake}. Добре се учиш!
+appraisal.num.retried.b3 = Поправи {n:blunder}, като опита отново.
+appraisal.num.retried.b3.2 = Поправи {n:blunder} на втория опит. Добре.
 # Level 2: big mistakes ({n} = mistakes and blunders), or the best moves found ({n}).
 # A line never starts with {n:time}: for 1 it is the word "веднъж", which the program does not capitalise.
 appraisal.num.clean.b2 = Никакви сериозни грешки – страхотно!
@@ -337,9 +343,25 @@ appraisal.improve.theme.b5 = Повтаря се: {theme}.
 appraisal.improve.theme.b5.2 = Тема на партията: {theme}.
 appraisal.improve.theme.b6 = Повтаря се: {theme}.
 appraisal.improve.theme.b6.2 = Тема: {theme}.
+appraisal.improve.theme.again.b1 = Същият съвет като миналия път: {theme}. Помни го.
+appraisal.improve.theme.again.b1.2 = Това се появи и в миналата партия: {theme}. Да поработим заедно.
+appraisal.improve.theme.again.b1.3 = Пак едно нещо за упражняване: {theme}. Всяка партия става по-лесно.
+appraisal.improve.theme.again.b2 = Същата идея като в миналата партия: {theme}. Струва си да се упражнява.
+appraisal.improve.theme.again.b2.2 = Това се появи и в миналата партия: {theme}.
+appraisal.improve.theme.again.b2.3 = Пак нещо, върху което да поработиш: {theme}.
+appraisal.improve.theme.again.b3 = Пак тема: {theme}. Появи се и в миналата партия.
+appraisal.improve.theme.again.b3.2 = Същата тема като напоследък: {theme}. Струва си да се упражнява.
+appraisal.improve.theme.again.b4 = Повтаряща се тема, и в последните партии: {theme}.
+appraisal.improve.theme.again.b4.2 = Същата тема като напоследък: {theme}.
+appraisal.improve.theme.again.b5 = Повтаря се, и напоследък: {theme}.
+appraisal.improve.theme.again.b5.2 = Същата тема като в последните партии: {theme}.
+appraisal.improve.theme.again.b6 = Пак: {theme}.
+appraisal.improve.theme.again.b6.2 = Тема, която се повтаря: {theme}.
 # The critical moment (levels 2-6).
 appraisal.improve.critical.b2 = Партията се обърна на ход {crit_no}. За следващия път: {theme}.
 appraisal.improve.critical.b2.2 = Ключовият момент беше ход {crit_no}, {crit_move}. Нещо за упражняване: {theme}.
+appraisal.improve.critical.again.b2 = Партията се обърна на ход {crit_no} и пак ставаше дума за: {theme}.
+appraisal.improve.critical.again.b2.2 = Ходът {crit_no} беше ключовият момент. Същата идея като миналия път: {theme}.
 appraisal.improve.critical.b3 = Критичният момент беше ход {crit_no}. Вместо {crit_move} по-добре беше {crit_best}.
 appraisal.improve.critical.b3.2 = На ход {crit_no} по-добрият ход беше {crit_best}, а не {crit_move}. Първо проверявай моите форсиращи ходове.
 appraisal.improve.critical.b4 = Критичен момент: ход {crit_no}, {crit_move}. По-добрият ход беше {crit_best}.
@@ -396,6 +418,14 @@ appraisal.improve.clean.b5 = Без критични грешки.
 appraisal.improve.clean.b5.2 = Чиста партия.
 appraisal.improve.clean.b6 = Чиста партия.
 appraisal.improve.clean.b6.2 = Никакви критични грешки.
+# The end card offers to try the critical position again (levels 1-3).
+appraisal.next.retry.b1 = Когато свършим, можеш да опиташ тази позиция отново.
+appraisal.next.retry.b1.2 = След това можеш да опиташ отново онази трудна позиция.
+appraisal.next.retry.b1.3 = Искаш ли да опиташ тази позиция отново? Можеш, след малко.
+appraisal.next.retry.b2 = Следваща стъпка: опитай тази позиция отново и намери по-добрия ход.
+appraisal.next.retry.b2.2 = След това можеш да опиташ тази позиция отново.
+appraisal.next.retry.b3 = Следваща стъпка: опитай тази позиция отново и намери по-добрия ход.
+appraisal.next.retry.b3.2 = Можеш да опиташ тази позиция отново от крайния екран.
 
 # ---- 5. Encouragement and the level suggestion -----------------------------------------------------
 # {level} = a level name, always in quotes after "ниво" or alone: ниво „{level}“. Never "готов".

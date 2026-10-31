@@ -6,15 +6,23 @@
 # "sei pronto?"): avere past tenses ("hai abbandonato"), nouns and impersonal phrasing instead.
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Ciao! Facciamo una partita amichevole. Ti aiuterò ogni volta che qualcosa va storto.
+event.greet.l1 = Ciao! Facciamo una partita amichevole. Ti dirò quando uno dei tuoi pezzi è in pericolo.
 event.greet.l1.2 = Eccoci! Ci andrò piano e ti mostrerò a cosa fare attenzione.
 event.greet.l1.3 = Ti do il benvenuto! Fai con calma: ti avviserò quando un pezzo sarà in pericolo.
-event.greet.l2 = Ciao! Giochiamo. Quando comparirà una forchetta o un’inchiodatura, te la mostrerò.
+event.greet.l1.first = Ciao! Prima di ogni mossa chiediti: il mio pezzo è al sicuro? Cosa attacca la mia mossa? Cosa minaccia l’avversario? Te lo ricordo io.
+event.greet.l1.first.2 = La tua prima partita vera! Prima di ogni mossa: il mio pezzo è al sicuro, cosa attacca, qual è la minaccia? Te lo ricorderò.
+event.greet.l2 = Ciao! Giochiamo. Se la mia mossa prepara una forchetta o un’inchiodatura, te lo dirò.
 event.greet.l2.2 = Eccoci! Porta in gioco i tuoi pezzi e tieni al sicuro il tuo re. Ti darò una mano strada facendo.
 event.greet.l2.3 = Si torna alla scacchiera! Occhio a forchette e inchiodature: fanno vincere le partite.
-event.greet.l3 = Ciao! Giochiamo una vera partita. Commenterò i tuoi piani e gli errori più grossi.
+event.greet.l3 = Ciao! Giochiamo una vera partita. Ti avviserò delle grandi minacce e ti spiegherò gli errori più grossi.
 event.greet.l3.2 = Eccoci! Pensa a un piano per i tuoi pezzi. Ti dirò quando una mossa trascura qualcosa.
-event.greet.l3.3 = Giochiamo! Ti segnalerò le mosse uniche e le mosse che non funzionano.
+event.greet.l3.3 = Giochiamo! Ti dirò quando funziona una sola mossa e quando una mossa va storta.
+event.greet.l1.theme = Rieccoci! L’ultima volta il consiglio era: {theme}. Tienilo a mente oggi.
+event.greet.l1.theme.2 = Ciao di nuovo! Ricorda il consiglio dell’ultima partita: {theme}. Ti aiuterò.
+event.greet.l2.theme = Rieccoci! L’idea dell’ultima partita era: {theme}. Vediamo come va oggi.
+event.greet.l2.theme.2 = Ciao di nuovo! Da ricordare dall’ultima partita: {theme}.
+event.greet.l3.theme = Rieccoci! Il tema dell’ultima partita era: {theme}. Tienilo a mente oggi.
+event.greet.l3.theme.2 = Ciao di nuovo! Dall’ultima partita: {theme}. Vediamo come va oggi.
 event.greet.l4 = Ciao! Stavolta ti darò le valutazioni e ti mostrerò le mosse candidate migliori.
 event.greet.l4.2 = Giochiamo. Dopo un errore ti dirò quale mossa era più precisa.
 event.greet.l4.3 = Che ne dici di una partita da circolo? Commenterò quando cambia la valutazione.
@@ -33,9 +41,9 @@ event.colour.black.2 = Stavolta giochi con il Nero: muovo io per primo.
 
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names are those of the coach page (assets/i18n/it.lang coach.level.<n>.name).
-event.level.l1 = Primi passi: ci vado piano e ti spiego ogni errore con parole semplici.
-event.level.l2 = Principiante: gioco un po’ più forte e chiamo per nome le tattiche semplici, come forchette e inchiodature.
-event.level.l3 = Intermedio: parlo di piani e di struttura pedonale, e ti mostro brevi varianti.
+event.level.l1 = Primi passi: ci vado piano. Ti dico quando un tuo pezzo è attaccato e senza protezione, e spiego gli errori gravi con parole semplici.
+event.level.l2 = Principiante: gioco un po’ più forte. Ti avviso di forchette, inchiodature e attacchi alla donna, e ti ricordo di sviluppare i pezzi.
+event.level.l3 = Intermedio: ti avviso solo dei matti e degli attacchi alla tua donna, e di quando funziona una sola mossa. Spiego comunque i tuoi errori.
 event.level.l4 = Giocatore di circolo: do la valutazione in pedoni e ti suggerisco mosse candidate.
 event.level.l5 = Forte giocatore di circolo: commenti brevi, e varianti più lunghe quando serve.
 event.level.l6 = Esperto: gioco al massimo e commento solo i momenti critici.
@@ -106,5 +114,7 @@ event.end.handshake = Stringiamoci la mano.
 # lesson.lang): never put di, a, da, in, su right before it (they would fuse with the article).
 event.lesson.resume = Eccoti di nuovo! Continuiamo con {chapter}.
 event.lesson.resume.2 = Ciao di nuovo! Ci eravamo fermati qui: {chapter}.
+event.lesson.start = Cominciamo con {chapter}.
+event.lesson.start.2 = Si parte con {chapter}.
 event.lesson.next = Prossimo capitolo: {chapter}.
 event.lesson.next.2 = E adesso, {chapter}.

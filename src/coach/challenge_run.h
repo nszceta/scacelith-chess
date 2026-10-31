@@ -49,8 +49,10 @@ public:
 
     // Starts 'challenge' (copied) on the director, which performs on 'stage'. Talks at once.
     // 'from': the position to begin at, 0-based (tests and screenshots; the set's introduction is
-    // said all the same).
-    void start(const Challenge& challenge, Director& director, Stage& stage, Analyst& analyst, int from = 0);
+    // said all the same). 'practiseTheme': the theme (exTypeName) of a game's error that this set
+    // practises ("" = none): the coach names it before the introduction.
+    void start(const Challenge& challenge, Director& director, Stage& stage, Analyst& analyst, int from = 0,
+               const std::string& practiseTheme = std::string());
     void stop();                                   // the analyses are cancelled (the director is the session's)
     void update(const chess::Game& game, float dt);
 

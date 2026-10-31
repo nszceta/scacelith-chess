@@ -1043,14 +1043,14 @@ coach.level.0.name = Die Schachregeln
 coach.level.0.desc = Eine interaktive Lektion, eine Regel nach der anderen.
 coach.level.0.detail = Der Trainer baut kleine Stellungen auf und zeigt, wie jede Figur zieht und schlägt, dann Rochade, Umwandlung, Schach und Matt. Sie probieren jede Idee selbst auf dem Brett aus.
 coach.level.1.name = Erste Schritte
-coach.level.1.desc = Was angegriffen ist, was ungedeckt bleibt.
-coach.level.1.detail = Der Trainer spielt behutsam und spricht einfach: welche Ihrer Figuren angegriffen sind, welche ungedeckt bleiben und wie Sie sie behalten.
+coach.level.1.desc = Angegriffene und ungedeckte Figuren, in einfachen Worten.
+coach.level.1.detail = Der Trainer spielt behutsam und spricht einfach. Er warnt Sie, wenn eine Ihrer Figuren oder einer Ihrer Bauern angegriffen und ungedeckt ist; beim ersten Mal bittet er Sie, die Gefahr selbst zu finden.
 coach.level.2.name = Anfänger
-coach.level.2.desc = Einfache Taktik, Entwicklung, Königssicherheit.
-coach.level.2.detail = Gabeln und Fesselungen werden beim Namen genannt. Der Trainer spricht über die Entwicklung Ihrer Figuren und die Sicherheit Ihres Königs.
+coach.level.2.desc = Gabeln, Fesselungen, Entwicklung, Königssicherheit.
+coach.level.2.detail = Der Trainer warnt Sie, wenn sein Zug eine Gabel, eine Fesselung, einen Angriff auf Ihre Dame oder ein Matt vorbereitet, und nennt die Taktik. Er erinnert Sie ans Entwickeln und an die Sicherheit Ihres Königs.
 coach.level.3.name = Hobbyspieler
-coach.level.3.desc = Pläne, Bauernstruktur, einzige Züge.
-coach.level.3.detail = Der Trainer erklärt Pläne und Bauernstrukturen und warnt Sie, wenn nur ein einziger Zug die Stellung hält.
+coach.level.3.desc = Große Drohungen und Momente, in denen nur ein Zug hilft.
+coach.level.3.detail = Keine Fragen und Markierungen mehr: Der Trainer warnt Sie nur vor einer Mattdrohung oder einem Angriff auf Ihre Dame und sagt Ihnen, wenn nur ein Zug die Stellung hält.
 coach.level.4.name = Vereinsspieler
 coach.level.4.desc = Kandidatenzüge, Bewertung in Bauerneinheiten.
 coach.level.4.detail = Der Trainer wägt die Kandidatenzüge ab und gibt die Bewertung in Bauerneinheiten an, wie ein Vereinstrainer.
@@ -1060,6 +1060,9 @@ coach.level.5.detail = Kurze Bemerkungen, konkrete Varianten und das Vokabular d
 coach.level.6.name = Experte
 coach.level.6.desc = Knappe Hinweise, tiefe Varianten, Bewertungszahlen.
 coach.level.6.detail = Wenige Worte, wie unter starken Spielern: Varianten über mehrere Züge und Bewertungszahlen.
+# Die Ziele der Stufen 1 und 2 auf der Karte der Stufe (ein Häkchen und „Abgeschlossen“, wenn erreicht)
+coach.goal.1 = Ziel: in zwei Partien hintereinander keine Figur umsonst verloren.
+coach.goal.2 = Ziel: zwei Siege hintereinander ohne groben Fehler.
 coach.note.clock = Keine Uhr: Nehmen Sie sich alle Zeit, die Sie brauchen.
 coach.note.takeback = Nach einem groben Fehler zeigt der Trainer, was schiefging, und bietet an, den Zug zurückzunehmen.
 coach.note.lesson = Sie spielen Weiß; der Trainer baut jede Übung auf dem Brett auf.
@@ -1068,10 +1071,16 @@ coach.note.fallible = Der Trainer ist nicht unfehlbar: Er kann einen Zug manchma
 coach.colour = Ihre Farbe
 coach.colour.help = Die Farbe, mit der Sie gegen den Trainer spielen. Abwechselnd: erst Weiß, dann Schwarz, von Partie zu Partie. Die Lektion über die Regeln wird immer mit Weiß gespielt.
 coach.colour.alternate = Abwechselnd
+coach.chapter = Kapitel
+coach.chapter.help = Das Kapitel, bei dem die Lektion beginnt: das, bei dem Sie aufgehört haben, oder ein beliebiges anderes zum Wiederholen. Der Abschluss der Lektion bleibt gespeichert.
+coach.chapter.title = Lektion beginnen bei
 coach.take_time = Hinweis „Lassen Sie sich Zeit“
 coach.take_time.help = Nach einer Minute Bedenkzeit sagt der Trainer, dass es keine Eile hat. Nur Stufen 1 bis 3.
 coach.danger_markers = Gefährdete Figuren anzeigen
-coach.danger_markers.help = Auf Stufe 1 und 2 erscheint bei Ihrem Zug unter jeder Ihrer Figuren, die der Trainer gerade gewinnen könnte, ein farbiges Feld.
+coach.danger_markers.auto = Automatisch
+coach.danger_markers.help = Auf Stufe 1 und 2 erscheint bei Ihrem Zug unter jeder Ihrer Figuren, die der Trainer gerade gewinnen könnte, ein farbiges Feld. Automatisch: in Ihren ersten drei Partien auf Stufe 1 und in Ihrer ersten Partie auf Stufe 2, danach aus. Ein: auf beiden Stufen, in jeder Partie.
+# Unter dem Schalter oben, wenn „Automatisch“ die Markierungen ausgeschaltet hat
+coach.danger_markers.withdrawn = Die Markierungen sind aus, da Sie das Spiel jetzt kennen. Wählen Sie Ein, um sie zu behalten.
 # Shown when the coach's voice cannot be heard: its model is not downloaded, or Options > Audio > Coach voice is off.
 coach.no_voice = Die Stimme des Trainers ist nicht installiert oder ausgeschaltet (Optionen > Ton): Seine Worte werden auf dem Bildschirm angezeigt.
 # At the table
@@ -1094,9 +1103,17 @@ coach.confirm.leave = Zurück zum Hauptmenü? Diese Partie mit dem Trainer wird 
 coach.gameover.again = Noch eine Partie
 coach.gameover.practise = Üben: {0}
 coach.gameover.unrated = Diese Partie mit dem Trainer wird nicht gewertet.
+# „Diese Stellung noch einmal versuchen“ (Stufen 1–3, Partie mit einem groben Fehler) und seine eigene Schlusskarte
+coach.gameover.retry = Diese Stellung noch einmal versuchen
+coach.retry.found = GUT GEFUNDEN
+coach.retry.found.line = Das ist der Zug, der die Partie verändert.
+coach.retry.shown = DER BESSERE ZUG
+coach.retry.shown.line = Jetzt haben Sie ihn gesehen. Suchen Sie diese Idee in Ihrer nächsten Partie.
+coach.retry.reason = Die kritische Stellung
 coach.lesson.done = GUT GEMACHT
 coach.lesson.done.line = Jetzt kennen Sie die Schachregeln.
-coach.lesson.next = Erste Partie
+coach.lesson.done.next_line = Erste Schritte: Ich spiele behutsam und sage Ihnen, wenn eine Figur in Gefahr ist.
+coach.lesson.next = Erste Schritte spielen
 
 # ---- Coach challenges (src/ui/ui_coach.cpp; the coach's spoken lines are in assets/coach/speech/<lang>/challenge.lang)
 # The tabs of the Coach page: games with the coach, and short sets of positions to solve

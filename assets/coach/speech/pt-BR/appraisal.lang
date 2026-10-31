@@ -286,6 +286,12 @@ appraisal.num.takebacks.b2 = Você voltou {n:move} e corrigiu {m}. É assim que 
 appraisal.num.takebacks.b2.2 = Você voltou {n:move} e conseguiu corrigir {m}. Bom aprendizado!
 appraisal.num.takebacks.b3 = Você voltou {n:move} e corrigiu {m}.
 appraisal.num.takebacks.b3.2 = Lances voltados: {n}; corrigidos: {m}. Bom.
+appraisal.num.retried.b1 = Você corrigiu {n:mistake} ao tentar de novo. É assim que se aprende!
+appraisal.num.retried.b1.2 = Você transformou {n:mistake} em um bom lance ao tentar de novo. Ótimo!
+appraisal.num.retried.b2 = Você corrigiu {n:mistake} ao tentar de novo. É assim que se aprende.
+appraisal.num.retried.b2.2 = Ao tentar de novo, você corrigiu {n:mistake}. Bom aprendizado!
+appraisal.num.retried.b3 = Você corrigiu {n:blunder} ao tentar de novo.
+appraisal.num.retried.b3.2 = Na segunda tentativa, você corrigiu {n:blunder}. Bom.
 # Level 2: big mistakes ({n} = mistakes and blunders), or the best moves found ({n}).
 # "Erro sério" for "big mistake" (mistakes and blunders together; "erro grave" is the blunder only).
 appraisal.num.clean.b2 = Nenhum erro sério: ótimo!
@@ -337,9 +343,25 @@ appraisal.improve.theme.b5 = Tema recorrente: {theme}.
 appraisal.improve.theme.b5.2 = Tema da partida: {theme}.
 appraisal.improve.theme.b6 = Tema recorrente: {theme}.
 appraisal.improve.theme.b6.2 = Tema: {theme}.
+appraisal.improve.theme.again.b1 = A mesma dica da última vez: {theme}. Lembre-se disso.
+appraisal.improve.theme.again.b1.2 = Isso apareceu na última partida também: {theme}. Vamos trabalhar nisso juntos.
+appraisal.improve.theme.again.b1.3 = De novo, algo para praticar: {theme}. Fica mais fácil a cada partida.
+appraisal.improve.theme.again.b2 = A mesma ideia da última partida: {theme}. Vale a pena praticar.
+appraisal.improve.theme.again.b2.2 = Isto apareceu na última partida também: {theme}.
+appraisal.improve.theme.again.b2.3 = De novo, algo para trabalhar: {theme}.
+appraisal.improve.theme.again.b3 = Um tema de novo: {theme}. Ele apareceu na última partida também.
+appraisal.improve.theme.again.b3.2 = O mesmo tema de há pouco: {theme}. Vale a pena praticar.
+appraisal.improve.theme.again.b4 = Um tema recorrente, também nas partidas recentes: {theme}.
+appraisal.improve.theme.again.b4.2 = O mesmo tema de há pouco: {theme}.
+appraisal.improve.theme.again.b5 = Recorrente, também recentemente: {theme}.
+appraisal.improve.theme.again.b5.2 = Mesmo tema das partidas recentes: {theme}.
+appraisal.improve.theme.again.b6 = De novo: {theme}.
+appraisal.improve.theme.again.b6.2 = Tema repetido: {theme}.
 # The critical moment (levels 2-6).
 appraisal.improve.critical.b2 = A partida virou no lance {crit_no}. Da próxima vez, tente {theme}.
 appraisal.improve.critical.b2.2 = O momento-chave foi o lance {crit_no}, {crit_move}. Algo para praticar: {theme}.
+appraisal.improve.critical.again.b2 = A partida virou no lance {crit_no}, e de novo foi por causa de: {theme}.
+appraisal.improve.critical.again.b2.2 = O lance {crit_no} foi o momento-chave. A mesma ideia da última vez: {theme}.
 appraisal.improve.critical.b3 = O momento crítico foi o lance {crit_no}. Em vez de {crit_move}, {crit_best} era melhor.
 appraisal.improve.critical.b3.2 = No lance {crit_no}, {crit_best} era melhor que {crit_move}. Verifique primeiro os meus lances forçantes.
 appraisal.improve.critical.b4 = Momento crítico: lance {crit_no}, {crit_move}. {crit_best} era melhor.
@@ -397,6 +419,13 @@ appraisal.improve.clean.b5 = Nenhum erro crítico.
 appraisal.improve.clean.b5.2 = Partida limpa.
 appraisal.improve.clean.b6 = Partida limpa.
 appraisal.improve.clean.b6.2 = Sem erros críticos.
+appraisal.next.retry.b1 = Quando terminarmos, você pode tentar aquela posição de novo.
+appraisal.next.retry.b1.2 = Depois disto, você pode tentar de novo aquela posição difícil.
+appraisal.next.retry.b1.3 = Quer tentar aquela posição de novo? Você pode, daqui a pouco.
+appraisal.next.retry.b2 = Próximo passo: tentar aquela posição de novo e achar o lance melhor.
+appraisal.next.retry.b2.2 = Depois disto, você pode tentar aquela posição de novo.
+appraisal.next.retry.b3 = Próximo passo: tentar aquela posição de novo e achar o lance melhor.
+appraisal.next.retry.b3.2 = Você pode tentar aquela posição de novo na tela final.
 
 # ---- 5. Encouragement and the level suggestion -----------------------------------------------------
 # {level} = “Iniciante” ...: always after "nível". "You're ready" = "você já pode passar" (no

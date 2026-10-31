@@ -1084,7 +1084,9 @@ bool hanging(const Ctx& c, Explanation& out) {
     const LineStep& r0 = c.r[0];
     const Square s = r0.move.to;
     const PieceType x = r0.captured;
-    if (x == Pawn && c.level <= 2) return false;
+    // A loose pawn is named at level 1 (a beginner loses them for nothing too), not at level 2: its
+    // lines are for pieces.
+    if (x == Pawn && c.level == 2) return false;
     // The piece that has just captured is lost in a trade (section 11), not "for free".
     if (s == c.played.to && c.f.captured != NoPiece) return false;
     if (!isUndefended(c.p1, s) || seePoints(c.p1, r0.move) < points(x)) return false;

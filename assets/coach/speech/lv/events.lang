@@ -7,15 +7,23 @@
 # ("esmu gatavs", "es eju pirmais").
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Sveiki! Uzspēlēsim draudzīgu partiju. Es palīdzēšu ikreiz, kad kaut kas noies greizi.
+event.greet.l1 = Sveiki! Uzspēlēsim draudzīgu partiju. Es pateikšu, kad kāda tava figūra būs briesmās.
 event.greet.l1.2 = Čau! Es spēlēšu saudzīgi un parādīšu, kam jāpievērš uzmanība.
 event.greet.l1.3 = Laipni lūdzam! Nesteidzies: es pateikšu, kad kāda figūra būs briesmās.
-event.greet.l2 = Sveiki! Spēlēsim. Kad radīsies dakša vai piesaiste, es tev to parādīšu.
+event.greet.l1.first = Sveiki! Pirms katra gājiena jautā: vai mana figūra ir droša? Kam uzbrūk mans gājiens? Kas man draud? Es atgādināšu.
+event.greet.l1.first.2 = Tava pirmā īstā partija! Pirms gājiena: vai mana figūra ir droša, kam tā uzbrūk, kas man draud? Es atgādināšu.
+event.greet.l2 = Sveiki! Spēlēsim. Ja mans gājiens radīs dakšu vai piesaisti, es tev pateikšu.
 event.greet.l2.2 = Čau! Attīsti savas figūras un sargā savu karali. Es palīdzēšu pa ceļam.
 event.greet.l2.3 = Atkal pie galdiņa! Seko līdzi dakšām un piesaistēm: ar tām uzvar partijas.
-event.greet.l3 = Sveiki! Uzspēlēsim īstu partiju. Es komentēšu tavus plānus un lielākās kļūdas.
+event.greet.l3 = Sveiki! Uzspēlēsim īstu partiju. Es brīdināšu par lieliem draudiem un izskaidrošu lielākās kļūdas.
 event.greet.l3.2 = Čau! Izdomā plānu savām figūrām. Es pateikšu, ja kāds gājiens kaut ko palaiž garām.
-event.greet.l3.3 = Spēlēsim! Es norādīšu uz vienīgajiem gājieniem un uz gājieniem, kas ir kļūdaini.
+event.greet.l3.3 = Spēlēsim! Es pateikšu, kad der tikai viens gājiens un kad gājiens ir kļūdains.
+event.greet.l1.theme = Laipni atpakaļ! Pagājušās partijas padoms bija: {theme}. Paturi to prātā šodien.
+event.greet.l1.theme.2 = Sveiki atkal! Atceries pagājušās partijas padomu: {theme}. Es palīdzēšu.
+event.greet.l2.theme = Laipni atpakaļ! Pagājušās partijas ideja bija: {theme}. Paskatīsimies, kā veiksies šodien.
+event.greet.l2.theme.2 = Sveiki atkal! Ko atcerēties no pagājušās partijas: {theme}.
+event.greet.l3.theme = Laipni atpakaļ! Pagājušās partijas tēma bija: {theme}. Paturi to prātā šodien.
+event.greet.l3.theme.2 = Sveiki atkal! No pagājušās partijas: {theme}. Paskatīsimies, kā veiksies šodien.
 event.greet.l4 = Sveiki! Šoreiz es došu novērtējumus un parādīšu labākos kandidātgājienus.
 event.greet.l4.2 = Spēlēsim. Pēc kļūdas es pateikšu, kas būtu bijis precīzāk.
 event.greet.l4.3 = Uzspēlēsim kā klubā? Es komentēšu, kad mainīsies novērtējums.
@@ -35,9 +43,9 @@ event.colour.black.2 = Šoreiz tu spēlē ar melnajām: es eju pirmais.
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names (coach.level.<n>.name of assets/i18n/lv.lang): Pirmie soļi, Iesācējs, Turpinātājs,
 # Kluba spēlētājs, Spēcīgs kluba spēlētājs, Eksperts.
-event.level.l1 = Pirmie soļi: es spēlēju saudzīgi un katru kļūdu izskaidroju vienkāršiem vārdiem.
-event.level.l2 = Iesācējs: es spēlēju mazliet spēcīgāk un nosaucu vienkāršus taktiskus paņēmienus, piemēram, dakšas un piesaistes.
-event.level.l3 = Turpinātājs: es runāju par plāniem un bandinieku struktūru un rādu īsus variantus.
+event.level.l1 = Pirmie soļi: es spēlēju saudzīgi. Pasaku, kad tava figūra ir uzbrukta un neaizsargāta, un lielas kļūdas izskaidroju vienkārši.
+event.level.l2 = Iesācējs: es spēlēju mazliet spēcīgāk. Brīdinu par dakšām, piesaistēm un uzbrukumiem dāmai un atgādinu izvest figūras.
+event.level.l3 = Turpinātājs: brīdinu tikai par matu un uzbrukumiem dāmai, un kad der tikai viens gājiens. Kļūdas joprojām izskaidroju.
 event.level.l4 = Kluba spēlētājs: es novērtēju pozīciju bandiniekos un iesaku kandidātgājienus.
 event.level.l5 = Spēcīgs kluba spēlētājs: īsi komentāri un garāki varianti, kad tas ir svarīgi.
 event.level.l6 = Eksperts: es spēlēju no visa spēka un komentēju tikai kritiskos brīžus.
@@ -110,5 +118,7 @@ event.end.handshake = Paspiedīsim rokas.
 # in quotes after the noun "tēma" (topic), which takes the case.
 event.lesson.resume = Prieks tevi atkal redzēt! Turpināsim ar tēmu „{chapter}”.
 event.lesson.resume.2 = Sveiki atkal! Mēs apstājāmies pie tēmas „{chapter}”.
+event.lesson.start = Sāksim ar tēmu „{chapter}”.
+event.lesson.start.2 = Sākam ar tēmu „{chapter}”.
 event.lesson.next = Nākamā tēma: „{chapter}”.
 event.lesson.next.2 = Tagad pievērsīsimies tēmai „{chapter}”.

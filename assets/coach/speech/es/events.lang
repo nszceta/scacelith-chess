@@ -5,15 +5,23 @@
 # player (no "bienvenido", "listo", "atento"...), the coach's own agree in the masculine ("listo").
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = ¡Hola! Juguemos una partida amistosa. Te ayudaré cada vez que algo salga mal.
+event.greet.l1 = ¡Hola! Juguemos una partida amistosa. Te avisaré cuando una de tus piezas esté en peligro.
 event.greet.l1.2 = ¡Buenas! Jugaré con suavidad y te enseñaré a qué prestar atención.
 event.greet.l1.3 = ¡Me alegra verte! Tómate tu tiempo: te avisaré si una pieza está en peligro.
-event.greet.l2 = ¡Hola! Vamos a jugar. Si aparece una horquilla o una clavada, te la enseñaré.
+event.greet.l1.first = ¡Hola! Antes de cada jugada, pregúntate: ¿está a salvo mi pieza? ¿Qué ataca mi jugada? ¿Qué amenaza mi rival? Te lo recordaré.
+event.greet.l1.first.2 = ¡Tu primera partida de verdad! Antes de cada jugada: ¿está a salvo mi pieza, qué ataca, cuál es la amenaza? Te lo recordaré.
+event.greet.l2 = ¡Hola! Vamos a jugar. Si mi jugada prepara una horquilla o una clavada, te lo diré.
 event.greet.l2.2 = ¡Buenas! Saca tus piezas y pon a salvo a tu rey. Te iré ayudando.
 event.greet.l2.3 = ¡De vuelta al tablero! Vigila las horquillas y las clavadas: ganan partidas.
-event.greet.l3 = ¡Hola! Juguemos una partida seria. Comentaré tus planes y los errores importantes.
+event.greet.l3 = ¡Hola! Juguemos una partida seria. Te avisaré de las grandes amenazas y te explicaré los errores importantes.
 event.greet.l3.2 = ¡Buenas! Piensa un plan para tus piezas. Te avisaré si una jugada pasa algo por alto.
-event.greet.l3.3 = ¡A jugar! Te señalaré las jugadas únicas y las que salen mal.
+event.greet.l3.3 = ¡A jugar! Te diré cuándo solo una jugada sirve y cuándo una jugada sale mal.
+event.greet.l1.theme = ¡Me alegra verte de nuevo! El consejo de la última partida: {theme}. Tenlo presente hoy.
+event.greet.l1.theme.2 = ¡Hola otra vez! Recuerda el consejo de la última partida: {theme}. Te ayudaré.
+event.greet.l2.theme = ¡Me alegra verte de nuevo! La idea de la última partida: {theme}. Veamos cómo va hoy.
+event.greet.l2.theme.2 = ¡Hola otra vez! Algo para recordar de la última partida: {theme}.
+event.greet.l3.theme = ¡De nuevo por aquí! El tema de la última partida: {theme}. Tenlo presente hoy.
+event.greet.l3.theme.2 = ¡Hola otra vez! De la última partida: {theme}. Veamos cómo va hoy.
 event.greet.l4 = ¡Hola! Esta vez daré evaluaciones y te enseñaré las mejores jugadas candidatas.
 event.greet.l4.2 = Juguemos. Después de un error, te diré qué era más preciso.
 event.greet.l4.3 = ¿Jugamos una partida de club? Comentaré cuando cambie la evaluación.
@@ -32,9 +40,9 @@ event.colour.black.2 = Esta vez juegas con negras: muevo yo primero.
 
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names are those of the coach page (assets/i18n/es.lang coach.level.<n>.name).
-event.level.l1 = Primeros pasos: juego con suavidad y te explico cada error con palabras sencillas.
-event.level.l2 = Principiante: juego algo más fuerte y nombro tácticas como horquillas y clavadas.
-event.level.l3 = En progreso: hablo de planes y de estructura de peones, y muestro variantes cortas.
+event.level.l1 = Primeros pasos: juego con suavidad. Te aviso si una pieza tuya está atacada y sin protección, y explico los errores graves con palabras sencillas.
+event.level.l2 = Principiante: juego algo más fuerte. Te aviso de horquillas, clavadas y ataques a tu dama, y te recuerdo que saques tus piezas.
+event.level.l3 = En progreso: solo te aviso de mates y ataques a tu dama, y de cuándo solo una jugada sirve. Sigo explicando tus errores.
 event.level.l4 = Jugador de club: doy la evaluación en peones y propongo jugadas candidatas.
 event.level.l5 = Jugador de club fuerte: comentarios breves, y variantes más largas cuando importa.
 event.level.l6 = Experto: juego lo mejor que sé y solo comento los momentos críticos.
@@ -105,5 +113,7 @@ event.end.handshake = Démonos la mano.
 # put it after "a" or "de" (no "al", "del" contraction is possible).
 event.lesson.resume = ¡De nuevo por aquí! Sigamos con {chapter}.
 event.lesson.resume.2 = ¡Hola otra vez! Nos habíamos quedado en {chapter}.
+event.lesson.start = Empecemos con {chapter}.
+event.lesson.start.2 = Comenzamos con {chapter}.
 event.lesson.next = Siguiente tema: {chapter}.
 event.lesson.next.2 = Ahora, {chapter}.

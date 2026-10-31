@@ -237,6 +237,16 @@ Game gameOf(const char* fen, std::initializer_list<const char*> sans) {
     return g;
 }
 
+// What the coach says of its threats after its last move: the game's first threat is asked about
+// (nothing pointed at), its statement kept for threatReveal(); appended here as the player's
+// quiet wait would bring it.
+Script threatsSaid(Reviewer& rv, const Game& g, const ai::Analysis* before = nullptr, const ai::Analysis* threat = nullptr) {
+    Script s = rv.coachMoved(g, before, threat);
+    if (rv.threatAsked())
+        for (const Beat& b : rv.threatReveal(g)) s.push_back(b);
+    return s;
+}
+
 ai::PvLine pvl(int cp, const char* pv, int mate = 0) {
     ai::PvLine l;
     l.depth = 16;
@@ -448,7 +458,7 @@ TEST(coach_review_a_game_is_decided_at_the_level_of_its_player) {
     // 1.Nd5? exd5 a rook and a knight up (+10 -> +4.5, W% 97.5 -> 84): a mistake in a game decided
     // for a strong player, who keeps a won game (83 as level 6 converts it): nothing said. Players of
     // levels 2-5 convert it less surely (79 at level 5, 63 at level 2): the coach says what the move
-    // gives away. Level 1 voices blunders only.
+    // gives away. Level 1 too: it voices no other mistake, but a piece left loose and taken at once.
     const char* fen = "6k1/5ppp/4p3/8/8/2N5/5PPP/R5K1 w - - 0 1";
     for (int level = 1; level <= 6; ++level) {
         Game g = gameOf(fen, {"Nd5"});
@@ -456,8 +466,8 @@ TEST(coach_review_a_game_is_decided_at_the_level_of_its_player) {
         rv.reset(level, White);
         const Review r = reviewOf(rv, g, analysisOf({pvl(1000, "g1f1 g8f8"), pvl(450, "c3d5 e6d5 g1f1")}));
         CHECK_EQ(r.verdict.cls, MoveClass::Mistake);
-        CHECK_EQ(r.verdict.voiced, level >= 2 && level <= 5);
-        if (level >= 2 && level <= 5) CHECK_EQ(r.verdict.exType, ExType::Hanging);
+        CHECK_EQ(r.verdict.voiced, level <= 5);
+        if (level <= 5) CHECK_EQ(r.verdict.exType, ExType::Hanging);
     }
 }
 
@@ -4590,10 +4600,15 @@ TEST(coach_review_praise_only_top_moves) {
         checkScript(r.script, "praise capture");
         const Beat* b = beatWithKey(r.script, "praise.capture.b1");
         if (b) CHECK(b->look == Look::Player);
-        // Rate limit: at most one praise per 3 of the player's moves at level 1.
-        int praised = 0;
-        for (int i = 0; i < 5; ++i) praised += reviewOf(rv, g, a0).verdict.praised ? 1 : 0;
-        CHECK_EQ(praised, 1);   // the 4th review (3 moves after the first praise) is praised again
+        // Rate limit at level 1: in the player's first ten moves one praise per 2 moves, then per 3.
+        auto praisedIn = [&](int moves) {
+            int n = 0;
+            for (int i = 0; i < moves; ++i) n += reviewOf(rv, g, a0).verdict.praised ? 1 : 0;
+            return n;
+        };
+        CHECK_EQ(praisedIn(5), 2);   // moves 2-6: the 3rd and 5th (the first was move 1)
+        CHECK_EQ(praisedIn(4), 2);   // moves 7-10: the 7th and 9th
+        CHECK_EQ(praisedIn(6), 2);   // moves 11-16: every third from the 9th: the 12th and 15th
     }
     // The same capture when something clearly better existed: no praise.
     {
@@ -4698,6 +4713,27 @@ TEST(coach_review_takeback_flow) {
     CHECK(noOffer.verdict.voiced);
     CHECK(!noOffer.offersTakeback);
     for (const Beat& b : noOffer.script) CHECK(b.kind != BeatKind::OfferTakeback);
+}
+
+// A taken-back blunder at level 3 gets a hint too (where to look, no piece named), and a good replay
+// of a fault with a known cause ends with one line on that cause; level 4 gets neither.
+TEST(coach_review_takeback_hint_and_reflection_at_level_3) {
+    for (int level : {3, 4}) {
+        Game g = gameOf(kHangFen, {"Nd5"});
+        Reviewer rv;
+        rv.reset(level, White);
+        CHECK(reviewOf(rv, g, hangA0()).offersTakeback);
+        CHECK(g.undo(1));
+        const Script hint = rv.takebackAccepted(g);
+        checkScript(hint, "takeback hint");
+        CHECK_EQ(hasKey(hint, "tb.hint.b3"), level == 3);
+        CHECK_EQ(hint.empty(), level == 4);
+        g.play(g.position().parseSAN("Kf1"));
+        const Review fixed = reviewOf(rv, g, hangA0());
+        CHECK(fixed.isRetry && fixed.takeback.fixed);
+        checkScript(fixed.script, "retry fixed");
+        CHECK_EQ(hasKey(fixed.script, "tb.why.b3"), level == 3);
+    }
 }
 
 TEST(coach_review_takeback_cap_counts_accepted_takebacks) {
@@ -4875,22 +4911,56 @@ TEST(coach_review_announcements) {
 }
 
 TEST(coach_review_threat_warnings) {
-    // The coach's pawn attacks the player's undefended knight (level 1: said and traced).
+    // The coach's pawn attacks the player's undefended knight (level 1: said and traced, after the
+    // question the game's first threat is asked with).
     Game g = gameOf("4k3/4p3/8/8/3N4/8/8/6K1 b - - 0 1", {"e5"});
     Reviewer rv;
     rv.reset(1, White);
-    Script s = rv.coachMoved(g);
+    Script s = threatsSaid(rv, g);
     CHECK(hasKey(s, "threat.piece.b1"));
     checkScript(s, "threat piece");
     const Beat* b = beatWithKey(s, "threat.piece.b1");
     if (b) {
-        CHECK(b->priority == Priority::Low);
+        CHECK(b->priority == Priority::Normal);
         bool target = false;
         for (const Gesture& gs : b->gestures)
             if (gs.kind == GestureKind::PointPiece && gs.square == sq("d4")) target = true;
         CHECK(target);
     }
-    // Level 2 warns only about the queen; level 3 not at all.
+    // The first threat of the game is asked about: one line, nothing pointed at, the statement kept.
+    rv.reset(1, White);
+    const Script asked = rv.coachMoved(g);
+    REQUIRE(asked.size() == size_t(1));
+    CHECK_EQ(asked[0].line.key, std::string("threat.ask.b1"));
+    CHECK(asked[0].gestures.empty() && asked[0].marks.empty());
+    CHECK(rv.threatAsked());
+    // Touching the knight itself leaves the question open; touching the king, which cannot help, shows the answer.
+    CHECK(rv.threatReveal(g, sq("d4")).empty());
+    CHECK(rv.threatAsked());
+    CHECK(hasKey(rv.threatReveal(g, sq("g1")), "threat.piece.b1"));
+    CHECK(!rv.threatAsked());
+    // The second threat of the game is told at once.
+    CHECK(hasKey(rv.coachMoved(g), "threat.piece.b1"));
+    CHECK(!rv.threatAsked());
+    // A rook that can guard the knight (Rd1: a bishop takes it, the rook takes the bishop) is on the
+    // track: touching it shows nothing. Against a pawn's attack guarding is no answer: the pawn
+    // still wins the knight, and the touch shows the statement.
+    Game bishop = gameOf("4kb2/8/8/8/3N4/8/8/R5K1 b - - 0 1", {"Bc5"});
+    rv.reset(1, White);
+    rv.coachMoved(bishop);
+    CHECK(rv.threatReveal(bishop, sq("a1")).empty());
+    CHECK(rv.threatAsked());
+    Game pawnAttack = gameOf("4k3/4p3/8/8/3N4/8/8/R5K1 b - - 0 1", {"e5"});
+    rv.reset(1, White);
+    rv.coachMoved(pawnAttack);
+    CHECK(hasKey(rv.threatReveal(pawnAttack, sq("a1")), "threat.piece.b1"));
+    // A pawn left without a protector is named at level 1 (its search wins it), not at level 2.
+    Game loosePawn = gameOf("4k3/8/8/8/p7/8/1P6/6K1 b - - 0 1", {"a3"});
+    rv.reset(1, White);
+    CHECK(hasKey(threatsSaid(rv, loosePawn), "threat.piece.b1"));
+    rv.reset(2, White);
+    CHECK(rv.coachMoved(loosePawn).empty());
+    // Level 2 warns only about the queen; level 3 too, and in one plain line (nothing asked).
     rv.reset(2, White);
     CHECK(rv.coachMoved(g).empty());
     rv.reset(3, White);
@@ -4898,15 +4968,129 @@ TEST(coach_review_threat_warnings) {
     // A rook pinned to its king on the e-file cannot take the knight on a5: no threat said.
     Game pin = gameOf("4k3/6pp/4r3/N7/8/8/6PP/4R1K1 b - - 0 1", {"Re5"});
     rv.reset(1, White);
-    CHECK(!hasKey(rv.coachMoved(pin), "threat.piece.b1"));
+    CHECK(!hasKey(threatsSaid(rv, pin), "threat.piece.b1"));
     Game free = gameOf("4k3/6pp/4r3/N7/8/8/6PP/5RK1 b - - 0 1", {"Re5"});
     rv.reset(1, White);
-    CHECK(hasKey(rv.coachMoved(free), "threat.piece.b1"));
+    CHECK(hasKey(threatsSaid(rv, free), "threat.piece.b1"));
     // A mate threat (level 1): the coach's queen threatens Qxg2#... here Qh2# after ...Qh4.
     Game m = gameOf("6k1/8/8/8/8/6P1/5P1P/q4NK1 b - - 0 1", {"Qa7"});
     rv.reset(1, White);
-    Script ms = rv.coachMoved(m);
+    Script ms = threatsSaid(rv, m);
     checkScript(ms, "threat mate");
+}
+
+TEST(coach_review_level_2_names_a_fork_and_a_pin) {
+    // ...Nd3 forks the queen on e1 and the rook on c1; ...Bg4 pins the undefended knight on f3 to the
+    // rook on d1. Level 2 names them (first asked about, then stated); level 1 says what is loose.
+    Game fork = gameOf("7k/8/8/8/1n6/8/8/2R1Q1K1 b - - 0 1", {"Nd3"});
+    Reviewer rv;
+    rv.reset(2, White);
+    Script s = threatsSaid(rv, fork);
+    checkScript(s, "fork");
+    const Beat* f = beatWithKey(s, "threat.fork.b2");
+    REQUIRE(f != nullptr);
+    REQUIRE(f->line.arg("t1") != nullptr && f->line.arg("t2") != nullptr);
+    CHECK_EQ(f->line.arg("t1")->piece, Queen);   // the more valuable target first
+    CHECK_EQ(f->line.arg("t2")->piece, Rook);
+    // A threat search that wins nothing (the king steps aside, the rook moves) is no fork.
+    rv.reset(2, White);
+    const ai::Analysis quiet = analysisOf({pvl(0, "h8g8 c1c2")});
+    CHECK(!hasKey(threatsSaid(rv, fork, nullptr, &quiet), "threat.fork.b2"));
+    Game pin = gameOf("4k3/8/4b3/8/8/5N2/8/3R2K1 b - - 0 1", {"Bg4"});
+    rv.reset(2, White);
+    s = threatsSaid(rv, pin);
+    checkScript(s, "pin");
+    const Beat* p = beatWithKey(s, "threat.pin.b2");
+    REQUIRE(p != nullptr);
+    REQUIRE(p->line.arg("your") != nullptr && p->line.arg("t1") != nullptr);
+    CHECK_EQ(p->line.arg("your")->piece, Knight);
+    CHECK_EQ(p->line.arg("t1")->piece, Rook);
+    rv.reset(1, White);
+    s = threatsSaid(rv, pin);
+    CHECK(hasKey(s, "threat.piece.b1") && !hasKey(s, "threat.pin.b1"));
+    // Level 3 names neither: the fork shows as the attack on the queen, the pin as nothing.
+    rv.reset(3, White);
+    const Script forkSaid = rv.coachMoved(fork);
+    CHECK(hasKey(forkSaid, "threat.piece.b3") && !hasKey(forkSaid, "threat.fork.b2"));
+    rv.reset(3, White);
+    CHECK(rv.coachMoved(pin).empty());
+}
+
+TEST(coach_review_defended_queen_attacked_by_a_pawn_is_warned_of) {
+    // ...e5 attacks the queen on d4, which the rook on d1 guards: the pawn still wins a queen for a
+    // pawn. Levels 2 and 3 warn of the queen whether or not it is protected.
+    const Game g = gameOf("7k/4p3/8/8/3Q4/8/8/3R2K1 b - - 0 1", {"e5"});
+    for (int level : {2, 3}) {
+        Reviewer rv;
+        rv.reset(level, White);
+        const Script s = threatsSaid(rv, g);
+        checkScript(s, "defended queen");
+        CHECK(hasKey(s, "threat.piece.b" + std::to_string(level)));
+    }
+}
+
+TEST(coach_review_level_3_warns_only_when_one_move_is_good) {
+    // After the coach's ...e5 the player's A0 has one move far ahead of the second best: said once,
+    // not again within eight moves, nor when the two lie close together, nor at level 2.
+    Game g = gameOf(nullptr, {"e4", "e5"});
+    const ai::Analysis far = analysisOf({pvl(300, "g1f3 b8c6"), pvl(-200, "d2d4 e5d4")});
+    const ai::Analysis close = analysisOf({pvl(300, "g1f3 b8c6"), pvl(250, "d2d4 e5d4")});
+    Reviewer rv;
+    rv.reset(3, White);
+    CHECK(!hasKey(rv.coachMoved(g, &close), "threat.only.b3"));
+    const Script s = rv.coachMoved(g, &far);
+    CHECK(hasKey(s, "threat.only.b3"));
+    checkScript(s, "only move");
+    CHECK(!hasKey(rv.coachMoved(g, &far), "threat.only.b3"));
+    rv.reset(2, White);
+    CHECK(!hasKey(rv.coachMoved(g, &far), "threat.only.b3"));
+}
+
+TEST(coach_review_level_1_names_a_loose_piece_after_a_mistake) {
+    // 1.Nd5?, the knight left to ...exd5, with a score that makes the move a mistake (not a blunder):
+    // levels 1-2 give the one line (nothing is demonstrated or offered); level 1 once said nothing.
+    const ai::Analysis a0 = analysisOf({pvl(20, "g1f1 g8f8"), pvl(-100, "c3d5 e6d5 g1f1")});
+    for (int level : {1, 2}) {
+        Reviewer rv;
+        rv.reset(level, White);
+        const Game g = gameOf(kHangFen, {"Nd5"});
+        const Review r = reviewOf(rv, g, a0);
+        checkScript(r.script, "loose piece mistake");
+        CHECK_EQ(r.verdict.cls, MoveClass::Mistake);
+        CHECK(hasKey(r.script, "ex.hanging.b" + std::to_string(level)));
+        CHECK(!r.offersTakeback);
+        for (const Beat& b : r.script) CHECK(b.kind == BeatKind::Say);
+    }
+}
+
+TEST(coach_review_development_reminder_once) {
+    // Levels 1-2: five moves in, no knight or bishop has moved: one reminder, never before the fifth
+    // move; level 3 says nothing of it.
+    const char* white[] = {"e3", "d3", "c3", "b3", "f3", "g3", "h3"};
+    const char* black[] = {"a6", "b6", "c6", "d6", "e6", "f6", "g6"};
+    for (int level : {1, 2, 3}) {
+        Reviewer rv;
+        rv.reset(level, White);
+        Game g;
+        int said = 0;
+        for (int i = 0; i < 7; ++i) {
+            const Position before = g.position();
+            const Move m = before.parseSAN(white[i]);
+            REQUIRE(m.valid());
+            const std::string uci = before.toUCI(m);
+            g.play(m);
+            const Move reply = g.position().parseSAN(black[i]);
+            const ai::Analysis a0 = analysisOf({pvl(10, "a2a3"), pvl(8, uci.c_str())});
+            const Review r = reviewOf(rv, g, a0);
+            if (hasKey(r.script, "tip.develop.b" + std::to_string(level))) {
+                ++said;
+                CHECK(i >= 4);
+            }
+            REQUIRE(reply.valid());
+            g.play(reply);
+        }
+        CHECK_EQ(said, level <= 2 ? 1 : 0);
+    }
 }
 
 TEST(coach_review_threat_search_gates_warnings) {
@@ -4917,21 +5101,21 @@ TEST(coach_review_threat_search_gates_warnings) {
     rv.reset(1, White);
     CHECK_EQ(rv.threatKey(g), std::string("4k3/8/8/4p3/3N4/8/8/6K1 b - - 1 2"));
     const ai::Analysis takes = analysisOf({pvl(330, "e5d4 g1f2")});
-    CHECK(hasKey(rv.coachMoved(g, nullptr, &takes), "threat.piece.b1"));
+    CHECK(hasKey(threatsSaid(rv, g, nullptr, &takes), "threat.piece.b1"));
     // Taking the knight walks into a back-rank mate (...exd4 Re8#): the search makes luft first and
     // wins nothing, so the knight is no threat, whatever the rules alone see.
     Game mate = gameOf("6k1/5ppp/4p3/8/3N4/8/5PPP/4R1K1 b - - 0 1", {"e5"});
     rv.reset(1, White);
-    CHECK(hasKey(rv.coachMoved(mate), "threat.piece.b1"));
+    CHECK(hasKey(threatsSaid(rv, mate), "threat.piece.b1"));
     const ai::Analysis luft = analysisOf({pvl(-20, "h7h6 d4f3 g8h7")});
     rv.reset(1, White);
-    CHECK(!hasKey(rv.coachMoved(mate, nullptr, &luft), "threat.piece.b1"));
+    CHECK(!hasKey(threatsSaid(rv, mate, nullptr, &luft), "threat.piece.b1"));
     // A failed search is no view: the rules decide.
     ai::Analysis failed;
     rv.reset(1, White);
-    CHECK(hasKey(rv.coachMoved(mate, nullptr, &failed), "threat.piece.b1"));
-    // No threat search at level 3 and beyond, nor after the player's own move.
-    rv.reset(3, White);
+    CHECK(hasKey(threatsSaid(rv, mate, nullptr, &failed), "threat.piece.b1"));
+    // No threat search at level 4 and beyond, nor after the player's own move.
+    rv.reset(4, White);
     CHECK(rv.threatKey(g).empty());
     rv.reset(1, Black);
     CHECK(rv.threatKey(g).empty());
@@ -4939,26 +5123,27 @@ TEST(coach_review_threat_search_gates_warnings) {
 
 TEST(coach_review_threat_search_takes_a_defended_piece) {
     // Audit N15: ...Rd3 attacks the queen, which the rook on d1 takes back (...Rxd4 Rxd4): a queen
-    // for a rook, 4 points, not the queen's whole value. The threat search (Stockfish 19's line,
+    // for a rook, 4 points, not the queen's whole value (level 3 warns of it in one plain line, the
+    // others ask about it first). The threat search (Stockfish 19's line,
     // depth 12) takes the queen first: that move is the coach's, read with the turn passed, and it
     // confirms the warning instead of hiding it.
     const char* fen = "8/7k/8/8/3Qp3/r7/8/3R3K b - - 0 1";
     const Game g = gameOf(fen, {"Rd3"});
     const ai::Analysis takes = analysisOf({pvl(410, "d3d4 d1d4 h7g6 d4d8 g6f5 d8f8 f5g5 f8c8")});
     Reviewer rv;
-    for (int level : {1, 2}) {
-        const std::string key = level == 1 ? "threat.piece.b1" : "threat.piece.b2";
+    for (int level : {1, 2, 3}) {
+        const std::string key = "threat.piece.b" + std::to_string(level);
         rv.reset(level, White);
         CHECK_EQ(rv.threatKey(g), std::string("8/7k/8/8/3Qp3/3r4/8/3R3K b - - 2 2"));
-        CHECK(hasKey(rv.coachMoved(g), key));
+        CHECK(hasKey(threatsSaid(rv, g), key));
         rv.reset(level, White);
-        const Script s = rv.coachMoved(g, nullptr, &takes);
+        const Script s = threatsSaid(rv, g, nullptr, &takes);
         CHECK(hasKey(s, key));
         checkScript(s, "threat on a defended queen");
         // A search that plays elsewhere and wins nothing is no threat, whatever the rules alone see.
         const ai::Analysis quiet = analysisOf({pvl(-30, "h7g6 d4e4")});
         rv.reset(level, White);
-        CHECK(!hasKey(rv.coachMoved(g, nullptr, &quiet), key));
+        CHECK(!hasKey(threatsSaid(rv, g, nullptr, &quiet), key));
     }
 }
 
@@ -4986,6 +5171,31 @@ TEST(coach_review_ignored_threat_verdict) {
     // The threat search wins nothing: the blunder is not that threat carried out.
     const ai::Analysis quiet = analysisOf({pvl(-20, "h7h6 d4f3")});
     CHECK(verdict(1, &quiet, "h3") == std::make_pair(std::string("ex.verdict.blunder.b1"), false));
+}
+
+TEST(coach_review_answered_threat_is_praised_by_name) {
+    // Levels 1-2: the coach's ...e5 attacks the knight and its threat search takes it; the player's
+    // Nf3 moves it away: the move is praised as having dealt with the threat, not as "good move".
+    // h3 leaves it standing (no praise), and without the threat search (or at level 3) nothing is known.
+    const char* fen = "6k1/5ppp/4p3/8/3N4/8/5PPP/6K1 b - - 0 1";
+    const ai::Analysis threat = analysisOf({pvl(330, "e5d4 g1f1")});
+    // The second move is close, so Nf3 is no "only move" (which would be praised in its own words).
+    const ai::Analysis a0 = analysisOf({pvl(0, "d4f3 g8f8"), pvl(-20, "h2h3 e5d4 g1f1")});
+    auto review = [&](int level, const ai::Analysis* t, const char* move) {
+        Reviewer rv;
+        rv.reset(level, White);
+        rv.coachMoved(gameOf(fen, {"e5"}), nullptr, t);
+        return reviewOf(rv, gameOf(fen, {"e5", move}), a0);
+    };
+    for (int level = 1; level <= 2; ++level) {
+        const Review r = review(level, &threat, "Nf3");
+        checkScript(r.script, "answered threat");
+        CHECK(r.answeredThreat);
+        CHECK(hasKey(r.script, "praise.check_threat.b" + std::to_string(level)));
+        CHECK(!review(level, &threat, "h3").answeredThreat);
+        CHECK(!review(level, nullptr, "Nf3").answeredThreat);
+    }
+    CHECK(!review(3, &threat, "Nf3").answeredThreat);
 }
 
 TEST(coach_review_punish_hint_needs_a_real_loss) {
@@ -5397,7 +5607,10 @@ TEST(coach_review_every_key_exists) {
         {"tip.same_piece", 1, 3}, {"tip.castle", 1, 3}, {"tip.knight_rim", 1, 3}, {"tip.flank", 1, 3},
         {"tip.centre", 1, 3}, {"praise.brilliant", 3, 6}, {"praise.great", 2, 6}, {"praise.only", 2, 6},
         {"praise.capture", 1, 2}, {"praise.best", 1, 3}, {"praise.trade", 1, 3}, {"praise.excellent", 3, 4},
-        {"threat.mate", 1, 2}, {"threat.piece", 1, 2},
+        {"praise.castle", 1, 3}, {"praise.saved", 1, 3}, {"praise.check_threat", 1, 2}, {"praise.protect", 1, 2},
+        {"praise.develop", 1, 2},
+        {"threat.mate", 1, 3}, {"threat.piece", 1, 3}, {"threat.ask", 1, 2}, {"threat.ask_mate", 1, 2},
+        {"threat.fork", 2, 2}, {"threat.pin", 2, 2}, {"threat.only", 3, 3}, {"tip.develop", 1, 2},
     };
     const char* fixed[] = {
         "ann.check.human.b1", "ann.check.human", "ann.check.coach", "ann.check.coach.first", "ann.double_check.coach", "ann.double_check.human",
@@ -5411,7 +5624,7 @@ TEST(coach_review_every_key_exists) {
         "ex.trapped.tip.b1", "ex.back_rank.tip.b1", "ex.hanging.tip.b1", "name.pattern.back_rank",
         "name.pattern.smothered", "name.pattern.support", "name.pattern.ladder", "name.pattern.epaulette",
         "tip.mate_technique.b1", "tip.fifty.b1", "tip.repetition.b1", "praise.sacrifice", "praise.fork.b2",
-        "praise.fork.b3", "praise.castle.b1", "praise.saved.b1", "praise.book.b1", "threat.punish.b1",
+        "praise.fork.b3", "praise.book.b1", "threat.punish.b1",
         "tb.hint.b1", "tb.hint.king.b1", "tb.hint.missed.b1", "tb.hint.mate_missed.b1", "tb.hint.general.b1",
         "tb.fixed.b1", "tb.fixed", "tb.same", "ex.verdict.dubious", "ex.verdict.inaccuracy.maybe",
     };

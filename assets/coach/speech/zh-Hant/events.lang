@@ -5,15 +5,23 @@
 # coach.level.*.name in assets/i18n/zh-Hant.lang; comments are 講評 (the interface's word).
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = 你好！我們輕鬆下一盤吧。遇到問題，我隨時幫你。
+event.greet.l1 = 你好！我們輕鬆下一盤吧。你的棋子有危險時，我會告訴你。
 event.greet.l1.2 = 嗨！我會下得溫和一點，也會告訴你要注意什麼。
 event.greet.l1.3 = 歡迎！慢慢來：哪個棋子有危險，我會提醒你。
-event.greet.l2 = 你好！開始吧。一出現捉雙或牽制，我就指給你看。
+event.greet.l1.first = 你好！每走一步之前，先問：我的棋子安全嗎？我這步棋攻擊什麼？對手在威脅什麼？我會提醒你。
+event.greet.l1.first.2 = 你的第一盤正式對局！每步之前先想：我的棋子安全嗎、它攻擊什麼、有什麼威脅？我會提醒你。
+event.greet.l2 = 你好！開始吧。如果我的著法形成捉雙或牽制，我會告訴你。
 event.greet.l2.2 = 嗨！把棋子出動起來，保護好你的王。我會一路幫你。
 event.greet.l2.3 = 歡迎回到棋盤前！留意捉雙和牽制：它們常常決定勝負。
-event.greet.l3 = 你好！我們認真下一盤。我會講評你的計畫和較大的失誤。
+event.greet.l3 = 你好！我們認真下一盤。大的威脅我會提醒你，較大的失誤我會講解。
 event.greet.l3.2 = 嗨！替你的棋子想個計畫。哪步棋有疏漏，我會告訴你。
-event.greet.l3.3 = 開始吧！唯一著法和走錯的著法，我都會指出來。
+event.greet.l3.3 = 開始吧！只有一步棋可行時，還有走錯時，我都會告訴你。
+event.greet.l1.theme = 歡迎回來！上一盤的提示是：{theme}。今天請記在心裡。
+event.greet.l1.theme.2 = 又見面了！記住上一盤的提示：{theme}。我會幫你。
+event.greet.l2.theme = 歡迎回來！上一盤的重點是：{theme}。看看今天怎麼樣。
+event.greet.l2.theme.2 = 又見面了！上一盤值得記住的是：{theme}。
+event.greet.l3.theme = 歡迎回來！上一盤的課題是：{theme}。今天請記在心裡。
+event.greet.l3.theme.2 = 嗨，又見面了！上一盤：{theme}。看看今天怎麼樣。
 event.greet.l4 = 你好！這次我會給出評估，並告訴你更好的候選著法。
 event.greet.l4.2 = 開始吧。你走錯之後，我會告訴你更精確的下法。
 event.greet.l4.3 = 準備好下一盤俱樂部水準的棋了嗎？評估一變，我就講評。
@@ -31,9 +39,9 @@ event.colour.black = 我執白，所以我先走。
 event.colour.black.2 = 這次你下黑棋：我先走。
 
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
-event.level.l1 = 入門第一步：我下得溫和，用淺顯的話講解每個錯誤。
-event.level.l2 = 初學者：我下得稍強一點，並點出捉雙、牽制這類簡單戰術。
-event.level.l3 = 中級棋手：我會講計畫和兵形，並示範簡短的變化。
+event.level.l1 = 入門第一步：我下得溫和。你的棋子被攻擊又沒有保護時，我會告訴你，大失誤則用淺顯的話講解。
+event.level.l2 = 初學者：我下得稍強一點。捉雙、牽制和對你后的攻擊我會警告你，也會提醒你出動棋子。
+event.level.l3 = 中級棋手：我只警告將死、對你后的攻擊，以及只有一步棋可行的時刻。你的失誤我仍會講解。
 event.level.l4 = 俱樂部棋手：我以兵為單位給出評估，並建議候選著法。
 event.level.l5 = 強俱樂部棋手：講評簡短，關鍵時刻給出較長的變化。
 event.level.l6 = 專家：我會全力以赴，只講評關鍵時刻。
@@ -103,5 +111,7 @@ event.end.handshake = 我們握個手吧。
 # {chapter} = the chapter's title (lesson.title.* in lesson.lang), in 「」 inside a sentence.
 event.lesson.resume = 歡迎回來！我們繼續學「{chapter}」。
 event.lesson.resume.2 = 又見面了！我們上次學到「{chapter}」。
+event.lesson.start = 我們從「{chapter}」開始。
+event.lesson.start.2 = 我們先學「{chapter}」。
 event.lesson.next = 下一課：{chapter}。
 event.lesson.next.2 = 現在來學「{chapter}」。

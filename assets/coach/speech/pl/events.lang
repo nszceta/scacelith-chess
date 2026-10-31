@@ -6,15 +6,23 @@
 # tense, impersonal phrases: "Poddajesz partię", "Następnym razem się odegrasz").
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Cześć! Zagrajmy przyjacielską partię. Pomogę ci, gdy tylko coś pójdzie nie tak.
+event.greet.l1 = Cześć! Zagrajmy przyjacielską partię. Powiem ci, kiedy któraś z twoich bierek będzie w niebezpieczeństwie.
 event.greet.l1.2 = Hej! Zagram łagodnie i pokażę ci, na co uważać.
 event.greet.l1.3 = Witaj! Nie spiesz się: powiem ci, kiedy któraś bierka znajdzie się w niebezpieczeństwie.
-event.greet.l2 = Cześć! Zagrajmy. Kiedy pojawią się widełki albo związanie, pokażę ci to.
+event.greet.l1.first = Cześć! Przed ruchem pytaj: czy moja bierka jest bezpieczna? Co atakuje mój ruch? Co grozi ze strony przeciwnika? Będę przypominał.
+event.greet.l1.first.2 = Twoja pierwsza prawdziwa partia! Przed ruchem: czy bierka jest bezpieczna, co atakuje, co grozi? Będę ci przypominał.
+event.greet.l2 = Cześć! Zagrajmy. Jeśli mój ruch przygotuje widełki albo związanie, powiem ci.
 event.greet.l2.2 = Hej! Wyprowadzaj figury i dbaj o bezpieczeństwo króla. Po drodze będę ci pomagał.
 event.greet.l2.3 = Witaj z powrotem przy szachownicy! Uważaj na widełki i związania: to one wygrywają partie.
-event.greet.l3 = Cześć! Zagrajmy prawdziwą partię. Będę komentował twoje plany i większe błędy.
+event.greet.l3 = Cześć! Zagrajmy prawdziwą partię. Ostrzegę cię przed dużymi groźbami i wyjaśnię większe błędy.
 event.greet.l3.2 = Hej! Wymyśl plan dla swoich figur. Powiem ci, kiedy ruch coś pomija.
-event.greet.l3.3 = Grajmy! Wskażę ci jedyne ruchy i ruchy, które okazują się złe.
+event.greet.l3.3 = Grajmy! Powiem ci, kiedy działa tylko jeden ruch i kiedy ruch okazuje się zły.
+event.greet.l1.theme = Witaj z powrotem! Rada z ostatniej partii: {theme}. Pamiętaj o tym dzisiaj.
+event.greet.l1.theme.2 = Cześć ponownie! Pamiętaj radę z ostatniej partii: {theme}. Pomogę ci.
+event.greet.l2.theme = Witaj z powrotem! Pomysł z ostatniej partii: {theme}. Zobaczmy, jak pójdzie dzisiaj.
+event.greet.l2.theme.2 = Cześć ponownie! Coś do zapamiętania z ostatniej partii: {theme}.
+event.greet.l3.theme = Witaj z powrotem! Temat ostatniej partii: {theme}. Pamiętaj o tym dzisiaj.
+event.greet.l3.theme.2 = Cześć ponownie! Z ostatniej partii: {theme}. Zobaczmy, jak pójdzie dzisiaj.
 event.greet.l4 = Cześć! Tym razem będę podawał oceny i pokazywał lepsze ruchy kandydackie.
 event.greet.l4.2 = Zagrajmy. Po błędzie powiem ci, co było dokładniejsze.
 event.greet.l4.3 = Partia jak w klubie? Skomentuję, kiedy zmieni się ocena.
@@ -34,9 +42,9 @@ event.colour.black.2 = Tym razem grasz czarnymi: pierwszy ruch jest mój.
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names are those chosen for assets/i18n/pl.lang (coach.level.<n>.name): Pierwsze kroki,
 # Początkujący, Średnio zaawansowany, Gracz klubowy, Silny gracz klubowy, Ekspert.
-event.level.l1 = Pierwsze kroki: gram łagodnie i każdy błąd tłumaczę prostymi słowami.
-event.level.l2 = Początkujący: gram trochę mocniej i nazywam proste motywy taktyczne, takie jak widełki i związania.
-event.level.l3 = Średnio zaawansowany: mówię o planach i strukturze pionkowej oraz pokazuję krótkie warianty.
+event.level.l1 = Pierwsze kroki: gram łagodnie. Mówię, gdy któraś z twoich bierek jest atakowana i bez obrony, a grube błędy tłumaczę prostymi słowami.
+event.level.l2 = Początkujący: gram mocniej. Ostrzegam przed widełkami, związaniami i atakami na hetmana oraz przypominam o wyprowadzaniu figur.
+event.level.l3 = Średnio zaawansowany: ostrzegam tylko przed matem i atakami na hetmana oraz gdy działa tylko jeden ruch. Błędy nadal tłumaczę.
 event.level.l4 = Gracz klubowy: podaję ocenę w pionkach i proponuję ruchy kandydackie.
 event.level.l5 = Silny gracz klubowy: krótkie uwagi, a dłuższe warianty wtedy, gdy to ważne.
 event.level.l6 = Ekspert: gram najlepiej, jak potrafię, i komentuję tylko krytyczne momenty.
@@ -107,5 +115,7 @@ event.end.handshake = Podajmy sobie ręce.
 # comes after a colon, or in quotes after "na temacie" (a quoted title keeps its nominative).
 event.lesson.resume = Witaj z powrotem! Kontynuujemy: {chapter}.
 event.lesson.resume.2 = Witaj ponownie! Skończyliśmy na rozdziale „{chapter}”.
+event.lesson.start = Zacznijmy od: {chapter}.
+event.lesson.start.2 = Zaczynamy od: {chapter}.
 event.lesson.next = Dalej: {chapter}.
 event.lesson.next.2 = A teraz: {chapter}.

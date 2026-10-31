@@ -5,6 +5,7 @@
 #include "elo.h"
 #include "graphics_quality.h"
 #include "../core/ini.h"
+#include "../coach/game_record.h"
 #include "../coach/subtitles.h"
 #include <string>
 #include <vector>
@@ -148,26 +149,34 @@ struct Settings {
         return coachNextColour == 1 ? 1 : 0;
     }
     // What the coach remembers between games (coach::Session's results): the finished coach games,
-    // oldest first (the level suggestion reads them; the last kCoachHistoryMax are kept), whether
-    // the end-of-game appraisal has explained what accuracy is, and the chapter the rules lesson
-    // resumes at (0 = from the start).
-    struct CoachGame {
-        int level = 1;
-        int result = 0;           // +1 the player won, 0 draw, -1 lost
-        double accuracy = -1.0;   // the player's game accuracy (percent), -1 unknown
-    };
+    // oldest first (the level suggestion, the mastery goals, the danger markers' Auto setting, the
+    // greetings and the recommended challenge read them; the last kCoachHistoryMax are kept),
+    // whether the end-of-game appraisal has explained what accuracy is, and the chapter the rules
+    // lesson resumes at (0 = from the start).
     static constexpr int kCoachHistoryMax = 40;
-    std::vector<CoachGame> coachHistory;
+    std::vector<coach::GameRecord> coachHistory;
     bool coachAccuracyExplained = false;
     // The rules lesson's chapter to resume at, by id (coach::LessonChapter::id, "" = from the
-    // start): an id survives chapters added to the lesson. Saved as coach.lesson_chapter_id; the
-    // index of earlier versions (coach.lesson_chapter, ten chapters) is read through their ids.
+    // start): an id survives chapters added to the lesson. The Coach page's Chapter row sets it to
+    // start the lesson anywhere. Saved as coach.lesson_chapter_id; the
+    // index of earlier versions (coach.lesson_chapter, ten chapters) is read through their ids. The
+    // former chapter "pieces" is read as "pieces_lines" (it was split in three).
     std::string coachLessonChapter;
     // The coach's "Take your time." after a minute without a move (levels 1-3): the Coach page's switch.
     bool coachTakeYourTime = true;
     // Levels 1-2: a coloured square under the player's pieces the coach could win, on the player's
-    // turn (GameScene::coachDangerMarks): the Coach page's switch.
-    bool coachDangerMarkers = true;
+    // turn (GameScene::coachDangerMarks): the Coach page's choice. Auto shows them for the first
+    // games only (coachDangerMarkersAt); On at levels 1-2 always; Off never. Saved as
+    // coach.danger_markers_mode: "auto", "on", "off"; the on / off switch of earlier versions is read as
+    // Auto / Off.
+    enum DangerMarkerMode { DangerMarkersAuto = 0, DangerMarkersOn = 1, DangerMarkersOff = 2 };
+    int coachDangerMarkerMode = DangerMarkersAuto;
+    // Whether a game at 'level' shows the danger markers, given the mode and the games played.
+    bool coachDangerMarkersAt(int level) const {
+        if (level < 1 || level > 2) return false;
+        if (coachDangerMarkerMode == DangerMarkersOn) return true;
+        return coachDangerMarkerMode == DangerMarkersAuto && coach::dangerMarkersAuto(level, coachHistory);
+    }
     // The Coach page's tab (0 Training, 1 Challenges) and the challenge last chosen on it
     // (coach::Challenge::id, "" = none yet), stored when the player presses Start.
     int coachTab = 0;
@@ -257,8 +266,8 @@ Settings& settings();
 // The [coach], [tts] and [analysis] sections of Settings::load / save, apart so that the unit tests can check
 // their round trip without the game target (settings_coach.cpp is in the core library). The
 // history is one line of "level:result:accuracy" entries, oldest first ("3:1:81.4 3:-1:-").
-std::string encodeCoachHistory(const std::vector<Settings::CoachGame>& games);
-std::vector<Settings::CoachGame> decodeCoachHistory(const std::string& text);
+std::string encodeCoachHistory(const std::vector<coach::GameRecord>& games);
+std::vector<coach::GameRecord> decodeCoachHistory(const std::string& text);
 // [coach] challenges_done: the ids separated by commas ("mate1,fork"). Decoding trims the spaces
 // around each id and drops the empty ones and the repeats.
 std::string encodeChallengeIds(const std::vector<std::string>& ids);

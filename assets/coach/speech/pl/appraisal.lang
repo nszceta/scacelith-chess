@@ -297,6 +297,12 @@ appraisal.num.takebacks.b2 = Cofnęliśmy {n:move_acc}, a {m} z nich udało ci s
 appraisal.num.takebacks.b2.2 = Cofnięte ruchy: {n}, poprawione: {m}. Tak się robi postępy!
 appraisal.num.takebacks.b3 = Cofnięte ruchy: {n}, z tego poprawione: {m}.
 appraisal.num.takebacks.b3.2 = Cofnięcia: {n}, poprawki: {m}. Dobrze.
+appraisal.num.retried.b1 = Udało ci się poprawić {n:mistake_acc}, próbując jeszcze raz. Tak właśnie się uczymy!
+appraisal.num.retried.b1.2 = Ponowna próba zamieniła {n:mistake_acc} w dobry ruch. Świetnie!
+appraisal.num.retried.b2 = Udało ci się poprawić {n:mistake_acc}, próbując jeszcze raz. Tak się uczymy.
+appraisal.num.retried.b2.2 = Próbując jeszcze raz, poprawiasz {n:mistake_acc}. Dobra nauka!
+appraisal.num.retried.b3 = Poprawiono {n:blunder_acc}, próbując jeszcze raz.
+appraisal.num.retried.b3.2 = Za drugim razem poprawiono {n:blunder_acc}. Dobrze.
 # Level 2: big mistakes ({n} = mistakes and blunders: "większy błąd", not "gruby błąd", which is
 # the blunder alone), or the best moves found ({n}).
 appraisal.num.clean.b2 = Ani jednego większego błędu: świetnie!
@@ -351,9 +357,25 @@ appraisal.improve.theme.b5 = Temat powracający: {theme}.
 appraisal.improve.theme.b5.2 = Temat partii: {theme}.
 appraisal.improve.theme.b6 = Powraca: {theme}.
 appraisal.improve.theme.b6.2 = Temat: {theme}.
+appraisal.improve.theme.again.b1 = Ta sama rada co ostatnio: {theme}. Pamiętaj o niej.
+appraisal.improve.theme.again.b1.2 = To pojawiło się też w ostatniej partii: {theme}. Popracujmy nad tym razem.
+appraisal.improve.theme.again.b1.3 = Znów jedna rzecz do przećwiczenia: {theme}. Z każdą partią będzie łatwiej.
+appraisal.improve.theme.again.b2 = Ten sam pomysł co w ostatniej partii: {theme}. Warto poćwiczyć.
+appraisal.improve.theme.again.b2.2 = To też pojawiło się w ostatniej partii: {theme}.
+appraisal.improve.theme.again.b2.3 = Znowu coś do przepracowania: {theme}.
+appraisal.improve.theme.again.b3 = Znowu ten sam temat: {theme}. Był też w ostatniej partii.
+appraisal.improve.theme.again.b3.2 = Ten sam temat co ostatnio: {theme}. Warto poćwiczyć.
+appraisal.improve.theme.again.b4 = Powracający temat, także w ostatnich partiach: {theme}.
+appraisal.improve.theme.again.b4.2 = Ten sam temat co ostatnio: {theme}.
+appraisal.improve.theme.again.b5 = Powraca, także ostatnio: {theme}.
+appraisal.improve.theme.again.b5.2 = Ten sam temat co w ostatnich partiach: {theme}.
+appraisal.improve.theme.again.b6 = Znów: {theme}.
+appraisal.improve.theme.again.b6.2 = Temat się powtarza: {theme}.
 # The critical moment (levels 2-6).
 appraisal.improve.critical.b2 = Przełom nastąpił w {crit_no:nth_move_loc}. Do przećwiczenia na następny raz: {theme}.
 appraisal.improve.critical.b2.2 = Kluczowy moment: {crit_no:nth_move}, {crit_move}. Coś do przećwiczenia: {theme}.
+appraisal.improve.critical.again.b2 = Przełom nastąpił w {crit_no:nth_move_loc}, i znów chodziło o to: {theme}.
+appraisal.improve.critical.again.b2.2 = Kluczowy moment: {crit_no:nth_move}. Ten sam pomysł co ostatnio: {theme}.
 appraisal.improve.critical.b3 = Krytyczny moment to {crit_no:nth_move}. Zamiast ruchu {crit_move} lepszy był ruch {crit_best}.
 appraisal.improve.critical.b3.2 = W {crit_no:nth_move_loc} lepsze było zagranie {crit_best} niż {crit_move}. Najpierw sprawdzaj moje ruchy forsujące.
 appraisal.improve.critical.b4 = Krytyczny moment: {crit_no:nth_move}, {crit_move}. Lepszy był ruch {crit_best}.
@@ -410,6 +432,13 @@ appraisal.improve.clean.b5 = Bez krytycznych błędów.
 appraisal.improve.clean.b5.2 = Czysta partia.
 appraisal.improve.clean.b6 = Czysta partia.
 appraisal.improve.clean.b6.2 = Żadnych krytycznych błędów.
+appraisal.next.retry.b1 = Kiedy skończymy, możesz spróbować tej pozycji jeszcze raz.
+appraisal.next.retry.b1.2 = Potem możesz jeszcze raz spróbować tej trudnej pozycji.
+appraisal.next.retry.b1.3 = Chcesz spróbować tej pozycji jeszcze raz? Za chwilę możesz.
+appraisal.next.retry.b2 = Następny krok: spróbuj tej pozycji jeszcze raz i znajdź lepszy ruch.
+appraisal.next.retry.b2.2 = Potem możesz jeszcze raz spróbować tej pozycji.
+appraisal.next.retry.b3 = Następny krok: spróbuj tej pozycji jeszcze raz i znajdź lepszy ruch.
+appraisal.next.retry.b3.2 = Tę pozycję możesz powtórzyć z ekranu końcowego.
 
 # ---- 5. Encouragement and the level suggestion -----------------------------------------------------
 # {level} inside „…” after "poziom" (never "Jesteś gotowy": the player's gender is unknown).

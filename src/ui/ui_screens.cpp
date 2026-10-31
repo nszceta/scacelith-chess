@@ -2046,10 +2046,12 @@ MenuAction gameOver(const std::string& result, const std::string& reason, bool p
             reasonLines = gfx::wrapLineCount(reasonText, reasonWrap, why);
         }
         const float reasonLineH = 32.0f, extra = float(reasonLines - 1) * reasonLineH;
-        // "Practise: Forks" (GameOverExtras::practiseLabel): its own row above the buttons.
+        // "Try that position again" (GameOverExtras::retryLabel) and "Practise: Forks"
+        // (GameOverExtras::practiseLabel): a row each above the buttons.
         const bool practise = !S.goExtras.practiseLabel.empty();
+        const bool retry = !S.goExtras.retryLabel.empty();
         const float practiseRow = practise ? 72.0f : 0.0f;
-        float h = 380.0f + (S.goExtras.detail.empty() ? 0.0f : 38.0f) + extra + practiseRow;
+        float h = 380.0f + (S.goExtras.detail.empty() ? 0.0f : 38.0f) + extra + practiseRow + (retry ? 72.0f : 0.0f);
         Rect p(v.x * 0.5f - w * 0.5f, v.y * 0.5f - h * 0.5f + 60.0f + (1.0f - t) * 20.0f + fold * 40.0f, w, h);
         im::captureMouseRect(p);
         gfx::Layer prev = gfx::layer();
@@ -2092,12 +2094,14 @@ MenuAction gameOver(const std::string& result, const std::string& reason, bool p
         const int nb = analyse ? 3 : 2;
         const float bx0 = p.cx() - (float(nb) * bw + float(nb - 1) * gap) * 0.5f;
         auto slot = [&](int i) { return im::flip(p, Rect(bx0 + float(i) * (bw + gap), by, bw, bh)); };
-        if (practise) {
-            const std::string label = S.goExtras.practiseLabel + "##gameover.practise";
+        // The extra rows, from the buttons up: "Practise" nearest, "Try that position again" above it.
+        auto extraRow = [&](const std::string& text, const char* id, MenuAction action, float up) {
+            const std::string label = text + id;
             const float pw = m::clamp(im::buttonWidthFor(label), 300.0f, w - 120.0f);
-            if (im::button(label, im::flip(p, Rect(p.cx() - pw * 0.5f, by - practiseRow, pw, bh)), im::ButtonKind::Secondary))
-                act = MenuAction::Practise;
-        }
+            if (im::button(label, im::flip(p, Rect(p.cx() - pw * 0.5f, by - up, pw, bh)), im::ButtonKind::Secondary)) act = action;
+        };
+        if (practise) extraRow(S.goExtras.practiseLabel, "##gameover.practise", MenuAction::Practise, 72.0f);
+        if (retry) extraRow(S.goExtras.retryLabel, "##gameover.retry", MenuAction::RetryPosition, practise ? 144.0f : 72.0f);
         if (im::button(L("common.main_menu"), slot(0), im::ButtonKind::Secondary)) act = MenuAction::BackToMainMenu;
         if (analyse && im::button(L("analysis.menu.gameover"), slot(1), im::ButtonKind::Secondary)) act = MenuAction::StartAnalysis;
         im::Id rematchId = im::makeId("##gameover.rematch");

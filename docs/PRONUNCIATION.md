@@ -217,7 +217,6 @@ European vowel is left as it is. Most findings of the European Portuguese pass h
 | troco (a troco de nada), torno (em torno de) | the open o of the verb: "a troca de nada" 6 times in 6; probe "tórno" in two contexts | `trôco` ("troco" 4 in 6), `tôrno` (respell.*: every use is the noun) |
 | para, the verb (lesson.knight.l, lesson.ep.watch, an.end.unfinished, .2) | the preposition "pra" (probe, 3 contexts): "ele sempre pode", "parabéns ao lado" | `pára` (.spoken): heard "para" 9 times in 12 against 4 |
 | força, the verb (an.brilliant.mate.2) | the noun "fôrça" (probe, 6 seeds) | `fórça` (.spoken) |
-| Tente starting lesson.values.trade | "A gente nunca entregar" (5 times in 7) | `Tênte` (.spoken): right 5 in 7 |
 | Najdorf, Nimzowitsch, Winawer, Bogoljubow, Tartakower, Janowski, Horwitz, Fajarowicz | w as in English, j as in "jogo": "Nash-dorf", "Nimzo-witch", "Tarta-call", "Fajaro-wix" | `Naidorf`, `Nimzóvitch`, `Vináver`, `Bogoliúbov`, `Tartakóver`, `Ianóvski`, `Hórvitz`, `Faiaróvitch` |
 
 - Round trip over 720 lines (Parakeet, seed 0), then 3 seeds on the words missed in more than a third of
@@ -230,7 +229,7 @@ European vowel is left as it is. Most findings of the European Portuguese pass h
   probe), Meran, Leningrado, Iugoslavo, Moscou.
 - Left as is: close calls between the open and the closed vowel, changing with the context (probe): "eu
   tomo", "eu começo", "olho" (open alone and in "Fique de olho", a tie in longer contexts), erros, "cerca de" (no candidate close;
-  "cerca" alone is "cêrca"). "Tente" elsewhere: "Tênte" did no better over 36 renderings (9 against 9).
+  "cerca" alone is "cêrca"). "Tente": "Tênte" did no better over 36 renderings (9 against 9).
   "onze" is read "ônze" (probe) but heard only 5 times in 12 ("ônze" 8, the same reading). Jaenisch
   ("Jaenich", j of "jogo") and Euwe ("Eu-ue"): no settled Brazilian reading to respell to.
 - Recogniser habits: as in European Portuguese ("ala" as "aula", "roque" as "rock", "mate" as "match",

@@ -844,6 +844,10 @@ tip.centre.b2 = केंद्र के लिए लड़ो: {sq} जैस
 tip.centre.b2.2 = तुम्हारी चालें केंद्र मुझे सौंप रही हैं। {sq} को देखो।
 tip.centre.b3 = केंद्र पर तुम्हारी कोई चुनौती नहीं; {sq} मेरा है।
 tip.centre.b3.2 = {sq} के आसपास केंद्र को चुनौती दो।
+tip.develop.b1 = तुम्हारे घोड़े और ऊँट अभी अपनी जगह पर हैं। मिसाल के लिए {your:refl_ko} बाहर लाओ।
+tip.develop.b1.2 = मोहरे निकालने का समय! तुम्हारे छोटे मोहरे अभी घर पर हैं। {your:refl_ko} आज़माओ।
+tip.develop.b2 = तुम्हारा कोई भी छोटा मोहरा अभी नहीं चला। {your:refl_ko} और उसके साथियों को बाहर लाओ।
+tip.develop.b2.2 = तुम्हारे मोहरे अभी सो रहे हैं। {your:refl_se} शुरू करो।
 # Endgame technique tips.
 tip.mate_technique.b1 = जब सिर्फ़ अकेला राजा बचे, तो उसे किनारे की ओर धकेलो, फिर मात दो।
 tip.mate_technique.b1.2 = सुझाव: मेरे राजा को किनारे की ओर दबाओ। अपने राजा को भी पास रखो।
@@ -920,10 +924,48 @@ praise.excellent.b4.2 = उत्कृष्ट।
 praise.excellent.b4.3 = बढ़िया, {move}, यह सटीक है।
 praise.castle.b1 = अच्छा! तुमने कैसलिंग की। अब तुम्हारा राजा ज़्यादा सुरक्षित है।
 praise.castle.b1.2 = बढ़िया कैसलिंग! तुम्हारा राजा अब सुरक्षित कोने में है।
+praise.castle.b2 = अच्छा, तुमने कैसलिंग की। राजा सुरक्षित है, और हाथी भी खेल में आ गया।
+praise.castle.b2.2 = कैसलिंग: सुरक्षित राजा और खेल में हाथी। शाबाश।
+praise.castle.b3 = अच्छा: कैसलिंग हुई, राजा सुरक्षित।
+praise.castle.b3.2 = जल्दी कैसलिंग। समझदारी की बात।
 praise.saved.b1 = अच्छा! तुमने अपना मोहरा बचा लिया।
 praise.saved.b1.2 = शाबाश, तुमने उसे सुरक्षित जगह पहुँचा दिया।
+praise.saved.b2 = अच्छा, उस मोहरे पर हमला था और तुमने उसे हटा लिया।
+praise.saved.b2.2 = अच्छी नज़र। तुमने मोहरा बचा लिया।
+praise.saved.b3 = अच्छा: हमले वाला मोहरा तुमने सुरक्षित जगह पहुँचा दिया।
+praise.saved.b3.2 = अच्छी नज़र। मोहरा ख़तरे में था।
+# The player dealt with the threat of the coach's last move.
+praise.check_threat.b1 = अच्छा! तुमने देख लिया कि मेरी चाल किस पर हमला करती थी, और उसका हल निकाल लिया।
+praise.check_threat.b1.2 = शाबाश! चाल चलने से पहले तुमने मेरा ख़तरा जाँच लिया।
+praise.check_threat.b1.3 = हाँ! तुमने देखा कि मैं किस पर हमला कर रहा हूँ। यह बहुत अच्छी आदत है।
+praise.check_threat.b2 = अच्छा: तुमने मेरा ख़तरा देखा और उसका जवाब दिया।
+praise.check_threat.b2.2 = तुमने देखा कि मेरी चाल किस पर हमला करती है। अच्छी आदत।
+praise.check_threat.b2.3 = इससे मेरा ख़तरा टल गया। अच्छी नज़र।
+# A piece of the player's was attacked and the move defended it.
+praise.protect.b1 = अच्छा! {your:par} हमला था, और अब {your:ki} रक्षा हो रही है।
+praise.protect.b1.2 = शाबाश! मेरे काटने से पहले तुमने {your:ki} रक्षा कर ली।
+praise.protect.b2 = अच्छा: {your:par} हमला था, और तुमने {your:ka} बचाव कर लिया।
+praise.protect.b2.2 = अच्छी नज़र। {your} अब सुरक्षित है।
+# A minor piece brought out from its first square in the opening.
+praise.develop.b1 = अच्छा! तुमने एक मोहरा खेल में उतारा। मोहरे वहाँ ज़्यादा काम करते हैं।
+praise.develop.b1.2 = बढ़िया! मोहरे जल्दी निकालना अच्छी आदत है।
+praise.develop.b2 = अच्छा, तुमने एक मोहरा निकाला। बाक़ी भी बाहर लाओ।
+praise.develop.b2.2 = शाबाश: मोहरे जल्दी निकालो।
 praise.book.b1 = अच्छा, यह ओपनिंग की एक जानी-मानी चाल है।
 praise.book.b1.2 = बढ़िया, मज़बूत खिलाड़ी भी ऐसे ही शुरू करते हैं।
+# The coach asks the player to find the threat of its last move.
+threat.ask.b1 = मेरी पिछली चाल ने एक धमकी बनाई है। क्या तुम्हें दिख रहा है कि तुम्हारा कौन-सा मोहरा ख़तरे में है?
+threat.ask.b1.2 = बोर्ड देखो। मेरी पिछली चाल तुम्हारे किसी मोहरे पर हमला करती है। क्या वह तुम्हें दिख रहा है?
+threat.ask.b1.3 = रुको, चलने से पहले: मेरी पिछली चाल एक धमकी है। तुम्हारा कौन-सा मोहरा ख़तरे में है?
+threat.ask.b2 = मेरी पिछली चाल ने धमकी बनाई है। क्या वह तुम्हें दिख रही है?
+threat.ask.b2.2 = ज़रा देखो: मेरी पिछली चाल किस पर हमला करती है?
+threat.ask.b2.3 = मैंने अभी एक धमकी बनाई है। क्या वह तुम्हें दिख रही है?
+# The same when the threat is a checkmate.
+threat.ask_mate.b1 = मेरी पिछली चाल तुम्हारे राजा के लिए धमकी है। क्या तुम्हें दिख रहा है कि मैं क्या करना चाहता हूँ?
+threat.ask_mate.b1.2 = सावधान: मैं कुछ बड़ा सोच रहा हूँ। क्या तुम्हें दिख रहा है कि मैं क्या करना चाहता हूँ?
+threat.ask_mate.b1.3 = मेरी पिछली चाल देखो। मैं कोई गंभीर धमकी दे रहा हूँ। क्या वह तुम्हें दिख रही है?
+threat.ask_mate.b2 = मेरी पिछली चाल एक गंभीर धमकी है। क्या तुम्हें दिख रहा है कि मैं क्या करना चाहता हूँ?
+threat.ask_mate.b2.2 = मेरी पिछली चाल देखो: वह कुछ बड़ी धमकी देती है। क्या वह तुम्हें दिख रही है?
 
 # ---- The coach's own threats (levels 1-2, before the player moves) ------------------------------
 # A mate threat ({sq} = where it would mate, pointed at at level 1; {my} = the piece).
@@ -933,6 +975,9 @@ threat.mate.b1.3 = {sq} को देखो। अगर मैं वहाँ 
 threat.mate.b2 = सावधान, मैं मात की धमकी दे रहा हूँ।
 threat.mate.b2.2 = ध्यान दो: {sq} पर मात का ख़तरा है।
 threat.mate.b2.3 = ध्यान से देखो: मैं मात की धमकी दे रहा हूँ।
+threat.mate.b3 = सावधान, मैं {sq} पर मात की धमकी दे रहा हूँ।
+threat.mate.b3.2 = मात की धमकी है: {my} {sq} पर जाना चाहता है।
+threat.mate.b3.3 = सावधान: मैं शह और मात की धमकी दे रहा हूँ।
 # A threat on a piece ({my} = my attacker, pointed at at level 1; {your} = the target, pointed at).
 threat.piece.b1 = देखो: {my} {your:par} हमला कर रहा है।
 threat.piece.b1.2 = सावधान! {your:par} {my:ka} हमला है।
@@ -940,6 +985,21 @@ threat.piece.b1.3 = ध्यान दो, {my} {your:ko} काटना च�
 threat.piece.b2 = {your:refl_ka} ध्यान रखो।
 threat.piece.b2.2 = {your:par} हमला है।
 threat.piece.b2.3 = {your:refl_par} नज़र रखो।
+threat.piece.b3 = {my} {your:par} हमला कर रहा है, और उसे काटने से मुझे मटीरियल मिलेगा।
+threat.piece.b3.2 = {your} ख़तरे में है: {my} {your:ko} काटने की धमकी दे रहा है।
+threat.piece.b3.3 = सावधान: मेरी पिछली चाल {your:par} हमला करती है।
+# A fork the coach's move sets up (level 2): {my} on {sq} attacks {t1} and {t2}.
+threat.fork.b2 = {sq} पर {my} एक साथ {t1:obl} और {t2:obl} पर हमला कर रहा है। यह फ़ोर्क है!
+threat.fork.b2.2 = सावधान, यह फ़ोर्क है: {my} {t1:obl} और {t2:obl} पर हमला कर रहा है।
+threat.fork.b2.3 = {my:ka} {t1:obl} और {t2:obl} पर फ़ोर्क है। दोनों को आसानी से नहीं बचाया जा सकता।
+# A pin (level 2): {my} on {sq} holds {your} in front of {t1}, the piece behind it.
+threat.pin.b2 = {sq} पर {my} {your:ko} {t1:ke} सामने पिन कर रहा है। अगर वह हटे, तो मैं {t1:ko} काट लूँगा।
+threat.pin.b2.2 = सावधान: {your} {my:se} पिन है। अगर वह हटे, तो {t1} गया।
+threat.pin.b2.3 = {your} पिन है: अगर वह हटे, तो {my} {t1:ko} काट लेगा।
+# Only one move is good (level 3).
+threat.only.b3 = यह निर्णायक स्थिति है: सिर्फ़ एक चाल सच में अच्छी है। आराम से सोचो।
+threat.only.b3.2 = सावधान, यहाँ सिर्फ़ एक अच्छी चाल है। पहले सब कुछ देखो।
+threat.only.b3.3 = धीरे: इस स्थिति में ज़्यादातर चालें ग़लत पड़ती हैं।
 threat.punish.b1 = मेरी पिछली चाल ग़लती थी। क्या तुम्हें इसका फ़ायदा उठाने का रास्ता दिखता है?
 threat.punish.b1.2 = हम्म, लगता है मुझसे ग़लती हो गई। क्या तुम्हें वह दिखती है?
 
@@ -955,6 +1015,8 @@ tb.hint.mate_missed.b1 = मेरे राजा को देखो। क्
 tb.hint.mate_missed.b1.2 = पहले शह वाली चालें आज़माओ। शायद मात मिल जाए!
 tb.hint.general.b1 = जल्दी मत करो, पूरे बोर्ड को देखो।
 tb.hint.general.b1.2 = कोई ज़्यादा सुरक्षित चाल ढूँढने की कोशिश करो।
+tb.hint.b3 = देखो कि मेरा जवाब तुम्हारे किस मोहरे पर हमला करता है।
+tb.hint.b3.2 = चलने से पहले देखो कि मेरा जवाब किस पर हमला करेगा।
 # The retry.
 tb.fixed.b1 = बहुत बेहतर!
 tb.fixed.b1.2 = हाँ, यह बेहतर है!
@@ -962,6 +1024,13 @@ tb.fixed.b1.3 = अच्छा, यह कहीं ज़्यादा अ�
 tb.fixed = यह बेहतर है।
 tb.fixed.2 = बेहतर।
 tb.fixed.3 = अच्छा सुधार।
+# After a good retry: one line that names the habit ({theme} = a phrase from appraisal.lang, no full stop).
+tb.why.b1 = अगली बार के लिए याद रखो: {theme}।
+tb.why.b1.2 = एक अच्छी आदत: {theme}।
+tb.why.b2 = यहाँ की सीख: {theme}।
+tb.why.b2.2 = जिससे मदद मिली: {theme}।
+tb.why.b3 = याद रखने लायक़: {theme}।
+tb.why.b3.2 = बनाने लायक़ आदत: {theme}।
 tb.same = फिर वही चाल? ठीक है, देखते हैं।
 tb.same.2 = तुम्हें यह चाल पसंद है। चलो, खेलकर देखते हैं।
 # The retry after a hint-only offer is the move the coach had in mind.
@@ -972,3 +1041,32 @@ tb.found.2 = बिल्कुल, यही वाली।
 # Levels 4-6, once per game: the level's takebacks are used up, so no offer this time.
 tb.none_left = अफ़सोस, इस बाज़ी में अब कोई चाल वापसी नहीं बची।
 tb.none_left.2 = इस बाज़ी में तुम्हारे पास कोई चाल वापसी नहीं बची।
+
+# ---- Retrying the critical position after a big mistake ----
+retry.task.b1 = चलो, उस पल पर लौटते हैं। क्या तुम्हें कोई बेहतर चाल सूझ रही है?
+retry.task.b1.2 = यह रही वही स्थिति। क्या तुम्हें कोई बेहतर चाल सूझ रही है?
+retry.task.b2 = तुम्हारी बड़ी ग़लती से पहले की स्थिति यह है। कोई बेहतर चाल ढूँढो।
+retry.task.b2.2 = उस पल को फिर से देखते हैं। इसकी जगह तुम्हारी कौन-सी चाल होगी?
+retry.task.b3 = यह निर्णायक चाल से पहले की स्थिति है। बेहतर चाल ढूँढो।
+retry.task.b3.2 = निर्णायक पल पर लौटो। बेहतर चाल कौन-सी है?
+# A wrong try.
+retry.again.b1 = यह नहीं। एक बार और देखो।
+retry.again.b1.2 = अभी नहीं। फिर से कोशिश करो।
+retry.again.b2 = यह नहीं। पूरा बोर्ड देखो।
+retry.again.b2.2 = अभी नहीं। कोई और चाल आज़माओ।
+retry.again.b3 = यह नहीं। देखो कि मेरा जवाब क्या करेगा।
+retry.again.b3.2 = अब भी नहीं। मेरे सबसे अच्छे जवाब के बारे में सोचो।
+# The player found a better move.
+retry.found.b1 = हाँ! यही बेहतर चाल है। शाबाश!
+retry.found.b1.2 = तुमने ढूँढ ली! यह कहीं बेहतर है।
+retry.found.b2 = हाँ, यह चलेगी। शाबाश।
+retry.found.b2.2 = यही विचार था। बढ़िया।
+retry.found.b3 = सही, यह टिकती है। शाबाश।
+retry.found.b3.2 = यही है। अच्छी खोज।
+# The second miss: the coach shows the better move ({best} may end with a verb: colon before it).
+retry.reveal.b1 = बेहतर चाल यह है: {best}। देखो।
+retry.reveal.b1.2 = मैं दिखाता हूँ, बेहतर चाल यह थी: {best}।
+retry.reveal.b2 = बेहतर चाल यह थी: {best}। देखो।
+retry.reveal.b2.2 = यह रही: {best}।
+retry.reveal.b3 = बेहतर चाल यह थी: {best}।
+retry.reveal.b3.2 = चाल यह थी: {best}।

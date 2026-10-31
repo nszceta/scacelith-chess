@@ -14,6 +14,12 @@
 # The player's gender is unknown: no adjective or participle agrees with the player ("Bem defendido!"
 # is an invariable exclamation, like "Bem jogado!").
 
+# ---- A challenge started from the end card of a game: said before its introduction ----------------
+# {theme}: the one thing the coach named at the end of that game.
+ch.practise = Da tua última partida: {theme}. Este conjunto foi feito para isso.
+ch.practise.2 = A tua última partida tinha uma coisa a trabalhar: {theme}. Vamos praticá-la.
+ch.practise.3 = A dica da última partida foi: {theme}. Aqui tens treino.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Mate num lance. {n:position}, e de cada vez há um único lance que dá mate. Vê todos os xeques.
 ch.intro.mate2 = Mate em dois. {n:position}: o teu primeiro lance tem de me deixar sem defesa, e depois dás mate.

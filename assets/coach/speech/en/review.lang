@@ -17,6 +17,7 @@
 #                     (the counted nouns are in common.lang, count.<noun>)
 #     {eval}           an evaluation from the player's side: "+1.3", "mate in 4"
 #     {text}           a name from this file (name.pattern.*)
+#     {theme}          a phrase from appraisal.lang: theme.* ("watching for double attacks")
 #   Never write "your" or "my" before {your}, {my}, {t1}, {t2}: the possessive is already in them.
 # - Lines at levels 1-2 must stay short (at most about 15 words per sentence).
 
@@ -854,6 +855,12 @@ tip.centre.b2 = Fight for the centre: squares like {sq} matter.
 tip.centre.b2.2 = You're giving me the centre. Look at {sq}.
 tip.centre.b3 = You're not contesting the centre; {sq} is mine.
 tip.centre.b3.2 = Challenge the centre, around {sq}.
+# A reminder once per game at levels 1-2 when no knight or bishop has left its home square by the
+# player's fifth move ({your} = a knight to start with).
+tip.develop.b1 = Your knights and bishops are still at home. Bring out {your}, for example.
+tip.develop.b1.2 = Time to develop! Your small pieces are still at home. Try {your}.
+tip.develop.b2 = None of your minor pieces has moved yet. Develop {your} and its friends.
+tip.develop.b2.2 = Your pieces are still asleep. Start with {your}.
 # Endgame technique tips.
 tip.mate_technique.b1 = With a lone king left, push it to the edge, then checkmate.
 tip.mate_technique.b1.2 = Tip: squeeze my king toward the edge. Keep your king close too.
@@ -930,12 +937,52 @@ praise.excellent.b4.2 = Excellent.
 praise.excellent.b4.3 = Good, {move} is accurate.
 praise.castle.b1 = Good! You castled. Your king is safer now.
 praise.castle.b1.2 = Nice castling! Your king is tucked away.
+praise.castle.b2 = Good, you castled. The king is safe, and the rook joins in.
+praise.castle.b2.2 = Castling: a safe king and a rook in play. Well done.
+praise.castle.b3 = Good: castled, king safe.
+praise.castle.b3.2 = Castling early. Sensible.
 praise.saved.b1 = Good! You saved your piece.
 praise.saved.b1.2 = Well done, you moved it to safety.
+praise.saved.b2 = Good, that piece was attacked and you moved it away.
+praise.saved.b2.2 = Well spotted. You saved the piece.
+praise.saved.b3 = Good: you moved the attacked piece to safety.
+praise.saved.b3.2 = Well spotted. The piece was in danger.
+# A habit named: the player's move dealt with what the coach attacked (the coach's last threat).
+praise.check_threat.b1 = Good! You saw what my move attacked, and you dealt with it.
+praise.check_threat.b1.2 = Well done! You checked my threat before you moved.
+praise.check_threat.b1.3 = Yes! You looked at what I attack. That's a great habit.
+praise.check_threat.b2 = Good: you saw my threat and answered it.
+praise.check_threat.b2.2 = You checked what my move attacks. Good habit.
+praise.check_threat.b2.3 = That deals with my threat. Well spotted.
+# A piece of the player's was attacked and the move defended it.
+praise.protect.b1 = Good! {your} was attacked, and now it is protected.
+praise.protect.b1.2 = Well done! You protected {your} before I could take it.
+praise.protect.b2 = Good: {your} was attacked, and you defended it.
+praise.protect.b2.2 = Well spotted. {your} is safe now.
+# A minor piece brought out from its first square in the opening.
+praise.develop.b1 = Good! You brought a piece out into the game. Pieces do more work there.
+praise.develop.b1.2 = Nice! Getting your pieces out early is a good habit.
+praise.develop.b2 = Good, you developed a piece. Bring out the others too.
+praise.develop.b2.2 = Well done: develop your pieces early.
 praise.book.b1 = Good, that's a well-known opening move.
 praise.book.b1.2 = Nice, that's how strong players start too.
 
-# ---- The coach's own threats (levels 1-2, before the player moves) ------------------------------
+# ---- The coach's own threats (before the player moves) ----------------------------------------
+# The first threat of a game at levels 1-2 is asked about first, nothing pointed at: the player is
+# to look at the board for what my last move attacks. The statement of the threat (below) follows
+# after a quiet while or when the player touches a piece that has nothing to do with it.
+threat.ask.b1 = My last move made a threat. Can you see which of your pieces is in danger?
+threat.ask.b1.2 = Look at the board. My last move attacks something of yours. Can you find it?
+threat.ask.b1.3 = Wait, before you move: my last move is a threat. Which of your pieces is in danger?
+threat.ask.b2 = My last move made a threat. Can you see what it is?
+threat.ask.b2.2 = Take a look: what does my last move attack?
+threat.ask.b2.3 = I just made a threat. Can you find it?
+# The same when the threat is a checkmate.
+threat.ask_mate.b1 = My last move is a threat against your king. Can you see what I want to do?
+threat.ask_mate.b1.2 = Be careful: I'm planning something big. Can you see what I want to do?
+threat.ask_mate.b1.3 = Look at my last move. I'm threatening something serious. Can you see it?
+threat.ask_mate.b2 = My last move is a serious threat. Can you see what I want to do?
+threat.ask_mate.b2.2 = Look at my last move: it threatens something big. Can you see it?
 # A mate threat ({sq} = where it would mate, pointed at at level 1; {my} = the piece).
 threat.mate.b1 = Careful! I'm threatening checkmate on {sq}.
 threat.mate.b1.2 = Watch out: {my} wants to go to {sq}. That would be checkmate.
@@ -943,6 +990,9 @@ threat.mate.b1.3 = Look at {sq}. If I get there, it's checkmate!
 threat.mate.b2 = Careful, I threaten mate.
 threat.mate.b2.2 = Watch out: there's a mate threat on {sq}.
 threat.mate.b2.3 = Look closely: I'm threatening checkmate.
+threat.mate.b3 = Careful, I'm threatening mate on {sq}.
+threat.mate.b3.2 = There's a mate threat: {my} wants to go to {sq}.
+threat.mate.b3.3 = Watch out: I threaten checkmate.
 # A threat on a piece ({my} = my attacker, pointed at at level 1; {your} = the target, pointed at).
 threat.piece.b1 = Look: {my} is attacking {your}.
 threat.piece.b1.2 = Careful! {your} is attacked by {my}.
@@ -950,11 +1000,27 @@ threat.piece.b1.3 = Watch out, {my} wants to take {your}.
 threat.piece.b2 = Careful with {your}.
 threat.piece.b2.2 = {your} is under attack.
 threat.piece.b2.3 = Watch {your}.
+threat.piece.b3 = {my} attacks {your}, and taking it would win material.
+threat.piece.b3.2 = {your} is in danger: {my} threatens to take it.
+threat.piece.b3.3 = Careful: my last move attacks {your}.
+# A fork the coach's move sets up (level 2): {my} on {sq} attacks {t1} and {t2}.
+threat.fork.b2 = {my} on {sq} attacks {t1} and {t2} at once. That's a fork!
+threat.fork.b2.2 = Watch out, it's a fork: {my} attacks {t1} and {t2}.
+threat.fork.b2.3 = {my} forks {t1} and {t2}. You can't easily save both.
+# A pin (level 2): {my} on {sq} holds {your} in front of {t1}, the piece behind it.
+threat.pin.b2 = {my} on {sq} pins {your} to {t1}. If it moves, I take {t1}.
+threat.pin.b2.2 = Careful: {your} is pinned by {my}. If it moves, {t1} falls.
+threat.pin.b2.3 = {your} is pinned: if it leaves, {my} takes {t1}.
+# Level 3: the position has one good move only (the engine's two best moves are far apart).
+threat.only.b3 = This is a critical position: only one move is really good. Take your time.
+threat.only.b3.2 = Careful, there's only one good move here. Look at everything first.
+threat.only.b3.3 = Slow down: most moves go wrong in this position.
 threat.punish.b1 = My last move was a mistake. Can you punish it?
 threat.punish.b1.2 = Hmm, I think I made a mistake. Can you find it?
 
 # ---- Takebacks ------------------------------------------------------------------------------------
-# After the takeback is accepted, a hint (levels 1-2).
+# After the takeback is accepted, a hint (levels 1-3). Level 3 names no piece: tb.hint.b3 is where
+# to look when the fault's cause has no line of its own (the other lines serve level 3 as well).
 tb.hint.b1 = Think about {your} this time.
 tb.hint.b1.2 = Keep an eye on {your}.
 tb.hint.king.b1 = Think about the safety of {your}.
@@ -965,6 +1031,8 @@ tb.hint.mate_missed.b1 = Look at my king. Can you checkmate it?
 tb.hint.mate_missed.b1.2 = Try the checks first. Maybe there's a checkmate!
 tb.hint.general.b1 = Take your time and look at the whole board.
 tb.hint.general.b1.2 = Try to find a safer move.
+tb.hint.b3 = Check which of your pieces my reply attacks.
+tb.hint.b3.2 = Look at what my reply would attack before you play.
 # The retry.
 tb.fixed.b1 = Much better!
 tb.fixed.b1.2 = Yes, that's better!
@@ -972,6 +1040,14 @@ tb.fixed.b1.3 = Good, that works much better.
 tb.fixed = That's better.
 tb.fixed.2 = Better.
 tb.fixed.3 = Good correction.
+# After a good retry of a move taken back for a fault with a named cause (levels 1-3), one line that
+# names the habit; {theme} is a phrase from appraisal.lang (theme.*), no full stop.
+tb.why.b1 = Remember for next time: {theme}.
+tb.why.b1.2 = A good habit: {theme}.
+tb.why.b2 = The lesson here: {theme}.
+tb.why.b2.2 = What helped: {theme}.
+tb.why.b3 = Worth remembering: {theme}.
+tb.why.b3.2 = The habit to build: {theme}.
 tb.same = The same move again? All right, let's see.
 tb.same.2 = You like that move. Let's play it out.
 # The retry after a hint-only offer is the move the coach had in mind.
@@ -983,3 +1059,35 @@ tb.found.2 = Exactly, that's the one.
 # where the offer would have been).
 tb.none_left = No more takebacks this game, I'm afraid.
 tb.none_left.2 = You have no takebacks left in this game.
+
+# ---- Trying the critical position again (levels 1-3) --------------------------------------------------
+# The end card's "Try that position again": the board is set to the position before the game's biggest
+# mistake and the player looks for a better move. The task is followed by ex.hint (the piece that has
+# the better move). {best} is the better move; the coach traces it on the board.
+retry.task.b1 = Let's go back to that moment. Can you find a better move?
+retry.task.b1.2 = Here is the position again. Can you find a better move?
+retry.task.b2 = This is the position before your big mistake. Find a better move.
+retry.task.b2.2 = Let's look at that moment again. What would you play instead?
+retry.task.b3 = This is the position before the critical move. Find the better move.
+retry.task.b3.2 = Back to the critical moment. What is the better move?
+# A move that is no good: it is taken back, and the player looks again.
+retry.again.b1 = Not that one. Have another look.
+retry.again.b1.2 = That is not it yet. Try again.
+retry.again.b2 = Not that one. Look at the whole board.
+retry.again.b2.2 = Not yet. Try another move.
+retry.again.b3 = Not that one. Look at what my reply would do.
+retry.again.b3.2 = Still not it. Think about my best reply.
+# The player found a move that is no mistake (said when the review itself said nothing).
+retry.found.b1 = Yes! That is the better move. Well done!
+retry.found.b1.2 = You found it! That is much better.
+retry.found.b2 = Yes, that works. Well done.
+retry.found.b2.2 = That's the idea. Good job.
+retry.found.b3 = Correct, that holds up. Well done.
+retry.found.b3.2 = That's it. Good find.
+# The second miss: the coach shows the better move.
+retry.reveal.b1 = Here is the better move: {best}. Watch it.
+retry.reveal.b1.2 = Let me show you: {best} was better.
+retry.reveal.b2 = The better move was {best}. Look.
+retry.reveal.b2.2 = Here it is: {best}.
+retry.reveal.b3 = The better move was {best}.
+retry.reveal.b3.2 = {best} was the move.

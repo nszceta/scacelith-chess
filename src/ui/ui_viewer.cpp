@@ -27,7 +27,7 @@
 //     --ui-library is given): analysis-page (the Analysis page), analysis-page-online (the same
 //     signed in to the fake server: My online games), library-analyse (Saved games with Analyse),
 //     gameover-analyse (the card of a game against Stockfish with "Analyse the game"),
-//     gameover-analyse-coach (-practise: with "Practise: Forks"), gameover-analyse-online (rematch offered, report),
+//     gameover-analyse-coach (-practise: with "Try that position again" and "Practise: Forks"), gameover-analyse-online (rematch offered, report),
 //     gameover-analyse-folded, online-game-analysing (a game of the history, Analyse pressed: its
 //     PGN on the way); --ui-clipboard <file>: the text Paste a PGN reads instead of the clipboard
 //   hot-seat (two players on one PC): newgame-hotseat (New Game with "Human, same PC"),
@@ -667,6 +667,7 @@ public:
         } else if (s == "coach-lesson-done") {
             ui::GameOverExtras x;
             x.line = i18n::tr("coach.lesson.done.line");
+            x.detail = i18n::tr("coach.lesson.done.next_line");
             x.primaryLabel = i18n::tr("coach.lesson.next");
             a = ui::gameOver(i18n::tr("coach.lesson.done"), i18n::tr("coach.level.0.name"), true, false, -1, x);
         } else if (s == "hotseat-hud") {
@@ -714,8 +715,10 @@ public:
             if (s.compare(0, 22, "gameover-analyse-coach") == 0) {
                 x.detail = i18n::tr("coach.gameover.unrated");
                 x.primaryLabel = i18n::tr("coach.gameover.again");
-                if (s == "gameover-analyse-coach-practise")
+                if (s == "gameover-analyse-coach-practise") {
                     x.practiseLabel = i18n::trf("coach.gameover.practise", {ui::challengeName("fork")});
+                    x.retryLabel = i18n::tr("coach.gameover.retry");
+                }
                 a = ui::gameOver("0-1", chess::endReasonText(chess::GameEndReason::Checkmate), false, false, 38, x);
             } else if (s == "gameover-analyse-online") {
                 x.primaryLabel = i18n::tr("online.rematch.accept");

@@ -11,8 +11,16 @@
 #            subject of these lines, so they use the reflexive "свой": {your:refl_acc} = "свою
 #            ладью", {your:refl_pre} = "своём коне"
 #   {sq}     a square; the coach points at it on that word
+#   {theme}  what the last game's appraisal named (theme.* of appraisal.lang)
 # The player always has the white pieces. The coach says "ты" to the player and is male ("я бы
 # ответил"); the player's gender is unknown: no past tense, short adjective or "сам" about the player.
+
+# ---- A challenge started from the end card of a game: said before its introduction ----------------
+# {theme}: the one thing the coach named at the end of that game (a phrase of appraisal.lang, theme.*:
+# an infinitive, "смотреть на всю доску, прежде чем ходить").
+ch.practise = По итогам прошлой партии: {theme}. Этот набор как раз для этого.
+ch.practise.2 = В прошлой партии было над чем поработать: {theme}. Потренируемся.
+ch.practise.3 = Совет прошлой партии: {theme}. Вот тренировка.
 
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Мат в один ход. {n:position}, и в каждой хватает одного хода, чтобы поставить мат. Проверь каждый шах.

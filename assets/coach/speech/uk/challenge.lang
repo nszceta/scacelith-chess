@@ -16,6 +16,11 @@
 # відповів би"); the player's gender is unknown: no past tense or short adjective about the player.
 # The apostrophe is ’ (U+2019), as in the other Ukrainian files.
 
+# ---- Practice after a game: the set is made for the theme of the player's last game ({theme}: an infinitive phrase)
+ch.practise = З твоєї останньої партії: {theme}. Цей набір саме для цього.
+ch.practise.2 = У твоїй останній партії було над чим попрацювати: {theme}. Потренуймо це.
+ch.practise.3 = Порада з останньої партії: {theme}. Ось трохи практики.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Мат в один хід. {n:position}, і в кожній вистачає одного ходу, щоб поставити мат. Перевір кожен шах.
 ch.intro.mate2 = Мат у два ходи. {n:position}: першим ходом залиш мене без захисту, а другим постав мат.

@@ -197,6 +197,51 @@ TEST(coach_ui_page_training_tab_level_and_colour) {
     CHECK(ui::titlePageShown());
 }
 
+// With the rules lesson selected, the Chapter row shows the chapter the lesson stopped at and starts
+// it anywhere else, from the list or with the arrows; it is not there for a game's level. Start saves
+// the chapter without taking back that the lesson was completed.
+TEST(coach_ui_page_lesson_chapter_choice) {
+    REQUIRE(uitest::app());
+    Restore restore;
+    game::Settings& g = game::settings();
+    g.coachTab = 0;
+    g.coachLevel = 2;
+    g.coachLessonChapter = "castling";
+    g.coachRulesDone = true;
+    uitest::Driver d;
+    Menus m;
+    m.attach(d);
+    openCoach(d);
+    CHECK_EQ(m.coach.lessonChapter, std::string("castling"));
+    CHECK(!m.coach.lessonPicked);
+    CHECK(!d.has(T("coach.chapter")));
+    REQUIRE(clickId(d, levelId(0)));
+    REQUIRE(d.has(T("coach.chapter")));
+
+    // The list opens over the page (lesson.title.* of the speech catalog, capitalised); a chapter
+    // picked in it is the setup's.
+    REQUIRE(clickValue(d, T("coach.chapter")));
+    d.frames(20);
+    REQUIRE(d.has("En passant"));
+    REQUIRE(d.click("En passant"));
+    d.frames(5);
+    CHECK_EQ(m.coach.lessonChapter, std::string("en_passant"));
+    CHECK(m.coach.lessonPicked);
+    // The arrows step through the chapters in the lesson's order.
+    REQUIRE(d.nudge(T("coach.chapter"), plat::KEY_LEFT));
+    CHECK_EQ(m.coach.lessonChapter, std::string("castling"));
+    REQUIRE(d.nudge(T("coach.chapter"), plat::KEY_RIGHT));
+    CHECK_EQ(m.coach.lessonChapter, std::string("en_passant"));
+
+    // Start: the chapter is saved to resume from, the lesson stays completed.
+    REQUIRE(d.click(T("newgame.start")));
+    CHECK_EQ(m.count(MenuAction::StartCoach), 1);
+    CHECK_EQ(g.coachLevel, 0);
+    CHECK_EQ(g.coachLessonChapter, std::string("en_passant"));
+    CHECK(g.coachRulesDone);
+    CHECK_EQ(savedString("coach.lesson_chapter_id"), std::string("en_passant"));
+}
+
 // The levels are the game's list (ui::setCoachLevels): a level without texts of its own is named
 // by its band, an open band reads "N+", and the settings' level is kept inside the list. The
 // player's rating, the rules lesson completed, the alternation's next colour and the missing voice

@@ -6,15 +6,23 @@
 # ("Pelataan", "Jatketaan"); White / Black as sides: "valkeat", "mustat" (pelaat valkeilla).
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Hei! Pelataan yhdessä leppoisa peli. Autan sinua aina, kun jokin menee pieleen.
+event.greet.l1 = Hei! Pelataan yhdessä leppoisa peli. Kerron, kun jokin nappulasi on vaarassa.
 event.greet.l1.2 = Hei! Pelaan lempeästi ja näytän, mitä kannattaa varoa.
 event.greet.l1.3 = Tervetuloa! Mieti rauhassa: kerron, kun jokin nappula on vaarassa.
-event.greet.l2 = Hei! Pelataan. Kun laudalle tulee haarukka tai kiinnitys, näytän sen sinulle.
+event.greet.l1.first = Hei! Kysy ennen jokaista siirtoa: onko nappulani turvassa? Mitä siirtoni uhkaa? Mitä vastustaja uhkaa? Muistutan sinua.
+event.greet.l1.first.2 = Ensimmäinen oikea pelisi! Ennen siirtoa: onko nappulani turvassa, mitä se uhkaa, mikä on uhka? Muistutan sinua.
+event.greet.l2 = Hei! Pelataan. Jos siirtoni valmistelee haarukan tai kiinnityksen, kerron siitä.
 event.greet.l2.2 = Hei! Kehitä upseerisi ja pidä kuninkaasi turvassa. Autan matkan varrella.
 event.greet.l2.3 = Tervetuloa takaisin laudan ääreen! Pidä silmällä haarukoita ja kiinnityksiä: niillä voitetaan pelejä.
-event.greet.l3 = Hei! Pelataan oikea peli. Kommentoin suunnitelmiasi ja isompia virheitä.
+event.greet.l3 = Hei! Pelataan oikea peli. Varoitan isoista uhista ja selitän isommat virheet.
 event.greet.l3.2 = Hei! Mieti nappuloillesi suunnitelma. Kerron, kun siirto jättää jotain huomiotta.
-event.greet.l3.3 = Pelataan! Kerron, milloin on vain yksi hyvä siirto ja milloin siirto menee pieleen.
+event.greet.l3.3 = Pelataan! Kerron, kun vain yksi siirto toimii ja kun siirto menee pieleen.
+event.greet.l1.theme = Tervetuloa takaisin! Viime pelin vinkki oli: {theme}. Pidä se mielessä tänään.
+event.greet.l1.theme.2 = Hei taas! Muista viime pelin vinkki: {theme}. Autan sinua.
+event.greet.l2.theme = Tervetuloa takaisin! Viime pelin ajatus oli: {theme}. Katsotaan, miten se sujuu tänään.
+event.greet.l2.theme.2 = Hei taas! Yksi asia viime pelistä: {theme}.
+event.greet.l3.theme = Tervetuloa takaisin! Viime pelin teema oli: {theme}. Pidä se mielessä tänään.
+event.greet.l3.theme.2 = Hei taas! Viime pelistä: {theme}. Katsotaan, miten tänään käy.
 event.greet.l4 = Hei! Tällä kertaa annan asema-arvioita ja näytän paremmat ehdokassiirrot.
 event.greet.l4.2 = Pelataan. Virheen jälkeen kerron, mikä olisi ollut tarkempaa.
 event.greet.l4.3 = Valmis kerhopeliin? Kommentoin, kun arvio muuttuu.
@@ -34,9 +42,9 @@ event.colour.black.2 = Pelaat tällä kertaa mustilla: minä siirrän ensin.
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names are those of the coach page (coach.level.<n>.name in assets/i18n/fi.lang):
 # Ensiaskeleet, Aloittelija, Edistyvä, Kerhopelaaja, Vahva kerhopelaaja, Asiantuntija.
-event.level.l1 = Ensiaskeleet: pelaan lempeästi ja selitän jokaisen virheen yksinkertaisin sanoin.
-event.level.l2 = Aloittelija: pelaan hieman vahvemmin ja nimeän yksinkertaiset taktiset keinot, kuten haarukat ja kiinnitykset.
-event.level.l3 = Edistyvä: puhun suunnitelmista ja sotilasrakenteesta sekä näytän lyhyitä muunnelmia.
+event.level.l1 = Ensiaskeleet: pelaan lempeästi. Kerron, kun nappulasi on uhattuna eikä suojattu, ja selitän isot virheet yksinkertaisin sanoin.
+event.level.l2 = Aloittelija: pelaan hieman vahvemmin. Varoitan haarukoista, kiinnityksistä ja kuningattaren uhkaamisesta ja muistutan kehittämään nappulat.
+event.level.l3 = Edistyvä: varoitan vain matista ja kuningattaren uhkaamisesta sekä kun vain yksi siirto toimii. Selitän silti virheesi.
 event.level.l4 = Kerhopelaaja: annan arviot sotilasyksikköinä ja ehdotan ehdokassiirtoja.
 event.level.l5 = Vahva kerhopelaaja: lyhyitä kommentteja ja pidempiä muunnelmia silloin, kun sillä on väliä.
 event.level.l6 = Asiantuntija: pelaan parhaani mukaan ja kommentoin vain kriittisiä hetkiä.
@@ -107,5 +115,7 @@ event.end.handshake = Kätellään.
 # stands after a colon, or in quotes after "kohtaan" (a quoted title keeps its nominative).
 event.lesson.resume = Tervetuloa takaisin! Jatketaan oppituntia: {chapter}.
 event.lesson.resume.2 = Hei taas! Viimeksi jäimme kohtaan ”{chapter}”.
+event.lesson.start = Aloitetaan: {chapter}.
+event.lesson.start.2 = Aloitetaan kohdasta ”{chapter}”.
 event.lesson.next = Seuraavaksi: {chapter}.
 event.lesson.next.2 = Nyt vuorossa: {chapter}.

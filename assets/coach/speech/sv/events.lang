@@ -5,15 +5,23 @@
 # Sides as in the glossary: "vit" / "svart", lowercase in running text ("du spelar med vit").
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Hej! Nu spelar vi ett vänskapligt parti. Jag hjälper dig så fort något går snett.
+event.greet.l1 = Hej! Nu spelar vi ett vänskapligt parti. Jag säger till när en av dina pjäser är i fara.
 event.greet.l1.2 = Hej på dig! Jag spelar snällt och visar vad du ska se upp med.
 event.greet.l1.3 = Välkommen! Ta god tid på dig: jag säger till när en pjäs är i fara.
-event.greet.l2 = Hej! Nu spelar vi. När en gaffel eller en bindning dyker upp visar jag dig den.
+event.greet.l1.first = Hej! Fråga dig före varje drag: är min pjäs säker? Vad angriper mitt drag? Vad hotar min motståndare? Jag påminner dig.
+event.greet.l1.first.2 = Ditt första riktiga parti! Före varje drag: är min pjäs säker, vad angriper den, vad är hotet? Jag påminner dig.
+event.greet.l2 = Hej! Nu spelar vi. Om mitt drag skapar en gaffel eller en bindning säger jag till.
 event.greet.l2.2 = Hej på dig! Få ut dina pjäser och håll din kung i säkerhet. Jag hjälper dig på vägen.
 event.greet.l2.3 = Välkommen tillbaka till brädet! Håll utkik efter gafflar och bindningar: de vinner partier.
-event.greet.l3 = Hej! Nu spelar vi ett riktigt parti. Jag kommenterar dina planer och de större misstagen.
+event.greet.l3 = Hej! Nu spelar vi ett riktigt parti. Jag varnar för de stora hoten och förklarar de större misstagen.
 event.greet.l3.2 = Hej på dig! Tänk ut en plan för dina pjäser. Jag säger till när ett drag missar något.
 event.greet.l3.3 = Nu kör vi! Jag säger till när bara ett drag fungerar, och när ett drag går snett.
+event.greet.l1.theme = Välkommen tillbaka! Förra partiets tips var {theme}. Tänk på det i dag.
+event.greet.l1.theme.2 = Hej igen! Kom ihåg förra partiets tips: {theme}. Jag hjälper dig.
+event.greet.l2.theme = Välkommen tillbaka! Förra partiets idé var {theme}. Vi får se hur det går i dag.
+event.greet.l2.theme.2 = Hej igen! Något att minnas från förra partiet: {theme}.
+event.greet.l3.theme = Välkommen tillbaka! Förra partiets tema var {theme}. Tänk på det i dag.
+event.greet.l3.theme.2 = Hej igen! Från förra partiet: {theme}. Vi får se hur det går i dag.
 event.greet.l4 = Hej! Den här gången ger jag värderingar och visar dig de bättre kandidatdragen.
 event.greet.l4.2 = Nu spelar vi. Efter ett misstag säger jag vad som var mer exakt.
 event.greet.l4.3 = Redo för ett klubbparti? Jag kommenterar när värderingen ändras.
@@ -32,9 +40,9 @@ event.colour.black.2 = Du spelar med svart den här gången: jag gör första dr
 
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names are those of the coach page (coach.level.<n>.name in assets/i18n/sv.lang).
-event.level.l1 = Första stegen: jag spelar snällt och förklarar varje misstag med enkla ord.
-event.level.l2 = Nybörjare: jag spelar lite starkare, och jag sätter namn på enkla taktiska motiv som gafflar och bindningar.
-event.level.l3 = Fortsättare: jag pratar om planer och bondestruktur, och jag visar korta varianter.
+event.level.l1 = Första stegen: jag spelar snällt. Jag säger till när en av dina pjäser är angripen och oskyddad, och jag förklarar stora misstag med enkla ord.
+event.level.l2 = Nybörjare: jag spelar lite starkare. Jag varnar för gafflar, bindningar och angrepp på din dam, och påminner dig om att få ut pjäserna.
+event.level.l3 = Fortsättare: jag varnar bara för matt och angrepp på din dam, och när bara ett drag fungerar. Jag förklarar fortfarande dina misstag.
 event.level.l4 = Klubbspelare: jag ger värderingar i bönder och föreslår kandidatdrag.
 event.level.l5 = Stark klubbspelare: korta kommentarer, och längre varianter när det spelar roll.
 event.level.l6 = Expert: jag spelar så starkt jag kan och kommenterar bara de kritiska ögonblicken.
@@ -105,5 +113,7 @@ event.end.handshake = Nu tar vi i hand.
 # after "med", "om" and a colon ("Nu fortsätter vi med rockad.", "kapitlet om rockad").
 event.lesson.resume = Välkommen tillbaka! Nu fortsätter vi med {chapter}.
 event.lesson.resume.2 = Hej igen! Vi slutade vid kapitlet om {chapter}.
+event.lesson.start = Vi börjar med {chapter}.
+event.lesson.start.2 = Vi inleder med {chapter}.
 event.lesson.next = Nästa kapitel: {chapter}.
 event.lesson.next.2 = Och nu: {chapter}.

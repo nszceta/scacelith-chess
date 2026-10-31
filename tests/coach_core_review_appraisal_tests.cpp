@@ -206,7 +206,8 @@ TEST(coach_core_review_appraisal_good_capture_highlight) {
 }
 
 TEST(coach_core_review_appraisal_takebacks_counted) {
-    // A blunder taken back and replaced by a good move: levels 1-3 count the takebacks that helped.
+    // A blunder taken back and replaced by a good move: levels 1-3 say it was fixed by trying again
+    // (the takebacks' own count is for takebacks that fixed something other than a blunder).
     const Game g = rookGame();
     for (int level = 1; level <= 4; ++level) {
         Appraisal a;
@@ -229,12 +230,10 @@ TEST(coach_core_review_appraisal_takebacks_counted) {
         const Script s = a.script(g, AppraisalContext{});
         const std::string where = "takebacks b" + std::to_string(level);
         checkAppraisal(s, where.c_str());
-        const Beat* b = beatWithKey(s, "appraisal.num.takebacks.b" + std::to_string(level));
+        const Beat* b = beatWithKey(s, "appraisal.num.retried.b" + std::to_string(level));
         CHECK_EQ(b != nullptr, level <= 3);
-        if (b) {
-            CHECK_EQ(b->line.arg("n")->number, 1);
-            CHECK_EQ(b->line.arg("m")->number, 1);
-        }
+        CHECK(beatWithKey(s, "appraisal.num.takebacks.b" + std::to_string(level)) == nullptr);
+        if (b) CHECK_EQ(b->line.arg("n")->number, 1);
     }
 }
 

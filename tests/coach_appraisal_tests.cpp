@@ -255,6 +255,74 @@ TEST(coach_appraisal_level_suggestion) {
     CHECK_EQ(suggestLevel(2, {{1, 1, 99.0}, {1, 1, 99.0}, {2, 1, 90.0}}), 2);
 }
 
+// Level 1 is not left on wins that the scaffold or pieces lost for nothing explain: a game with no
+// first-try blunder, or played without the danger markers, is needed first (games saved by an
+// earlier version have no markers recorded and count as played without them).
+TEST(coach_appraisal_level_one_gate) {
+    GameRecord scaffolded{1, 1, 99.0};
+    scaffolded.markers = true;
+    scaffolded.blunders = 2;
+    CHECK_EQ(suggestLevel(1, {scaffolded, scaffolded}), 1);
+    GameRecord clean = scaffolded;
+    clean.blunders = 0;
+    CHECK_EQ(suggestLevel(1, {scaffolded, clean}), 2);
+    GameRecord bare = scaffolded;
+    bare.markers = false;
+    CHECK_EQ(suggestLevel(1, {scaffolded, bare}), 2);
+    CHECK_EQ(suggestLevel(1, {{1, 1, 99.0}, {1, 1, 99.0}}), 2);   // an earlier version's games
+    // Only level 1 is gated.
+    GameRecord two{2, 1, 90.0};
+    two.markers = true;
+    two.blunders = 3;
+    CHECK_EQ(suggestLevel(2, {two, two}), 3);
+}
+
+TEST(coach_appraisal_level_mastery) {
+    GameRecord clean{1, 0, 50.0};
+    clean.blunders = 0;
+    GameRecord slip = clean;
+    slip.blunders = 1;
+    GameRecord unknown = clean;
+    unknown.blunders = -1;
+    CHECK(levelMastered(1, {clean, clean}));
+    CHECK(!levelMastered(1, {clean}));
+    CHECK(!levelMastered(1, {clean, slip}));
+    CHECK(levelMastered(1, {slip, clean, clean}));   // the last two games at the level
+    CHECK(!levelMastered(1, {clean, unknown}));      // blunders not recorded: not proven
+    GameRecord win{2, 1, 80.0};
+    win.blunders = 0;
+    GameRecord draw = win;
+    draw.result = 0;
+    CHECK(levelMastered(2, {win, win}));
+    CHECK(levelMastered(2, {win, clean, win}));      // games at another level are skipped
+    CHECK(!levelMastered(2, {win, draw}));
+    CHECK(!levelMastered(3, {win, win}));
+}
+
+TEST(coach_appraisal_theme_memory) {
+    auto themed = [](const char* t) {
+        GameRecord r;
+        r.theme = t;
+        return r;
+    };
+    // A theme named in two of the last three games, whatever their level.
+    CHECK(recurringTheme({themed("fork"), themed(""), themed("fork")}) == "fork");
+    CHECK(recurringTheme({themed("fork"), themed("pin"), themed("hanging")}).empty());
+    CHECK(recurringTheme({themed("fork"), themed("pin"), themed("hanging"), themed("fork")}).empty());   // fork fell out of the window
+    CHECK(recurringTheme({themed("fork"), themed("fork"), themed("pin"), themed("pin")}) == "pin");
+    CHECK(recurringTheme({themed(""), themed("")}).empty());
+    CHECK(recurringTheme({}).empty());
+    CHECK(themeFromName("missed_fork") == ExType::MissedFork);
+    CHECK(themeFromName("") == ExType::None && themeFromName("nonsense") == ExType::None);
+    // The danger markers' Auto setting: the first three games at level 1, the first at level 2.
+    const GameRecord one{1, 1, 80.0}, two{2, 1, 80.0};
+    CHECK(dangerMarkersAuto(1, {}) && dangerMarkersAuto(1, {one, one}));
+    CHECK(!dangerMarkersAuto(1, {one, one, one}));
+    CHECK(dangerMarkersAuto(2, {one, one, one}));   // each level counts its own games
+    CHECK(!dangerMarkersAuto(2, {two}));
+    CHECK(!dangerMarkersAuto(3, {}) && !dangerMarkersAuto(0, {}));
+}
+
 // ---- Collection ------------------------------------------------------------------------------------------
 
 TEST(coach_appraisal_collection) {
@@ -359,6 +427,71 @@ TEST(coach_appraisal_stats) {
     u.reset(3, White);
     u.add(reviewAt(g, 0, MoveClass::Best, 900, 900));
     CHECK(!u.stats(g).numbers);
+}
+
+TEST(coach_appraisal_takebacks_count_as_first_played) {
+    // Two blunders, each taken back and replayed with the best move, against a game without them:
+    // the replacements do not lift the accuracy, and the first tries are the blunders counted.
+    Game g = rookGame();
+    auto played = [&g](bool takeBack) {
+        Appraisal a;
+        a.reset(2, White);
+        for (int ply = 0; ply < 21; ply += 2) {
+            if (takeBack && (ply == 4 || ply == 12)) {
+                Review bad = reviewAt(g, ply, MoveClass::Blunder, 900, 200, ExType::Hanging);
+                bad.verdict.offered = true;
+                a.add(bad);
+                a.truncate(size_t(ply));   // Game::undo
+                Review again = reviewAt(g, ply, MoveClass::Best, 900, 900);
+                again.isRetry = true;
+                again.takeback.fixed = true;
+                a.add(again);
+            } else {
+                a.add(reviewAt(g, ply, MoveClass::Best, 900, 900));
+            }
+        }
+        return a;
+    };
+    const AppraisalStats clean = played(false).stats(g), retaken = played(true).stats(g);
+    CHECK(retaken.human.accuracy < clean.human.accuracy - 10.0);
+    CHECK_EQ(retaken.human.count(MoveClass::Blunder), 0);   // the classes are the replayed moves'
+    CHECK_EQ(retaken.firstTryBlunders, 2);
+    CHECK_EQ(retaken.fixedBlunders, 2);
+    CHECK_EQ(clean.firstTryBlunders, 0);
+    // The appraisal says so (level 2: the line replaces the takebacks' count).
+    Script s = played(true).script(g, AppraisalContext{});
+    checkAppraisal(s, 2, "retried blunders");
+    CHECK(hasPrefix(s, "appraisal.num.retried"));
+    CHECK(!hasPrefix(s, "appraisal.num.takebacks"));
+}
+
+// The critical position a game's end card offers to try again: levels 1-3 only, and only a blunder
+// (a critical mistake gets none), with the position before the move and the engine's better move.
+TEST(coach_appraisal_retry_point_is_the_critical_blunder) {
+    const Game g = rookGame();
+    auto point = [&g](int level, MoveClass cls) {
+        Appraisal a;
+        a.reset(level, White);
+        for (int ply = 0; ply < 21; ply += 2) {
+            if (ply == 8) {
+                Review bad = reviewAt(g, ply, cls, 900, 100, ExType::Hanging);
+                bad.verdict.bestUci = "e1e2";
+                a.add(bad);
+            } else {
+                a.add(reviewAt(g, ply, MoveClass::Best, 900, 900));
+            }
+        }
+        return a.retryPoint(g);
+    };
+    for (int level : {1, 2, 3}) {
+        const RetryPoint p = point(level, MoveClass::Blunder);
+        CHECK(p.valid());
+        CHECK_EQ(p.ply, 8);
+        CHECK_EQ(p.fen, g.positionAt(8).fen());
+        CHECK_EQ(p.bestUci, std::string("e1e2"));
+    }
+    CHECK(!point(4, MoveClass::Blunder).valid());
+    CHECK(!point(2, MoveClass::Mistake).valid());
 }
 
 // ---- Scripts ---------------------------------------------------------------------------------------------
@@ -639,6 +772,13 @@ TEST(coach_appraisal_practise_suggestion) {
         CHECK(improvement(level, ExType::Positional) == ExType::Positional);
         CHECK(std::string(practiceChallenge(improvement(level, ExType::Positional))).empty());
     }
+    // The themes with a set of their own, beyond the tactics: the king's safety, the opening,
+    // stalemate and exchanges.
+    CHECK(std::string(practiceChallenge(ExType::KingSafety)) == "escape");
+    CHECK(std::string(practiceChallenge(ExType::Opening)) == "opening");
+    CHECK(std::string(practiceChallenge(ExType::Stalemate)) == "kq");
+    CHECK(std::string(practiceChallenge(ExType::Exchange)) == "hanging");
+    CHECK(std::string(practiceChallenge(ExType::BadTrade)).empty());
     // Level 3 names the better move, not the theme: nothing to practise.
     CHECK(improvement(3, ExType::Fork) == ExType::None);
     // Every set suggested exists.
@@ -646,6 +786,30 @@ TEST(coach_appraisal_practise_suggestion) {
         const std::string id = practiceChallenge(ExType(t));
         CHECK(id.empty() || ChallengeBook::shared().find(id) != nullptr);
     }
+}
+
+// A theme the appraisal of one of the last two games named too gets the "again" wording where the
+// theme is named (level 1's blunder, level 2's critical moment); another theme keeps the plain one.
+TEST(coach_appraisal_theme_again) {
+    Game g = rookGame();
+    auto script = [&g](int level, const std::vector<std::string>& recent) {
+        Appraisal a;
+        a.reset(level, Black);
+        for (int ply = 1; ply < 21; ply += 2) {
+            if (ply == 5) a.add(reviewAt(g, ply, MoveClass::Blunder, 0, 600, ExType::Fork));
+            else a.add(reviewAt(g, ply, ply < 5 ? MoveClass::Best : MoveClass::Good, ply < 5 ? 0 : 600, ply < 5 ? 0 : 600));
+        }
+        AppraisalContext ctx;
+        ctx.recentThemes = recent;
+        return a.script(g, ctx);
+    };
+    CHECK(hasKey(script(1, {"fork"}), "appraisal.improve.theme.again.b1"));
+    CHECK(hasKey(script(1, {"pin", "fork"}), "appraisal.improve.theme.again.b1"));
+    CHECK(hasKey(script(1, {"pin"}), "appraisal.improve.theme.b1"));
+    CHECK(hasKey(script(1, {}), "appraisal.improve.theme.b1"));
+    CHECK(hasKey(script(2, {"fork"}), "appraisal.improve.critical.again.b2"));
+    CHECK(hasKey(script(2, {"pin"}), "appraisal.improve.critical.b2"));
+    CHECK(!hasPrefix(script(3, {"fork"}), "appraisal.improve.theme.again"));   // level 3 names the better move
 }
 
 TEST(coach_appraisal_every_key_exists) {
@@ -656,7 +820,7 @@ TEST(coach_appraisal_every_key_exists) {
         "appraisal.best.won", "appraisal.best.streak", "appraisal.best.capture", "appraisal.best.phase",
         "appraisal.num.material", "appraisal.num.material_nochecks", "appraisal.improve.theme",
         "appraisal.improve.was_winning", "appraisal.improve.stalemate", "appraisal.improve.clean", "appraisal.end",
-        "appraisal.end.up",
+        "appraisal.end.up", "appraisal.improve.theme.again",
     };
     for (const char* f : families)
         for (int l = 1; l <= 6; ++l) {
@@ -673,6 +837,8 @@ TEST(coach_appraisal_every_key_exists) {
     }
     for (int l = 1; l <= 3; ++l) {
         CHECK(en.count("appraisal.num.takebacks.b" + std::to_string(l)) == 1);
+        CHECK(en.count("appraisal.num.retried.b" + std::to_string(l)) == 1);
+        CHECK(en.count("appraisal.next.retry.b" + std::to_string(l)) == 1);
         CHECK(en.count("appraisal.improve.coach_hung.b" + std::to_string(l)) == 1);
     }
     for (const char* k : {"appraisal.open.loss_close.b3", "appraisal.open.loss_close.b4", "appraisal.num.clean.b2",
@@ -680,7 +846,8 @@ TEST(coach_appraisal_every_key_exists) {
                           "appraisal.num.acc_explain.b3", "appraisal.num.acc.b4", "appraisal.num.acc_phase.b4",
                           "appraisal.num.coach.b4", "appraisal.num.acc.b5", "appraisal.num.book.b5",
                           "appraisal.num.acc.b6", "appraisal.num.acc_solo.b6", "appraisal.phase.opening",
-                          "appraisal.phase.middlegame", "appraisal.phase.endgame", "theme.general"})
+                          "appraisal.phase.middlegame", "appraisal.phase.endgame", "theme.general",
+                          "appraisal.improve.critical.again.b2"})
         CHECK(en.count(k) == 1);
     for (int l = 1; l <= 6; ++l) CHECK(en.count("appraisal.level.l" + std::to_string(l)) == 1);
     // A theme phrase for every explanation type.

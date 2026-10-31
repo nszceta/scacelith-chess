@@ -6,7 +6,7 @@
 // - Touch-move is relaxed: a piece put back on its square is released (Arbiter::reset(game)).
 // - Nothing is recorded: the scene skips the scorekeeper for the lesson (no header, no recording,
 //   no moves; GameScene's !lesson() guards), no clock, no rating, and positions that
-//   are over on load (8.1 stalemate, 8.3 two kings) or after a move (mates, the stalemate
+//   are over on load (10.1 stalemate, 10.3 two kings) or after a move (mates, the stalemate
 //   exercise) never trigger the end-of-game flow; Game::undo works on a finished game.
 // - SetPosition: Game::resetFromFEN + Arbiter::reset + PhysicalBoard::syncTo behind a fade.
 //   PlayMove: the coach's hand plays the move and the game records it (no scoresheet).
@@ -521,8 +521,8 @@ Lesson::Lesson() {
         w.ask = askLine;
     }
 
-    // ---- Chapter 1: how the pieces move and capture ----
-    b.begin("pieces");
+    // ---- Chapter 1: how the rook, bishop and queen move (the pieces that slide along lines) ----
+    b.begin("pieces_lines");
     // 1.1 Rook
     b.set("7k/8/n7/8/8/8/8/R3K3 w - - 0 1");
     b.say(line("lesson.rook.intro", "your", yours(Rook, "a1")), {pointPiece("a1", "your")});
@@ -538,12 +538,7 @@ Lesson::Lesson() {
         e.hint2Marks = {markArrow("a1", "a6")};
         b.wait(e, {}, {markPiece("a6")});
     }
-    // 1.2 Pieces don't jump (demonstration only)
-    b.set("7k/8/n7/8/P7/8/8/R3K3 w - - 0 1");
-    b.say(line("lesson.jump.blocked", "sq", square("a4")), {trace({"a1", "a3"}), pointPiece("a4", "sq")},
-          {markSquare("a4", "sq")});
-    b.say(line("lesson.jump.knight"));
-    // 1.3 Bishop
+    // 1.2 Bishop
     b.set("7k/8/8/1r6/8/8/8/4KB2 w - - 0 1");
     b.say(line("lesson.bishop.intro", "your", yours(Bishop, "f1")), {pointPiece("f1", "your"), trace({"f1", "c4"}, "", 0.6f)});
     b.say(line("lesson.bishop.colour"), {present("d3")});
@@ -557,7 +552,7 @@ Lesson::Lesson() {
         e.hint2Marks = {markArrow("f1", "b5")};
         b.wait(e, {pointPiece("b5", "my")}, {markPiece("b5", "my")});
     }
-    // 1.4 Queen (the black king on a8, so that Qxh5 gives no check)
+    // 1.3 Queen (the black king on a8, so that Qxh5 gives no check)
     b.set("k7/8/8/7n/8/8/8/3QK3 w - - 0 1");
     b.say(line("lesson.queen.intro", "your", yours(Queen, "d1")),
           {pointPiece("d1", "your"), trace({"d1", "d6"}, "", 0.45f), trace({"d1", "g4"}, "", 0.75f)});
@@ -571,7 +566,15 @@ Lesson::Lesson() {
         e.hint2Marks = {markArrow("d1", "h5")};
         b.wait(e, {}, {markPiece("h5")});
     }
-    // 1.5 King
+    // 1.4 Pieces don't jump (demonstration only; the knight comes in the next chapter)
+    b.set("7k/8/n7/8/P7/8/8/R3K3 w - - 0 1");
+    b.say(line("lesson.jump.blocked", "sq", square("a4")), {trace({"a1", "a3"}), pointPiece("a4", "sq")},
+          {markSquare("a4", "sq")});
+    b.say(line("lesson.jump.all"));
+
+    // ---- Chapter 2: how the king, knight and pawn move (the pieces that step) ----
+    b.begin("pieces_steps");
+    // 2.1 King
     b.set("k7/8/8/8/8/8/4p3/4K3 w - - 0 1");
     b.say(line("lesson.king.intro"), {pointPiece("e1")},
           {markSquare("d1"), markSquare("d2"), markSquare("e2"), markSquare("f2"), markSquare("f1")});
@@ -584,7 +587,7 @@ Lesson::Lesson() {
         e.hint2Marks = {markPiece("e2")};
         b.wait(e, {pointPiece("e2", "my")});
     }
-    // 1.6 Knight
+    // 2.2 Knight
     b.set("7k/8/8/8/8/5r2/8/4K1N1 w - - 0 1");
     b.say(line("lesson.knight.intro", "your", yours(Knight, "g1")), {pointPiece("g1", "your")});
     b.say(line("lesson.knight.l"), {trace({"g1", "g3", "f3"}, "@")}, {markArrow("g1", "f3", "g3", "@")});
@@ -598,7 +601,7 @@ Lesson::Lesson() {
         e.hint2Marks = {markArrow("g1", "f3", "g3")};
         b.wait(e, {}, {markPiece("f3")});
     }
-    // 1.7 Pawn: moving
+    // 2.3 Pawn: moving
     b.set("4k3/8/8/8/8/8/4P3/4K3 w - - 0 1");
     b.say(line("lesson.pawn.intro", "your", yours(Pawn, "e2")), {pointPiece("e2", "your")});
     b.say(line("lesson.pawn.first"), {}, {markSquare("e3"), markSquare("e4")});
@@ -610,7 +613,7 @@ Lesson::Lesson() {
         e.hint2Marks = {markSquare("e4")};
         b.wait(e);
     }
-    // 1.8 Pawn: capturing
+    // 2.4 Pawn: capturing
     b.set("7k/8/8/3np3/4P3/8/8/4K3 w - - 0 1");
     b.say(line("lesson.pawncap.blocked"), {pointPiece("e5")});
     b.say(line("lesson.pawncap.diagonal"), {trace({"e4", "d5"})}, {markArrow("e4", "d5")});
@@ -622,13 +625,32 @@ Lesson::Lesson() {
         e.hint2Marks = {markArrow("e4", "d5")};
         b.wait(e, {}, {markPiece("d5")});
     }
-    // 1.9 Values, set-up and the first moves
+
+    // ---- Chapter 3: piece values, the set-up and the first moves ----
+    b.begin("values_setup");
     b.set(kStart);
     b.say(line("lesson.values.pawn"), {pointPiece("e2")});
     b.say(line("lesson.values.pieces"),
           {pointPiece("g1"), pointPiece("f1", "@"), pointPiece("a1", "@2"), pointPiece("d1", "@3")});
     b.say(line("lesson.values.king"), {pointPiece("e1")});
     b.say(line("lesson.values.trade"));
+    // 3.1 Practising the values: two pieces nothing defends, the knight takes the one worth more
+    b.set("7k/8/4q3/1p6/3N4/8/8/6K1 w - - 0 1");
+    b.say(line("lesson.values.two", "sq", square("e6"), "sq2", square("b5")),
+          {pointPiece("d4"), pointPiece("e6", "sq"), pointPiece("b5", "sq2")});
+    {
+        Arg my = mine(Queen, "e6"), your = yours(Knight, "d4");
+        Expectation e = anyOf({"d4e6"}, line("lesson.values.ask"), line("lesson.values.ok"));
+        e.replies.push_back(replyMoves({"d4b5"}, line("lesson.values.small", "my", my)));
+        e.replies.push_back(replyPiece(King, line("lesson.use_your", "your", your)));
+        e.replies.push_back(replyAny(line("lesson.values.look")));
+        e.hint2 = line("lesson.values.look");
+        e.hint2Gestures = {pointPiece("d4"), pointPiece("e6")};
+        e.hint2Marks = {markArrow("d4", "e6")};
+        b.wait(e);
+    }
+    // 3.2 The set-up and the first moves
+    b.set(kStart);
     b.say(line("lesson.setup.corners"), {pointPiece("a1", "@"), pointPiece("b1", "@2"), pointPiece("c1", "@3")});
     b.say(line("lesson.setup.queen"), {pointPiece("d1")});
     b.say(line("lesson.setup.king"), {pointPiece("e1")});
@@ -649,8 +671,9 @@ Lesson::Lesson() {
         b.wait(e, {pointPiece("g1", "sq"), pointSquare("f3", "sq2")}, {markSquare("f3", "sq2")});
     }
 
-    // ---- Chapter 2: safe and unsafe captures ----
+    // ---- Chapter 4: safe and unsafe captures ----
     b.begin("safety");
+    // 4.1 A defended piece against a free one
     b.set("7k/8/4p3/3n4/b7/8/8/3QK3 w - - 0 1");
     b.say(line("lesson.safety.defended"), {beatG()});
     b.say(line("lesson.safety.pawn", "my", mine(Knight, "d5")), {pointPiece("e6", "@"), pointPiece("d5", "my")},
@@ -669,10 +692,46 @@ Lesson::Lesson() {
         e.hint2Marks = {markPiece("a4")};
         b.wait(e);
     }
+    // 4.2 A defended pawn is not free either: the queen takes the pawn nothing defends
+    b.set("6k1/7p/6p1/1p6/8/3Q4/8/4K3 w - - 0 1");
+    b.say(line("lesson.safety.pawns", "sq", square("g6"), "sq2", square("b5")),
+          {pointPiece("d3"), pointPiece("g6", "sq"), pointPiece("b5", "sq2")});
+    {
+        Expectation e = anyOf({"d3b5"}, line("lesson.safety.pawns_ask"), line("lesson.safety.pawns_ok"));
+        LessonReply gave = replyMoves({"d3g6"}, line("lesson.safety.watch"));
+        gave.demo = "h7g6";
+        gave.demoLine = line("lesson.safety.gave_pawn");
+        gave.after = line("lesson.safety.pawns_other");
+        e.replies.push_back(gave);
+        e.replies.push_back(replyAny(line("lesson.safety.look")));
+        e.hint2 = line("lesson.safety.look");
+        e.hint2Gestures = {pointPiece("b5")};
+        e.hint2Marks = {markPiece("b5")};
+        b.wait(e);
+    }
+    // 4.3 The other way round: a pawn may take a defended queen (the queen on c1 must not take c6)
+    b.set("6k1/1p4pp/2p5/3q4/4P3/8/8/2Q3K1 w - - 0 1");
+    b.say(line("lesson.safety.small", "my", mine(Queen, "d5")), {pointPiece("d5", "my"), pointPiece("e4")},
+          {markArrow("e4", "d5")});
+    b.say(line("lesson.safety.small_count"), {pointPiece("c6", "@")});
+    {
+        Expectation e = anyOf({"e4d5"}, line("lesson.safety.small_ask"), line("lesson.safety.small_ok"));
+        LessonReply gave = replyMoves({"c1c6"}, line("lesson.safety.watch"));
+        gave.demo = "b7c6";
+        gave.demoLine = line("lesson.safety.gave_pawn");
+        gave.after = line("lesson.safety.small_other");
+        e.replies.push_back(gave);
+        e.replies.push_back(replyAny(line("lesson.safety.small_look")));
+        e.hint2 = line("lesson.safety.small_look");
+        e.hint2Gestures = {pointPiece("e4"), pointPiece("d5")};
+        e.hint2Marks = {markArrow("e4", "d5")};
+        b.wait(e);
+    }
+    b.say(line("lesson.safety.count"));
 
-    // ---- Chapter 3: check and getting out of check ----
+    // ---- Chapter 5: check and getting out of check ----
     b.begin("check");
-    // 3.1 The king never steps into danger
+    // 5.1 The king never steps into danger
     b.set("7k/8/8/8/8/8/r7/4K3 w - - 0 1");
     b.say(line("lesson.danger.rank"), {pointPiece("a2"), trace({"a2", "h2"}, "", 0.35f)}, {markArrow("a2", "h2")});
     b.say(line("lesson.danger.rule"));
@@ -686,7 +745,7 @@ Lesson::Lesson() {
         e.hint2Marks = {markSquare("d1"), markSquare("f1")};
         b.wait(e);
     }
-    // 3.2 Check: move the king
+    // 5.2 Check: move the king
     b.set("4r2k/8/8/8/8/8/8/4K3 w - - 0 1");
     b.say(line("lesson.check.what"), {trace({"e8", "e1"})}, {markArrow("e8", "e1")});
     b.say(line("lesson.check.must"));
@@ -703,7 +762,7 @@ Lesson::Lesson() {
         e.hint2Marks = {markSquare("d1"), markSquare("d2"), markSquare("f1"), markSquare("f2")};
         b.wait(e);
     }
-    // 3.3 Check: block
+    // 5.3 Check: block
     b.set("4r2k/8/8/8/8/8/3P1P2/3QKB2 w - - 0 1");
     b.say(line("lesson.block.again"), {pointPiece("e8"), pointPiece("e1", "", 0.6f)});
     {
@@ -714,7 +773,7 @@ Lesson::Lesson() {
         e.hint2Marks = {markSquare("e2")};
         b.wait(e, {}, {markSquare("e2")});
     }
-    // 3.4 Check: capture the attacker
+    // 5.4 Check: capture the attacker
     b.set("7k/8/8/8/8/2N5/4q3/4K3 w - - 0 1");
     b.say(line("lesson.capture.check"), {pointPiece("e2")});
     {
@@ -725,10 +784,26 @@ Lesson::Lesson() {
         e.hint2Marks = {markPiece("e2")};
         b.wait(e);
     }
+    // 5.5 Check once more, all three ways open: the coach names the one the player chose
+    b.set("4r2k/8/3N4/8/8/8/8/4KB2 w - - 0 1");
+    {
+        Expectation e;
+        e.kind = Expectation::Kind::EscapesCheck;
+        e.solution = "d6e8";
+        e.ask = line("lesson.check.open.ask");
+        for (const char* u : {"e1d1", "e1d2", "e1f2"}) e.successFor.push_back({u, line("lesson.check.open.king")});
+        for (const char* u : {"f1e2", "d6e4"}) e.successFor.push_back({u, line("lesson.check.open.block")});
+        e.successFor.push_back({"d6e8", line("lesson.check.open.take")});
+        e.illegal.push_back(replyMoves({"e1e2"}, line("lesson.check.file")));
+        e.hint2 = line("lesson.check.open.hint");
+        e.hint2Gestures = {pointPiece("e1", "@"), pointSquare("e4", "@2"), pointPiece("d6", "@3")};
+        e.hint2Marks = {markSquare("d1", "@"), markSquare("e4", "@2"), markPiece("e8", "@3")};
+        b.wait(e, {pointPiece("e8")});
+    }
 
-    // ---- Chapter 4: checkmate ----
+    // ---- Chapter 6: checkmate ----
     b.begin("mate");
-    // 4.1 Back-rank mate
+    // 6.1 Back-rank mate
     b.set("6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1");
     b.say(line("lesson.mate1.what"));
     b.say(line("lesson.mate1.stuck"), {pointPiece("g8"), present("g7", "@")},
@@ -741,13 +816,17 @@ Lesson::Lesson() {
         e.success = line("lesson.mate1.ok");
         e.replies.push_back(replyStalemate());
         e.replies.push_back(replyCheckEscape());
+        e.replies.push_back(replyPiece(King, line("lesson.mate1.king")));
         e.replies.push_back(replyAny(line("lesson.mate1.wrong")));
         e.hint2 = line("lesson.mate1.wrong");
         e.hint2Gestures = {pointPiece("a1")};
         e.hint2Marks = {markSquare("a8")};
+        e.afterDemo = line("lesson.mate1.why");
+        e.afterDemoGestures = {trace({"a8", "h8"}, "@"), pointPiece("g7", "@2")};
+        e.afterDemoMarks = {markArrow("a8", "h8", nullptr, "@"), markSquare("g7", "@2")};
         b.wait(e);
     }
-    // 4.2 King and queen together
+    // 6.2 King and queen together
     b.set("4k3/7Q/4K3/8/8/8/8/8 w - - 0 1");
     {
         Expectation e;
@@ -759,13 +838,19 @@ Lesson::Lesson() {
         e.successFor.push_back({"h7h8", line("lesson.mate2.ok_rank")});
         e.replies.push_back(replyStalemate());
         e.replies.push_back(replyCheckEscape());
+        e.replies.push_back(replyMoves({"h7g7", "h7h6"}, line("lesson.mate2.half", "sq", square("f8"), "sq2", square("d8"))));
+        e.replies.push_back(replyMoves({"h7c7"}, line("lesson.mate2.half", "sq", square("d8"), "sq2", square("f8"))));
+        e.replies.push_back(replyPiece(King, line("lesson.mate2.king")));
         e.replies.push_back(replyAny(line("lesson.mate2.wrong")));
         e.hint2 = line("lesson.mate2.wrong");
         e.hint2Gestures = {pointPiece("h7")};
         e.hint2Marks = {markSquare("e7")};
+        e.afterDemo = line("lesson.mate2.why", "sq", square("d8"), "sq2", square("f8"));
+        e.afterDemoGestures = {pointSquare("d8", "sq"), pointSquare("f8", "sq2")};
+        e.afterDemoMarks = {markSquare("d8", "sq"), markSquare("f8", "sq2")};
         b.wait(e, {pointPiece("e6"), pointPiece("h7", "", 0.5f)});
     }
-    // 4.3 Two-rook ladder
+    // 6.3 Two-rook ladder
     b.set("4k3/R7/8/8/8/8/8/1R4K1 w - - 0 1");
     b.say(line("lesson.mate3.edge"), {trace({"a7", "h7"})}, {markArrow("a7", "h7")});
     {
@@ -787,12 +872,50 @@ Lesson::Lesson() {
         e.hint2 = line("lesson.mate3.hint");
         e.hint2Gestures = {pointPiece("b1")};
         e.hint2Marks = {markSquare("b8")};
+        e.afterDemo = line("lesson.mate3.why");
+        e.afterDemoGestures = {trace({"a7", "h7"}, "@"), trace({"a8", "h8"}, "@2")};
+        e.afterDemoMarks = {markArrow("a7", "h7", nullptr, "@"), markArrow("a8", "h8", nullptr, "@2")};
         b.wait(e, {pointPiece("b1", "your")});
     }
+    // 6.4 Check is not always mate: the pawn on h6 left my king the square h7
+    b.set("6k1/5pp1/7p/8/8/8/8/R5K1 w - - 0 1");
+    b.say(line("lesson.mate4.look"), {pointPiece("g8")});
+    {
+        Expectation e = anyOf({"a1a8"}, line("lesson.mate4.ask"), line("lesson.mate4.ok"));
+        e.showEscape = true;
+        e.replies.push_back(replyPiece(King, line("lesson.mate4.king")));
+        e.replies.push_back(replyAny(line("lesson.mate4.wrong")));
+        e.hint2 = line("lesson.mate4.wrong");
+        e.hint2Gestures = {pointPiece("a1")};
+        e.hint2Marks = {markSquare("a8")};
+        b.wait(e);
+    }
+    b.say(line("lesson.mate4.after", "sq", square("h6")), {pointPiece("h6", "sq")}, {markSquare("h7")});
+    // 6.5 Two checks, one of them mate: count the squares of my king
+    b.set("k7/8/1K6/8/8/8/8/7R w - - 0 1");
+    {
+        Expectation e;
+        e.kind = Expectation::Kind::Mates;
+        e.solution = "h1h8";
+        e.ask = line("lesson.mate5.ask");
+        e.success = line("lesson.mate5.ok");
+        e.replies.push_back(replyStalemate());
+        e.replies.push_back(replyCheckEscape());
+        e.replies.push_back(replyPiece(King, line("lesson.mate5.king", "sq", square("a7"), "sq2", square("b7"))));
+        e.replies.push_back(replyAny(line("lesson.mate5.wrong")));
+        e.hint2 = line("lesson.mate5.hint", "sq", square("a7"), "sq2", square("b7"));
+        e.hint2.with("sq3", square("b8"));
+        e.hint2Gestures = {pointSquare("b8", "sq3")};
+        e.hint2Marks = {markSquare("b8", "sq3")};
+        e.afterDemo = line("lesson.mate5.why", "sq", square("b8"));
+        e.afterDemoGestures = {pointSquare("b8", "sq")};
+        e.afterDemoMarks = {markSquare("b8", "sq")};
+        b.wait(e, {pointPiece("a8")});
+    }
 
-    // ---- Chapter 5: castling ----
+    // ---- Chapter 7: castling ----
     b.begin("castling");
-    // 5.1 King-side castling
+    // 7.1 King-side castling
     b.set("r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1");
     b.say(line("lesson.castle.what"), {pointPiece("e1"), pointPiece("h1", "", 0.7f)});
     b.say(line("lesson.castle.how"), {trace({"e1", "g1"}, "@"), trace({"h1", "f1"}, "@2")});
@@ -809,7 +932,7 @@ Lesson::Lesson() {
         e.hint2Marks = {markSquare("g1")};
         b.wait(e);
     }
-    // 5.2 When castling is not allowed
+    // 7.2 When castling is not allowed
     b.set("r3k2r/8/8/8/2b5/8/8/R3K2R w KQkq - 0 1");
     b.say(line("lesson.castle2.moved"));
     b.say(line("lesson.castle2.attacked"));
@@ -823,8 +946,21 @@ Lesson::Lesson() {
         b.wait(e);
     }
 
-    // ---- Chapter 6: en passant ----
+    // ---- Chapter 8: en passant ----
     b.begin("en_passant");
+    // 8.1 The double step: only a pawn still at home may go two squares (a moved pawn trying it is refused)
+    b.set("4k3/8/8/8/8/4P3/P7/4K3 w - - 0 1");
+    b.say(line("lesson.ep0.rule"), {pointPiece("a2", "@"), pointPiece("e3", "@2")});
+    {
+        Expectation e = anyOf({"a2a4"}, line("lesson.ep0.ask"), line("lesson.ep0.ok"));
+        e.replies.push_back(replyMoves({"a2a3"}, line("lesson.pawn.one")));
+        e.replies.push_back(replyMoves({"e3e4"}, line("lesson.ep0.moved")));
+        e.replies.push_back(replyAny(line("lesson.pawn.use")));
+        e.illegal.push_back(replyMoves({"e3e5"}, line("lesson.ep0.moved")));
+        e.hint2Gestures = {pointPiece("a2"), pointSquare("a4")};
+        e.hint2Marks = {markSquare("a4")};
+        b.wait(e);
+    }
     b.set("4k3/3p4/8/4P3/8/8/8/4K3 b - - 0 1");
     b.say(line("lesson.ep.what"), {pointPiece("e5")});
     b.say(line("lesson.ep.watch"), {pointPiece("d7")});
@@ -837,8 +973,22 @@ Lesson::Lesson() {
         e.hint2Marks = {markSquare("d6")};
         b.wait(e);
     }
+    // 8.2 Two pawns beside yours: the one that stood there a move ago has lost its chance
+    b.set("4k3/5p2/8/3pP3/8/8/8/4K3 b - - 0 1");
+    b.say(line("lesson.ep2.old", "sq", square("d5")), {pointPiece("d5", "sq")}, {markSquare("d5", "sq")});
+    b.say(line("lesson.ep2.watch"), {pointPiece("f7")});
+    b.play("f7f5");
+    {
+        Expectation e = anyOf({"e5f6"}, line("lesson.ep2.ask"), line("lesson.ep2.ok", "sq", square("d5")));
+        e.replies.push_back(replyMoves({"e5e6"}, line("lesson.ep2.push")));
+        e.replies.push_back(replyAny(line("lesson.ep2.wrong")));
+        e.hint2 = line("lesson.ep2.hint", "sq", square("f5"), "sq2", square("f6"));
+        e.hint2Gestures = {pointPiece("f5", "sq"), pointSquare("f6", "sq2")};
+        e.hint2Marks = {markSquare("f6", "sq2")};
+        b.wait(e, {pointPiece("d5"), pointPiece("f5", "", 0.6f)});
+    }
 
-    // ---- Chapter 7: promotion ----
+    // ---- Chapter 9: promotion ----
     b.begin("promotion");
     b.set("8/4P2k/8/8/8/8/8/4K3 w - - 0 1");
     b.say(line("lesson.promo.what"), {pointPiece("e7")}, {markSquare("e8")});
@@ -853,15 +1003,32 @@ Lesson::Lesson() {
         e.hint2Marks = {markSquare("e8")};
         b.wait(e);
     }
+    // 9.2 Promoting with a capture (the push is possible too, but the rook guards the square)
+    b.set("3r3k/4P3/8/8/8/8/8/4K3 w - - 0 1");
+    {
+        Expectation e = anyOf({"e7d8q"}, line("lesson.promo2.ask"), line("lesson.promo2.ok"));
+        e.kind = Expectation::Kind::Promotes;
+        e.replies.push_back(replyMoves({"e7d8r", "e7d8b", "e7d8n"}, line("lesson.promo.under")));
+        LessonReply push = replyMoves({"e7e8q", "e7e8r", "e7e8b", "e7e8n"}, line("lesson.promo2.push", "sq", square("e8")));
+        push.demo = "d8e8";
+        push.demoLine = line("lesson.promo2.lost");
+        e.replies.push_back(push);
+        e.replies.push_back(replyAny(line("lesson.promo2.wrong", "sq", square("d8"))));
+        for (const char* u : {"e7d8r", "e7d8b", "e7d8n"}) e.acceptOnRetry.push_back(LessonRetry{u, 2, line("lesson.promo.under_ok")});
+        e.hint2 = line("lesson.promo2.hint", "sq", square("d8"));
+        e.hint2Gestures = {pointPiece("e7"), pointSquare("d8", "sq")};
+        e.hint2Marks = {markArrow("e7", "d8")};
+        b.wait(e, {pointPiece("d8")}, {markPiece("d8")});
+    }
 
-    // ---- Chapter 8: stalemate and draws ----
+    // ---- Chapter 10: stalemate and draws ----
     b.begin("draws");
-    // 8.1 Stalemate (demonstration; the game is drawn on load)
+    // 10.1 Stalemate (demonstration; the game is drawn on load)
     b.set("7k/5Q2/6K1/8/8/8/8/8 b - - 0 1");
     b.say(line("lesson.stale.what"), {pointPiece("h8"), present("g7", "@")},
           {markSquare("g8", "@"), markSquare("g7", "@"), markSquare("h7", "@")});
     b.say(line("lesson.stale.draw"));
-    // 8.2 Avoid stalemate
+    // 10.2 Avoid stalemate
     b.set("7k/8/6K1/8/8/8/5Q2/8 w - - 0 1");
     {
         Expectation e;
@@ -871,21 +1038,25 @@ Lesson::Lesson() {
         e.success = line("lesson.stale2.ok");
         e.replies.push_back(replyStalemate());
         e.replies.push_back(replyCheckEscape());
+        e.replies.push_back(replyPiece(King, line("lesson.stale2.king", "sq", square("g7"), "sq2", square("h7"))));
         e.replies.push_back(replyAny(line("lesson.stale2.wrong")));
-        e.hint2 = line("lesson.stale2.wrong");
-        e.hint2Gestures = {pointSquare("f8")};
-        e.hint2Marks = {markSquare("f8")};
+        e.hint2 = line("lesson.stale2.hint", "sq", square("g7"), "sq2", square("h7"));
+        e.hint2Gestures = {pointSquare("g7", "sq"), pointSquare("h7", "sq2"), pointSquare("f8")};
+        e.hint2Marks = {markSquare("g7", "sq"), markSquare("h7", "sq2"), markSquare("f8")};
+        e.afterDemo = line("lesson.stale2.why");
+        e.afterDemoGestures = {pointPiece("h8", "@")};
+        e.afterDemoMarks = {markPiece("h8", "@")};
         b.wait(e);
     }
-    // 8.3 Other draws (talk; two kings: drawn on load)
+    // 10.3 Other draws (talk; two kings: drawn on load)
     b.set("8/8/4k3/8/8/4K3/8/8 w - - 0 1");
     b.say(line("lesson.draws.kings"), {pointPiece("e3"), pointPiece("e6", "", 0.5f)});
     b.say(line("lesson.draws.agree"));
     b.say(line("lesson.draws.repeat"));
 
-    // ---- Chapter 9: before you move (the safety habit) ----
+    // ---- Chapter 11: before you move (the safety habit) ----
     b.begin("before_move");
-    // 9.1 My last move made a threat: the attacked knight goes to a safe square, not a guarded one.
+    // 11.1 My last move made a threat: the attacked knight goes to a safe square, not a guarded one.
     b.set("6k1/pp3ppp/4p3/8/3N4/8/PP3PPP/6K1 b - - 0 1");
     b.say(line("lesson.before.habit"), {nod()});
     b.say(line("lesson.before.last"), {pointPiece("e6")});
@@ -914,7 +1085,7 @@ Lesson::Lesson() {
         e.hint2Marks = {markSquare("c6", "sq"), markSquare("e6", "sq2")};
         b.wait(e);
     }
-    // 9.2 My last move left a piece free (the rook's capture is guarded).
+    // 11.2 My last move left a piece free (the rook's capture is guarded).
     b.set("r1b3k1/p4ppp/8/8/8/7P/5PP1/R5K1 b - - 0 1");
     b.say(line("lesson.before.again"));
     b.play("c8g4");
@@ -931,7 +1102,7 @@ Lesson::Lesson() {
         e.hint2Marks = {markArrow("h3", "g4")};
         b.wait(e);
     }
-    // 9.3 A check from a safe square (e2 is guarded by the knight, d4 by the pawn).
+    // 11.3 A check from a safe square (e2 is guarded by the knight, d4 by the pawn).
     b.set("4k3/3p2pp/8/2p5/3n4/8/5PPP/3Q2K1 w - - 0 1");
     {
         Arg your = yours(Queen, "d1");
@@ -952,9 +1123,9 @@ Lesson::Lesson() {
     }
     b.say(line("lesson.before.done"), {nod()});
 
-    // ---- Chapter 10: the opening ----
+    // ---- Chapter 12: the opening ----
     b.begin("opening");
-    // 10.1 A pawn in the centre
+    // 12.1 A pawn in the centre
     b.set(kStart);
     b.say(line("lesson.opening.what"), {nod()});
     b.say(line("lesson.opening.goals"), {beatG("@"), beatG("@2"), beatG("@3")});
@@ -970,7 +1141,7 @@ Lesson::Lesson() {
         e.hint2Marks = {markSquare("e4"), markSquare("d4")};
         b.wait(e);
     }
-    // 10.2 A knight toward the centre, not on the edge; the queen stays at home (after 1.d4 d5)
+    // 12.2 A knight toward the centre, not on the edge; the queen stays at home (after 1.d4 d5)
     b.set("rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 2");
     b.say(line("lesson.opening.queen"), {pointPiece("d1")});
     {
@@ -987,7 +1158,7 @@ Lesson::Lesson() {
         e.hint2Marks = {markSquare("f3"), markSquare("c3")};
         b.wait(e);
     }
-    // 10.3 Castle when the way is clear (a piece moved twice is answered, a lost knight or bishop shown)
+    // 12.3 Castle when the way is clear (a piece moved twice is answered, a lost knight or bishop shown)
     b.set("r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4");
     b.say(line("lesson.opening.later"), {pointPiece("f3"), pointPiece("c4", "@")});
     b.say(line("lesson.opening.twice"));
@@ -1014,34 +1185,91 @@ Lesson::Lesson() {
     }
     b.say(line("lesson.opening.done"), {nod()});
 
-    // ---- Chapter 11: real games (no moves, the start position as a backdrop) ----
+    // ---- Chapter 13: review (the coach only asks; one position of each of five rules, not in the order taught) ----
+    b.begin("review");
+    // 13.1 Promotion
+    b.set("7k/P7/8/8/8/8/8/4K3 w - - 0 1");
+    b.say(line("lesson.review.start"), {nod()});
+    {
+        Expectation e = anyOf({"a7a8q"}, line("lesson.review.promo.ask"), line("lesson.review.promo.ok"));
+        e.kind = Expectation::Kind::Promotes;
+        e.replies.push_back(replyMoves({"a7a8r", "a7a8b", "a7a8n"}, line("lesson.promo.under")));
+        e.replies.push_back(replyAny(line("lesson.promo.push", "sq", square("a8"))));
+        for (const char* u : {"a7a8r", "a7a8b", "a7a8n"}) e.acceptOnRetry.push_back(LessonRetry{u, 2, line("lesson.promo.under_ok")});
+        e.hint2 = line("lesson.promo.push", "sq", square("a8"));
+        e.hint2Gestures = {pointPiece("a7"), pointSquare("a8", "sq")};
+        e.hint2Marks = {markSquare("a8")};
+        b.wait(e);
+    }
+    // 13.2 Out of check (a knight's check cannot be blocked; the rook cannot help)
+    b.set("4k3/8/8/8/8/3n4/8/4K2R w - - 0 1");
+    {
+        Expectation e;
+        e.kind = Expectation::Kind::EscapesCheck;
+        e.solution = "e1d1";
+        e.ask = line("lesson.review.check.ask");
+        e.success = line("lesson.review.check.ok");
+        e.hint2Gestures = {pointPiece("e1"), pointPiece("d3", "", 0.5f)};
+        e.hint2Marks = {markSquare("d1"), markSquare("d2"), markSquare("f1"), markSquare("e2")};
+        b.wait(e);
+    }
+    // 13.3 Castling on the one side where it is allowed (a rook guards g1: the attempt on the king's
+    // side is answered with why the king may not land there)
+    b.set("4k1r1/8/8/8/8/8/PPPP1P1P/R3K2R w KQ - 0 1");
+    {
+        Expectation e = anyOf({"e1c1"}, line("lesson.review.castle.ask"), line("lesson.review.castle.ok"));
+        e.replies.push_back(replyAny(line("lesson.review.castle.other")));
+        e.hint2Gestures = {pointPiece("e1"), pointSquare("c1")};
+        e.hint2Marks = {markSquare("c1")};
+        b.wait(e);
+    }
+    // 13.4 En passant (the coach's pawn passes the player's)
+    b.set("4k3/2p5/8/1P6/8/8/8/4K3 b - - 0 1");
+    b.play("c7c5");
+    {
+        Expectation e = anyOf({"b5c6"}, line("lesson.review.ep.ask"), line("lesson.review.ep.ok"));
+        e.hint2Gestures = {pointPiece("b5"), pointSquare("c6")};
+        e.hint2Marks = {markSquare("c6")};
+        b.wait(e);
+    }
+    // 13.5 Mate in one (Qg7 is guarded by the king; Qg6 would be stalemate)
+    b.set("7k/8/5K2/8/8/8/8/6Q1 w - - 0 1");
+    {
+        Expectation e;
+        e.kind = Expectation::Kind::Mates;
+        e.solution = "g1g7";
+        e.ask = line("lesson.review.mate.ask");
+        e.success = line("lesson.review.mate.ok");
+        e.replies.push_back(replyStalemate());
+        e.replies.push_back(replyCheckEscape());
+        e.replies.push_back(replyAny(line("lesson.mate2.wrong")));
+        e.hint2 = line("lesson.mate2.wrong");
+        e.hint2Gestures = {pointPiece("g1")};
+        e.hint2Marks = {markSquare("g7")};
+        b.wait(e);
+    }
+
+    // ---- Chapter 14: how our games work (no moves, the start position as a backdrop) ----
     b.begin("etiquette");
     b.set(kStart);
     b.say(line("lesson.talk.rules"), {nod()});
     b.sayBoard(line("lesson.talk.real"), {present(nullptr)});
-    b.say(line("lesson.talk.elo"), {beatG()});
-    b.say(line("lesson.talk.elo_gap"));
-    b.say(line("lesson.talk.elo_start"));
-    b.say(line("lesson.talk.clock"), {pointObject(TableObject::Clock, "@")});
-    b.say(line("lesson.talk.press"), {pointObject(TableObject::Clock)});
-    b.say(line("lesson.talk.flag"));
-    b.say(line("lesson.talk.increment"));
-    b.say(line("lesson.talk.speeds"));
-    b.say(line("lesson.talk.no_clock"), {openPalm()});
+    b.say(line("lesson.talk.no_clock"), {pointObject(TableObject::Clock)});
     b.say(line("lesson.talk.touch"), {pointPiece("e2")});
-    b.say(line("lesson.talk.touch_mine"), {pointPiece("e7")});
-    b.say(line("lesson.talk.adjust"));
-    b.say(line("lesson.talk.release"));
-    b.say(line("lesson.talk.sheet"), {pointObject(TableObject::CoachSheet, "@")});
-    b.say(line("lesson.talk.notation", "move", Arg::ofMove("Nf3", "g1f3")));
-    b.say(line("lesson.talk.robot"), {pointObject(TableObject::PlayerSheet)});
     b.say(line("lesson.talk.handshake"));
     b.say(line("lesson.talk.polite"));
-    b.say(line("lesson.talk.tips"), {beatG("@"), beatG("@2"), beatG("@3")});
+    b.say(line("lesson.talk.help"), {openPalm()});
+    b.say(line("lesson.talk.help_back"));
+    b.say(line("lesson.talk.help_skip"));
     b.say(line("lesson.talk.next"), {openPalm()});
     b.say(line("lesson.talk.welcome"), {nod()});
     // The handshake follows (anim::TaskType::Handshake, as at a game's end), then [coach]
     // rules_done = true and the coach page with First steps selected.
+}
+
+const Lesson& Lesson::shared() {
+    static const Lesson lesson;
+    return lesson;
 }
 
 // ==== Judging moves ================================================================================
@@ -1181,6 +1409,17 @@ LessonReaction Lesson::judge(int expect, const Position& before, const Move& mov
         r.accepted = true;
         // As chapterLines() lists it (no {to}): said from the audio synthesised with the chapter.
         if (!praise.empty()) r.before.push_back(say(praise, Look::Player, {nod()}));
+        if (e.showEscape && after.inCheck() && !after.isCheckmate()) {
+            // A check that is not mate: the coach says and shows where its king goes, then the move back.
+            Line escape;
+            std::string demo;
+            answerCheck(after, escape, demo);
+            if (!demo.empty() && after.parseUCI(demo).valid()) {
+                r.before.push_back(say(escape, Look::Board));
+                r.before.push_back(demoBeat(demo));
+                r.before.push_back(rewindBeat(1));
+            }
+        }
         return r;
     }
 
@@ -1224,6 +1463,8 @@ LessonReaction Lesson::judge(int expect, const Position& before, const Move& mov
         r.after.push_back(say(line("lesson.watch"), Look::Board));
         r.after.push_back(demoBeat(e.solution));
         r.after.push_back(rewindBeat(1));
+        if (!e.afterDemo.empty())
+            r.after.push_back(say(e.afterDemo, Look::Target, e.afterDemoGestures, e.afterDemoMarks));
         r.after.push_back(say(line("lesson.now_you"), Look::Player, {openPalm()}));
     }
     return r;

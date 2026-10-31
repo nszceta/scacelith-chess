@@ -8,7 +8,14 @@
 #            "{move:nomate}" says a mating move without "checkmate" (the line says it)
 #   {your}   one of the player's pieces ("your knight"); the coach points at it on that word
 #   {sq}     a square; the coach points at it on that word
+#   {theme}  what the last game's appraisal named, a phrase of appraisal.lang (theme.*): "watching for double attacks"
 # The player always has the white pieces. The coach speaks informally to the player.
+
+# ---- A challenge started from the end card of a game: said before its introduction ----------------
+# {theme}: the one thing the coach named at the end of that game.
+ch.practise = From your last game: {theme}. This set is made for it.
+ch.practise.2 = Your last game had one thing to work on: {theme}. Let's practise it.
+ch.practise.3 = Last game's tip was {theme}. Here is some practice.
 
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Mate in one. {n:position}, and each time a single move checkmates. Look at every check.

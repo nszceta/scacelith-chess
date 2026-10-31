@@ -855,6 +855,12 @@ tip.centre.b2 = Luptă pentru centru: câmpuri ca {sq} contează.
 tip.centre.b2.2 = Îmi lași centrul. Uită-te la câmpul {sq}.
 tip.centre.b3 = Nu-mi dispuți centrul; câmpul {sq} e al meu.
 tip.centre.b3.2 = Luptă pentru centru, în jurul câmpului {sq}.
+# A reminder once per game at levels 1-2 when no knight or bishop has left its home square by the
+# player's fifth move ({your} = a knight to start with).
+tip.develop.b1 = Caii și nebunii tăi sunt încă acasă. Scoate {your}, de exemplu.
+tip.develop.b1.2 = E timpul să-ți scoți piesele! Piesele mici sunt încă acasă. Încearcă cu {your}.
+tip.develop.b2 = Nicio piesă ușoară de-a ta nu s-a mutat încă. Dezvoltă {your} și celelalte piese.
+tip.develop.b2.2 = Piesele tale încă dorm. Începe cu {your}.
 # Endgame technique tips.
 tip.mate_technique.b1 = Contra unui rege singur, împinge-l spre margine, apoi dă-i mat.
 tip.mate_technique.b1.2 = Sfat: împinge-mi regele spre margine. Ține-ți și regele aproape.
@@ -931,10 +937,45 @@ praise.excellent.b4.2 = Excelent.
 praise.excellent.b4.3 = Bine, {move} e precisă.
 praise.castle.b1 = Bine! Ai făcut rocada. Acum regele tău e mai în siguranță.
 praise.castle.b1.2 = Frumoasă rocadă! Regele tău e la adăpost.
+praise.castle.b2 = Bine, ai făcut rocada. Regele e în siguranță, iar turnul intră în joc.
+praise.castle.b2.2 = Rocadă: rege în siguranță și turn în joc. Bravo.
+praise.castle.b3 = Bine: rocadă făcută, rege în siguranță.
+praise.castle.b3.2 = Rocadă din timp. Înțelept.
 praise.saved.b1 = Bine! Ți-ai salvat piesa.
 praise.saved.b1.2 = Bravo, ai pus piesa la adăpost.
+praise.saved.b2 = Bine, piesa era atacată și ai mutat-o din bătaie.
+praise.saved.b2.2 = Bine observat. Ți-ai salvat piesa.
+praise.saved.b3 = Bine: ai mutat piesa atacată în siguranță.
+praise.saved.b3.2 = Bine observat. Piesa era în pericol.
+praise.check_threat.b1 = Bine! Ai văzut ce atacă mutarea mea și ai rezolvat.
+praise.check_threat.b1.2 = Bravo! Ai verificat amenințarea mea înainte să muți.
+praise.check_threat.b1.3 = Da! Te-ai uitat la ce atac. E un obicei excelent.
+praise.check_threat.b2 = Bine: ai văzut amenințarea mea și ai oprit-o.
+praise.check_threat.b2.2 = Ai verificat ce atacă mutarea mea. Obicei bun.
+praise.check_threat.b2.3 = Asta rezolvă amenințarea mea. Bine observat.
+praise.protect.b1 = Bine! {your} era ataca{your:agr_t}, iar acum e apăra{your:agr_t}.
+praise.protect.b1.2 = Bravo! Ți-ai apărat {your:def} înainte să {your:cl} pot lua.
+praise.protect.b2 = Bine: {your} era sub atac, iar tu {your:cl} aperi acum.
+praise.protect.b2.2 = Bine observat. {your} e în siguranță acum.
+praise.develop.b1 = Bine! Ai scos o piesă în joc. Acolo piesele lucrează mai mult.
+praise.develop.b1.2 = Frumos! E un obicei bun să-ți scoți piesele devreme.
+praise.develop.b2 = Bine, ți-ai dezvoltat o piesă. Scoate-le și pe celelalte.
+praise.develop.b2.2 = Bravo: dezvoltă-ți piesele devreme.
 praise.book.b1 = Bine, e o mutare de deschidere bine cunoscută.
 praise.book.b1.2 = Frumos, așa încep și jucătorii puternici.
+# ---- The first threat of a game at levels 1-2 is asked about first (nothing pointed at) ----
+# The statement of the threat (below) follows after a quiet while.
+threat.ask.b1 = Ultima mea mutare a creat o amenințare. Vezi care dintre piesele tale e în pericol?
+threat.ask.b1.2 = Uită-te la tablă. Ultima mea mutare atacă ceva de-al tău. Poți găsi?
+threat.ask.b1.3 = Stai, înainte să muți: ultima mea mutare e o amenințare. Care dintre piesele tale e în pericol?
+threat.ask.b2 = Ultima mea mutare a creat o amenințare. Vezi care e?
+threat.ask.b2.2 = Uită-te: ce atacă ultima mea mutare?
+threat.ask.b2.3 = Tocmai am creat o amenințare. Poți s-o găsești?
+threat.ask_mate.b1 = Ultima mea mutare e o amenințare la adresa regelui tău. Vezi ce vreau să fac?
+threat.ask_mate.b1.2 = Ai grijă: pregătesc ceva mare. Vezi ce vreau să fac?
+threat.ask_mate.b1.3 = Uită-te la ultima mea mutare. Amenint ceva serios. Vezi?
+threat.ask_mate.b2 = Ultima mea mutare e o amenințare serioasă. Vezi ce vreau să fac?
+threat.ask_mate.b2.2 = Uită-te la ultima mea mutare: amenință ceva mare. Vezi?
 
 # ---- The coach's own threats (levels 1-2, before the player moves) ------------------------------
 # A mate threat ({sq} = where it would mate, pointed at at level 1; {my} = the piece).
@@ -944,6 +985,9 @@ threat.mate.b1.3 = Uită-te la {sq}. Dacă ajung acolo, e șah mat!
 threat.mate.b2 = Atenție, amenint mat.
 threat.mate.b2.2 = Atenție: e o amenințare de mat pe {sq}.
 threat.mate.b2.3 = Privește cu atenție: amenint șah mat.
+threat.mate.b3 = Atenție, amenint cu mat pe {sq}.
+threat.mate.b3.2 = E o amenințare de mat: {my} vrea să meargă pe {sq}.
+threat.mate.b3.3 = Ai grijă: amenint cu șah mat.
 # A threat on a piece ({my} = my attacker, pointed at at level 1; {your} = the target, pointed at).
 threat.piece.b1 = Uite: {my} atacă {your}.
 threat.piece.b1.2 = Atenție! {your} e ataca{your:agr_t} de {my}.
@@ -951,6 +995,18 @@ threat.piece.b1.3 = Atenție, {my} vrea să ia {your}.
 threat.piece.b2 = Atenție la {your}.
 threat.piece.b2.2 = {your} e sub atac.
 threat.piece.b2.3 = Ai grijă de {your}.
+threat.piece.b3 = {my} atacă {your}, iar dacă {your:cl} iau, câștig material.
+threat.piece.b3.2 = {your} e în pericol: {my} amenință să {your:cl} ia.
+threat.piece.b3.3 = Atenție: ultima mea mutare atacă {your}.
+threat.fork.b2 = {my} de pe {sq} atacă și {t1}, și {t2} deodată. E o furculiță!
+threat.fork.b2.2 = Atenție, e o furculiță: {my} atacă și {t1}, și {t2}.
+threat.fork.b2.3 = {my} face o furculiță: atacă și {t1}, și {t2}. Greu le salvezi pe amândouă.
+threat.pin.b2 = {my} de pe {sq} leagă {your} de {t1}. Dacă se mută, iau {t1}.
+threat.pin.b2.2 = Atenție: {my} leagă {your}. Dacă se mută, cade {t1}.
+threat.pin.b2.3 = {your} e lega{your:agr_t}: dacă pleacă, {my} ia {t1}.
+threat.only.b3 = Poziție critică: doar o mutare e cu adevărat bună. Nu te grăbi.
+threat.only.b3.2 = Atenție, aici există o singură mutare bună. Privește mai întâi totul.
+threat.only.b3.3 = Încet: majoritatea mutărilor nu merg în poziția asta.
 threat.punish.b1 = Ultima mea mutare a fost o greșeală. Poți s-o pedepsești?
 threat.punish.b1.2 = Hm, cred că am făcut o greșeală. Poți s-o găsești?
 
@@ -966,6 +1022,8 @@ tb.hint.mate_missed.b1 = Uită-te la regele meu. Îi poți da șah mat?
 tb.hint.mate_missed.b1.2 = Încearcă întâi șahurile. Poate există un mat!
 tb.hint.general.b1 = Nu te grăbi și uită-te la toată tabla.
 tb.hint.general.b1.2 = Încearcă să găsești o mutare mai sigură.
+tb.hint.b3 = Verifică ce piese ale tale atacă răspunsul meu.
+tb.hint.b3.2 = Uită-te ce ar ataca răspunsul meu, înainte să joci.
 # The retry.
 tb.fixed.b1 = Mult mai bine!
 tb.fixed.b1.2 = Da, așa e mai bine!
@@ -973,6 +1031,14 @@ tb.fixed.b1.3 = Bine, așa merge mult mai bine.
 tb.fixed = Așa e mai bine.
 tb.fixed.2 = Mai bine.
 tb.fixed.3 = Bine corectat.
+# After a good retry of a move taken back for a fault with a named cause (levels 1-3), one line that
+# names the habit; {theme} is a phrase from appraisal.lang (theme.*), no full stop.
+tb.why.b1 = Ține minte pentru data viitoare: {theme}.
+tb.why.b1.2 = Un obicei bun: {theme}.
+tb.why.b2 = Lecția de aici: {theme}.
+tb.why.b2.2 = Ce a ajutat: {theme}.
+tb.why.b3 = Merită ținut minte: {theme}.
+tb.why.b3.2 = Obiceiul de format: {theme}.
 tb.same = Iar aceeași mutare? Bine, să vedem.
 tb.same.2 = Îți place mutarea asta. Hai s-o jucăm până la capăt.
 # The retry after a hint-only offer is the move the coach had in mind.
@@ -984,3 +1050,30 @@ tb.found.2 = Exact, asta e.
 # where the offer would have been).
 tb.none_left = Din păcate, în partida asta nu mai poți lua mutări înapoi.
 tb.none_left.2 = Nu mai ai nicio anulare de mutare în partida asta.
+
+# ---- Trying the critical position again (levels 1-3) ----------------------------------------
+# The end card's "Try that position again"; {best} is the better move, traced on the board.
+retry.task.b1 = Hai să ne întoarcem la momentul acela. Găsești o mutare mai bună?
+retry.task.b1.2 = Iată din nou poziția. Găsești o mutare mai bună?
+retry.task.b2 = Asta e poziția dinaintea greșelii tale mari. Găsește o mutare mai bună.
+retry.task.b2.2 = Să ne uităm din nou la momentul acela. Ce ai juca în loc?
+retry.task.b3 = Asta e poziția dinaintea mutării critice. Găsește mutarea mai bună.
+retry.task.b3.2 = Înapoi la momentul critic. Care e mutarea mai bună?
+retry.again.b1 = Nu asta. Mai uită-te o dată.
+retry.again.b1.2 = Încă nu e aceea. Mai încearcă.
+retry.again.b2 = Nu asta. Privește toată tabla.
+retry.again.b2.2 = Încă nu. Încearcă altă mutare.
+retry.again.b3 = Nu asta. Uită-te ce ar face răspunsul meu.
+retry.again.b3.2 = Tot nu e aceea. Gândește-te la cel mai bun răspuns al meu.
+retry.found.b1 = Da! Asta e mutarea mai bună. Bravo!
+retry.found.b1.2 = Ai găsit-o! Mult mai bine.
+retry.found.b2 = Da, merge. Bravo.
+retry.found.b2.2 = Asta e ideea. Frumos.
+retry.found.b3 = Corect, rezistă. Bravo.
+retry.found.b3.2 = Asta e. Bine găsit.
+retry.reveal.b1 = Iată mutarea mai bună: {best}. Privește.
+retry.reveal.b1.2 = Să-ți arăt: {best} era mai bună.
+retry.reveal.b2 = Mutarea mai bună era {best}. Uite.
+retry.reveal.b2.2 = Iat-o: {best}.
+retry.reveal.b3 = Mutarea mai bună era {best}.
+retry.reveal.b3.2 = {best} era mutarea.

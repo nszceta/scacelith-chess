@@ -242,8 +242,64 @@ TEST(coach_session_blunder_offer_accepted_and_retried) {
     CHECK_EQ(count("tb.hint"), 1);
     t.move("g1f1");
     CHECK(t.until([&] { return t.session.coachMayMove() && t.session.director().idle(); }, 60.0f));
-    CHECK_EQ(count("tb."), 2);   // the hint and the first retry's "fixed"
+    CHECK_EQ(count("tb."), 3);   // the hint, and the first retry's "fixed" with its reflection
     checkRenders(t.lines);
+}
+
+// A retry of a critical position (the end card's "Try that position again"): the task and the
+// scaffold instead of a greeting; a mistake goes back by hand, the second one ends the retry with
+// the better move shown; nothing is appraised.
+TEST(coach_session_position_retry_shows_the_better_move_after_two_misses) {
+    Table t;
+    hangTable(t);
+    SessionConfig c = levelConfig(1);
+    c.retryBest = "g1f1";
+    t.start(c);
+    CHECK(t.queued("retry.task.b1"));
+    CHECK(t.queued("ex.hint.b1"));
+    CHECK(!t.queuedPrefix("event.greet"));
+    CHECK(t.quiet());
+    CHECK(t.session.playerMayMove(t.game));
+    CHECK(!t.session.canTakeBack(t.game));
+    CHECK(!t.session.handshakeWanted());
+
+    t.move("c3d5");
+    CHECK(t.until([&] { return !t.stage.all("takeBack").empty(); }, 120.0f));
+    CHECK(t.until([&] { return t.game.moves().empty() && t.session.playerMayMove(t.game); }, 30.0f));
+    CHECK(t.quiet());
+    CHECK(t.queued("retry.again.b1"));
+    CHECK(!t.queued("retry.reveal.b1"));
+    CHECK(!t.session.handshakeWanted());
+
+    t.move("c3d5");
+    CHECK(t.until([&] { return t.session.handshakeWanted(); }, 120.0f));
+    CHECK_EQ(t.stage.all("takeBack").size(), size_t(2));
+    CHECK(t.queued("retry.reveal.b1"));
+    // The game's review says nothing in a retry: no verdict, demonstration, better move or takeback chat.
+    for (const char* prefix : {"demo.", "event.takeback", "tb.", "praise."}) CHECK(!t.queuedPrefix(prefix));
+    for (const Line& l : t.lines)
+        if (l.key.rfind("ex.", 0) == 0) CHECK_EQ(l.key, std::string("ex.hint.b1"));   // the task's own scaffold
+    CHECK(!t.session.retryFound());
+    CHECK(!t.session.playerMayMove(t.game));
+    checkRenders(t.lines);
+}
+
+// A move the review does not judge a mistake ends the retry as found, whether or not it is the
+// engine's own: here the second-best move of a quiet position.
+TEST(coach_session_position_retry_accepts_any_move_that_is_no_mistake) {
+    Table t;
+    hangTable(t);
+    t.analyst.results[fenOf(kHangFen) + "|A0"] =
+        analysisOf({pvl(20, "g1f1 g8f8"), pvl(15, "g1h1 g8f8"), pvl(-330, "c3d5 e6d5 g1f1")});
+    SessionConfig c = levelConfig(1);
+    c.retryBest = "g1f1";
+    t.start(c);
+    CHECK(t.quiet());
+    t.move("g1h1");
+    CHECK(t.until([&] { return t.session.handshakeWanted(); }, 120.0f));
+    CHECK(t.session.retryFound());
+    CHECK(t.stage.all("takeBack").empty());
+    CHECK(!t.session.playerMayMove(t.game));
 }
 
 // A reason's sequence is confirmed by the engine before it is said: the player's reply to 1...exd5
@@ -303,11 +359,55 @@ TEST(coach_session_threats_searched_after_the_coach_move) {
             CHECK(t.reply("e7e5"));
             t.run(2.0f);
             CHECK(t.quiet());
-            CHECK_EQ(t.analyst.count("V", threat), level <= 2 ? 1 : 0);
-            // Level 1 warns about the knight when the search wins it; level 2 only about the queen.
-            CHECK_EQ(t.queued("threat.piece.b1"), level == 1 && wins);
+            CHECK_EQ(t.analyst.count("V", threat), level <= 3 ? 1 : 0);
+            // Level 1 asks about the knight when the search wins it (the first threat of a game is
+            // asked, not told); levels 2-3 warn only about the queen.
+            CHECK_EQ(t.queued("threat.ask.b1"), level == 1 && wins);
+            CHECK(!t.queued("threat.piece.b1"));
             checkRenders(t.lines);
         }
+    }
+}
+
+TEST(coach_session_threat_question_revealed) {
+    // Level 1: the coach asks which piece is in danger, nothing pointed at. The statement follows
+    // after 15 quiet seconds, or when the player touches a piece that has nothing to do with the
+    // threat; touching the threatened knight itself needs no statement.
+    const char* fen = "4k3/4p3/8/8/8/5N2/8/6K1 w - - 0 1";
+    chess::Game after;
+    after.resetFromFEN(fen);
+    after.play(after.position().parseUCI("f3d4"));
+    after.play(after.position().parseUCI("e7e5"));
+    chess::Position turn = after.position();
+    CHECK(turn.passTurn());
+    const std::string threat = turn.fen();
+    enum class Then { Wait, TouchKing, TouchKnight };
+    for (Then then : {Then::Wait, Then::TouchKing, Then::TouchKnight}) {
+        Table t;
+        t.game.resetFromFEN(fen);
+        t.analyst.results[fenOf(fen) + "|A0"] = analysisOf({pvl(0, "f3d4 e7e5")});
+        t.analyst.results[threat + "|V"] = analysisOf({pvl(330, "e5d4 g1f2")});
+        t.start(levelConfig(1));
+        CHECK(t.quiet());
+        t.move("f3d4");
+        CHECK(t.reply("e7e5"));
+        t.run(2.0f);
+        CHECK(t.quiet());
+        CHECK(t.queued("threat.ask.b1"));
+        CHECK(t.session.threatQuestionOpen());
+        t.run(10.0f);
+        CHECK(!t.queued("threat.piece.b1"));   // not yet: the player has time to look
+        switch (then) {
+        case Then::Wait:
+            t.run(8.0f);
+            break;
+        case Then::TouchKing: t.session.onPieceTouched(t.game, chess::parseSquare("g1")); break;
+        case Then::TouchKnight: t.session.onPieceTouched(t.game, chess::parseSquare("d4")); break;
+        }
+        t.run(2.0f);
+        const bool told = then == Then::Wait || then == Then::TouchKing;
+        CHECK_EQ(t.queued("threat.piece.b1"), told);
+        CHECK_EQ(t.session.threatQuestionOpen(), then == Then::TouchKnight);
     }
 }
 
@@ -623,7 +723,7 @@ TEST(coach_session_game_over_drops_the_greeting) {
 TEST(coach_session_lesson_space_skips_one_line) {
     Table t;
     SessionConfig cfg = levelConfig(0);
-    cfg.lessonChapter = 1;   // "pieces": the rook first
+    cfg.lessonChapter = 1;   // "pieces_lines": the rook first
     t.start(cfg);
     CHECK(t.until([&] { return t.said("lesson.rook.intro"); }, 60.0f));
     t.step();
@@ -634,12 +734,12 @@ TEST(coach_session_lesson_space_skips_one_line) {
     CHECK(t.said("lesson.rook.ask"));
     t.move("a1a6");
     CHECK(t.until([&] { return t.said("lesson.bishop.ask"); }, 120.0f));
-    CHECK(t.said("lesson.jump.blocked"));
+    CHECK(t.said("lesson.bishop.colour"));
     CHECK(t.said("lesson.bishop.intro"));
 
     Table u;
     SessionConfig last = levelConfig(0);
-    last.lessonChapter = 11;   // the talk, no exercise
+    last.lessonChapter = Lesson().chapterIndex("etiquette");   // the talk, no exercise
     u.start(last);
     CHECK(u.until([&] { return u.said("lesson.talk.rules"); }, 60.0f));
     u.step();
@@ -898,10 +998,24 @@ TEST(coach_session_speech_speeds_by_level) {
     CHECK(std::fabs(t.stage.reqs.back().speed - 0.75f) < 1e-6f);
 }
 
+// A chapter the player picked is introduced as a start, not as a return.
+TEST(coach_session_rules_lesson_chosen_chapter) {
+    Table t;
+    SessionConfig cfg = levelConfig(0);
+    cfg.lessonChapter = 1;
+    cfg.lessonChosen = true;
+    t.start(cfg);
+    int expect = -1;
+    CHECK(t.until([&] { return t.session.director().waitingMove(&expect); }, 120.0f));
+    CHECK(t.said("event.lesson.start"));
+    CHECK(!t.said("event.lesson.resume"));
+    CHECK_EQ(t.session.lessonChapter(), 1);
+}
+
 TEST(coach_session_rules_lesson_chapter) {
     Table t;
     SessionConfig cfg = levelConfig(0);
-    cfg.lessonChapter = 1;   // "pieces": the rook first
+    cfg.lessonChapter = 1;   // "pieces_lines": the rook first
     t.start(cfg);
     const Lesson lesson;
     int expect = -1;
@@ -940,7 +1054,7 @@ TEST(coach_session_rules_lesson_chapter) {
     CHECK(t.until([&] { return t.said("lesson.rook.ok"); }, 30.0f));
     CHECK(t.until([&] {
         for (const fake::Stage::Ev& e : t.stage.all("setPosition"))
-            if (e.text == "7k/8/n7/8/P7/8/8/R3K3 w - - 0 1") return true;
+            if (e.text == "7k/8/8/1r6/8/8/8/4KB2 w - - 0 1") return true;   // the bishop's set-up
         return false;
     }, 60.0f));
 

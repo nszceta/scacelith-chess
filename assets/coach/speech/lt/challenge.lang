@@ -17,6 +17,11 @@
 # "Mate in N" = "matas per N ėjimų" (glossary). The challenge names quoted in ch.intro.* are the
 # names chosen for assets/i18n/lt.lang (challenge.<id>.name).
 
+# ---- From the last game (the set practises its tip; {theme} comes after a colon) ------------------
+ch.practise = Iš tavo paskutinės partijos: {theme}. Šis rinkinys sukurtas kaip tik tam.
+ch.practise.2 = Paskutinėje partijoje buvo vienas dalykas, ką patreniruoti: {theme}. Pasitreniruokime.
+ch.practise.3 = Praėjusios partijos patarimas buvo toks: {theme}. Štai šiek tiek treniruotės.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Matas per vieną ėjimą. {n:position}, ir kiekvienoje matui užtenka vieno ėjimo. Patikrink kiekvieną šachą.
 ch.intro.mate2 = Matas per du ėjimus. {n:position}: pirmasis tavo ėjimas turi atimti iš manęs bet kokią gynybą, o tada paskelbsi matą.

@@ -15,6 +15,10 @@
 # {n:position} always follows a preposition here ("في {n:position}").
 
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
+ch.practise = من مباراتك الأخيرة: {theme}. هذه المجموعة مصمّمة لذلك.
+ch.practise.2 = في مباراتك الأخيرة أمر واحد يستحق العمل: {theme}. لنتمرّن عليه.
+ch.practise.3 = نصيحة المباراة الماضية كانت: {theme}. إليك بعض التمرين.
+
 ch.intro.mate1 = كش مات في نقلة واحدة. في {n:position}، تكفي نقلة واحدة كل مرة للإماتة. تفحّص كل كش ممكن.
 ch.intro.mate2 = كش مات في نقلتين. في {n:position}، يجب ألّا تترك لي نقلتك الأولى أي دفاع، ثم تعطي كش مات.
 ch.intro.mate3 = كش مات في ثلاث نقلات. في {n:position}، فكّر في الكش والأخذ والتهديد، واحسب أفضل ردّ لي في كل مرة.

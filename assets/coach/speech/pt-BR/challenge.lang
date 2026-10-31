@@ -15,6 +15,11 @@
 # not "Bem defendido!"). A count after the position count never agrees with it ("{n:position} em que",
 # not "... tiradas de"), so that "1 posição" and "6 posições" both read well.
 
+# ---- A set made for the theme of the player's last game ----------------------------------------------
+ch.practise = Da sua última partida: {theme}. Este conjunto foi feito para isso.
+ch.practise.2 = Na sua última partida havia algo para trabalhar: {theme}. Vamos praticar.
+ch.practise.3 = A dica da última partida foi: {theme}. Aqui vai um treino.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Mate em um. {n:position}, e em cada uma, um único lance dá xeque-mate. Olhe todos os xeques.
 ch.intro.mate2 = Mate em dois. {n:position}: seu primeiro lance tem de me deixar sem defesa, e então você dá mate.

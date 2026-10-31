@@ -291,13 +291,14 @@ TEST(coach_core_review_praise_trade_when_ahead) {
 TEST(coach_core_review_praise_castling) {
     // 4.O-O, the engine's move: a beginner is told well done, once a game.
     const ai::Analysis a0 = analysisOf({pvl(30, "e1g1 g8f6"), pvl(25, "c2c3 g8f6")});
-    for (int level = 1; level <= 2; ++level) {
+    for (int level = 1; level <= 4; ++level) {
         Game g = gameOf(nullptr, {"e4", "e5", "Nf3", "Nc6", "Bc4", "Bc5", "O-O"});
         Reviewer rv;
         rv.reset(level, White);
         const Review r = reviewOf(rv, g, a0);
         checkScript(r.script, "castle");
-        CHECK_EQ(hasKey(r.script, "praise.castle.b1"), level == 1);
+        for (int b = 1; b <= 4; ++b)
+            CHECK_EQ(hasKey(r.script, "praise.castle.b" + std::to_string(b)), b == level && level <= 3);
     }
     // Black castles too.
     Game g = gameOf(nullptr, {"e4", "e5", "Nf3", "Nc6", "Bc4", "Bc5", "d3", "Nf6", "c3", "O-O"});
@@ -328,12 +329,72 @@ TEST(coach_core_review_praise_piece_saved) {
         CHECK_EQ(r.verdict.cls, MoveClass::Best);
         CHECK_EQ(hasKey(r.script, "praise.saved.b1"), k.saved);
     }
-    // Level 2 does not praise a piece merely saved.
-    const ai::Analysis a0 = analysisOf({pvl(150, cases[0].line), pvl(140, "d4b3 g8f7 b3d2 f7e6")});
-    Game g = gameOf(fen, {"Nf3"});
-    Reviewer rv;
-    rv.reset(2, White);
-    CHECK(!hasKey(reviewOf(rv, g, a0).script, "praise.saved.b1"));
+    // Level 2 praises it in its own words; level 4 not at all.
+    for (int level = 2; level <= 4; ++level) {
+        const ai::Analysis a0 = analysisOf({pvl(150, cases[0].line), pvl(140, "d4b3 g8f7 b3d2 f7e6")});
+        Game g = gameOf(fen, {"Nf3"});
+        Reviewer rv;
+        rv.reset(level, White);
+        const Review r = reviewOf(rv, g, a0);
+        CHECK_EQ(hasKey(r.script, "praise.saved.b" + std::to_string(level)), level <= 3);
+        CHECK(!hasKey(r.script, "praise.saved.b1"));
+    }
+}
+
+TEST(coach_core_review_praise_develop_and_protect_name_the_habit) {
+    // 1.Nf3, the engine's move: a piece brought out is praised as such at levels 1-2; a pawn move is not.
+    const ai::Analysis open = analysisOf({pvl(30, "g1f3 g8f6"), pvl(25, "e2e4 e7e5")});
+    for (int level = 1; level <= 3; ++level) {
+        Game g = gameOf(nullptr, {"Nf3"});
+        Reviewer rv;
+        rv.reset(level, White);
+        const Review r = reviewOf(rv, g, open);
+        checkScript(r.script, "develop");
+        CHECK_EQ(hasKey(r.script, "praise.develop.b" + std::to_string(level)), level <= 2);
+    }
+    {
+        Game g = gameOf(nullptr, {"e4"});
+        Reviewer rv;
+        rv.reset(1, White);
+        CHECK(!hasKey(reviewOf(rv, g, analysisOf({pvl(30, "e2e4 e7e5"), pvl(25, "g1f3 g8f6")})).script, "praise.develop.b1"));
+    }
+    // The knight on d4 is attacked by the bishop and unprotected; Rd1 protects it (the trade that
+    // follows wins nothing): praised with the piece named, at levels 1-2 only.
+    const char* fen = "6k1/pp4pp/8/4b3/3N4/8/PP4PP/4R1K1 w - - 0 1";
+    const ai::Analysis guard = analysisOf({pvl(0, "e1d1 g8f8 g1f1 f8e7"), pvl(-10, "d4b3 g8f8 g1f1 f8e7")});
+    for (int level = 1; level <= 3; ++level) {
+        Game g = gameOf(fen, {"Rd1"});
+        Reviewer rv;
+        rv.reset(level, White);
+        const Review r = reviewOf(rv, g, guard);
+        checkScript(r.script, "protect");
+        const std::string key = "praise.protect.b" + std::to_string(level);
+        CHECK_EQ(hasKey(r.script, key), level <= 2);
+        if (level <= 2) {
+            const Beat* b = beatWithKey(r.script, key);
+            const Arg* your = b ? b->line.arg("your") : nullptr;
+            CHECK(your && your->piece == Knight && your->own);
+        }
+    }
+}
+
+TEST(coach_core_review_praise_comes_sooner_at_first_for_beginners) {
+    // 1.Nf3 Nf6 2.d4 d5 3.Nc3, a piece brought out on the first and the third move: at level 1 the
+    // third is praised again (the first ten moves are praised up to every second move); at level 2
+    // the pause is four moves, so it is not.
+    const ai::Analysis first = analysisOf({pvl(30, "g1f3 g8f6"), pvl(25, "e2e4 e7e5")});
+    const ai::Analysis quiet = analysisOf({pvl(30, "d2d4 d7d5"), pvl(25, "e2e4 e7e5")});
+    const ai::Analysis third = analysisOf({pvl(30, "b1c3 c7c6"), pvl(25, "e2e4 e7e5")});
+    for (int level = 1; level <= 2; ++level) {
+        Reviewer rv;
+        rv.reset(level, White);
+        const std::string key = "praise.develop.b" + std::to_string(level);
+        CHECK(hasKey(reviewOf(rv, gameOf(nullptr, {"Nf3"}), first).script, key));
+        reviewOf(rv, gameOf(nullptr, {"Nf3", "Nf6", "d4"}), quiet);
+        const Review r = reviewOf(rv, gameOf(nullptr, {"Nf3", "Nf6", "d4", "d5", "Nc3"}), third);
+        checkScript(r.script, "third move");
+        CHECK_EQ(hasKey(r.script, key), level == 1);
+    }
 }
 
 TEST(coach_core_review_praise_excellent_needs_a_harder_move) {

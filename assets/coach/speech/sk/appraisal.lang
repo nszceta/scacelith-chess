@@ -293,6 +293,12 @@ appraisal.num.takebacks.b2 = Vrátili sme {n:move} a {m} z nich sa ti podarilo o
 appraisal.num.takebacks.b2.2 = Vrátené ťahy: {n}, opravené: {m}. Takto sa napreduje!
 appraisal.num.takebacks.b3 = Vrátili sme {n:move} a {m} z nich sa ti podarilo opraviť.
 appraisal.num.takebacks.b3.2 = Vrátené ťahy: {n}, z toho opravené: {m}. Dobre.
+appraisal.num.retried.b1 = Opravené opakovaním: {n:mistake}. Tak sa človek učí!
+appraisal.num.retried.b1.2 = Na dobrý ťah sa podarilo zmeniť: {n:mistake}. Skvelé!
+appraisal.num.retried.b2 = Opravené druhým pokusom: {n:mistake}. Tak sa učíme.
+appraisal.num.retried.b2.2 = Druhým pokusom sa opravilo: {n:mistake}. Dobré učenie!
+appraisal.num.retried.b3 = Opravené druhým pokusom: {n:blunder}.
+appraisal.num.retried.b3.2 = Hrubé chyby opravené na druhý pokus: {n:blunder}. Dobre.
 # Level 2: big mistakes ({n} = mistakes and blunders), or the best moves found ({n}).
 appraisal.num.clean.b2 = Ani jedna vážna chyba: výborne!
 appraisal.num.clean.b2.2 = V tejto partii ani jedna vážna chyba. Vynikajúce!
@@ -343,10 +349,26 @@ appraisal.improve.theme.b5 = Opakuje sa: {theme}.
 appraisal.improve.theme.b5.2 = Téma partie: {theme}.
 appraisal.improve.theme.b6 = Opakuje sa: {theme}.
 appraisal.improve.theme.b6.2 = Téma: {theme}.
+appraisal.improve.theme.again.b1 = Rovnaká rada ako minule: {theme}. Maj ju na pamäti.
+appraisal.improve.theme.again.b1.2 = Toto sa objavilo aj v minulej partii: {theme}. Popracujme na tom spolu.
+appraisal.improve.theme.again.b1.3 = Zase jedna vec na precvičenie: {theme}. S každou partiou je to ľahšie.
+appraisal.improve.theme.again.b2 = Rovnaká myšlienka ako v minulej partii: {theme}. Oplatí sa trénovať.
+appraisal.improve.theme.again.b2.2 = Aj toto sa objavilo v minulej partii: {theme}.
+appraisal.improve.theme.again.b2.3 = Opäť niečo, na čom treba popracovať: {theme}.
+appraisal.improve.theme.again.b3 = Téma sa vracia: {theme}. Bola aj v minulej partii.
+appraisal.improve.theme.again.b3.2 = Rovnaká téma ako nedávno: {theme}. Oplatí sa trénovať.
+appraisal.improve.theme.again.b4 = Opakujúca sa téma, aj v nedávnych partiách: {theme}.
+appraisal.improve.theme.again.b4.2 = Rovnaká téma ako nedávno: {theme}.
+appraisal.improve.theme.again.b5 = Opakuje sa, aj nedávno: {theme}.
+appraisal.improve.theme.again.b5.2 = Rovnaká téma ako v nedávnych partiách: {theme}.
+appraisal.improve.theme.again.b6 = Znova: {theme}.
+appraisal.improve.theme.again.b6.2 = Téma sa opakuje: {theme}.
 # The critical moment (levels 2-6). Moves are never declined: "namiesto ťahu {crit_move}", and the
 # neuter "lepšie bolo {crit_best}" (no adjective agreeing with a move).
 appraisal.improve.critical.b2 = Partia sa zlomila v {crit_no:ord_loc} ťahu. Nabudúce sa zameraj na toto: {theme}.
 appraisal.improve.critical.b2.2 = Kľúčovým momentom bol {crit_no:ord} ťah, {crit_move}. Niečo na precvičenie: {theme}.
+appraisal.improve.critical.again.b2 = Partia sa zlomila v {crit_no:ord_loc} ťahu a opäť išlo o toto: {theme}.
+appraisal.improve.critical.again.b2.2 = Kľúčovým momentom bol {crit_no:ord} ťah. Rovnaká myšlienka ako minule: {theme}.
 appraisal.improve.critical.b3 = Kritickým momentom bol {crit_no:ord} ťah. Namiesto ťahu {crit_move} bolo lepšie {crit_best}.
 appraisal.improve.critical.b3.2 = V {crit_no:ord_loc} ťahu bolo lepšie {crit_best} ako {crit_move}. Najprv kontroluj moje vynucujúce ťahy.
 appraisal.improve.critical.b4 = Kritický moment: {crit_no:ord} ťah, {crit_move}. Lepšie bolo {crit_best}.
@@ -406,6 +428,13 @@ appraisal.improve.clean.b5 = Bez kritických chýb.
 appraisal.improve.clean.b5.2 = Čistá partia.
 appraisal.improve.clean.b6 = Čistá partia.
 appraisal.improve.clean.b6.2 = Žiadne kritické chyby.
+appraisal.next.retry.b1 = Keď skončíme, môžeš tú pozíciu skúsiť znova.
+appraisal.next.retry.b1.2 = Potom môžeš tú ošemetnú pozíciu skúsiť znova.
+appraisal.next.retry.b1.3 = Chceš tú pozíciu skúsiť znova? O chvíľu môžeš.
+appraisal.next.retry.b2 = Ďalší krok: skús tú pozíciu znova a nájdi lepší ťah.
+appraisal.next.retry.b2.2 = Potom môžeš tú pozíciu skúsiť znova.
+appraisal.next.retry.b3 = Ďalší krok: skúsiť pozíciu znova a nájsť lepší ťah.
+appraisal.next.retry.b3.2 = Pozíciu môžeš skúsiť znova z obrazovky na konci partie.
 
 # ---- 5. Encouragement and the level suggestion -----------------------------------------------------
 # {level} always in „...“ after "úroveň" in a fixed case ("na úrovni „Začiatočník“"): the name never

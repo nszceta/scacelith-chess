@@ -15,6 +15,11 @@
 # agrees with the player. Each intro starts with the challenge's name exactly as assets/i18n/hi.lang
 # writes it (challenge.<id>.name), even where the menu's polite "-ें" form differs from the coach's "तुम".
 
+# From the last game: the review's tip as the reason for this set ({theme} = a phrase, no full stop).
+ch.practise = पिछली बाज़ी से: {theme}। यह सेट इसी के लिए बना है।
+ch.practise.2 = पिछली बाज़ी में एक बात पर काम करना था: {theme}। चलो, इसका अभ्यास करते हैं।
+ch.practise.3 = पिछली बाज़ी का सुझाव था: {theme}। यह रहा अभ्यास।
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = एक चाल में मात। {n:position}, और हर बार सिर्फ़ एक चाल से मात होती है। हर शह को देखो।
 ch.intro.mate2 = दो चालों में मात। {n:position}: तुम्हारी पहली चाल के बाद मेरे पास कोई बचाव नहीं बचना चाहिए, फिर मात दो।

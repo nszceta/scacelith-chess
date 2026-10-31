@@ -13,6 +13,12 @@
 # отговорил"); the player's gender is unknown. "{n:position}" is never followed by a relative
 # pronoun ("които" would not agree with "1 позиция").
 
+# ---- A challenge started from the end card of a game: said before its introduction ----------------
+# {theme}: the one thing the coach named at the end of that game.
+ch.practise = От последната ти партия: {theme}. Този комплект е направен точно за това.
+ch.practise.2 = В последната ти партия имаше едно нещо за упражняване: {theme}. Да го упражним.
+ch.practise.3 = Съветът от миналата партия беше: {theme}. Ето малко упражнения.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Мат в един ход. {n:position}, и всеки път един-единствен ход дава мат. Провери всеки шах.
 ch.intro.mate2 = Мат в два хода. {n:position}: първият ти ход трябва да ме остави без защита, а после даваш мат.

@@ -5,15 +5,23 @@
 # coach.level.*.name in assets/i18n/zh-Hans.lang.
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = 你好！我们轻松地下一盘吧。遇到问题，我随时帮你。
+event.greet.l1 = 你好！我们轻松地下一盘吧。你的棋子有危险时，我会告诉你。
 event.greet.l1.2 = 嗨！我会下得温和一些，告诉你该注意什么。
 event.greet.l1.3 = 欢迎！慢慢来：有棋子遇到危险时，我会提醒你。
-event.greet.l2 = 你好！开始吧。一出现捉双或牵制，我就指给你看。
+event.greet.l1.first = 你好！每走一步之前，先问：我的子安全吗？我这步棋攻击什么？对手在威胁什么？我会提醒你。
+event.greet.l1.first.2 = 你的第一盘正式对局！每步之前想一想：我的子安全吗，它攻击什么，有什么威胁？我会提醒你。
+event.greet.l2 = 你好！开始吧。如果我这步棋要形成捉双或牵制，我会告诉你。
 event.greet.l2.2 = 嗨！把棋子出动起来，保护好你的王。我会一路帮你。
 event.greet.l2.3 = 欢迎回到棋盘前！留意捉双和牵制：它们常常决定胜负。
-event.greet.l3 = 你好！我们认真下一盘。我会点评你的计划和较大的错误。
+event.greet.l3 = 你好！我们认真下一盘。大的威胁我会提醒你，较大的错误我会讲解。
 event.greet.l3.2 = 嗨！给你的棋子想一个计划。哪步棋考虑不周，我会告诉你。
-event.greet.l3.3 = 开始吧！我会指出唯一着法，以及出问题的着法。
+event.greet.l3.3 = 开始吧！只有一步棋可行，或者某步棋出了问题时，我会告诉你。
+event.greet.l1.theme = 欢迎回来！上一盘的提示是：{theme}。今天请记在心里。
+event.greet.l1.theme.2 = 又见面了！记住上一盘的提示：{theme}。我会帮你。
+event.greet.l2.theme = 欢迎回来！上一盘的想法是：{theme}。看看今天怎么样。
+event.greet.l2.theme.2 = 又见面了！上一盘值得记住的一点：{theme}。
+event.greet.l3.theme = 欢迎回来！上一盘的主题是：{theme}。今天请记在心里。
+event.greet.l3.theme.2 = 嗨，又见面了！来自上一盘：{theme}。看看今天怎么样。
 event.greet.l4 = 你好！这次我会给出评估，并告诉你更好的候选着法。
 event.greet.l4.2 = 开始吧。你走出错着后，我会告诉你更精确的下法。
 event.greet.l4.3 = 准备好下一盘俱乐部水平的棋了吗？评估一变，我就点评。
@@ -31,9 +39,9 @@ event.colour.black = 我执白，所以我先走。
 event.colour.black.2 = 这次你执黑：我先走。
 
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
-event.level.l1 = 入门第一步：我下得温和，用浅显的话讲解每个错误。
-event.level.l2 = 初学者：我下得稍强一些，并点出捉双、牵制这类简单战术。
-event.level.l3 = 中级棋手：我会讲计划和兵形，并演示简短的变化。
+event.level.l1 = 入门第一步：我下得温和。你的子被攻击又无人保护时，我会告诉你，大错我会用浅显的话讲解。
+event.level.l2 = 初学者：我下得稍强一些。捉双、牵制和对你后的攻击我会提醒你，还会提醒你出动棋子。
+event.level.l3 = 中级棋手：我只提醒将死和对你后的攻击，以及只有一步棋可行的时刻。你的错误我仍会讲解。
 event.level.l4 = 俱乐部棋手：我以兵为单位给出评估，并建议候选着法。
 event.level.l5 = 强俱乐部棋手：点评简短，关键时刻给出更长的变化。
 event.level.l6 = 专家：我会全力以赴，只点评关键时刻。
@@ -103,5 +111,7 @@ event.end.handshake = 我们握个手吧。
 # {chapter} = the chapter's title (lesson.title.* in lesson.lang), in quotes inside a sentence.
 event.lesson.resume = 欢迎回来！我们继续学习“{chapter}”。
 event.lesson.resume.2 = 又见面了！我们上次学到了“{chapter}”。
+event.lesson.start = 我们从“{chapter}”开始。
+event.lesson.start.2 = 我们先学“{chapter}”。
 event.lesson.next = 下一课：{chapter}。
 event.lesson.next.2 = 现在来学“{chapter}”。

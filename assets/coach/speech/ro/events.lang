@@ -6,15 +6,23 @@
 # ("ai meritat", "ai abandonat"), the present, the future and nouns.
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Salut! Hai să jucăm o partidă prietenească. Te ajut ori de câte ori ceva nu merge bine.
+event.greet.l1 = Salut! Hai să jucăm o partidă prietenească. Îți spun când una dintre piesele tale e în pericol.
 event.greet.l1.2 = Bună! Voi juca blând și îți voi arăta la ce trebuie să ai grijă.
 event.greet.l1.3 = Bine ai venit! Nu te grăbi: îți spun când o piesă e în pericol.
-event.greet.l2 = Salut! Hai să jucăm. Când apare o furculiță sau o legare, ți-o arăt.
+event.greet.l1.first = Salut! Înainte de fiecare mutare, întreabă-te: piesa mea e în siguranță? Ce atacă mutarea mea? Ce amenință adversarul? Îți amintesc eu.
+event.greet.l1.first.2 = Prima ta partidă adevărată! Înainte de fiecare mutare: piesa mea e în siguranță, ce atacă, care e amenințarea? Îți amintesc eu.
+event.greet.l2 = Salut! Hai să jucăm. Dacă mutarea mea pregătește o furculiță sau o legare, îți spun.
 event.greet.l2.2 = Bună! Scoate-ți piesele și ține-ți regele în siguranță. Te ajut pe parcurs.
 event.greet.l2.3 = Bine ai revenit la tablă! Atenție la furculițe și legări: ele câștigă partide.
-event.greet.l3 = Salut! Hai să jucăm o partidă adevărată. Îți voi comenta planurile și greșelile mai mari.
+event.greet.l3 = Salut! Hai să jucăm o partidă adevărată. Te avertizez la amenințările mari și îți explic greșelile mai mari.
 event.greet.l3.2 = Bună! Gândește-te la un plan pentru piesele tale. Îți spun când o mutare scapă ceva din vedere.
-event.greet.l3.3 = Hai să jucăm! Îți voi semnala singurele mutări bune și mutările care nu merg.
+event.greet.l3.3 = Hai să jucăm! Îți spun când doar o mutare merge și când o mutare nu merge.
+event.greet.l1.theme = Bine ai revenit! Sfatul din ultima partidă a fost: {theme}. Ține-l minte și azi.
+event.greet.l1.theme.2 = Salut din nou! Ține minte sfatul din ultima partidă: {theme}. Te ajut.
+event.greet.l2.theme = Bine ai revenit! Ideea din ultima partidă a fost: {theme}. Să vedem cum merge azi.
+event.greet.l2.theme.2 = Salut din nou! Ceva de ținut minte din ultima partidă: {theme}.
+event.greet.l3.theme = Bine ai revenit! Tema ultimei partide a fost: {theme}. Ține-o minte și azi.
+event.greet.l3.theme.2 = Salut din nou! Din ultima partidă: {theme}. Să vedem cum merge azi.
 event.greet.l4 = Salut! De data asta îți dau evaluări și îți arăt mutările candidate mai bune.
 event.greet.l4.2 = Să jucăm. După o greșeală, îți spun ce era mai precis.
 event.greet.l4.3 = O partidă ca la club? Comentez când se schimbă evaluarea.
@@ -34,9 +42,9 @@ event.colour.black.2 = De data asta joci cu negrele: eu mut primul.
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names are those of the coach page (assets/i18n/ro.lang coach.level.<n>.name): Primii pași,
 # Începător, Intermediar, Jucător de club, Jucător de club puternic, Expert.
-event.level.l1 = Primii pași: joc blând și îți explic fiecare greșeală în cuvinte simple.
-event.level.l2 = Începător: joc ceva mai tare și numesc tacticile simple, cum ar fi furculițele și legările.
-event.level.l3 = Intermediar: vorbesc despre planuri și structura de pioni și îți arăt variante scurte.
+event.level.l1 = Primii pași: joc blând. Te anunț când o piesă a ta e atacată și fără apărare și explic greșelile mari în cuvinte simple.
+event.level.l2 = Începător: joc ceva mai tare. Te avertizez la furculițe, legări și atacuri asupra damei și îți amintesc să-ți scoți piesele.
+event.level.l3 = Intermediar: te avertizez doar la mat și la atacuri asupra damei, și când doar o mutare merge. Îți explic în continuare greșelile.
 event.level.l4 = Jucător de club: dau evaluări în pioni și îți propun mutări candidate.
 event.level.l5 = Jucător de club puternic: comentarii scurte și variante mai lungi când contează.
 event.level.l6 = Expert: joc cât pot de bine și comentez doar momentele critice.
@@ -107,5 +115,7 @@ event.end.handshake = Hai să dăm mâna.
 # article: it always follows a colon, never a preposition ("la", "cu" would change the article).
 event.lesson.resume = Bine ai revenit! Continuăm lecția: {chapter}.
 event.lesson.resume.2 = Salut din nou! Reluăm de unde am rămas: {chapter}.
+event.lesson.start = Să începem: {chapter}.
+event.lesson.start.2 = Pornim de aici: {chapter}.
 event.lesson.next = Urmează: {chapter}.
 event.lesson.next.2 = Și acum: {chapter}.

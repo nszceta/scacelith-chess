@@ -42,7 +42,9 @@ depth / move time / nodes) and the time control (unlimited, 1+0, 3+0, 3+2, 5+0, 
 15+10, 30+0, 30+20, 90+30, or custom with increment and delay). Your colour is random for the
 first game, then alternates. Every physical action (touching, moving, capturing, promoting,
 pressing the clock) takes exactly the same time for both players, and each clock only stops when
-the lever is actually pressed.
+the lever is actually pressed. A time control such as 5+3 means five minutes each plus three
+seconds added after every move; games are called bullet, blitz, rapid or classical, from the
+shortest to the longest.
 
 Stockfish runs on your computer. With **Realistic thinking time** (Options > Gameplay, on by
 default) it takes about as long over a move as a human of its strength would with its clock: longer
@@ -76,6 +78,8 @@ being turned.
 Each player has a handwriting of their own (Caveat, Marck Script or Bad Script for Latin and
 Cyrillic; names in other scripts are written in Aref Ruqaa, Klee One or LXGW WenKai), and moves use
 the piece letters of the interface language.
+Moves are written as the piece's letter and the destination square (Nf3); a pawn move is written
+with the square alone.
 
 ### Your Elo
 
@@ -141,15 +145,30 @@ your colour (White, Black, or alternating from one game to the next); the choice
 (`[coach]` in the settings file).
 
 - **The rules of chess** (level 0) is an interactive lesson, always with White: the coach sets up
-  small positions and shows how each piece moves and captures, then castling, promotion, check
-  and checkmate, the habit of looking before every move and the first rules of the opening, and
-  you try each idea on the board. Legal-move hints are on, touch-move is relaxed (a piece can be
-  put back), nothing is written down; leaving it resumes at the same chapter next time.
+  small positions and shows how each piece moves and captures, what the pieces are worth and
+  which captures are safe, then check (getting out of it by moving, blocking or capturing) and
+  checkmate (telling a check from a mate by counting the king's squares), castling, en passant
+  (and when the chance has gone), promotion (by capturing too), stalemate, the habit of looking before every move and the first rules of the opening. A
+  review chapter then asks, without explaining, one position each of promotion, getting out of
+  check, castling on the side where it is allowed, en passant and mate in one, in an order
+  different from the one taught. You try each idea on the board; a wrong move gets an answer about that very move, and when the coach has to show the solution it also points at what makes it work. Legal-move hints are on,
+  touch-move is relaxed (a piece can be put back), nothing is written down; leaving it resumes at
+  the same chapter next time. With the
+  lesson selected, the **Chapter** row of the Coach page chooses where it starts: click it for the
+  whole list, or step through with the arrows. It shows the chapter you stopped at (the first one
+  when you have not begun, or completed the lesson), and any chapter can be started to go over it
+  again; completing the lesson stays recorded whatever chapter it started at.
+  The last chapter tells how games with the coach work: no clock and no rating, touch-move, the
+  handshake, and how the coach helps (it tells you when a piece of yours is attacked or left
+  unprotected, offers to take back a big mistake, and Space skips what it says); the lesson's end
+  card offers to play *First steps*, and says what that level does.
 - **Levels 1 to 6** (from *First steps* to *Expert*) are real games against the coach's Stockfish
   at that strength, with its teaching repertoire in the opening. The lower the level, the plainer
   the words; levels 0 to 2 show the board's coordinates. There is no clock, the game is never
   rated, the scoresheets name the coach with its level's rating, and touch-move and the hints
-  option apply as in a normal game.
+  option apply as in a normal game. Your first game at level 1 after the rules lesson opens by
+  recalling the lesson's three questions (is my piece safe, what does my move attack, what is
+  the opponent threatening).
 - After your move the coach may say what it saw: a threat, a good move, a mistake. It points at
   the pieces and squares it talks about, which light up in blue on the board, and it can show a
   line by playing it with its own hand, then put the pieces back. A line never leaves a bigger
@@ -168,9 +187,26 @@ your colour (White, Black, or alternating from one game to the next); the choice
   if you find it. A move that costs a little is called
   a small slip, never a mistake with a made-up line. Praise goes to a move that mattered: not to
   one of several moves as good as each other, nor to a small gain in a game already won or lost.
-  At levels 1 and 2 the coach also looks for its own threats with a search after each of its moves:
-  it holds back a warning when the search finds that the threat wins nothing, and when your move
-  then loses to a threat it found, it says that you did not answer it. A mistake (less than a
+  At levels 1 and 2 the praise also names the habit: a minor piece brought out in the opening, an
+  attacked piece you defended, a move that answered the coach's last threat (the coach then adds
+  "you check my threats" when it had nothing else to say). Castling and a piece moved out of danger
+  are praised at levels 1 to 3. At level 1 the first ten moves are praised up to every second move,
+  after that every third.
+  At levels 1 to 3 the coach also looks for its own threats with a search after each of its moves:
+  it holds back a warning when the search finds that the threat wins nothing, and (levels 1 and 2)
+  when your move then loses to a threat it found, it says that you did not answer it. What it
+  warns of depends on the level: level 1, a mate threat and any piece or pawn of yours left
+  attacked and without a protector; level 2, a mate threat, an attack on your queen, and a fork or
+  a pin that its move sets up, which it names; level 3, only a mate threat or an attack on your
+  queen, in one plain line, and a position where only one move is good (the engine's two best
+  moves far apart), at most every eight moves. At levels 1 and 2 the first threat of a game is
+  only asked about ("My last move made a threat. Can you see which of your pieces is in
+  danger?"), with nothing pointed at and the danger markers off; it is said and pointed at after
+  15 seconds without a move, or when you touch a piece that is neither in danger nor able to deal
+  with the threat. Moving or defending the piece in danger needs no answer. Once per game, after
+  your fifth move, the coach at levels 1 and 2 also reminds you to bring out your knights and
+  bishops when none has moved. At level 1 a mistake that leaves a piece or pawn unprotected and
+  taken at once gets one short line, without a demonstration or a takeback offer. A mistake (less than a
   blunder) is explained in words only, without playing the line: the coach then plays its own
   move, and you answer it. After a blunder it has shown, it offers to take
   your move back: **Take back** or
@@ -184,13 +220,43 @@ your colour (White, Black, or alternating from one game to the next); the choice
   still clearly ahead, depends on the level: the lower the level, the bigger the advantage it
   takes, as players of that level turn an advantage into a win less surely. The coach then keeps
   pointing out what a move gives away in a game a strong player would win anyway, and offers the
-  takeback more often.
+  takeback more often. At level 3 the hint after a takeback is also given: for a mistake with no
+  cause of its own to point at, it only says where to look (which of your pieces my reply attacks),
+  naming no piece; after a good replay of a mistake with a known cause, the coach adds one line on
+  that cause.
 - **Space** skips what the coach is saying. **Esc** opens the menu: take back my move (your last
   move and the coach's reply, as long as neither scoresheet has written them), offer or claim a
   draw, resign, options, main menu (abandons the game).
 - At the end the coach says a word on the game, shakes your hand and sums the game up; the end
   card offers to play again at the same level. When the coach suggests another level, the Coach
-  page proposes it next time.
+  page proposes it next time. A move you took back counts in the summary as the move you played
+  first, not only as the one you replayed: taking back every blunder does not make a game
+  accurate, and the coach says how many blunders you fixed by trying again. At levels 1 to 3, when
+  the game had a critical blunder, the card also offers **Try that position again**: the board is
+  set up as it was before that move, with you to move, and the coach asks for a better move and
+  points at the piece that has one. The engine's move is right, and so is any move the coach
+  would not call a mistake. A wrong try is taken back with a word to look again; after the second
+  one the coach shows the better move. Nothing of a retry is saved, no game and no rating; its
+  end card offers the position once more only when the better move had to be shown.
+- **The coach remembers your games** (levels 1 to 6; the last 40 are kept in `[coach]` `history`
+  of the settings file, with the level, result, accuracy, the theme the coach named, your
+  blunders and whether the danger markers were on). When the improvement the coach names at the
+  end of a game is the same as in one of your last two games, it says so ("The same tip as last
+  time") instead of presenting it afresh, and at levels 1 to 3 the next game opens by recalling it
+  (the first game after the rules lesson opens with the lesson's questions instead). The end
+  card's **Practise** button covers every theme that has a set (forks, pins, free pieces and
+  exchanges, king safety, the opening, stalemate, ...) and the practice opens with a line naming
+  that theme. Without a rated game, the Coach page's **Recommended** level is the coach's own
+  suggestion after your last game; the suggestion never moves a level 1 player up until a game at
+  level 1 had no blunder at your first try or was played without the danger markers. Levels 1 and
+  2 state a goal on their card (no piece lost for nothing in two games in a row; two wins in a row
+  without a blunder), ticked with a check mark and "Completed" when your last games met it.
+- **Danger markers** (the Coach page's *Show pieces in danger*: **Automatic**, **On**, **Off**) put
+  a coloured square under each of your pieces the coach could win, on your turn. Automatic, the
+  default, shows them for your first three games at level 1 and your first game at level 2, never
+  from level 3, and the page says so in a line once it has switched them off; On keeps them in
+  every game of levels 1 and 2. A settings file from an earlier version keeps its choice (the old
+  switch on reads as Automatic).
 
 The Coach page has two tabs: **Training** (the games above) and **Challenges**, short sets of
 positions that each train one skill without a whole game: mates in one, two and three, back-rank
@@ -205,7 +271,8 @@ try again. The coach never gives a hint you did not ask for: press **H** at any 
 piece to play, then the square to look at, then the move itself, shown by hand), and after a few
 wrong tries it asks whether you would like one (**Hint** or **H** accepts, **No, thanks** or
 touching a piece keeps looking). Nothing of a challenge is saved, no game, no rating: a green
-check on the Coach page marks the sets you have completed. The line positions come from the
+check on the Coach page marks the sets you have completed, and **Recommended** marks the set for
+the theme the coach named in two of your last three games. The line positions come from the
 Lichess puzzle database, each checked with the game's Stockfish.
 
 The coach speaks with a voice synthesised on your computer (Supertonic 3). Its model is not part of

@@ -14,6 +14,11 @@
 # Challenge names as assets/i18n/nl.lang (challenge.<id>.name). Tactical terms: matpatroon, vork, penning, spies, aftrekaanval,
 # afleiden, lokken, tussenzet, ingesloten stuk, stille zet.
 
+# ---- A challenge made from the theme of the last game ({theme}: an infinitive phrase) ---------------------
+ch.practise = Uit je laatste partij: {theme}. Deze set is daarvoor gemaakt.
+ch.practise.2 = Je laatste partij had één ding om aan te werken: {theme}. Laten we het oefenen.
+ch.practise.3 = De tip van de vorige partij: {theme}. Hier is wat oefening.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Mat in één. {n:position}, en telkens is er één zet die mat geeft. Bekijk alle schaakzetten.
 ch.intro.mate2 = Mat in twee. {n:position}: je eerste zet moet me zonder verdediging laten, daarna zet je mat.

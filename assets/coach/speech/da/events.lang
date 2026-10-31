@@ -6,15 +6,23 @@
 # Commas as the glossary says: no comma before a subordinate clause that follows its main clause.
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = Hej! Lad os spille et venskabeligt parti. Jeg hjælper dig hver gang noget går galt.
+event.greet.l1 = Hej! Lad os spille et venskabeligt parti. Jeg siger til når en af dine brikker er i fare.
 event.greet.l1.2 = Hej! Jeg spiller ikke for hårdt og viser dig hvad du skal holde øje med.
 event.greet.l1.3 = Velkommen! Tag dig god tid: jeg siger til når en brik er i fare.
-event.greet.l2 = Hej! Lad os spille. Når der opstår en gaffel eller en binding, viser jeg dig den.
+event.greet.l1.first = Hej! Før hvert træk: er min brik sikker? Hvad angriber mit træk? Hvad truer min modstander med? Jeg minder dig om det.
+event.greet.l1.first.2 = Dit første rigtige parti! Før hvert træk: er min brik sikker, hvad angriber den, hvad er truslen? Jeg minder dig om det.
+event.greet.l2 = Hej! Lad os spille. Hvis mit træk skaber en gaffel eller en binding, siger jeg til.
 event.greet.l2.2 = Hej! Få dine brikker i spil, og hold din konge i sikkerhed. Jeg hjælper dig undervejs.
 event.greet.l2.3 = Velkommen tilbage til brættet! Hold øje med gafler og bindinger: de vinder partier.
-event.greet.l3 = Hej! Lad os spille et rigtigt parti. Jeg kommenterer dine planer og de større fejl.
+event.greet.l3 = Hej! Lad os spille et rigtigt parti. Jeg advarer dig mod de store trusler og forklarer de større fejl.
 event.greet.l3.2 = Hej! Tænk over en plan for dine brikker. Jeg siger til når et træk overser noget.
-event.greet.l3.3 = Lad os spille! Jeg siger til når kun ét træk holder og når et træk går galt.
+event.greet.l3.3 = Lad os spille! Jeg siger til når kun ét træk virker, og når et træk går galt.
+event.greet.l1.theme = Velkommen tilbage! Sidste partis tip var: {theme}. Husk det i dag.
+event.greet.l1.theme.2 = Hej igen! Husk sidste partis tip: {theme}. Jeg hjælper dig.
+event.greet.l2.theme = Velkommen tilbage! Sidste partis idé var: {theme}. Lad os se hvordan det går i dag.
+event.greet.l2.theme.2 = Hej igen! Noget at huske fra sidste parti: {theme}.
+event.greet.l3.theme = Velkommen tilbage! Sidste partis tema var: {theme}. Husk det i dag.
+event.greet.l3.theme.2 = Hej igen! Fra sidste parti: {theme}. Lad os se hvordan det går i dag.
 event.greet.l4 = Hej! Denne gang giver jeg vurderinger og viser dig de bedre kandidattræk.
 event.greet.l4.2 = Lad os spille. Efter en fejl siger jeg hvad der var mere præcist.
 event.greet.l4.3 = Klar til et klubparti? Jeg kommenterer når vurderingen ændrer sig.
@@ -34,9 +42,9 @@ event.colour.black.2 = Du spiller sort denne gang: jeg trækker først.
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
 # The level names are those chosen for assets/i18n/da.lang (coach.level.<n>.name): Første skridt,
 # Begynder, Let øvet, Klubspiller, Stærk klubspiller, Ekspert.
-event.level.l1 = Første skridt: jeg spiller ikke for hårdt og forklarer hver fejl med enkle ord.
-event.level.l2 = Begynder: jeg spiller lidt stærkere og kalder enkle taktiske motiver som gafler og bindinger ved navn.
-event.level.l3 = Let øvet: jeg taler om planer og bondestruktur og viser korte varianter.
+event.level.l1 = Første skridt: jeg spiller ikke for hårdt. Jeg siger til når en af dine brikker er angrebet og udækket, og forklarer store fejl med enkle ord.
+event.level.l2 = Begynder: jeg spiller lidt stærkere. Jeg advarer om gafler, bindinger og angreb på din dronning, og minder dig om at få brikkerne ud.
+event.level.l3 = Let øvet: jeg advarer kun om mat og angreb på din dronning, og når kun ét træk virker. Jeg forklarer stadig dine fejl.
 event.level.l4 = Klubspiller: jeg giver vurderinger i bønder og foreslår kandidattræk.
 event.level.l5 = Stærk klubspiller: korte kommentarer og længere varianter når det betyder noget.
 event.level.l6 = Ekspert: jeg spiller for fuld styrke og kommenterer kun de kritiske øjeblikke.
@@ -107,5 +115,7 @@ event.end.handshake = Lad os give hånd.
 # fits after "med", "ved", "til" and a colon.
 event.lesson.resume = Velkommen tilbage! Lad os fortsætte med {chapter}.
 event.lesson.resume.2 = Hej igen! Vi stoppede ved {chapter}.
+event.lesson.start = Lad os begynde med {chapter}.
+event.lesson.start.2 = Vi begynder med {chapter}.
 event.lesson.next = Næste kapitel: {chapter}.
 event.lesson.next.2 = Nu til {chapter}.

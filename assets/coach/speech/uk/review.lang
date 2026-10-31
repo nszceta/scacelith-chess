@@ -846,6 +846,11 @@ tip.centre.b2 = Борися за центр: такі поля, як {sq}, ва
 tip.centre.b2.2 = Ти віддаєш мені центр. Подивись на поле {sq}.
 tip.centre.b3 = Ти не борешся за центр; поле {sq} — моє.
 tip.centre.b3.2 = Борися за центр, за поля навколо {sq}.
+# A reminder once per game at levels 1-2 when no knight or bishop has left its home square by the player’s fifth move ({your} = a knight to start with).
+tip.develop.b1 = Твої коні й слони ще вдома. Виведи, наприклад, {your:acc}.
+tip.develop.b1.2 = Час розвивати фігури! Легкі фігури ще вдома. Спробуй піти {your:bare_ins}.
+tip.develop.b2 = Жодна з твоїх легких фігур ще не ходила. Виводь {your:acc} та решту.
+tip.develop.b2.2 = Твої фігури ще сплять. Почни з {your:gen}.
 # Endgame technique tips.
 tip.mate_technique.b1 = Проти самотнього короля: притисни його до краю, а тоді постав мат.
 tip.mate_technique.b1.2 = Порада: тисни мого короля до краю. І свого короля тримай поруч.
@@ -922,10 +927,48 @@ praise.excellent.b4.2 = Відмінно.
 praise.excellent.b4.3 = Добре, {move} — точний хід.
 praise.castle.b1 = Добре! Рокіровку зроблено. Тепер твоєму королю безпечніше.
 praise.castle.b1.2 = Гарна рокіровка! Твій король тепер у затишному куточку.
+praise.castle.b2 = Добре, рокіровку зроблено. Король у безпеці, а тура вступає в гру.
+praise.castle.b2.2 = Рокіровка: безпечний король і тура в грі. Молодець.
+praise.castle.b3 = Добре: рокіровка, король у безпеці.
+praise.castle.b3.2 = Рання рокіровка. Розумно.
 praise.saved.b1 = Добре! Твою фігуру врятовано.
 praise.saved.b1.2 = Молодець, фігура тепер у безпеці.
+praise.saved.b2 = Добре, фігуру атакували, а її відведено.
+praise.saved.b2.2 = Добре помічено. Фігуру врятовано.
+praise.saved.b3 = Добре: атаковану фігуру відведено в безпечне місце.
+praise.saved.b3.2 = Добре помічено. Фігурі загрожувала небезпека.
+# A habit named: the player’s move dealt with what the coach attacked (the coach’s last threat).
+praise.check_threat.b1 = Добре! Загрозу від мого ходу помічено й усунено.
+praise.check_threat.b1.2 = Молодець! Перед ходом ти перевіряєш мою загрозу.
+praise.check_threat.b1.3 = Так! Ти дивишся, що я атакую. Це чудова звичка.
+praise.check_threat.b2 = Добре: загрозу помічено й знято.
+praise.check_threat.b2.2 = Ти перевіряєш, що атакує мій хід. Добра звичка.
+praise.check_threat.b2.3 = Це відповідь на мою загрозу. Добре помічено.
+# A piece of the player’s was attacked and the move defended it.
+praise.protect.b1 = Добре! {your:acc} атакували, а тепер {your:pron} під захистом.
+praise.protect.b1.2 = Молодець! Ти захищаєш {your:acc}, перш ніж я встигаю {your:pron_acc} взяти.
+praise.protect.b2 = Добре: {your:acc} атакували, і тепер є захист.
+praise.protect.b2.2 = Добре помічено. {your} тепер у безпеці.
+# The player brought a piece out.
+praise.develop.b1 = Добре! Фігуру виведено в гру. Там вона працює більше.
+praise.develop.b1.2 = Гарно! Рано виводити фігури — добра звичка.
+praise.develop.b2 = Добре, фігуру виведено. Виводь і решту.
+praise.develop.b2.2 = Молодець: розвивай фігури рано.
 praise.book.b1 = Добре, це відомий дебютний хід.
 praise.book.b1.2 = Гарно, так починають і сильні гравці.
+
+# The first threat of a game at levels 1-2 is asked about first, nothing pointed at.
+threat.ask.b1 = Мій останній хід створив загрозу. Бачиш, яка з твоїх фігур під ударом?
+threat.ask.b1.2 = Подивись на дошку. Мій останній хід щось у тебе атакує. Знайдеш що?
+threat.ask.b1.3 = Зачекай, перш ніж ходити: мій останній хід — загроза. Яка з твоїх фігур під ударом?
+threat.ask.b2 = Мій останній хід створив загрозу. Бачиш яку?
+threat.ask.b2.2 = Подивись: що атакує мій останній хід?
+threat.ask.b2.3 = Я щойно створив загрозу. Знайдеш її?
+threat.ask_mate.b1 = Мій останній хід загрожує твоєму королю. Бачиш, що я хочу зробити?
+threat.ask_mate.b1.2 = Обережно: я задумав щось серйозне. Бачиш, що я хочу зробити?
+threat.ask_mate.b1.3 = Подивись на мій останній хід. Я загрожую чимось серйозним. Бачиш чим?
+threat.ask_mate.b2 = Мій останній хід — серйозна загроза. Бачиш, що я хочу зробити?
+threat.ask_mate.b2.2 = Подивись на мій останній хід: він загрожує чимось великим. Бачиш чим?
 
 # ---- The coach's own threats (levels 1-2, before the player moves) ------------------------------
 # A mate threat ({sq} = where it would mate, pointed at at level 1; {my} = the piece).
@@ -935,6 +978,9 @@ threat.mate.b1.3 = Подивись на поле {sq}. Якщо я туди д�
 threat.mate.b2 = Обережно, я загрожую матом.
 threat.mate.b2.2 = Стережися: на {sq} загроза мату.
 threat.mate.b2.3 = Придивись уважно: є загроза мату.
+threat.mate.b3 = Обережно, я загрожую матом на {sq}.
+threat.mate.b3.2 = Є загроза мату: {my} хоче піти на {sq}.
+threat.mate.b3.3 = Стережися: я загрожую матом.
 # A threat on a piece ({my} = my attacker, pointed at at level 1; {your} = the target, pointed at).
 threat.piece.b1 = Дивись: {my} атакує {your:acc}.
 threat.piece.b1.2 = Обережно! {your:acc} атакує {my}.
@@ -942,6 +988,21 @@ threat.piece.b1.3 = Стережися, {my} хоче забрати {your:acc}.
 threat.piece.b2 = Подбай про {your:refl_acc}.
 threat.piece.b2.2 = {your} під ударом.
 threat.piece.b2.3 = Стеж за {your:refl_ins}.
+threat.piece.b3 = {my} атакує {your:acc}, і взяття виграло б матеріал.
+threat.piece.b3.2 = {your} під загрозою: {my} збирається {your:pron_acc} забрати.
+threat.piece.b3.3 = Обережно: мій останній хід атакує {your:acc}.
+# A fork the coach’s move sets up (level 2): {my} on {sq} attacks {t1} and {t2}.
+threat.fork.b2 = {my} на {sq} атакує {t1:acc} й {t2:acc} одразу. Це вилка!
+threat.fork.b2.2 = Стережися, вилка: {my} атакує {t1:acc} й {t2:acc}.
+threat.fork.b2.3 = {my} робить вилку на {t1:acc} й {t2:acc}. Урятувати обох непросто.
+# A pin (level 2): {my} on {sq} holds {your} in front of {t1}, the piece behind it.
+threat.pin.b2 = {my} на {sq} зв’язує {your:acc} із {t1:ins}. Якщо {your:pron} піде, я заберу {t1:acc}.
+threat.pin.b2.2 = Обережно: {your:acc} зв’язано {my:ins}. Якщо {your:pron} піде, {t1} пропаде.
+threat.pin.b2.3 = {your:acc} зв’язано: якщо {your:pron} піде, {my} забере {t1:acc}.
+# Level 3: the position has one good move only (the engine’s two best moves are far apart).
+threat.only.b3 = Позиція критична: справді добрий лише один хід. Не поспішай.
+threat.only.b3.2 = Обережно, тут лише один добрий хід. Спершу подивись на все.
+threat.only.b3.3 = Не поспішай: у цій позиції більшість ходів хибні.
 threat.punish.b1 = Мій останній хід був помилкою. Зможеш мене покарати?
 threat.punish.b1.2 = Хм, здається, я помилився. Знайдеш мою помилку?
 
@@ -957,6 +1018,8 @@ tb.hint.mate_missed.b1 = Подивись на мого короля. Можеш
 tb.hint.mate_missed.b1.2 = Спершу перебери шахи. Раптом там є мат!
 tb.hint.general.b1 = Не поспішай і подивись на всю дошку.
 tb.hint.general.b1.2 = Спробуй знайти безпечніший хід.
+tb.hint.b3 = Перевір, які з твоїх фігур атакує моя відповідь.
+tb.hint.b3.2 = Перш ніж ходити, подивись, що атакуватиме моя відповідь.
 # The retry.
 tb.fixed.b1 = Набагато краще!
 tb.fixed.b1.2 = Так, це краще!
@@ -964,6 +1027,13 @@ tb.fixed.b1.3 = Добре, так значно краще.
 tb.fixed = Так краще.
 tb.fixed.2 = Краще.
 tb.fixed.3 = Добре виправлено.
+# After a good retry of a move taken back for a fault with a named cause (levels 1-3): the habit ({theme} = a phrase from appraisal.lang, no full stop).
+tb.why.b1 = Запам’ятай на майбутнє: {theme}.
+tb.why.b1.2 = Добра звичка: {theme}.
+tb.why.b2 = Урок тут такий: {theme}.
+tb.why.b2.2 = Що допомогло б: {theme}.
+tb.why.b3 = Варто пам’ятати: {theme}.
+tb.why.b3.2 = Звичка, яку варто виробити: {theme}.
 tb.same = Знову той самий хід? Гаразд, подивимося.
 tb.same.2 = Тобі подобається цей хід. Зіграймо його.
 tb.found.b1 = Так! Саме цей хід я й мав на увазі.
@@ -974,3 +1044,32 @@ tb.found.2 = Точно, саме він.
 # where the offer would have been).
 tb.none_left = На жаль, більше повернути хід у цій партії не можна.
 tb.none_left.2 = Повернення ходів у цій партії закінчилися.
+
+# The end card’s "Try that position again": the position before the game’s biggest mistake; the player looks for a better move ({best} = the better move).
+retry.task.b1 = Повернімося до того моменту. Знайдеш кращий хід?
+retry.task.b1.2 = Ось позиція ще раз. Знайдеш кращий хід?
+retry.task.b2 = Це позиція перед твоєю грубою помилкою. Знайди кращий хід.
+retry.task.b2.2 = Подивімося на цей момент ще раз. Що б ти зіграв замість цього?
+retry.task.b3 = Це позиція перед критичним ходом. Знайди кращий хід.
+retry.task.b3.2 = Знову критичний момент. Який хід кращий?
+# A wrong try.
+retry.again.b1 = Не цей. Подивись ще раз.
+retry.again.b1.2 = Це ще не те. Спробуй знову.
+retry.again.b2 = Не цей. Подивись на всю дошку.
+retry.again.b2.2 = Ще ні. Спробуй інший хід.
+retry.again.b3 = Не цей. Подивись, що зробить моя відповідь.
+retry.again.b3.2 = Усе ще не те. Подумай про мою найкращу відповідь.
+# The better move was found.
+retry.found.b1 = Так! Це кращий хід. Молодець!
+retry.found.b1.2 = Знайдено! Це значно краще.
+retry.found.b2 = Так, це працює. Молодець.
+retry.found.b2.2 = Ось така ідея. Добра робота.
+retry.found.b3 = Правильно, цей хід тримає позицію. Молодець.
+retry.found.b3.2 = Саме так. Гарна знахідка.
+# The second miss: the coach shows the better move.
+retry.reveal.b1 = Ось кращий хід: {best}. Дивись.
+retry.reveal.b1.2 = Покажу: кращий хід — {best}.
+retry.reveal.b2 = Кращий хід — {best}. Дивись.
+retry.reveal.b2.2 = Ось він: {best}.
+retry.reveal.b3 = Кращий хід — {best}.
+retry.reveal.b3.2 = Потрібний хід — {best}.

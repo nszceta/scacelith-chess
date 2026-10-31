@@ -15,7 +15,9 @@
 # ---- Chapter titles (said inside "Kontynuujemy: {chapter}.") ------------------------------------
 # Nominative, lower case (see event.lesson.* in events.lang).
 lesson.title.welcome = szachownica
-lesson.title.pieces = jak poruszają się bierki
+lesson.title.pieces_lines = jak poruszają się wieża, goniec i hetman
+lesson.title.pieces_steps = jak poruszają się król, skoczek i pionek
+lesson.title.values_setup = wartości bierek i pierwsze ruchy
 lesson.title.safety = bezpieczne i niebezpieczne bicia
 lesson.title.check = szach
 lesson.title.mate = mat
@@ -25,7 +27,8 @@ lesson.title.promotion = promocja
 lesson.title.draws = pat i remisy
 lesson.title.before_move = przed ruchem
 lesson.title.opening = debiut
-lesson.title.etiquette = ranking, zegar i dobre obyczaje w prawdziwych partiach
+lesson.title.review = krótkie powtórzenie
+lesson.title.etiquette = jak wyglądają nasze partie
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
 # After the coach demonstrated the solution.
@@ -95,7 +98,7 @@ lesson.rook.king = To twój król. Użyj {your:refl_gen} z rogu szachownicy.
 lesson.rook.ok = Jest! {my} schodzi z szachownicy.
 # Pieces don't jump
 lesson.jump.blocked = Bierki nie przeskakują nad innymi. Twój pionek na {sq} zagradza wieży drogę.
-lesson.jump.knight = Skakać potrafi tylko skoczek. Wkrótce go poznamy.
+lesson.jump.all = To samo dotyczy gońca i hetmana: one też nie przeskakują nad bierkami.
 # Bishop
 lesson.bishop.intro = To jest {your}. Porusza się po przekątnych, na dowolną odległość.
 lesson.bishop.colour = Goniec zawsze zostaje na polach tego samego koloru.
@@ -140,7 +143,12 @@ lesson.pawncap.ok = Tak! Prosto, żeby iść, na ukos, żeby bić.
 lesson.values.pawn = Każda bierka ma wartość w punktach. Pionek jest wart jeden punkt.
 lesson.values.pieces = Skoczek albo {@}goniec – trzy. {@2}Wieża – pięć. {@3}Hetman – dziewięć.
 lesson.values.king = Król jest bezcenny: nigdy nie wolno go oddać.
-lesson.values.trade = Staraj się nigdy nie oddawać bierki za mniej, niż jest warta.
+lesson.values.trade = Nie wymieniaj większej bierki na mniejszą, chyba że zyskujesz więcej, niż tracisz.
+lesson.values.two = Twój skoczek atakuje dwie moje bierki: tę na {sq} i tę na {sq2}. Żadnej z nich nic nie broni.
+lesson.values.ask = Zbij tę, która jest warta więcej!
+lesson.values.small = To pionek, wart jeden punkt. {my} też stał bez obrony, a to dziewięć punktów.
+lesson.values.look = Spójrz, co atakuje twój skoczek, i zbij bierkę wartą więcej.
+lesson.values.ok = Tak! Hetman jest wart dziewięć punktów. Gdy dwie bierki stoją bez obrony, zbij większą.
 lesson.setup.corners = Każda partia zaczyna się tak: wieże w {@}rogach, obok nich {@2}skoczki, potem {@3}gońce.
 lesson.setup.queen = Hetman stoi na polu swojego koloru: twój hetman stoi na jasnym polu.
 lesson.setup.king = Obok niego stoi król. Białe zawsze zaczynają.
@@ -161,6 +169,18 @@ lesson.safety.gave = Twój hetman, wart dziewięć, poszedł za mojego skoczka, 
 lesson.safety.other = Spróbuj zbić drugą bierkę.
 lesson.safety.look = Poszukaj bierki, której nic nie broni.
 lesson.safety.ok = Doskonale! Zawsze zadawaj sobie pytanie: czy ta bierka jest broniona?
+lesson.safety.pawns = Twój hetman atakuje dwa moje pionki: na {sq} i na {sq2}.
+lesson.safety.pawns_ask = Zbij pionka, którego można bezpiecznie zbić.
+lesson.safety.gave_pawn = Twój hetman, wart dziewięć, poszedł za pionka, wartego jeden punkt.
+lesson.safety.pawns_other = Nawet pionek może być broniony. Spróbuj zbić drugiego.
+lesson.safety.pawns_ok = Dobrze! Nigdy nie ryzykuj hetmana dla bronionego pionka.
+lesson.safety.small = Teraz na odwrót. {my} jest bronion{my:y}, ale twój pionek {my:pron_acc} atakuje.
+lesson.safety.small_count = Jeśli zbijesz hetmana, mój {@}pionek odbije twojego. Oddajesz jeden punkt, a zyskujesz dziewięć.
+lesson.safety.small_ask = Zbij mojego hetmana właściwą bierką!
+lesson.safety.small_other = Zbij hetmana raczej pionkiem: najtańszą bierką, która może.
+lesson.safety.small_look = Twój pionek atakuje mojego hetmana. Zbij go nim.
+lesson.safety.small_ok = Tak! Mała bierka może zbić dużą, także bronioną: tracisz jeden punkt, a zyskujesz dziewięć.
+lesson.safety.count = Przed każdym biciem policz, ile zyskujesz i ile możesz stracić z powrotem.
 
 # ---- Chapter 3: check and getting out of check -----------------------------------------------------------------
 lesson.danger.rank = Moja wieża kontroluje cały drugi rząd.
@@ -182,6 +202,11 @@ lesson.capture.check = Mój hetman daje szacha tuż obok twojego króla.
 lesson.capture.ask = Zbij atakującą bierkę!
 lesson.capture.king_ok = Tak! Mój hetman nie miał obrony, więc twój król mógł go zbić.
 lesson.capture.knight_ok = Tak! Twój skoczek usunął atakującą bierkę.
+lesson.check.open.ask = Znowu szach! Tym razem wyjdź spod niego, jak chcesz.
+lesson.check.open.king = Król odchodzi z linii ataku. Można też zasłonić się bierką albo zbić moją wieżę skoczkiem.
+lesson.check.open.block = Atak zasłonięty. Można też było odejść królem albo zbić moją wieżę skoczkiem.
+lesson.check.open.take = Zbito moją wieżę, czyli bierkę dającą szacha. Pomogłoby też odejście królem albo zasłonięcie się.
+lesson.check.open.hint = Są trzy sposoby: {@}rusz królem, {@2}zasłoń się na kolumnie albo {@3}zbij moją wieżę skoczkiem.
 
 # ---- Chapter 4: checkmate ------------------------------------------------------------------------------------
 lesson.mate1.what = Mat: król jest pod szachem i nie ma żadnego wyjścia. Tak wygrywa się partię.
@@ -189,16 +214,34 @@ lesson.mate1.stuck = Mój król jest uwięziony za {@}własnymi pionkami.
 lesson.mate1.ask = Daj mi mata w jednym ruchu!
 lesson.mate1.wrong = Blisko! Daj szacha na mojej ostatniej linii, skąd mój król nie ucieknie.
 lesson.mate1.ok = Mat! To mat na ostatniej linii. Zapamiętaj go!
+lesson.mate1.king = Twój król stoi dobrze tam, gdzie stoi. Daj szacha wieżą.
+lesson.mate1.why = Widzisz? Wieża kontroluje {@}całą moją ostatnią linię, a {@2}własne pionki zajmują pola przed moim królem.
 lesson.mate2.ask = Twój król i hetman działają razem. Daj mi mata w jednym ruchu.
 lesson.mate2.wrong = Znajdź szacha, po którym mój król nie będzie miał ani jednego pola.
 lesson.mate2.ok = Mat! Twój król broni hetmana, więc mój król nie może go zbić.
 lesson.mate2.ok_rank = Mat na ostatniej linii! Twój król pilnuje wszystkich pól przed moim.
+lesson.mate2.king = Twój król pilnuje pól obok mojego. Zostaw go i użyj hetmana.
+lesson.mate2.half = To pilnuje pola {sq}, ale mój król nadal może pójść na {sq2}.
+lesson.mate2.why = Widzisz? Twój hetman kontroluje pola {sq} i {sq2}, a twój król pola przed moim. Mój król nie ma wyjścia.
 lesson.mate3.edge = Twoja wieża na siódmym rzędzie trzyma mojego króla na krawędzi.
 lesson.mate3.ask = Teraz użyj {your:refl_gen}, żeby dać mata.
 lesson.mate3.free = Szach, ale siódmy rząd jest teraz wolny i mój król ucieka.
 lesson.mate3.takes = Mój król po prostu zbija twoją wieżę.
 lesson.mate3.hint = Daj szacha na ostatniej linii tą wieżą, która nie pilnuje siódmego rzędu.
 lesson.mate3.ok = Mat! Dwie wieże zadziałały jak drabina.
+lesson.mate3.why = Widzisz? Jedna wieża odcina {@}siódmy rząd, a druga daje szacha na {@2}ostatniej linii. Mój król nie ma wyjścia.
+lesson.mate4.look = Szach to nie zawsze mat. Zobaczmy, co się stanie.
+lesson.mate4.ask = Daj szacha mojemu królowi wieżą.
+lesson.mate4.king = Twój król zostaje tam, gdzie jest. Daj szacha wieżą.
+lesson.mate4.wrong = To nie szach. Twoja wieża może zaatakować mojego króla z ostatniej linii.
+lesson.mate4.ok = Tak, to szach! Ale czy mat? Patrz.
+lesson.mate4.after = Mój pionek na {sq} zrobił miejsce mojemu królowi. Zanim ucieszysz się z szacha, policz pola, z których król jeszcze może skorzystać.
+lesson.mate5.ask = Dwa ruchy wieżą dają szacha, ale tylko jeden to mat. Policz pola mojego króla i wybierz.
+lesson.mate5.king = Twój król już kontroluje pola {sq} i {sq2}. Zostaw go i ruszaj wieżą.
+lesson.mate5.wrong = To nie szach. Szukaj ruchu wieżą, który atakuje mojego króla.
+lesson.mate5.hint = Twój król kontroluje pola {sq} i {sq2}. Który szach wieżą odbiera też pole {sq3}?
+lesson.mate5.why = Widzisz? Wieża kontroluje pole {sq}, twój król pozostałe dwa pola, a mój król jest uwięziony.
+lesson.mate5.ok = Mat! Liczysz pola mojego króla: żadnego nie zostaje.
 
 # ---- Chapter 5: castling ---------------------------------------------------------------------------------------
 lesson.castle.what = Roszada to specjalny ruch, który zapewnia królowi bezpieczeństwo. Król i wieża ruszają się razem.
@@ -215,6 +258,10 @@ lesson.castle2.bishop = Mój goniec atakuje pole {sq}. Dlatego roszada na tę st
 lesson.castle2.ask = Zrób roszadę na drugą stronę.
 lesson.castle2.other = Zrób roszadę w stronę swojej drugiej wieży, po stronie hetmana.
 lesson.castle2.ok = Dobrze! Po długiej roszadzie twój król stoi na {sq}.
+lesson.ep0.rule = Bicie w przelocie zaczyna się od ruchu o dwa pola. Tylko pionek, który {@}stoi jeszcze na swoim miejscu, może iść o dwa pola. Pionek, który {@2}już się ruszał, idzie po jednym.
+lesson.ep0.ask = Przesuń jednego pionka o dwa pola.
+lesson.ep0.moved = Ten pionek już się ruszał, więc może iść tylko o jedno pole. Użyj pionka, który stoi jeszcze na swoim miejscu.
+lesson.ep0.ok = Dobrze: o dwa pola może iść tylko pionek z pola początkowego.
 
 # ---- Chapter 6: en passant ------------------------------------------------------------------------------------
 # Polish names the rule "bicie w przelocie" ("capture in passing"), which already says what English
@@ -225,6 +272,13 @@ lesson.ep.how = Twój pionek może go zbić tak, jakby mój przesunął się tyl
 lesson.ep.now = Ale tylko teraz, w tym ruchu. Bij w przelocie!
 lesson.ep.gone = Okazja minęła: bicie w przelocie jest możliwe tylko od razu. Spróbujmy jeszcze raz.
 lesson.ep.ok = Bicie w przelocie! Mój pionek z pola {sq} znika z szachownicy.
+lesson.ep2.old = Mój pionek na {sq} od dawna stoi obok twojego. Na bicie w przelocie jest już za późno.
+lesson.ep2.watch = Teraz patrz na mojego drugiego pionka.
+lesson.ep2.ask = Dwa moje pionki stoją obok twojego, ale tylko jeden przed chwilą poszedł o dwa pola. Zbij go w przelocie!
+lesson.ep2.push = To tylko przesuwa twojego pionka. Zbij pionka, który właśnie poszedł o dwa pola.
+lesson.ep2.wrong = Znajdź pionka, który właśnie ruszył o dwa pola, i zbij go w przelocie.
+lesson.ep2.hint = Mój pionek na {sq} właśnie poszedł o dwa pola. Zbij go w przelocie, na {sq2}.
+lesson.ep2.ok = Bicie w przelocie! Mojego pionka na {sq} nie dało się zbić: jego szansa minęła.
 
 # ---- Chapter 7: promotion -------------------------------------------------------------------------------------
 lesson.promo.what = Gdy pionek dojdzie do ostatniego rzędu, następuje promocja: zamienia się w hetmana, wieżę, gońca albo skoczka.
@@ -233,12 +287,21 @@ lesson.promo.under = Wolno! Ale hetman jest silniejszy. Wybierzmy hetmana.
 lesson.promo.under_ok = Dobrze. Choć większość graczy wybiera hetmana.
 lesson.promo.push = Przesuń pionka na ostatni rząd, na {sq}.
 lesson.promo.ok = Nowy hetman! Możesz mieć nawet dwa hetmany naraz.
+lesson.promo2.ask = Pionek może też się promować, bijąc na ukos. Zbij moją wieżę i zrób hetmana!
+lesson.promo2.push = To też promocja, ale moja wieża pilnuje pola {sq}. Patrz.
+lesson.promo2.lost = Moja wieża zbiła twoją nową bierkę. Najpierw zbij moją wieżę.
+lesson.promo2.wrong = To nie zbija mojej wieży. Twój pionek bije na ukos, na {sq}.
+lesson.promo2.hint = Zbij moją wieżę pionkiem, na pole {sq}: bijąc, pionek się promuje.
+lesson.promo2.ok = Zbicie i promocja! Pionek może zrobić jedno i drugie w jednym ruchu.
 
 # ---- Chapter 8: stalemate and draws -----------------------------------------------------------------------------
 lesson.stale.what = Teraz mój ruch. Mój król nie jest pod szachem, ale {@}każde pole wokół niego jest atakowane.
 lesson.stale.draw = Nie mam żadnego prawidłowego ruchu. To pat i partia kończy się remisem.
 lesson.stale2.ask = Kiedy wygrywasz, uważaj na pata. Daj mi mata w jednym ruchu, bez pata!
-lesson.stale2.wrong = Daj szacha na mojej ostatniej linii, skąd mój król nie ucieknie.
+lesson.stale2.wrong = Znajdź szacha, po którym mój król nie ma pola. Uwaga: cichy ruch może dać pata.
+lesson.stale2.king = Twój król już kontroluje pola {sq} i {sq2}. Zostaw go i użyj hetmana.
+lesson.stale2.hint = Twój król kontroluje pola {sq} i {sq2}. Daj szacha wzdłuż ostatniej linii, a mój król nie ma dokąd pójść.
+lesson.stale2.why = Widzisz? Mój król jest atakowany {@}i nie ma wolnego pola: to mat. Bez szacha byłby pat.
 lesson.stale2.ok = Mat! Zawsze zostawiaj królowi przeciwnika jakiś ruch, chyba że dajesz mata.
 lesson.draws.kings = Inne remisy: gdy nikt nie może dać mata, na przykład gdy zostały same króle, partia kończy się remisem.
 lesson.draws.agree = Gracze mogą też zgodzić się na remis.
@@ -288,33 +351,29 @@ lesson.opening.castle.ask = Droga jest wolna. Zrób roszadę i schowaj króla.
 lesson.opening.castle.wrong = Twój król jest gotowy. Zrób roszadę teraz, póki droga jest wolna.
 lesson.opening.castle.ok = Roszada! Twój król jest bezpieczny, a wieża wchodzi do gry.
 lesson.opening.done = Centrum, bierki, roszada: to dobry początek każdej partii.
+lesson.review.start = Szybkie powtórzenie, tym razem w innej kolejności. Nie tłumaczę: pokaż mi.
+lesson.review.promo.ask = Wypromuj tego pionka.
+lesson.review.promo.ok = Dobrze: nowy hetman i szach!
+lesson.review.check.ask = Twój król jest pod szachem. Wydostań się z niego.
+lesson.review.check.ok = Szacha już nie ma. Dobrze.
+lesson.review.castle.ask = Zrób roszadę po tej stronie, po której wolno.
+lesson.review.castle.other = To nie roszada. Zrób roszadę po tej stronie, po której wolno.
+lesson.review.castle.ok = Roszada, po bezpiecznej stronie!
+lesson.review.ep.ask = Zbij mojego pionka w przelocie.
+lesson.review.ep.ok = Bicie w przelocie! Pamiętasz.
+lesson.review.mate.ask = Daj mi mata w jednym ruchu.
+lesson.review.mate.ok = Mat! Powtórzenie skończone.
 
-# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 11: how our games work (no clock or rating with the coach, touch-move, help, manners) ----
 lesson.talk.rules = Znasz już wszystkie zasady szachów. Brawo!
-lesson.talk.real = Opowiem ci, jak wyglądają prawdziwe partie.
-lesson.talk.elo = Gracze mają ranking, nazywany Elo. Rośnie, gdy wygrywasz, i spada, gdy przegrywasz.
-lesson.talk.elo_gap = Wygrana z silniejszym graczem daje więcej punktów, a porażka ze słabszym kosztuje więcej.
-lesson.talk.elo_start = Twój ranking pojawi się po pięciu partiach rankingowych. Partie ze mną to trening, więc nie są rankingowe.
-lesson.talk.clock = To jest {@}zegar szachowy. Każdy gracz ma swój czas, który płynie tylko podczas jego ruchu.
-lesson.talk.press = Po swoim ruchu naciskasz zegar tą samą ręką. Wtedy rusza mój czas.
-lesson.talk.flag = Jeśli skończy ci się czas, przegrywasz, chyba że nie mam żadnej możliwości, żeby dać ci mata.
-lesson.talk.increment = Pięć plus trzy oznacza po pięć minut dla każdego i trzy sekundy więcej po każdym ruchu.
-# Blitz, rapid and classical as Polish players and PZSzach name them (blitz, szachy szybkie, szachy
-# klasyczne); the time-control menu of assets/i18n/pl.lang may show them as short labels.
-lesson.talk.speeds = Krótkie partie to blitz, dłuższe – partie szybkie, a najdłuższe – klasyczne.
-lesson.talk.no_clock = Ze mną zegar jest wyłączony. Myśl tak długo, jak potrzebujesz.
-lesson.talk.touch = W prawdziwej partii, jeśli dotkniesz swojej bierki, musisz nią zagrać.
-lesson.talk.touch_mine = Jeśli dotkniesz mojej bierki, musisz ją zbić, o ile to możliwe.
-lesson.talk.adjust = Żeby poprawić bierkę bez wykonywania ruchu, najpierw powiedz „poprawiam”.
-lesson.talk.release = Gdy tylko puścisz bierkę na nowym polu, ruch jest wykonany.
-lesson.talk.sheet = Na turniejach każdy z graczy zapisuje wszystkie ruchy na {@}blankiecie.
-# {move:letters} shows the Polish scoresheet letters ("Sf3"), which is what this line teaches; a pawn
-# has no letter, so "litera figury" (a piece, not a pawn).
-lesson.talk.notation = Zapisujemy literę figury i pole, na przykład {move:letters}. Przy pionku wystarczy samo pole.
-lesson.talk.robot = Twój robot zapisuje ruchy za ciebie. W szybkich partiach zapis nie jest obowiązkowy.
+lesson.talk.real = Opowiem ci, jak będą wyglądały nasze partie.
+lesson.talk.no_clock = Ze mną nie ma zegara ani rankingu. Myśl tak długo, jak potrzebujesz.
+lesson.talk.touch = Bierkę, której dotkniesz, trzeba ruszyć: najpierw patrz, potem dotykaj.
 lesson.talk.handshake = Partia zaczyna się i kończy uściskiem dłoni. Oznacza on: dobra partia, dziękuję.
 lesson.talk.polite = Wygrana czy przegrana – zawsze zachowuj się uprzejmie i nigdy nie przeszkadzaj przeciwnikowi, kiedy myśli.
-lesson.talk.tips = Trzy rady na twoje partie: {@}kontroluj centrum, {@2}wyprowadzaj skoczki i gońce, a {@3}roszadę rób wcześnie.
+lesson.talk.help = W naszych partiach będę ci pomagał. Jeśli któraś z twoich bierek jest atakowana albo zostaje bez obrony, powiem ci.
+lesson.talk.help_back = Po grubym błędzie pokażę ci, dlaczego, i zaproponuję cofnięcie ruchu.
+lesson.talk.help_skip = A jeśli za dużo mówię, naciśnij spację: przestanę.
 # "Pierwsze kroki" = coach.level.1.name (assets/i18n/pl.lang).
-lesson.talk.next = Kiedy zechcesz, wybierz „Pierwsze kroki”. Zagram łagodnie i pomogę ci po każdym błędzie.
+lesson.talk.next = Kiedy zechcesz, zagraj „Pierwsze kroki”. Zagram łagodnie.
 lesson.talk.welcome = Witaj w świecie szachów! Podajmy sobie ręce.

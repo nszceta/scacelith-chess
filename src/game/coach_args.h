@@ -10,6 +10,10 @@ namespace game {
 struct CoachArgs {
     bool start = false;       // --start --coach (or --coach-stage-test): straight to a coach game
     int level = -1;           // --coach-level N: 0 = the rules lesson, 1..6; -1 = Settings [coach] level
+                              // (0 too when --coach-lesson-chapter is given without a level)
+    std::string lessonChapter;   // --coach-lesson-chapter <id>: the lesson starts at that chapter
+                                 // (coach::LessonChapter::id; the scene ignores an unknown one); "" =
+                                 // the chapter to resume at (Settings [coach] lesson_chapter_id)
     int colour = -1;          // --coach-colour white|black: 0 / 1; -1 = Settings (the lesson: White)
     std::string dir;          // --coach-dir <path>: the voice's model folder; "" = the default,
                               // <application data>/coach/ (tts::modelFolder)
@@ -79,6 +83,13 @@ inline CoachArgs parseCoachArgs(const std::vector<std::string>& args) {
                 c.problems.push_back("--coach-challenge-position expects 1..99, got '" + value + "'");
                 if (hasValue && value.compare(0, 2, "--") != 0) ++i;
             }
+        } else if (a == "--coach-lesson-chapter") {
+            if (hasValue && !value.empty() && value.compare(0, 2, "--") != 0) {
+                c.lessonChapter = value;
+                ++i;
+            } else {
+                c.problems.push_back("--coach-lesson-chapter expects a chapter id");
+            }
         } else if (a == "--coach-dir") {
             if (hasValue && !value.empty() && value.compare(0, 2, "--") != 0) {
                 c.dir = value;
@@ -89,6 +100,7 @@ inline CoachArgs parseCoachArgs(const std::vector<std::string>& args) {
         }
     }
     c.start = (start && coach) || c.stageTest;
+    if (!c.lessonChapter.empty() && c.level < 0) c.level = 0;
     return c;
 }
 

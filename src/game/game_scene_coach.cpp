@@ -69,10 +69,7 @@ const vec3 kDangerColor{0.7835f, 0.0612f, 0.2623f};
 float smooth01(float x) { return x <= 0.0f ? 0.0f : x >= 1.0f ? 1.0f : x * x * (3.0f - 2.0f * x); }
 
 // The rules lesson's chapters, to save the chapter to resume at by its id (Settings::coachLessonChapter).
-const coach::Lesson& lessonBook() {
-    static const coach::Lesson lesson;
-    return lesson;
-}
+const coach::Lesson& lessonBook() { return coach::Lesson::shared(); }
 int lessonChapterIndex(const std::string& id) { return id.empty() ? 0 : std::max(0, lessonBook().chapterIndex(id)); }
 std::string lessonChapterId(int index) {
     const std::vector<coach::LessonChapter>& c = lessonBook().chapters();
@@ -172,13 +169,15 @@ struct CoachRuntime {
     // Marks, analyses, draw offer, end of the game
     std::map<int, int> markPieces;                    // square of a Piece mark -> the piece's id
     std::vector<TestMark> testMarks;
-    // The pieces in danger (levels 1-2, Settings::coachDangerMarkers): the set found for the
+    // The pieces in danger (levels 1-2, Settings::coachDangerMarkerMode): the set found for the
     // position with hash dangerHash, and each square's tint (strength [0,1], seconds shown).
     bool dangerKnown = false;
     uint64_t dangerHash = 0;
     uint64_t danger = 0;
     float dangerStrength[64] = {};
     float dangerAge[64] = {};
+    bool dangerMarkers = false;                       // this game shows them (Settings::coachDangerMarkersAt at its start)
+    std::string practiseTheme;                        // the next challenge practises this theme (chainChallenge), once
     std::set<uint32_t> analyses;                      // ids the session asked for
     uint32_t drawAnalysis = 0;
     int drawPly = -1;
@@ -613,6 +612,10 @@ bool GameScene::legalHints() const { return settings().showLegalMoves || drill()
 void GameScene::initCoachArgs() {
     coachArgs_ = parseCoachArgs(ctx_->args);
     for (const std::string& p : coachArgs_.problems) LOGW("command line: %s", p.c_str());
+    if (!coachArgs_.lessonChapter.empty() && lessonBook().chapterIndex(coachArgs_.lessonChapter) < 0) {
+        LOGW("command line: --coach-lesson-chapter: no chapter '%s', the lesson resumes where it was left", coachArgs_.lessonChapter.c_str());
+        coachArgs_.lessonChapter.clear();
+    }
     if (coachArgs_.start) coachChallenge_ = coachArgs_.challenge;
     if (!coachArgs_.dir.empty()) tts::setModelDirectory(coachArgs_.dir);
     coachModelInit();   // the voice model download: the Coach entry's prompt (coach_model.h)
@@ -701,9 +704,16 @@ void GameScene::setupCoachGame() {
         LOGW("coach: no challenge '%s', a coach game instead", coachChallenge_.c_str());
         coachChallenge_.clear();
     }
-    // The rules lesson and the challenges are played with White; so is the stage test unless told
-    // otherwise (its line points at White's g1 knight).
-    humanColor_ = coachLevel_ == 0 || challenge() || (rt.test && coachArgs_.colour < 0) ? White : Color(colour);
+    // The rules lesson and the challenges are played with White, a retry by the side to move at its
+    // position; so is the stage test unless told otherwise (its line points at White's g1 knight).
+    Position retryPos;
+    if (retrying() && !retryPos.setFEN(coachRetryFen_)) {
+        LOGW("coach: the position to retry '%s' is not valid, a coach game instead", coachRetryFen_.c_str());
+        coachRetryFen_.clear();
+        coachRetryBest_.clear();
+    }
+    if (retrying()) humanColor_ = retryPos.sideToMove();
+    else humanColor_ = coachLevel_ == 0 || challenge() || (rt.test && coachArgs_.colour < 0) ? White : Color(colour);
     rt.seed = (uint64_t(rng_.next()) << 32) | rng_.next();
     rt.testKind = ctx_->argValue("--coach-stage-test");
     if (rt.testKind.compare(0, 2, "--") == 0) rt.testKind.clear();
@@ -712,6 +722,9 @@ void GameScene::setupCoachGame() {
     rt.forceSubtitles = rt.test;
     if (challenge())
         LOGI("New game (coach): the challenge '%s'%s", coachChallenge_.c_str(), rt.test ? ", stage test" : "");
+    else if (retrying())
+        LOGI("New game (coach): level %d, the position to try again, human plays %s (%s)", coachLevel_,
+             humanColor_ == White ? "White" : "Black", coachRetryFen_.c_str());
     else
         LOGI("New game (coach): level %d%s, human plays %s%s", coachLevel_, coachLevel_ == 0 ? " (the rules lesson)" : "",
              humanColor_ == White ? "White" : "Black", rt.test ? ", stage test" : "");
@@ -750,7 +763,7 @@ void GameScene::startCoachGame() {
     CoachRuntime& rt = coachRuntime();
     Settings& s = settings();
     // Alternating colours: the next coach game is played with the other colour.
-    if (coachLevel_ > 0 && !challenge() && coachArgs_.colour < 0 && s.coachColour == 2 && !rt.test) {
+    if (coachLevel_ > 0 && !challenge() && !retrying() && coachArgs_.colour < 0 && s.coachColour == 2 && !rt.test) {
         s.coachNextColour = humanColor_ == White ? 1 : 0;
         s.save();
     }
@@ -764,13 +777,26 @@ void GameScene::startCoachGame() {
     c.director.subtitles = s.subtitles;
     c.speeds = speechSpeeds(s);
     c.challenge = coachChallenge_;
+    c.retryBest = coachRetryBest_;
     c.challengePosition = coachArgs_.challengePosition;
     c.introduceLevel = s.coachHistory.empty() || s.coachHistory.back().level != coachLevel_;
+    c.firstAfterLesson = s.coachRulesDone && s.coachHistory.empty();
     c.offersEnabled = true;
-    for (const Settings::CoachGame& g : s.coachHistory) c.history.push_back({g.level, g.result, g.accuracy});
+    c.history = s.coachHistory;
+    rt.dangerMarkers = !challenge() && !retrying() && s.coachDangerMarkersAt(coachLevel_);
+    c.dangerMarkers = rt.dangerMarkers;
+    c.practiseTheme = rt.practiseTheme;
+    rt.practiseTheme.clear();
     c.accuracyExplained = s.coachAccuracyExplained;
     c.takeYourTime = s.coachTakeYourTime;
-    c.lessonChapter = lessonChapterIndex(s.coachLessonChapter);
+    // The chapter named on the command line, else the Coach page's (the saved one, picked or not).
+    if (!coachArgs_.lessonChapter.empty()) {
+        c.lessonChapter = lessonChapterIndex(coachArgs_.lessonChapter);
+        c.lessonChosen = true;
+    } else {
+        c.lessonChapter = lessonChapterIndex(s.coachLessonChapter);
+        c.lessonChosen = coachSetup_.lessonPicked;
+    }
     rt.stage->ensureWorker();
     // Every glyph the coach's lines can show in this language, once (subtitles never wait).
     std::string ui = i18n::language();
@@ -900,6 +926,23 @@ void GameScene::endChallenge() {
     isDraw_ = false;
 }
 
+void GameScene::endRetry() {
+    CoachRuntime& rt = coachRuntime();
+    const bool found = rt.session.retryFound();
+    LOGI("coach: the retry of the critical position is over (%s)", found ? "the better move found" : "the better move shown");
+    if (turn_ == Turn::HumanTouched) humanRelease();
+    turn_ = Turn::None;
+    state_ = State::GameOver;
+    stateTime_ = 0.0f;
+    gameOverShown_ = false;
+    endHandshakeDone_ = false;
+    rt.handshakeReported = false;
+    resultText_ = i18n::tr(found ? "coach.retry.found" : "coach.retry.shown");
+    reasonText_ = i18n::tr("coach.retry.reason");
+    playerWon_ = true;
+    isDraw_ = false;
+}
+
 void GameScene::saveChallengeDone() {
     if (!coach_ || !coach_->sessionRunning || !coach_->session.challengeCompleted()) return;
     Settings& s = settings();
@@ -927,19 +970,42 @@ void GameScene::nextChallenge() {
     chainChallenge(next);
 }
 
-void GameScene::chainChallenge(const std::string& id) {
+void GameScene::chainChallenge(const std::string& id, const std::string& theme) {
     LOGI("coach: next challenge '%s'", id.c_str());
     coachChallenge_ = id;
+    coachRuntime().practiseTheme = theme;
     coachArgs_.challengePosition = 0;
     Settings& s = settings();
     s.coachChallenge = id;   // the Coach page shows it selected
     s.save();
 }
 
+bool GameScene::coachRetryOffered() const {
+    return coach_ && coach_->sessionRunning && !drill() && coachLevel_ <= 3 && coach_->session.retryPoint().valid();
+}
+
+bool GameScene::coachRetryFound() const { return coach_ && coach_->sessionRunning && coach_->session.retryFound(); }
+
+void GameScene::chainRetry() {
+    // From a game's end card: its critical position. From a retry's own (the better move was shown):
+    // the same one again.
+    if (!retrying() && coachRetryOffered()) {
+        const coach::RetryPoint& point = coach_->session.retryPoint();
+        coachRetryFen_ = point.fen;
+        coachRetryBest_ = point.bestUci;
+    }
+    LOGI("coach: the critical position is tried again (%s)", coachRetryFen_.c_str());
+}
+
 std::string GameScene::practiseChallenge() const {
     // Levels 1-3 of a game only (the session suggests none elsewhere: lesson, challenge, 4-6).
     if (!coach_ || !coach_->sessionRunning || challenge() || lesson() || coachLevel_ > 3) return std::string();
     return coach_->session.suggestedChallenge();
+}
+
+std::string GameScene::practiseTheme() const {
+    if (practiseChallenge().empty()) return std::string();
+    return coach_->session.practiseTheme();
 }
 
 bool GameScene::coachHandshakeWanted() const {
@@ -958,13 +1024,13 @@ void GameScene::persistCoachResults() {
     if (!coach_ || coach_->resultsSaved || !coach_->sessionRunning) return;
     CoachRuntime& rt = *coach_;
     rt.resultsSaved = true;
+    if (retrying()) return;   // a retry leaves no game record: the history and the level stay
     if (challenge()) {   // its completion only: no history, no level
         saveChallengeDone();
         return;
     }
     Settings& s = settings();
-    s.coachHistory.clear();
-    for (const coach::GameRecord& g : rt.session.history()) s.coachHistory.push_back({g.level, g.result, g.accuracy});
+    s.coachHistory = rt.session.history();
     if (s.coachHistory.size() > size_t(Settings::kCoachHistoryMax))
         s.coachHistory.erase(s.coachHistory.begin(), s.coachHistory.end() - Settings::kCoachHistoryMax);
     s.coachAccuracyExplained = rt.session.accuracyExplained();
@@ -1009,8 +1075,8 @@ bool GameScene::coachMayTouch() const {
     return !rt.test;
 }
 
-void GameScene::coachPlayerTouched() {
-    if (coach_ && coach_->sessionRunning) coach_->session.onPlayerActive();
+void GameScene::coachPlayerTouched(Square from) {
+    if (coach_ && coach_->sessionRunning) coach_->session.onPieceTouched(game_, from);
 }
 
 void GameScene::coachIllegalAttempt(Square from, Square to) {
@@ -1204,16 +1270,19 @@ void GameScene::updateCoach(float dt) {
         stage.mouth(pos, facing);
         audio::setVoicePose(rt.voice, pos, facing);
     }
-    // The pieces in danger (levels 1-2 games, the Coach page's switch): on the player's turn only,
+    // The pieces in danger (rt.dangerMarkers: levels 1-2, as Settings::coachDangerMarkerMode has it): on the player's turn only,
     // never with the coach's own marks, a demonstration or a rewind on the table, the takeback card
     // or a finished game. The set is found once per position; each square fades in and out on its
     // own, so a piece coming into danger or leaving it does not make the others blink.
-    bool dangerShown = settings().coachDangerMarkers && coachLevel_ >= 1 && coachLevel_ <= 2 && !challenge() && !rt.test &&
+    bool dangerShown = rt.dangerMarkers && !challenge() && !rt.test &&
                        state_ == State::Playing && !game_.isOver() && (turn_ == Turn::HumanIdle || turn_ == Turn::HumanTouched) &&
                        game_.position().sideToMove() == humanColor_ && !rt.jobRunning && rt.jobs.empty() && !offerUp;
-    if (dangerShown && rt.sessionRunning)
+    if (dangerShown && rt.sessionRunning) {
+        // The coach's own marks, and the question "which of your pieces is in danger?" the markers would answer.
+        if (rt.session.threatQuestionOpen()) dangerShown = false;
         for (const coach::ShownMark& m : rt.session.director().marks())
             if (m.strength > 0.0f) dangerShown = false;
+    }
     if (dangerShown && (!rt.dangerKnown || game_.position().hash() != rt.dangerHash)) {
         rt.danger = coach::hangingPieces(game_.position(), humanColor_, false);
         rt.dangerHash = game_.position().hash();
@@ -1242,7 +1311,11 @@ void GameScene::updateCoach(float dt) {
     if (challenge() && rt.sessionRunning && rt.session.challengeCompleted()) saveChallengeDone();
     if (drill() && state_ == State::Playing && rt.sessionRunning && rt.session.handshakeWanted()) {
         if (challenge()) endChallenge();
-        else endLesson();
+        else if (retrying()) {
+            if (!rt.jobRunning && rt.jobs.empty()) endRetry();   // the move taken back is back on the table
+        } else {
+            endLesson();
+        }
     }
 }
 

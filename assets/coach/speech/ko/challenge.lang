@@ -13,6 +13,12 @@
 # written "1수 메이트" (spoken "한 수 메이트"), as Korean puzzle books write them.
 # The player always has the white pieces.
 
+# ---- A challenge started from the end card of a game: said before its introduction ----------------
+# {theme}: the one thing the coach named at the end of that game (a -기 phrase, after a colon).
+ch.practise = 지난 게임에서: {theme}. 이 세트는 그걸 위한 거예요.
+ch.practise.2 = 지난 게임에서 연습할 점이 하나 있었어요: {theme}. 같이 연습해 봐요.
+ch.practise.3 = 지난 게임의 팁은 이거였어요: {theme}. 연습해 볼까요.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = 1수 메이트예요. 모두 {n:position}예요. 매번 단 한 수로 체크메이트할 수 있어요. 체크를 전부 살펴보세요.
 ch.intro.mate1.spoken = 한 수 메이트예요. 모두 {n:position}예요. 매번 단 한 수로 체크메이트할 수 있어요. 체크를 전부 살펴보세요.

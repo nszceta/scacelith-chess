@@ -151,21 +151,26 @@ TEST(coach_core_review_double_check_announced) {
 }
 
 TEST(coach_core_review_mate_threat_warning) {
-    // 1.e4 e5 2.Qh5 Nc6 3.Bc4: the coach (White) now threatens Qxf7#. Levels 1-2 warn the player,
-    // level 1 pointing at f7; level 3 says nothing.
+    // 1.e4 e5 2.Qh5 Nc6 3.Bc4: the coach (White) now threatens Qxf7#. Levels 1-2 ask about it first
+    // (the game's first threat: nothing pointed at) and then state it, level 1 pointing at f7;
+    // level 3 states it at once, in one plain line.
     for (int level = 1; level <= 3; ++level) {
         Game g = gameOf(nullptr, {"e4", "e5", "Qh5", "Nc6", "Bc4"});
         Reviewer rv;
         rv.reset(level, Black);
-        const Script s = rv.coachMoved(g);
+        Script s = rv.coachMoved(g);
         checkScript(s, "mate threat");
-        if (level == 3) {
-            CHECK(s.empty());
-            continue;
+        if (level <= 2) {
+            REQUIRE(s.size() == size_t(1));
+            CHECK_EQ(s[0].line.key, "threat.ask_mate.b" + std::to_string(level));
+            CHECK(s[0].gestures.empty() && s[0].marks.empty());
+            CHECK(rv.threatAsked());
+            s = rv.threatReveal(g);
+            checkScript(s, "mate threat statement");
         }
         const Beat* b = beatWithKey(s, "threat.mate.b" + std::to_string(level));
         REQUIRE(b != nullptr);
-        CHECK(b->priority == Priority::Low);
+        CHECK(b->priority == (level <= 2 ? Priority::Normal : Priority::Low));
         REQUIRE(b->line.arg("sq") != nullptr);
         CHECK_EQ(b->line.arg("sq")->square, sq("f7"));
         REQUIRE(b->line.arg("my") != nullptr);
@@ -184,10 +189,12 @@ TEST(coach_core_review_mate_threat_warning) {
 TEST(coach_core_review_threat_by_an_uncovered_piece) {
     // ...Nb4 opens the long diagonal: the bishop on b7, not the knight that moved, now attacks the
     // loose rook on f3. The warning names and traces the bishop.
-    Game g = gameOf("4k3/1b6/8/3n4/8/5R2/8/4K3 b - - 0 1", {"Nb4"});
+    const Game g = gameOf("4k3/1b6/8/3n4/8/5R2/8/4K3 b - - 0 1", {"Nb4"});
     Reviewer rv;
     rv.reset(1, White);
-    const Script s = rv.coachMoved(g);
+    Script s = rv.coachMoved(g);
+    REQUIRE(rv.threatAsked());
+    s = rv.threatReveal(g);
     checkScript(s, "uncovered attacker");
     const Beat* b = beatWithKey(s, "threat.piece.b1");
     REQUIRE(b != nullptr);

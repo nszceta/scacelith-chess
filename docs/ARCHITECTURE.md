@@ -251,7 +251,11 @@ director's marks (`World::submitCoachMarks`, piece highlights through `submitPie
 * **End of the game.** `endGame` → `Session::onGameOver`; the handshake waits for
   `handshakeWanted()`, then `onHandshakeDone`; the end card waits for `finished()`, and the
   results (`history`, `accuracyExplained`, the suggested level, the lesson's chapter) are saved in
-  `[coach]`. The rules lesson has no end-of-game flow of its own: when its last chapter is said,
+  `[coach]`. Each game of the `history` is a `coach::GameRecord` (`game_record.h`: level, result,
+  accuracy, the theme the appraisal named, first-try blunders, whether the danger markers were on):
+  `suggestLevel`, `levelMastered`, `recurringTheme` and `Settings::coachDangerMarkersAt` read it, and
+  the next greeting, the "again" wording of the appraisal and the Coach page's recommendations
+  follow from it. The rules lesson has no end-of-game flow of its own: when its last chapter is said,
   the session wants the handshake and the scene ends the lesson (`endLesson`).
 * **Challenges.** The Coach page's Challenges tab lists short sets of positions, each training
   one skill (mates in one to three, forks, pins, the escape of a king in danger, basic endgames;
@@ -270,10 +274,19 @@ director's marks (`World::submitCoachMarks`, piece highlights through `submitPie
   placements refused and explained) and saves nothing but its completion
   (`Settings::coachChallengesDone`, the Coach page's check marks); its end card offers the next
   challenge, and Main menu goes back to the Challenges tab (`ui::openCoachPage(1)`).
+* **Position retry.** At levels 1-3 the end card of a game with a critical blunder offers to try that
+  position again (`Appraisal::retryPoint`: the position before the move and the engine's better
+  move, exposed by `Session::retryPoint`). The scene starts a new coach game from that FEN
+  (`GameScene::retrying()`, treated as a drill like a challenge: no scoresheet, clock or record;
+  `SessionConfig::retryBest`). The session reviews the player's moves as in a game with the
+  offers off (`Reviewer::positionRetry` speaks the task, the hint, the second-try word and the
+  reveal): a move that is the better one or that the review calls no mistake ends it (found); a
+  mistake is taken back by the session itself, and the second one ends it with the better move
+  shown. Nothing is appraised or saved.
 * **Settings.** `[coach]` (level, colour, alternating colour, history, lesson chapter, the Coach
   page's tab, the challenges completed...) and `[tts]` are read and written by
   `src/game/settings_coach.cpp` (core library, unit-tested). The command line (`--start --coach`,
-  `--coach-level`, `--coach-colour`, `--coach-challenge`, `--coach-challenge-position`,
+  `--coach-level`, `--coach-lesson-chapter`, `--coach-colour`, `--coach-challenge`, `--coach-challenge-position`,
   `--coach-dir`, `--coach-stage-test`, `--coach-auto-answer`) is parsed by
   `src/game/coach_args.h`.
 

@@ -5,16 +5,24 @@
 # needs it ("あなたの番です"). Level names as in assets/i18n/ja.lang (coach.level.*.name).
 
 # ---- Start of a coach game, per level (1 First steps ... 6 Expert) --------------------------------
-event.greet.l1 = こんにちは！気楽に一局指しましょう。困ったらいつでも手伝いますね。
-event.greet.l1.spoken = こんにちは！気楽に一局さしましょう。困ったらいつでも手伝いますね。
+event.greet.l1 = こんにちは！気楽に一局指しましょう。あなたの駒が危ないときは教えますね。
+event.greet.l1.spoken = こんにちは！気楽に一局さしましょう。あなたの駒が危ないときは教えますね。
 event.greet.l1.2 = やあ！やさしく指して、気をつけるポイントを教えますね。
 event.greet.l1.3 = ようこそ！ゆっくり考えてください。駒が危ないときは教えます。
-event.greet.l2 = こんにちは！指しましょう。フォークやピンが出てきたら教えますね。
+event.greet.l1.first = こんにちは！指す前に考えましょう。私の駒は安全？この手は何を攻める？相手の狙いは？私が声をかけますね。
+event.greet.l1.first.2 = 初めての対局ですね！指す前に：駒は安全？何を攻める？狙われていない？私が思い出させます。
+event.greet.l2 = こんにちは！指しましょう。私の手でフォークやピンができそうなら、教えます。
 event.greet.l2.2 = やあ！駒を展開して、キングを安全に保ちましょう。途中で手伝います。
 event.greet.l2.3 = おかえりなさい！フォークとピンに注目。勝負を決める武器です。
-event.greet.l3 = こんにちは！本格的な一局を指しましょう。作戦と大きなミスにコメントします。
+event.greet.l3 = こんにちは！本格的な一局を指しましょう。大きな脅威は警告して、大きなミスは説明します。
 event.greet.l3.2 = やあ！駒をどう使うか、作戦を立てましょう。見落としがあれば教えます。
-event.greet.l3.3 = さあ、指しましょう！唯一の手と、うまくいかない手を指摘します。
+event.greet.l3.3 = さあ、指しましょう！唯一の手しかうまくいかないときと、手がうまくいかないときは、教えます。
+event.greet.l1.theme = おかえりなさい！前回のヒントは、{theme}でした。今日も意識しましょう。
+event.greet.l1.theme.2 = またお会いしましたね！前回のヒントを思い出して：{theme}。お手伝いします。
+event.greet.l2.theme = おかえりなさい！前回のテーマは、{theme}でした。今日はどうなるか見ましょう。
+event.greet.l2.theme.2 = またよろしく！前回から覚えておくこと：{theme}。
+event.greet.l3.theme = おかえりなさい！前回のテーマは、{theme}でした。今日も意識しましょう。
+event.greet.l3.theme.2 = また会いましたね。前回から：{theme}。今日はどうなるか見てみましょう。
 event.greet.l4 = こんにちは！今回は評価値を示し、より良い候補手もお見せします。
 event.greet.l4.2 = 指しましょう。ミスのあとは、より正確な手をお伝えします。
 event.greet.l4.3 = クラブでの一局、準備はいいですか？評価値が変わったらコメントします。
@@ -32,9 +40,9 @@ event.colour.black = 私が白なので、私から指します。
 event.colour.black.2 = 今回あなたは黒です。私が先に指します。
 
 # ---- Level introductions (the first game at a level, or when the player changes it) -------------
-event.level.l1 = はじめの一歩：手加減して指し、どのミスもわかりやすく説明します。
-event.level.l2 = 初心者：少し強めに指し、フォークやピンなど簡単な戦術を教えます。
-event.level.l3 = 中級者：作戦やポーン構造について話し、短い変化を見せます。
+event.level.l1 = はじめの一歩：手加減して指します。あなたの駒が攻められて守りがないときは教え、大きなミスはやさしい言葉で説明します。
+event.level.l2 = 初心者：少し強めに指します。フォーク、ピン、クイーンへの攻撃を警告し、駒を出すよう声をかけます。
+event.level.l3 = 中級者：警告するのはメイトとクイーンへの攻撃、そして唯一の手のときだけ。ミスの説明は続けます。
 event.level.l4 = クラブ会員：ポーン単位の評価値を示し、候補手を提案します。
 event.level.l5 = 強いクラブ会員：コメントは短く、大事な場面では長い変化も示します。
 event.level.l6 = エキスパート：全力で指し、勝負どころだけコメントします。
@@ -104,5 +112,7 @@ event.end.handshake = 握手しましょう。
 # {chapter} = the chapter's title (lesson.title.* in lesson.lang), a noun phrase.
 event.lesson.resume = おかえりなさい！{chapter}の続きから始めましょう。
 event.lesson.resume.2 = また会えましたね！前回は{chapter}のところで終わりました。
+event.lesson.start = まず{chapter}から始めましょう。
+event.lesson.start.2 = {chapter}から始めます。
 event.lesson.next = 次は{chapter}です。
 event.lesson.next.2 = さて、今度は{chapter}です。

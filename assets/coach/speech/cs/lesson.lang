@@ -13,7 +13,9 @@
 # ---- Chapter titles (said inside "Pokračujeme kapitolou „{chapter}“.") ------------------------------
 # Nominative, lower case (see event.lesson.* in events.lang).
 lesson.title.welcome = šachovnice
-lesson.title.pieces = jak táhnou figury
+lesson.title.pieces_lines = jak táhnou věž, střelec a dáma
+lesson.title.pieces_steps = jak táhnou král, jezdec a pěšec
+lesson.title.values_setup = hodnota figur a první tahy
 lesson.title.safety = bezpečné a nebezpečné braní
 lesson.title.check = šach
 lesson.title.mate = mat
@@ -23,7 +25,8 @@ lesson.title.promotion = proměna pěšce
 lesson.title.draws = pat a remíza
 lesson.title.before_move = před tahem
 lesson.title.opening = zahájení
-lesson.title.etiquette = rating, hodiny a etiketa ve skutečných partiích
+lesson.title.review = rychlé opakování
+lesson.title.etiquette = jak probíhají naše partie
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
 # After the coach demonstrated the solution.
@@ -94,7 +97,7 @@ lesson.rook.king = To je tvůj král. Použij {your:refl_acc} v rohu.
 lesson.rook.ok = Sebráno! {my} opouští šachovnici.
 # Pieces don't jump
 lesson.jump.blocked = Figury nemohou přeskakovat jiné figury. Tvůj pěšec na {sq} stojí věži v cestě.
-lesson.jump.knight = Přeskakovat umí jen jezdec. S ním se brzy seznámíme.
+lesson.jump.all = U střelce a dámy je to stejné: ani oni nemohou přeskakovat figury.
 # Bishop
 lesson.bishop.intro = Tohle je {your}. Táhne šikmo, tak daleko, jak chce.
 lesson.bishop.colour = Střelec zůstává vždycky na polích stejné barvy.
@@ -137,7 +140,12 @@ lesson.pawncap.ok = Ano! Táhne rovně, bere šikmo.
 lesson.values.pawn = Každá figura má svou hodnotu v bodech. Pěšec má hodnotu jednoho bodu.
 lesson.values.pieces = Jezdec nebo {@}střelec tři. {@2}Věž pět. {@3}Dáma devět.
 lesson.values.king = Král je k nezaplacení: o krále nikdy přijít nesmíš.
-lesson.values.trade = Snaž se nikdy nedávat figuru za méně, než kolik stojí.
+lesson.values.trade = Nevyměňuj větší figuru za menší, pokud tím nezískáš víc, než ztratíš.
+lesson.values.two = Tvůj jezdec napadá dvě mé figury: {sq} a {sq2}. Žádnou z nich nic nekryje.
+lesson.values.ask = Vezmi tu, která má větší hodnotu!
+lesson.values.small = To je pěšec za jeden bod. {my} byl{my:past} také zadarmo a má hodnotu devět.
+lesson.values.look = Podívej se, na co útočí tvůj jezdec, a vezmi figuru s větší hodnotou.
+lesson.values.ok = Ano! Dáma má hodnotu devět. Když jsou zadarmo dvě figury, vezmi tu větší.
 lesson.setup.corners = Každá partie začíná takhle: věže v {@}rozích, vedle nich {@2}jezdci, potom {@3}střelci.
 lesson.setup.queen = Dáma stojí na poli své barvy: tvoje dáma je na světlém poli.
 lesson.setup.king = Král stojí vedle ní. Bílý táhne vždycky první.
@@ -158,6 +166,18 @@ lesson.safety.gave = Tvoje dáma je pryč, a to za mého jezdce: devět bodů za
 lesson.safety.other = Zkus tu druhou figuru.
 lesson.safety.look = Hledej figuru, kterou nic nekryje.
 lesson.safety.ok = Výborně! Vždycky se ptej: je ta figura krytá?
+lesson.safety.pawns = Tvoje dáma napadá dva mé pěšce: {sq} a {sq2}.
+lesson.safety.pawns_ask = Vezmi pěšce, kterého je bezpečné vzít.
+lesson.safety.gave_pawn = Tvoje dáma za devět bodů je pryč, a to za pěšce za jeden bod.
+lesson.safety.pawns_other = I pěšec může být krytý. Zkus toho druhého.
+lesson.safety.pawns_ok = Správně! Nikdy neriskuj dámu kvůli krytému pěšci.
+lesson.safety.small = Teď to naopak. {my} má obránce, ale tvůj pěšec na {my:pron_acc} útočí.
+lesson.safety.small_count = Když ji vezmeš, můj {@}pěšec vezme tvého pěšce zpět. Dáš jeden bod a získáš devět.
+lesson.safety.small_ask = Vezmi mou dámu správnou figurou!
+lesson.safety.small_other = Vezmi ji raději pěšcem: nejlevnější figurou, která může.
+lesson.safety.small_look = Tvůj pěšec napadá mou dámu. Vezmi ji jím.
+lesson.safety.small_ok = Ano! Malá figura smí vzít velkou, i krytou: ztratíš jeden bod a získáš devět.
+lesson.safety.count = Před každým braním spočítej, co získáš a co můžeš ztratit zpět.
 
 # ---- Chapter 3: check and getting out of check -----------------------------------------------------------------
 lesson.danger.rank = Moje věž ovládá celou druhou řadu.
@@ -179,6 +199,11 @@ lesson.capture.check = Moje dáma dává šach, hned vedle tvého krále.
 lesson.capture.ask = Vezmi útočníka!
 lesson.capture.king_ok = Ano! Moje dáma neměla obránce, a tak ji tvůj král mohl vzít.
 lesson.capture.knight_ok = Ano! Tvůj jezdec útočníka odstranil.
+lesson.check.open.ask = Zase šach! Tentokrát se z něj dostaň, jak chceš.
+lesson.check.open.king = Ustoupit králem je v pořádku. Šlo by i zaclonit, nebo vzít mou věž jezdcem.
+lesson.check.open.block = Zaclonit útok je v pořádku. Šlo by i ustoupit králem, nebo vzít mou věž jezdcem.
+lesson.check.open.take = Vzít mou věž, figuru dávající šach, je v pořádku. Šlo by i ustoupit králem nebo zaclonit.
+lesson.check.open.hint = Tři možnosti: {@}ustoupit králem, {@2}zaclonit na sloupci, nebo {@3}vzít mou věž jezdcem.
 
 # ---- Chapter 4: checkmate ------------------------------------------------------------------------------------
 lesson.mate1.what = Mat: král je v šachu a nemá kam uniknout. Tím je partie vyhraná.
@@ -186,16 +211,34 @@ lesson.mate1.stuck = Můj král je uvězněný za {@}svými pěšci.
 lesson.mate1.ask = Dej mi mat jedním tahem!
 lesson.mate1.wrong = Skoro! Dej šach na mé základní řadě, kde můj král nemůže uniknout.
 lesson.mate1.ok = Mat! Tohle je mat na základní řadě. Zapamatuj si ho!
+lesson.mate1.king = Tvůj král je dobře tam, kde stojí. Šach dej věží.
+lesson.mate1.why = Vidíš? Věž hlídá {@}celou mou základní řadu a {@2}vlastní pěšci zaplňují pole před mým králem.
 lesson.mate2.ask = Tvůj král a dáma spolupracují. Dej mi mat jedním tahem.
 lesson.mate2.wrong = Najdi šach, po kterém můj král nebude mít vůbec žádné pole.
 lesson.mate2.ok = Mat! Tvůj král kryje dámu, takže ji můj vzít nemůže.
 lesson.mate2.ok_rank = Mat na základní řadě! Tvůj král hlídá všechna pole před mým.
+lesson.mate2.king = Tvůj král hlídá pole vedle mého. Nech ho stát a použij dámu.
+lesson.mate2.half = Tím hlídáš {sq}, ale můj král může ještě na {sq2}.
+lesson.mate2.why = Vidíš? Tvoje dáma ovládá {sq} a {sq2} a tvůj král hlídá pole před mým. Můj král nemá kudy uniknout.
 lesson.mate3.edge = Tvoje věž na sedmé řadě drží mého krále na okraji šachovnice.
 lesson.mate3.ask = Teď dej mat {your:refl_ins}.
 lesson.mate3.free = Šach, ale sedmá řada je teď volná a můj král unikne.
 lesson.mate3.takes = Můj král prostě vezme tvou věž.
 lesson.mate3.hint = Dej šach na základní řadě tou věží, která nehlídá sedmou řadu.
 lesson.mate3.ok = Mat! Obě věže postupovaly jako po žebříku.
+lesson.mate3.why = Vidíš? Jedna věž odřízla {@}sedmou řadu a druhá dává šach na {@2}základní řadě. Můj král nemá kudy uniknout.
+lesson.mate4.look = Šach ještě není mat. Uvidíme, co se stane.
+lesson.mate4.ask = Dej mému králi šach věží.
+lesson.mate4.king = Tvůj král zůstane, kde je. Šach dej věží.
+lesson.mate4.wrong = To není šach. Tvoje věž může napadnout mého krále ze základní řady.
+lesson.mate4.ok = Ano, to je šach! Ale je to i mat? Sleduj.
+lesson.mate4.after = Můj pěšec na {sq} dal mému králi prostor. Než se z šachu zaraduješ, spočítej, kam ještě může můj král.
+lesson.mate5.ask = Šach dávají dva tahy tvé věže a jen jeden je mat. Spočítej pole mého krále a vyber.
+lesson.mate5.king = Tvůj král už hlídá {sq} a {sq2}. Nech ho stát a táhni věží.
+lesson.mate5.wrong = To není šach. Hledej tah věží, který napadne mého krále.
+lesson.mate5.hint = Tvůj král hlídá {sq} a {sq2}. Který šach věží vezme i {sq3}?
+lesson.mate5.why = Vidíš? Věž ovládá {sq}, tvůj král zbylá dvě pole a můj král je uvězněný.
+lesson.mate5.ok = Mat! Počítání polí mého krále se vyplatilo: žádné nezbylo.
 
 # ---- Chapter 5: castling ---------------------------------------------------------------------------------------
 lesson.castle.what = Rošáda je zvláštní tah, který dostane tvého krále do bezpečí. Král a věž přitom táhnou současně.
@@ -212,6 +255,10 @@ lesson.castle2.bishop = Můj střelec napadá pole {sq}. Rošáda na tuhle stran
 lesson.castle2.ask = Udělej rošádu na druhou stranu.
 lesson.castle2.other = Udělej rošádu ke své druhé věži, na dámské křídlo.
 lesson.castle2.ok = Správně! Po velké rošádě stojí tvůj král na {sq}.
+lesson.ep0.rule = Braní mimochodem začíná dvojkrokem. O dvě pole smí jen pěšec {@}na výchozím poli. Pěšec, který {@2}už táhl, postupuje po jednom poli.
+lesson.ep0.ask = Posuň jednoho ze svých pěšců o dvě pole.
+lesson.ep0.moved = Ten pěšec už táhl, takže smí jen o jedno pole. Použij pěšce, který ještě stojí na výchozím poli.
+lesson.ep0.ok = Správně: o dvě pole smí jen pěšec na výchozím poli.
 
 # ---- Chapter 6: en passant ------------------------------------------------------------------------------------
 # The Czech term "braní mimochodem" already means "capturing in passing"; the line gives the French
@@ -223,6 +270,13 @@ lesson.ep.how = Tvůj pěšec ho smí vzít, jako by můj táhl jen o jedno pole
 lesson.ep.now = Ale jen teď, hned tímto tahem. Ber mimochodem!
 lesson.ep.gone = Příležitost je pryč: mimochodem se dá brát jen hned. Zkusme to znovu.
 lesson.ep.ok = Braní mimochodem! Můj pěšec z pole {sq} mizí.
+lesson.ep2.old = Můj pěšec na {sq} stojí vedle tvého už delší dobu. Brát ho mimochodem je pozdě.
+lesson.ep2.watch = Teď sleduj mého druhého pěšce.
+lesson.ep2.ask = Dva moji pěšci stojí vedle tvého, ale jen jeden právě postoupil o dvě pole. Vezmi ho mimochodem!
+lesson.ep2.push = Tím jen posuneš svého pěšce. Vezmi pěšce, který právě postoupil o dvě pole.
+lesson.ep2.wrong = Hledej pěšce, který právě udělal dvojkrok, a vezmi ho mimochodem.
+lesson.ep2.hint = Můj pěšec na {sq} právě postoupil o dvě pole. Vezmi ho mimochodem, na {sq2}.
+lesson.ep2.ok = Braní mimochodem! Mého pěšce na {sq} vzít nešlo: jeho příležitost pominula.
 
 # ---- Chapter 7: promotion -------------------------------------------------------------------------------------
 lesson.promo.what = Když pěšec dojde na poslední řadu, promění se: stane se z něj dáma, věž, střelec nebo jezdec.
@@ -231,12 +285,21 @@ lesson.promo.under = To je povolené! Ale dáma je silnější. Vybereme dámu.
 lesson.promo.under_ok = Dobře. Většina hráčů si ale vybírá dámu.
 lesson.promo.push = Posuň pěšce na poslední řadu, na {sq}.
 lesson.promo.ok = Nová dáma! Dokonce můžeš mít dvě dámy najednou.
+lesson.promo2.ask = Pěšec se může proměnit i braním, šikmo. Vezmi mou věž a udělej dámu!
+lesson.promo2.push = I tohle je proměna, ale moje věž hlídá {sq}. Sleduj.
+lesson.promo2.lost = Moje věž tvou novou figuru vzala. Nejdřív vezmi mou věž.
+lesson.promo2.wrong = Tím mou věž nevezmeš. Tvůj pěšec bere šikmo, na {sq}.
+lesson.promo2.hint = Vezmi mou věž pěšcem, na {sq}: promění se při braní.
+lesson.promo2.ok = Vzato a proměněno! Pěšec zvládne obojí jedním tahem.
 
 # ---- Chapter 8: stalemate and draws -----------------------------------------------------------------------------
 lesson.stale.what = Jsem na tahu já. Můj král není v šachu, ale {@}všechna pole kolem něj jsou napadená.
 lesson.stale.draw = Nemám žádný povolený tah. To je pat a partie končí remízou.
 lesson.stale2.ask = Když vyhráváš, dej si pozor na pat. Dej mi mat jedním tahem, a ne pat!
-lesson.stale2.wrong = Dej šach na mé základní řadě, odkud můj král nemůže uniknout.
+lesson.stale2.wrong = Najdi šach, po kterém můj král nemá žádné pole. Pozor: tichý tah mi může dát pat.
+lesson.stale2.king = Tvůj král už hlídá {sq} a {sq2}. Nech ho stát a použij dámu.
+lesson.stale2.hint = Tvůj král hlídá {sq} a {sq2}. Dej šach po základní řadě a můj král nemá kam.
+lesson.stale2.why = Vidíš? Můj král je {@}v šachu a nemá volné pole: to je mat. Bez šachu by to byl pat.
 lesson.stale2.ok = Mat! Soupeřovu králi vždycky nech nějaký tah, pokud mu zrovna nedáváš mat.
 lesson.draws.kings = Další remízy: když už nikdo nemůže dát mat, třeba když zůstanou jen dva králové, partie končí remízou.
 lesson.draws.agree = Hráči se také mohou dohodnout na remíze.
@@ -286,31 +349,29 @@ lesson.opening.castle.ask = Cesta je volná. Udělej rošádu a schovej krále.
 lesson.opening.castle.wrong = Tvůj král je připravený. Udělej rošádu hned, dokud je cesta volná.
 lesson.opening.castle.ok = Rošáda! Tvůj král je v bezpečí a věž vstupuje do hry.
 lesson.opening.done = Centrum, figury, rošáda: to je dobrý začátek každé partie.
+# ---- Chapter 11: review (no teaching: the coach only asks) ----------------------------------------
+lesson.review.start = Rychlé opakování, tentokrát v jiném pořadí. Nebudu vysvětlovat: ty mi to ukážeš.
+lesson.review.promo.ask = Proměň tohoto pěšce.
+lesson.review.promo.ok = Dobře: nová dáma a šach!
+lesson.review.check.ask = Tvůj král je v šachu. Dostaň ho z něj.
+lesson.review.check.ok = Ze šachu venku. Dobře.
+lesson.review.castle.ask = Udělej rošádu na straně, kde je povolená.
+lesson.review.castle.other = To není rošáda. Udělej rošádu na straně, kde je povolená.
+lesson.review.castle.ok = Rošáda na bezpečné straně!
+lesson.review.ep.ask = Vezmi mého pěšce mimochodem.
+lesson.review.ep.ok = Braní mimochodem! Pamatuješ si to.
+lesson.review.mate.ask = Dej mi mat jedním tahem.
+lesson.review.mate.ok = Mat! Opakování je u konce.
 
-# ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
+# ---- Chapter 12: how our games work (no clock, touch-move, handshake, and how the coach helps) ----
 lesson.talk.rules = Teď už znáš všechna pravidla šachu. Výborně!
-lesson.talk.real = Teď ti povím, jak se hrají skutečné partie.
-lesson.talk.elo = Hráči mají rating, kterému se říká Elo. Když vyhraješ, stoupá, a když prohraješ, klesá.
-lesson.talk.elo_gap = Výhra nad silnějším hráčem přinese víc bodů, prohra se slabším stojí víc.
-lesson.talk.elo_start = Tvůj rating se objeví po pěti partiích na rating. Partie s trenérem jsou trénink, a proto se do ratingu nepočítají.
-lesson.talk.clock = Tohle jsou {@}šachové hodiny. Každý hráč má svůj vlastní čas, který mu běží jen tehdy, když je na tahu.
-lesson.talk.press = Po svém tahu stiskneš hodiny stejnou rukou. Tím se spustí můj čas.
-lesson.talk.flag = Když ti dojde čas, prohraješ, ledaže bych ti vůbec nemohl dát mat.
-lesson.talk.increment = Pět plus tři znamená pět minut pro každého a k tomu tři sekundy po každém tahu.
-# The time controls as in assets/i18n/cs.lang (tc.blitz, tc.rapid, tc.classical: Blitz, Rapid, Klasické).
-lesson.talk.speeds = Krátké partie se nazývají blitz, delší rapid a nejdelší klasické.
-lesson.talk.no_clock = Se mnou hodiny neběží. Na přemýšlení si vezmi tolik času, kolik potřebuješ.
-lesson.talk.touch = Ve skutečné partii platí: když se dotkneš své figury, musíš s ní táhnout.
-lesson.talk.touch_mine = Když se dotkneš mé figury, musíš ji vzít, pokud to jde.
-# "Upravuji" is the Czech formula of the rules (the French "j'adoube").
-lesson.talk.adjust = Když chceš figuru jen narovnat a netáhnout s ní, řekni nejdřív „upravuji“.
-lesson.talk.release = Jakmile figuru na novém poli pustíš, tah je zahraný.
-lesson.talk.sheet = Na turnajích oba hráči zapisují každý tah do {@}partiáře.
-# {move:letters} shows the Czech scoresheet letters ("Jf3"), which is what this line teaches.
-lesson.talk.notation = Zapisuje se písmeno figury a pole, třeba {move:letters}. U pěšců jen pole.
-lesson.talk.robot = Tvůj robot zapisuje tahy za tebe. V rychlých partiích se zapisovat nemusí.
+lesson.talk.real = Povím ti, jak budou fungovat naše partie.
+lesson.talk.no_clock = Se mnou nejsou hodiny ani rating. Na přemýšlení si vezmi tolik času, kolik potřebuješ.
+lesson.talk.touch = Figura, které se dotkneš, musí táhnout, takže nejdřív se podívej, potom se dotkni.
 lesson.talk.handshake = Partie začíná i končí podáním ruky. Znamená to: dobrá partie a děkuju.
 lesson.talk.polite = Ať vyhraješ, nebo prohraješ, chovej se slušně a nikdy neruš soupeře, když přemýšlí.
-lesson.talk.tips = Tři rady pro tvoje partie: {@}ovládni centrum, {@2}vyveď jezdce a střelce a {@3}udělej brzy rošádu.
-lesson.talk.next = Až budeš chtít, vyber si úroveň „První kroky“. Budu hrát mírně a po každé chybě ti pomůžu.
+lesson.talk.help = V našich partiích ti pomůžu. Když bude některá tvá figura napadená nebo bez krytí, řeknu ti to.
+lesson.talk.help_back = Po velké chybě ti ukážu proč a nabídnu ti vzít tah zpět.
+lesson.talk.help_skip = A když budu mluvit moc, stiskni mezerník: přestanu.
+lesson.talk.next = Až budeš chtít, zahraj „První kroky“. Budu hrát mírně.
 lesson.talk.welcome = Vítej ve světě šachu! Podáme si ruce.

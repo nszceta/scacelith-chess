@@ -15,7 +15,9 @@
 # ---- Chapter titles (said inside "Nastavljamo lekciju: {chapter}.") ------------------------------------
 # Lower-case nominatives (see event.lesson.* in events.lang).
 lesson.title.welcome = šahovska ploča
-lesson.title.pieces = kako se kreću figure
+lesson.title.pieces_lines = kretanje topa, lovca i dame
+lesson.title.pieces_steps = kretanje kralja, skakača i pješaka
+lesson.title.values_setup = vrijednost figura i prvi potezi
 lesson.title.safety = sigurna i nesigurna uzimanja
 lesson.title.check = šah
 lesson.title.mate = mat
@@ -25,7 +27,8 @@ lesson.title.promotion = promocija pješaka
 lesson.title.draws = pat i remi
 lesson.title.before_move = prije poteza
 lesson.title.opening = otvaranje
-lesson.title.etiquette = rejting, sat i ponašanje u pravim partijama
+lesson.title.review = kratko ponavljanje
+lesson.title.etiquette = kako igramo naše partije
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
 # After the coach demonstrated the solution.
@@ -96,7 +99,7 @@ lesson.rook.king = To je tvoj kralj. Igraj {your:bare_ins} iz kuta.
 lesson.rook.ok = Uzeto! {my} napušta ploču.
 # Pieces don't jump
 lesson.jump.blocked = Figure ne mogu preskakati druge figure. Tvoj pješak na {sq} zatvara put topu.
-lesson.jump.knight = Samo skakač može preskakati. Uskoro ćemo ga upoznati.
+lesson.jump.all = Isto vrijedi za lovca i damu: ni oni ne mogu preskakati figure.
 # Bishop
 lesson.bishop.intro = Ovo je {your}. Kreće se dijagonalno, koliko god polja želi.
 lesson.bishop.colour = Lovac uvijek ostaje na poljima iste boje.
@@ -141,7 +144,12 @@ lesson.pawncap.ok = Da! Ravno za kretanje, dijagonalno za uzimanje.
 lesson.values.pawn = Svaka figura ima vrijednost u bodovima. Pješak vrijedi jedan bod.
 lesson.values.pieces = Skakač ili {@}lovac vrijedi tri. {@2}Top pet. {@3}Dama devet.
 lesson.values.king = Kralj je neprocjenjiv: nikad ga ne možeš dati.
-lesson.values.trade = Trudi se nikad ne dati figuru za manje nego što vrijedi.
+lesson.values.trade = Ne mijenjaj veću figuru za manju, osim ako dobiješ više nego što izgubiš.
+lesson.values.two = Tvoj skakač napada dvije moje figure: {sq} i {sq2}. Nijednu ne brani ništa.
+lesson.values.ask = Uzmi onu koja više vrijedi!
+lesson.values.small = To je pješak, vrijedi jedan. {my} je također bi{my:pt} nebranjen{my:ag}, a vrijedi devet.
+lesson.values.look = Pogledaj što tvoj skakač napada i uzmi figuru koja više vrijedi.
+lesson.values.ok = Da! Dama vrijedi devet. Kad su dvije figure slobodne, uzmi veću.
 lesson.setup.corners = Svaka partija počinje ovako: topovi u {@}kutovima, pa {@2}skakači, pa {@3}lovci.
 lesson.setup.queen = Dama stoji na polju svoje boje: tvoja dama je na svijetlom polju.
 lesson.setup.king = Kralj stoji pokraj nje. Bijeli uvijek povlači prvi potez.
@@ -162,6 +170,18 @@ lesson.safety.gave = Za mog skakača, koji vrijedi tri, otišla je tvoja dama, k
 lesson.safety.other = Pokušaj s drugom figurom.
 lesson.safety.look = Potraži figuru koju ništa ne brani.
 lesson.safety.ok = Izvrsno! Uvijek se pitaj: je li ta figura branjena?
+lesson.safety.pawns = Tvoja dama napada dva moja pješaka: {sq} i {sq2}.
+lesson.safety.pawns_ask = Uzmi pješaka kojeg je sigurno uzeti.
+lesson.safety.gave_pawn = Za pješaka, koji vrijedi jedan, otišla je tvoja dama, koja vrijedi devet.
+lesson.safety.pawns_other = I pješak može biti branjen. Pokušaj s drugim pješakom.
+lesson.safety.pawns_ok = Tako je! Nikad ne riskiraj damu za branjenog pješaka.
+lesson.safety.small = Sad obrnuto. {my} je branjen{my:ag}, ali {my:pron_acc} tvoj pješak napada.
+lesson.safety.small_count = Ako uzmeš damu, moj {@}pješak uzima tvog natrag. Daješ jedan bod, a dobivaš devet.
+lesson.safety.small_ask = Uzmi moju damu pravom figurom!
+lesson.safety.small_other = Uzmi je radije pješakom: najjeftinijom figurom koja to može.
+lesson.safety.small_look = Tvoj pješak napada moju damu. Uzmi je njime.
+lesson.safety.small_ok = Da! Mala figura smije uzeti veliku, čak i branjenu: gubiš jedan bod, a dobivaš devet.
+lesson.safety.count = Prije svakog uzimanja izbroji što dobivaš i što se može izgubiti natrag.
 
 # ---- Chapter 3: check and getting out of check -----------------------------------------------------------------
 lesson.danger.rank = Moj top kontrolira cijeli drugi red.
@@ -183,6 +203,11 @@ lesson.capture.check = Moja dama daje šah, odmah pokraj tvog kralja.
 lesson.capture.ask = Uzmi napadača!
 lesson.capture.king_ok = Da! Moja dama nije bila branjena, pa ju je tvoj kralj mogao uzeti.
 lesson.capture.knight_ok = Da! Tvoj skakač je uklonio napadača.
+lesson.check.open.ask = Opet šah! Ovaj put izađi iz njega kako god želiš.
+lesson.check.open.king = Kralj je pomaknut u stranu. Mogla se i zatvoriti linija figurom, ili je tvoj skakač mogao uzeti moj top.
+lesson.check.open.block = Napad je zatvoren. Kralj se mogao i pomaknuti, ili je tvoj skakač mogao uzeti moj top.
+lesson.check.open.take = Uzet je moj top, figura koja daje šah. Pomoglo bi i pomicanje kralja ili zatvaranje napada.
+lesson.check.open.hint = Tri načina: {@}pomakni kralja, {@2}zatvori liniju figurom ili {@3}uzmi moj top skakačem.
 
 # ---- Chapter 4: checkmate ------------------------------------------------------------------------------------
 lesson.mate1.what = Mat: kralj je u šahu i nema izlaza. Time je partija dobivena.
@@ -190,16 +215,34 @@ lesson.mate1.stuck = Moj kralj je zarobljen iza {@}svojih pješaka.
 lesson.mate1.ask = Daj mi mat u jednom potezu!
 lesson.mate1.wrong = Blizu si! Daj šah na mom zadnjem redu, odakle moj kralj ne može pobjeći.
 lesson.mate1.ok = Mat! To je mat na zadnjem redu. Zapamti ga!
+lesson.mate1.king = Tvoj kralj je dobro gdje je. Šah daj topom.
+lesson.mate1.why = Vidiš? Top pokriva {@}cijeli moj zadnji red, a {@2}moji pješaci popunjavaju polja ispred mog kralja.
 lesson.mate2.ask = Tvoj kralj i dama rade zajedno. Daj mi mat u jednom potezu.
 lesson.mate2.wrong = Pronađi šah koji mom kralju ne ostavlja nijedno polje.
 lesson.mate2.ok = Mat! Tvoj kralj štiti damu, pa ju moj ne može uzeti.
 lesson.mate2.ok_rank = Mat na zadnjem redu! Tvoj kralj čuva sva polja ispred mog.
+lesson.mate2.king = Tvoj kralj čuva polja pokraj mog. Ostavi ga ondje i igraj damom.
+lesson.mate2.half = To nadzire {sq}, ali moj kralj još može na {sq2}.
+lesson.mate2.why = Vidiš? Tvoja dama pokriva {sq} i {sq2}, a tvoj kralj polja ispred mog. Moj kralj nema izlaza.
 lesson.mate3.edge = Tvoj top na sedmom redu drži mog kralja na rubu.
 lesson.mate3.ask = Sad iskoristi {your:refl_acc} i daj mat.
 lesson.mate3.free = Šah, ali sedmi red je sad slobodan i moj kralj bježi.
 lesson.mate3.takes = Moj kralj jednostavno uzima tvoj top.
 lesson.mate3.hint = Daj šah na zadnjem redu onim topom koji ne čuva sedmi red.
 lesson.mate3.ok = Mat! Dva topa radila su kao ljestve.
+lesson.mate3.why = Vidiš? Jedan top odsijeca {@}sedmi red, a drugi daje šah na {@2}zadnjem redu. Moj kralj nema izlaza.
+lesson.mate4.look = Šah nije uvijek mat. Pogledajmo što se događa.
+lesson.mate4.ask = Daj mom kralju šah svojim topom.
+lesson.mate4.king = Tvoj kralj ostaje gdje je. Šah daj topom.
+lesson.mate4.wrong = To nije šah. Tvoj top može napasti mog kralja sa zadnjeg reda.
+lesson.mate4.ok = Da, to je šah! Ali je li mat? Gledaj.
+lesson.mate4.after = Moj pješak na {sq} dao je mom kralju prostora. Prije nego što proslaviš šah, izbroji polja koja moj kralj još može koristiti.
+lesson.mate5.ask = Dva poteza tvog topa daju šah, a samo je jedan mat. Izbroji polja mog kralja, pa biraj.
+lesson.mate5.king = Tvoj kralj već pokriva {sq} i {sq2}. Ostavi ga ondje i pomakni top.
+lesson.mate5.wrong = To nije šah. Potraži potez topa koji napada mog kralja.
+lesson.mate5.hint = Tvoj kralj pokriva {sq} i {sq2}. Koji šah topom oduzima i {sq3}?
+lesson.mate5.why = Vidiš? Top pokriva {sq}, tvoj kralj druga dva polja, i moj kralj je zarobljen.
+lesson.mate5.ok = Mat! Polja mog kralja su izbrojena: nijedno nije ostalo.
 
 # ---- Chapter 5: castling ---------------------------------------------------------------------------------------
 lesson.castle.what = Rokada je poseban potez koji tvog kralja stavlja na sigurno. Kralj i top kreću se zajedno.
@@ -216,6 +259,10 @@ lesson.castle2.bishop = Moj lovac napada polje {sq}. Zato je rokada na ovu stran
 lesson.castle2.ask = Napravi rokadu na drugu stranu.
 lesson.castle2.other = Napravi rokadu prema svom drugom topu, na daminu krilu.
 lesson.castle2.ok = Točno! Nakon velike rokade tvoj je kralj na {sq}.
+lesson.ep0.rule = En passant počinje dvostrukim korakom. Samo pješak koji je {@}još kod kuće smije ići dva polja. Pješak koji se {@2}već pomaknuo ide jedno po jedno.
+lesson.ep0.ask = Pomakni jednog svog pješaka dva polja.
+lesson.ep0.moved = Taj se pješak već pomaknuo, pa može samo jedno polje. Igraj pješakom koji je još kod kuće.
+lesson.ep0.ok = Točno: samo pješak na početnom polju smije ići dva.
 
 # ---- Chapter 6: en passant ------------------------------------------------------------------------------------
 lesson.ep.what = Jedno posebno uzimanje pješakom zove se en passant, što na francuskom znači „u prolazu“.
@@ -224,6 +271,13 @@ lesson.ep.how = Tvoj pješak ga smije uzeti kao da se moj pomaknuo samo jedno po
 lesson.ep.now = Ali samo sada, u ovom potezu. Uzmi en passant!
 lesson.ep.gone = Prilika je prošla: en passant vrijedi samo odmah. Pokušajmo ponovno.
 lesson.ep.ok = En passant! Moj pješak s polja {sq} uklonjen je s ploče.
+lesson.ep2.old = Moj pješak na {sq} već neko vrijeme stoji pokraj tvog. Prekasno je uzeti ga en passant.
+lesson.ep2.watch = Sad gledaj mog drugog pješaka.
+lesson.ep2.ask = Dva moja pješaka stoje pokraj tvog, ali se samo jedan upravo pomaknuo dva polja. Uzmi njega en passant!
+lesson.ep2.push = To samo gura tvog pješaka. Uzmi pješaka koji se upravo pomaknuo dva polja.
+lesson.ep2.wrong = Potraži pješaka koji je upravo napravio dvostruki korak i uzmi ga en passant.
+lesson.ep2.hint = Moj pješak na {sq} upravo je prešao dva polja. Uzmi ga en passant, na {sq2}.
+lesson.ep2.ok = En passant! Mog pješaka na {sq} nije se moglo uzeti: prilika je prošla.
 
 # ---- Chapter 7: promotion -------------------------------------------------------------------------------------
 lesson.promo.what = Kad pješak stigne do zadnjeg reda, promovira se: postaje dama, top, lovac ili skakač.
@@ -232,12 +286,21 @@ lesson.promo.under = Dopušteno! Ali dama je jača. Izaberimo damu.
 lesson.promo.under_ok = Dobro. Ipak, većina igrača bira damu.
 lesson.promo.push = Pogurni pješaka do zadnjeg reda, na {sq}.
 lesson.promo.ok = Nova dama! Možeš čak imati i dvije dame odjednom.
+lesson.promo2.ask = Pješak se može promovirati i uzimanjem, dijagonalno. Uzmi moj top i napravi damu!
+lesson.promo2.push = I to je promocija, ali moj top čuva {sq}. Gledaj.
+lesson.promo2.lost = Moj top uzeo je tvoju novu figuru. Najprije uzmi moj top.
+lesson.promo2.wrong = To ne uzima moj top. Tvoj pješak uzima dijagonalno, na {sq}.
+lesson.promo2.hint = Uzmi moj top svojim pješakom, na {sq}: promovira se dok uzima.
+lesson.promo2.ok = Uzeto i promovirano! Pješak može oboje u jednom potezu.
 
 # ---- Chapter 8: stalemate and draws -----------------------------------------------------------------------------
 lesson.stale.what = Ja sam na potezu. Moj kralj nije u šahu, ali {@}svako polje oko njega je napadnuto.
 lesson.stale.draw = Nemam nijedan pravilan potez. To je pat i partija je remi.
 lesson.stale2.ask = Kad dobivaš, čuvaj se pata. Daj mi mat u jednom potezu, bez pata!
-lesson.stale2.wrong = Daj šah na mom zadnjem redu, odakle moj kralj ne može pobjeći.
+lesson.stale2.wrong = Nađi šah koji mom kralju ne ostavlja nijedno polje. Pazi: miran potez može biti pat.
+lesson.stale2.king = Tvoj kralj već pokriva {sq} i {sq2}. Ostavi ga ondje i igraj damom.
+lesson.stale2.hint = Tvoj kralj pokriva {sq} i {sq2}. Daj mi šah po zadnjem redu i moj kralj nema kamo.
+lesson.stale2.why = Vidiš? Moj kralj je napadnut {@}i nema slobodnog polja: to je mat. Bez šaha bio bi pat.
 lesson.stale2.ok = Mat! Uvijek ostavi protivničkom kralju neki potez, osim ako mu daješ mat.
 lesson.draws.kings = Drugi remiji: kad nitko ne može dati mat, na primjer kad ostanu samo dva kralja, partija je remi.
 lesson.draws.agree = Igrači mogu i dogovoriti remi.
@@ -287,32 +350,29 @@ lesson.opening.castle.ask = Put je slobodan. Rokiraj kralja na sigurno.
 lesson.opening.castle.wrong = Tvoj kralj je spreman. Rokiraj sada, dok je put slobodan.
 lesson.opening.castle.ok = Rokirano! Tvoj kralj je siguran, a top ulazi u igru.
 lesson.opening.done = Centar, figure, rokada: to je dobar početak svake partije.
+lesson.review.start = Kratko ponavljanje, ovaj put drugim redom. Ne objašnjavam: ti mi pokaži.
+lesson.review.promo.ask = Promoviraj ovog pješaka.
+lesson.review.promo.ok = Dobro: nova dama i šah!
+lesson.review.check.ask = Tvoj kralj je u šahu. Izađi iz njega.
+lesson.review.check.ok = Izvan šaha. Dobro.
+lesson.review.castle.ask = Rokiraj kralja, na strani gdje je dopušteno.
+lesson.review.castle.other = To nije rokada. Rokiraj na strani gdje je dopušteno.
+lesson.review.castle.ok = Rokirano, na sigurnoj strani!
+lesson.review.ep.ask = Uzmi mog pješaka en passant.
+lesson.review.ep.ok = En passant! Dobro pamćenje.
+lesson.review.mate.ask = Daj mi mat u jednom potezu.
+lesson.review.mate.ok = Mat! Ponavljanje je gotovo.
 
 # ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = Sad znaš sva pravila šaha. Bravo!
-lesson.talk.real = Da ti ispričam kako se igraju prave partije.
-lesson.talk.elo = Igrači imaju rejting, koji se zove Elo. Raste kad pobjeđuješ, a pada kad gubiš.
-lesson.talk.elo_gap = Pobjeda nad jačim igračem donosi više bodova, a poraz od slabijeg više košta.
-lesson.talk.elo_start = Tvoj rejting pojavit će se nakon pet partija za rejting. Partije sa mnom služe za vježbu, pa se za rejting ne računaju.
-lesson.talk.clock = Ovo je {@}šahovski sat. Svaki igrač ima svoje vrijeme, koje teče samo dok je on na potezu.
-lesson.talk.press = Nakon svog poteza pritisneš sat istom rukom. Time pokrećeš moje vrijeme.
-lesson.talk.flag = Ako ti istekne vrijeme, gubiš, osim ako ti ja nikako ne mogu dati mat.
-lesson.talk.increment = Pet plus tri znači pet minuta za svakog igrača, plus tri sekunde nakon svakog poteza.
-# The time controls are named as on the new-game page (assets/i18n/hr.lang tc.*): Brzopotezni (blitz),
-# Ubrzani (rapid), Klasični (classical): "brzopotezni / ubrzani / klasični šah".
-lesson.talk.speeds = Kratke partije igraju se u brzopoteznom šahu, dulje u ubrzanom šahu, a najdulje u klasičnom šahu.
-lesson.talk.no_clock = Sa mnom je sat isključen. Razmišljaj koliko god ti treba.
-lesson.talk.touch = U pravoj partiji, ako dodirneš neku svoju figuru, moraš ju pomaknuti.
-lesson.talk.touch_mine = Ako dodirneš neku moju figuru, moraš ju uzeti, ako možeš.
-lesson.talk.adjust = Ako figuru samo želiš namjestiti, a ne odigrati, najprije reci „namještam“.
-lesson.talk.release = Čim pustiš figuru na novom polju, potez je odigran.
-lesson.talk.sheet = Na turnirima oba igrača zapisuju svaki potez u {@}zapisnik.
-# {move:letters} shows the Croatian scoresheet letters ("Sf3"), which is what this line teaches.
-lesson.talk.notation = Zapisujemo slovo figure i polje, na primjer {move:letters}. Za pješake samo polje.
-lesson.talk.robot = Tvoj robot zapisuje poteze umjesto tebe. U brzim partijama zapisivanje nije obavezno.
+lesson.talk.real = Da ti ispričam kako će izgledati naše partije.
+lesson.talk.no_clock = Sa mnom nema sata ni rejtinga. Razmišljaj koliko god ti treba.
+lesson.talk.touch = Figura koju dodirneš mora se pomaknuti, zato prvo pogledaj, pa dodirni.
 lesson.talk.handshake = Partije počinju i završavaju rukovanjem. Ono znači: dobra partija, i hvala.
 lesson.talk.polite = Pobjeda ili poraz, pristojnost je na prvom mjestu. I nikad ne ometaj protivnika dok razmišlja.
-lesson.talk.tips = Tri savjeta za tvoje partije: {@}kontroliraj centar, {@2}razvij skakače i lovce i {@3}rokiraj rano.
+lesson.talk.help = U našim partijama pomagat ću ti. Ako je neka tvoja figura napadnuta ili ostane bez zaštite, reći ću ti.
+lesson.talk.help_back = Nakon velike pogreške pokazat ću ti zašto i ponuditi da povučeš potez.
+lesson.talk.help_skip = A ako previše pričam, pritisni razmaknicu: prestat ću.
 # The level name of assets/i18n/hr.lang coach.level.1.name, quoted so that it keeps its nominative.
-lesson.talk.next = Kad poželiš, odaberi razinu „Prvi koraci“. Igrat ću lagano i pomoći ti nakon svake pogreške.
+lesson.talk.next = Kad poželiš, odigraj „Prve korake“. Igrat ću lagano.
 lesson.talk.welcome = Želim ti dobrodošlicu u svijet šaha! Rukujmo se.

@@ -14,6 +14,10 @@
 # The player always has the white pieces. The coach says "sina" to the player.
 # The challenge names are those of assets/i18n/et.lang (challenge.<id>.name).
 
+ch.practise = Sinu viimasest partiist: {theme}. See komplekt on selleks tehtud.
+ch.practise.2 = Sinu viimases partiis oli üks asi, mille kallal töötada: {theme}. Harjutame seda.
+ch.practise.3 = Eelmise partii nõuanne oli: {theme}. Siin on veidi harjutamist.
+
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
 ch.intro.mate1 = Matt ühe käiguga. {n:position} ja iga kord paneb matti üksainus käik. Kontrolli kõiki tuleandmisi.
 ch.intro.mate2 = Matt kahe käiguga. {n:position}: sinu esimene käik peab jätma mind kaitseta, siis paned matti.

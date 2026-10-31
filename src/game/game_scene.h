@@ -66,6 +66,8 @@
 //   --start --coach         skip the menu: a coach game (--coach-level N, 0 = the rules lesson,
 //                           1..6; --coach-colour white|black, or --coach-color); the [coach]
 //                           settings otherwise
+//   --coach-lesson-chapter <id>   the lesson (level 0, unless --coach-level says otherwise) starts
+//                           at that chapter (coach::LessonChapter::id)
 //   --coach-dir <path>      the folder of the coach's voice files
 //                           (default: <application data>/coach/, see tts/model_store.h)
 //   --coach-stage-test      a coach game whose Stage performs a fixed sequence (a spoken line with
@@ -422,11 +424,14 @@ private:
     bool coach() const { return mode_ == GameMode::Coach; }
     bool lesson() const { return coach() && coachLevel_ == 0 && coachChallenge_.empty(); }   // the rules lesson
     bool challenge() const { return coach() && !coachChallenge_.empty(); }   // a challenge (coach/challenge.h)
-    // The rules lesson or a challenge: no game but exercises (no scoresheet, clock, rating, draw or
-    // resignation; the game never ends by itself; the coach's moves come from its script; a piece
-    // touched may be put back; illegal placements are refused and explained).
-    bool drill() const { return lesson() || challenge(); }
-    // Legal-move hints: the option, forced on in the rules lesson and the challenges.
+    // A retry of a game's critical position (coach levels 1-3, the end card's "Try that position
+    // again"): the coach::Session with SessionConfig::retryBest on a game that starts at that position.
+    bool retrying() const { return coach() && !coachRetryBest_.empty(); }
+    // The rules lesson, a challenge or a retry: no game but exercises (no scoresheet, clock, rating,
+    // draw or resignation; the game never ends by itself; the coach's moves come from its script, a
+    // retry's none; a piece touched may be put back; illegal placements are refused and explained).
+    bool drill() const { return lesson() || challenge() || retrying(); }
+    // Legal-move hints: the option, forced on in the rules lesson, the challenges and the retries.
     bool legalHints() const;
     void initCoachArgs();                     // command line: --coach and its options
     void refreshCoachVoice();                 // are the voice's model files there (tts::modelFilesPresent)
@@ -450,22 +455,29 @@ private:
     void coachGameOver();                     // endGame()
     void endLesson();                         // the rules lesson is over: its own ending
     void endChallenge();                      // a challenge is over (every position solved)
+    void endRetry();                          // a retry is over (the better move found, or shown)
     void saveChallengeDone();                 // its completion, once (Settings::coachChallengesDone)
     void nextChallenge();                     // "Next challenge" on its end card: the one to play next
-    void chainChallenge(const std::string& id);   // the next coach game is the challenge 'id', from its start
+    // The next coach game is the challenge 'id', from its start. 'theme' (coach::exTypeName): the
+    // error of the game just played that the set practises, which the coach names first.
+    void chainChallenge(const std::string& id, const std::string& theme = std::string());
     std::string practiseChallenge() const;    // a game's end card: the set the appraisal suggests ("" = none)
+    std::string practiseTheme() const;        // ... and the theme it practises
+    bool coachRetryOffered() const;           // a game's end card: it has a critical position to try again
+    bool coachRetryFound() const;             // a retry's end card: the player found the better move
+    void chainRetry();                        // "Try that position again": the next coach game is that retry
     bool coachEndCardReady() const;           // GameOver: the coach has said everything
     bool coachHandshakeWanted() const;        // GameOver: the closing words are said
     bool coachHoldsMove() const;              // updateAi: the coach's move waits (review, hands, draw offer)
     bool coachMayTouch() const;               // the player may touch a piece now
-    void coachPlayerTouched();                // humanTouch(): the session hears of it
+    void coachPlayerTouched(chess::Square from);   // humanTouch(): the session hears of it (the piece's square)
     void coachIllegalAttempt(chess::Square from, chess::Square to);
     bool coachBookMove(chess::Move& mv);      // updateAi: the teaching repertoire's move, if any
     void coachGazeTarget(m::vec3& target);    // updateGaze: where the coach looks while it talks
     // render(): the pieces the coach designates and its marks on the board, this frame.
     void coachMarks(std::vector<PieceHighlight>& highlights, std::vector<CoachMark>& marks);
     // render(): levels 1-2, the player's pieces the coach could win (coach::hangingPieces), a tint
-    // under each on the player's turn (Settings::coachDangerMarkers; kept up to date in updateCoach).
+    // under each on the player's turn (Settings::coachDangerMarkerMode; kept up to date in updateCoach).
     void coachDangerMarks(std::vector<AnalysisMark>& marks) const;
     void drawCoachSubtitles();                // renderOverlay()
     void persistCoachResults();               // Settings [coach] from the session (once per game)
@@ -812,6 +824,7 @@ private:
     ui::CoachSetup coachSetup_;         // the coach page's choice
     int coachLevel_ = 1;                // the coach game being played: 0 = the rules lesson, 1..6
     std::string coachChallenge_;        // the challenge being played (coach::Challenge::id), "" = none
+    std::string coachRetryFen_, coachRetryBest_;   // the position to retry and the engine's move there, "" = none
     float coachFaceLift_ = 0.0f;        // 0..1: the view rises gently to the coach's face as it talks to the player
     float coachFade_ = 0.0f;            // a lesson position being set up behind a fade
     bool coachVoiceFiles_ = false;      // tts::modelFilesPresent() at start-up

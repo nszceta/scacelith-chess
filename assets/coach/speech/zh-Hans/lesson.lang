@@ -11,7 +11,9 @@
 
 # ---- Chapter titles (said inside "我们继续学习“{chapter}”。") ------------------------------------------
 lesson.title.welcome = 棋盘
-lesson.title.pieces = 棋子的走法
+lesson.title.pieces_lines = 车、象和后的走法
+lesson.title.pieces_steps = 王、马和兵的走法
+lesson.title.values_setup = 棋子的价值与最初几步
 lesson.title.safety = 安全与不安全的吃子
 lesson.title.check = 将军
 lesson.title.mate = 将死
@@ -21,7 +23,8 @@ lesson.title.promotion = 升变
 lesson.title.draws = 逼和与和棋
 lesson.title.before_move = 走棋之前
 lesson.title.opening = 开局
-lesson.title.etiquette = 正式对局的等级分、棋钟和礼仪
+lesson.title.review = 快速复习
+lesson.title.etiquette = 我们的对局怎么进行
 
 # ---- Lines every exercise uses ------------------------------------------------------------------------
 # After the coach demonstrated the solution.
@@ -90,7 +93,7 @@ lesson.rook.king = 那是你的王。用{your}，它在角上。
 lesson.rook.ok = 吃掉了！{my}离开了棋盘。
 # Pieces don't jump
 lesson.jump.blocked = 棋子不能跳过别的子。你在{sq}的兵挡住了车的路。
-lesson.jump.knight = 只有马能跳。我们很快就会认识它。
+lesson.jump.all = 象和后也一样：它们同样不能跳过别的子。
 # Bishop
 lesson.bishop.intro = 这是{your}。它斜着走，格数不限。
 lesson.bishop.colour = 象永远只在同一种颜色的格子上走。
@@ -133,7 +136,12 @@ lesson.pawncap.ok = 对了！兵直走，斜吃。
 lesson.values.pawn = 每个棋子都有分值。一个兵值1分。
 lesson.values.pieces = 马或{@}象，3分。{@2}车，5分。{@3}后，9分。
 lesson.values.king = 王是无价的：你永远不能把它送掉。
-lesson.values.trade = 尽量不要拿一个子去换价值比它低的子。
+lesson.values.trade = 不要拿大子去换小子，除非你赢得比失去的多。
+lesson.values.two = 你的马同时攻击我的两个子：{sq}和{sq2}。它们都没有保护。
+lesson.values.ask = 吃掉价值更高的那个！
+lesson.values.small = 那是个兵，只值1分。{my}也是白送的，而她值9分。
+lesson.values.look = 看看你的马攻击什么，吃掉价值更高的子。
+lesson.values.ok = 对！后值9分。两个子都白送时，吃大的。
 lesson.setup.corners = 每盘棋都这样开始：车在{@}角上，然后是{@2}马，再是{@3}象。
 lesson.setup.queen = 后放在和自己同色的格子上：你的后在白格上。
 lesson.setup.king = 王放在后的旁边。白方总是先走。
@@ -154,6 +162,18 @@ lesson.safety.gave = 你用价值9分的后，换了我价值3分的马。
 lesson.safety.other = 试试另一个子。
 lesson.safety.look = 找出没有任何保护的那个子。
 lesson.safety.ok = 太棒了！每次都要问自己：那个子有保护吗？
+lesson.safety.pawns = 你的后攻击我的两个兵：{sq}和{sq2}。
+lesson.safety.pawns_ask = 吃掉那个可以安全吃的兵。
+lesson.safety.gave_pawn = 你用价值9分的后，换了一个只值1分的兵。
+lesson.safety.pawns_other = 连兵也可能有保护。试试另一个兵。
+lesson.safety.pawns_ok = 对！别为了一个有保护的兵去冒丢后的风险。
+lesson.safety.small = 反过来看。{my}有保护，但你的兵在攻击她。
+lesson.safety.small_count = 如果你吃掉她，我的{@}兵会吃回你的兵。你付出1分，赢得9分。
+lesson.safety.small_ask = 用正确的子吃掉我的后！
+lesson.safety.small_other = 改用你的兵吃她：能吃她的子里价值最低的那个。
+lesson.safety.small_look = 你的兵攻击着我的后。用它吃掉她。
+lesson.safety.small_ok = 对！小子可以吃大子，哪怕对方有保护：你失去1分，赢得9分。
+lesson.safety.count = 每次吃子之前，先算一算：你赢多少，又可能被吃回多少。
 
 # ---- Chapter 3: check and getting out of check -----------------------------------------------------------------
 lesson.danger.rank = 我的车控制着整条第二横线。
@@ -175,6 +195,11 @@ lesson.capture.check = 我的后在你的王旁边将军。
 lesson.capture.ask = 吃掉来将军的子！
 lesson.capture.king_ok = 对！我的后没有保护，所以你的王可以吃掉它。
 lesson.capture.knight_ok = 对！你的马吃掉了来将军的子。
+lesson.check.open.ask = 又将军了！这次用你喜欢的任何方法解除。
+lesson.check.open.king = 你把王走开了。其实也可以用一个子挡住，或者用你的马吃掉我的车。
+lesson.check.open.block = 你挡住了攻击。其实王也可以走开，或者用你的马吃掉我的车。
+lesson.check.open.take = 你吃掉了我的车，也就是来将军的子。走王或者挡住也都可以。
+lesson.check.open.hint = 有三种方法：{@}移动王，{@2}在直线上挡住，或者{@3}用你的马吃掉我的车。
 
 # ---- Chapter 4: checkmate ------------------------------------------------------------------------------------
 lesson.mate1.what = 将死：王被将军，而且无路可逃。这样就赢了。
@@ -182,16 +207,34 @@ lesson.mate1.stuck = 我的王被困在{@}自己的兵后面。
 lesson.mate1.ask = 一步将死我！
 lesson.mate1.wrong = 差一点！在我的底线将军，我的王在那里逃不掉。
 lesson.mate1.ok = 将死！这叫底线杀。记住它！
+lesson.mate1.king = 你的王在原地就好。用车来将军。
+lesson.mate1.why = 看到了吗？车控制了我的{@}整条底线，而我自己的{@2}兵堵住了王前面的格子。
 lesson.mate2.ask = 你的王和后可以配合作战。一步将死我。
 lesson.mate2.wrong = 找一步将军，让我的王一格都走不了。
 lesson.mate2.ok = 将死！你的王保护着后，所以我的王吃不掉它。
 lesson.mate2.ok_rank = 底线将死！你的王控制了我的王前面的每一格。
+lesson.mate2.king = 你的王守着我的王旁边的格子。让它留在那里，用后。
+lesson.mate2.half = 那只控制了{sq}，但我的王还能走到{sq2}。
+lesson.mate2.why = 看到了吗？你的后控制{sq}和{sq2}，你的王控制我的王前面的格子。我的王无路可逃。
 lesson.mate3.edge = 你在第七横线的车把我的王困在了边上。
 lesson.mate3.ask = 现在用{your}将死我。
 lesson.mate3.free = 将军了，但第七横线空了出来，我的王可以逃走。
 lesson.mate3.takes = 我的王可以直接吃掉你的车。
 lesson.mate3.hint = 用没在守第七横线的那个车，在底线将军。
 lesson.mate3.ok = 将死！两个车像爬梯子一样交替配合。
+lesson.mate3.why = 看到了吗？一个车截断了{@}第七横线，另一个车在{@2}底线将军。我的王无路可逃。
+lesson.mate4.look = 将军不一定就是将死。我们来看看会怎样。
+lesson.mate4.ask = 用你的车将我的王一军。
+lesson.mate4.king = 你的王留在原地。用车来将军。
+lesson.mate4.wrong = 这不是将军。你的车可以从底线攻击我的王。
+lesson.mate4.ok = 对，这是将军！但是将死了吗？看着。
+lesson.mate4.after = 我在{sq}的兵给我的王让出了空间。为将军高兴之前，先数数我的王还有几个格子可走。
+lesson.mate5.ask = 你的车有两步能将军，只有一步是将死。先数数我的王的格子，再选。
+lesson.mate5.king = 你的王已经控制{sq}和{sq2}。让它留在那里，走车。
+lesson.mate5.wrong = 这不是将军。找一步攻击我的王的车着法。
+lesson.mate5.hint = 你的王控制{sq}和{sq2}。哪一步车将军还能夺走{sq3}？
+lesson.mate5.why = 看到了吗？车控制{sq}，你的王控制另外两格，我的王被困住了。
+lesson.mate5.ok = 将死！你数清了我的王的格子：一个都没剩。
 
 # ---- Chapter 5: castling ---------------------------------------------------------------------------------------
 lesson.castle.what = 王车易位是一种特殊着法，能让王更安全。王和车一起走。
@@ -208,6 +251,10 @@ lesson.castle2.bishop = 我的象在攻击{sq}。所以现在不能在这一侧�
 lesson.castle2.ask = 在另一侧易位。
 lesson.castle2.other = 朝你的另一个车易位，也就是后翼那一侧。
 lesson.castle2.ok = 正确！长易位后，你的王到了{sq}。
+lesson.ep0.rule = 吃过路兵从“走两格”开始。只有{@}还在原位的兵才能走两格。{@2}已经走过的兵，每次只走一格。
+lesson.ep0.ask = 把你的一个兵走两格。
+lesson.ep0.moved = 那个兵已经走过了，只能走一格。用还在原位的兵。
+lesson.ep0.ok = 对：只有在起始格上的兵才能走两格。
 
 # ---- Chapter 6: en passant ------------------------------------------------------------------------------------
 lesson.ep.what = 兵有一种特殊的吃法，叫“吃过路兵”。
@@ -216,6 +263,13 @@ lesson.ep.how = 你的兵可以把它当成只走了一格来吃：走到{sq}。
 lesson.ep.now = 但只有现在这一步可以。吃过路兵！
 lesson.ep.gone = 机会没了：吃过路兵必须立刻进行。我们再试一次。
 lesson.ep.ok = 吃过路兵！我在{sq}的兵被拿掉了。
+lesson.ep2.old = 我在{sq}的兵已经在你的兵旁边站了好一会儿了。现在吃过路兵已经太迟。
+lesson.ep2.watch = 现在看我的另一个兵。
+lesson.ep2.ask = 我有两个兵站在你的兵旁边，但只有一个刚刚走了两格。用吃过路兵吃掉那个！
+lesson.ep2.push = 那只是把你的兵推进了一格。吃掉刚走两格的那个兵。
+lesson.ep2.wrong = 找出刚走完两格的兵，用吃过路兵吃掉它。
+lesson.ep2.hint = 我在{sq}的兵刚走了两格。用吃过路兵吃掉它，走到{sq2}。
+lesson.ep2.ok = 吃过路兵！我在{sq}的兵没法再被吃了：它的机会已经过去。
 
 # ---- Chapter 7: promotion -------------------------------------------------------------------------------------
 lesson.promo.what = 兵走到对方的底线就要升变：变成后、车、象或马。
@@ -224,12 +278,21 @@ lesson.promo.under = 可以！但后更强。我们选后吧。
 lesson.promo.under_ok = 好的。不过大多数棋手都会选后。
 lesson.promo.push = 把你的兵推到底线，走到{sq}。
 lesson.promo.ok = 新的后！你甚至可以同时拥有两个后。
+lesson.promo2.ask = 兵也可以斜着吃子来升变。吃掉我的车，变成后！
+lesson.promo2.push = 这样也能升变，但我的车守着{sq}。看着。
+lesson.promo2.lost = 我的车吃掉了你的新棋子。先吃掉我的车。
+lesson.promo2.wrong = 这没吃到我的车。你的兵斜着吃，走到{sq}。
+lesson.promo2.hint = 用你的兵吃掉我的车，走到{sq}：吃子的同时升变。
+lesson.promo2.ok = 吃子加升变！一个兵一步棋可以同时做到。
 
 # ---- Chapter 8: stalemate and draws -----------------------------------------------------------------------------
 lesson.stale.what = 轮到我走。我的王没有被将军，但它{@}周围的每一格都受到攻击。
 lesson.stale.draw = 我没有合法着法可走。这叫逼和，这盘棋就和了。
 lesson.stale2.ask = 占优时要小心逼和。一步将死我，别造成逼和！
-lesson.stale2.wrong = 在我的底线将军，那里我的王逃不掉。
+lesson.stale2.wrong = 找一步将军，让我的王无格可走。小心：一步安静的着法可能让我被逼和。
+lesson.stale2.king = 你的王已经控制{sq}和{sq2}。让它留在那里，用后。
+lesson.stale2.hint = 你的王控制{sq}和{sq2}。沿底线将我的军，我的王就无处可去。
+lesson.stale2.why = 看到了吗？我的王{@}被将军，又没有空格可走：这是将死。没有这一将，就是逼和。
 lesson.stale2.ok = 将死！除非你正在将死对方，否则总要给对方的王留一步棋。
 lesson.draws.kings = 其他和棋情况：谁都无法将死时，比如只剩两个王，就是和棋。
 lesson.draws.agree = 双方也可以协议和棋。
@@ -279,28 +342,28 @@ lesson.opening.castle.ask = 路是通的。王车易位，让王安全。
 lesson.opening.castle.wrong = 你的王准备好了。趁路是通的，现在就易位。
 lesson.opening.castle.ok = 易位完成！你的王安全了，你的车也加入了战斗。
 lesson.opening.done = 中心、出子、易位：这是每盘棋的好开局。
+lesson.review.start = 快速复习，这次顺序不同。我不讲解，你来演示。
+lesson.review.promo.ask = 让这个兵升变。
+lesson.review.promo.ok = 好：新的后，还将军了！
+lesson.review.check.ask = 你的王被将军了。解除它。
+lesson.review.check.ok = 解除将军了。很好。
+lesson.review.castle.ask = 王车易位，选允许易位的那一侧。
+lesson.review.castle.other = 这不是王车易位。在允许易位的那一侧易位。
+lesson.review.castle.ok = 易位完成，选了安全的一侧！
+lesson.review.ep.ask = 用吃过路兵吃掉我的兵。
+lesson.review.ep.ok = 吃过路兵！你记住了。
+lesson.review.mate.ask = 一步将死我。
+lesson.review.mate.ok = 将死！复习完成。
 
 # ---- Chapter 11: real games (rating, clock, touch-move, scoresheet, manners) ------------------------------------
 lesson.talk.rules = 现在你已经掌握了国际象棋的所有规则。干得好！
-lesson.talk.real = 我来告诉你正式对局是怎么下的。
-lesson.talk.elo = 棋手都有等级分，也叫Elo分。赢棋会涨，输棋会降。
-lesson.talk.elo_gap = 赢了更强的对手，得分更多；输给更弱的对手，扣分更多。
-lesson.talk.elo_start = 下满五盘计分对局后，你的等级分才会显示。教练对局是练习，不计分。
-lesson.talk.clock = 这是{@}棋钟。双方各有自己的用时，只在轮到自己时计时。
-lesson.talk.press = 走完棋后，用走棋的那只手按钟。这样我的钟就开始走了。
-lesson.talk.flag = 如果你的时间用完，你就输了，除非我根本不可能将死你。
-lesson.talk.increment = “5+3”就是每方五分钟，每走一步再加三秒。
-lesson.talk.speeds = 用时短的对局叫超快棋，长一些的叫快棋，最长的叫慢棋。
-lesson.talk.no_clock = 跟我下棋不用棋钟。你想多久都可以。
-lesson.talk.touch = 在正式对局中，你摸了自己的哪个棋子，就必须走哪个。
-lesson.talk.touch_mine = 如果你摸了我的棋子，只要能吃，就必须吃掉它。
-lesson.talk.adjust = 想摆正棋子而不走它，要先说“我摆正”。
-lesson.talk.release = 棋子放到新的格子上一松手，这步棋就算走完了。
-lesson.talk.sheet = 比赛中，双方都要把每步棋写在{@}对局记录表上。
-lesson.talk.notation = 记谱时写棋子名和格子，比如{move:letters}。兵只写格子。
-lesson.talk.robot = 你的机器人会替你记谱。快棋和超快棋不要求记谱。
+lesson.talk.real = 我来告诉你，我们的对局是怎么进行的。
+lesson.talk.no_clock = 跟我下棋没有棋钟，也不计等级分。你想多久都可以。
+lesson.talk.touch = 摸到的棋子就必须走，所以先看，再摸。
 lesson.talk.handshake = 对局开始和结束时都要握手，意思是：一盘好棋，谢谢你。
 lesson.talk.polite = 无论输赢都要有礼貌，对手思考时绝不要打扰。
-lesson.talk.tips = 下棋三个诀窍：{@}控制中心，{@2}出动马和象，{@3}尽早王车易位。
-lesson.talk.next = 准备好了就选“入门第一步”。我会下得温和，你每次出错我都帮你。
+lesson.talk.help = 在我们的对局中，我会帮你。你的棋子被攻击或无人保护时，我会告诉你。
+lesson.talk.help_back = 出现大错后，我会告诉你原因，并提议让你悔棋。
+lesson.talk.help_skip = 如果我话太多，按空格键：我就会停下。
+lesson.talk.next = 准备好了就下“入门第一步”。我会下得温和。
 lesson.talk.welcome = 欢迎来到国际象棋的世界！我们握个手吧。

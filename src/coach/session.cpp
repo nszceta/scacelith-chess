@@ -39,11 +39,12 @@ constexpr float kA12Wait = 4.0f;          // ... and for A1 / A2
 constexpr float kVerifyWait = 6.0f;       // ... and for the searches confirming a reason's sequence
 constexpr float kCoachRemarkWait = 1.5f;  // the coach's remarks wait this long for A0
 constexpr float kTakeYourTime = 60.0f;    // "Take your time." after this long without a move (levels 1-3)
+constexpr float kThreatWait = 15.0f;     // the question about the coach's threat is answered after this long without a move (levels 1-2)
 constexpr float kFiller = 6.0f;           // a filler once the engine holds the coach's move this long
 constexpr int kMistakeEncourageGap = 6;   // human moves between two "after a mistake" encouragements
 constexpr int kBehindCp = -300;           // "behind": below -3 pawns for the player...
 constexpr int kBehindMoves = 3;           // ... for this many human moves in a row (once per game)
-constexpr int kWellMoves = 4;             // "playing well": this many Best/Excellent moves in a row...
+constexpr int kWellMoves = 4;             // "playing well": this many Best/Excellent moves in a row, or one move that answers my threat...
 constexpr int kWellGap = 8;               // ... spaced by this many human moves
 constexpr size_t kCacheRoots = 32;
 const char* const kAccuracyExplain = "appraisal.num.acc_explain.b3";
@@ -120,6 +121,7 @@ struct Session::Impl {
         int turnPly = -1;             // plies when the current human turn began (-1: none)
         float turnTime = 0.0f;
         bool tookTime = false;
+        float askWait = 0.0f;         // quiet seconds since the coach asked about its threat (coachMoved)
         // The coach's last move: its remarks wait for A0.
         int coachMovedPly = -1;
         float coachMovedWait = 0.0f;
@@ -167,6 +169,7 @@ struct Session::Impl {
         bool done = false;            // finished()
         int suggested = 0;
         std::string practise;         // suggestedChallenge(): the set for the appraisal's improvement theme
+        std::string practiseTheme;    // practiseTheme(): that theme (exTypeName), "" with no set
         // The lesson.
         int chapter = 0;
         uint64_t chapterScript = 0;
@@ -186,6 +189,15 @@ struct Session::Impl {
         int takebackTo = -1;          // a takeback asked of the stage: the game goes back to this many plies
         // A challenge (run).
         bool challenge = false;
+        // A retry of the critical position (SessionConfig::retryBest), or the one a game's end card offers.
+        bool retry = false;
+        std::string retryBest;
+        bool retryJudged = false;     // the player's move was reviewed: its verdict waits for the table
+        bool retryDone = false, retryFound = false;
+        int retryMisses = 0;
+        PlyVerdict retryVerdict;
+        uint64_t retryScript = 0;
+        RetryPoint retryPoint;
     };
 
     SessionConfig config;
@@ -409,6 +421,14 @@ struct Session::Impl {
     void buildReview(const chess::Game& game) {
         Review r = reviewer.review(reviewInput(game));
         appraisal.add(r);
+        if (g.retry) {
+            // The review judges the move; the retry speaks for itself (found, again, the better move
+            // shown): a game's explanation, demonstration or better-move remark would pre-empt it.
+            g.retryVerdict = r.verdict;
+            g.retryJudged = true;
+            r.script.clear();
+            r.offersTakeback = false;
+        }
         g.lastClass = r.verdict.cls;
         if (r.offersTakeback) g.offerPly = r.verdict.ply;
         g.yourMoveAfterCoach = explainsWithoutOffer(r);
@@ -438,7 +458,9 @@ struct Session::Impl {
         case MoveClass::Unjudged: break;
         default: g.wellRun = 0; break;
         }
-        if (g.wellRun >= kWellMoves && moves - g.lastWell >= kWellGap && r.script.empty()) {
+        // "You check my threats": said when the move just dealt with the coach's threat (nothing else
+        // was said about it), or after a run of best moves.
+        if ((g.wellRun >= kWellMoves || r.answeredThreat) && moves - g.lastWell >= kWellGap && r.script.empty()) {
             play(encouragementScript(Encouragement::PlayingWell, ply));
             g.lastWell = moves;
             g.wellRun = 0;
@@ -571,6 +593,8 @@ struct Session::Impl {
         g.coachMovedPly = -1;
         g.turnPly = -1;
         g.yourMoveAfterCoach = false;
+        g.askWait = 0.0f;
+        reviewer.closeThreatQuestion();
         if (g.offerPly >= int(n)) g.offerPly = -1;
     }
 
@@ -605,10 +629,12 @@ struct Session::Impl {
             } else if ((a0 && (g.threatKey.empty() || g.threatDone)) || g.coachMovedWait >= kCoachRemarkWait) {
                 play(reviewer.coachMoved(game, a0 && a0->ok ? a0 : nullptr, g.threatDone && g.threat.ok ? &g.threat : nullptr));
                 g.coachMovedPly = -1;
+                g.askWait = 0.0f;
             }
         }
 
         updateReview(game, dt);
+        updateRetry(game);
 
         if (g.announcerWaiting && director.idle() && g.review == ReviewState::None && !g.over)
             announceOpenings(game, true);
@@ -621,6 +647,11 @@ struct Session::Impl {
             if (g.level <= 3 && config.takeYourTime && !g.tookTime && g.turnTime >= kTakeYourTime && director.idle()) {
                 play(takeYourTimeScript(int(n) - 1));
                 g.tookTime = true;
+            }
+            // The coach asked whether the player sees its threat: a quiet while, and it says what it is.
+            if (reviewer.threatAsked()) {
+                if (director.idle()) g.askWait += dt;
+                if (g.askWait >= kThreatWait) play(reviewer.threatReveal(game));
             }
         }
         if (!g.over && !humanTurn && g.thinking && coachMayMove()) {
@@ -646,8 +677,40 @@ struct Session::Impl {
     }
 
     bool coachMayMove() const {
+        if (g.retry) return false;   // the coach only watches the player look for the move
         if (g.level == 0 || g.challenge) return true;
         return g.review == ReviewState::None && !director.offerOpen() && g.takebackTo < 0;
+    }
+
+    // A retry of the critical position: the review of the player's move has been said (the director
+    // is idle), and what it found decides. A move that is no mistake ends it; a mistake is taken back,
+    // the first time with a word to look again, the second with the better move shown.
+    void updateRetry(const chess::Game& game) {
+        if (!g.retry || g.retryDone || !g.retryJudged || g.review != ReviewState::None || !director.idle()) return;
+        g.retryJudged = false;
+        const PlyVerdict& v = g.retryVerdict;
+        const bool mistake = v.cls == MoveClass::Mistake || v.cls == MoveClass::Blunder || v.cls == MoveClass::Unjudged;
+        if (v.uci == g.retryBest || !mistake) {
+            g.retryFound = g.retryDone = true;
+            play(reviewer.positionRetry(game, g.retryBest, Reviewer::RetryStep::Found));
+            g.retryScript = director.lastScript();
+            return;
+        }
+        // The player's move and the coach's reply held back by the table go back by hand.
+        const size_t n = game.moves().size();
+        director.clear();
+        stage->takeBack(1);
+        g.takebackTo = int(n) - 1;
+        chess::Game after = game;
+        if (after.moves().size() == n && n > 0) after.undo(1);
+        appraisal.truncate(after.moves().size());
+        cancelBeyond(after, after.moves().size());
+        g.yourMoveAfterCoach = false;
+        g.turnPly = -1;   // the human's turn again: A0 comes from the cache
+        const bool reveal = ++g.retryMisses >= 2;
+        play(reviewer.positionRetry(after, g.retryBest, reveal ? Reviewer::RetryStep::Reveal : Reviewer::RetryStep::Again));
+        g.retryScript = director.lastScript();
+        g.retryDone = reveal;
     }
 
     void gameOver(const chess::Game& game, bool humanResigned) {
@@ -705,26 +768,37 @@ struct Session::Impl {
     void handshakeDone(const chess::Game& game) {
         if (g.handshakeDone) return;
         g.handshakeDone = true;
-        if (g.level == 0 || g.challenge) {
+        if (g.level == 0 || g.challenge || g.retry) {   // nothing is appraised or recorded
             g.done = true;
             return;
         }
         for (const Job& j : g.jobs) analyst->cancelAnalysis(j.id);
         g.jobs.clear();
         const AppraisalStats st = appraisal.stats(game);
-        history.push_back(GameRecord{g.level, st.result, st.human.accuracy});
+        g.retryPoint = appraisal.retryPoint(game);
+        AppraisalContext ctx;
+        // The themes of the last two games before this one: naming one again changes the wording.
+        for (size_t i = history.size(), seen = 0; i-- > 0 && seen < 2; ++seen)
+            if (!history[i].theme.empty()) ctx.recentThemes.push_back(history[i].theme);
+        GameRecord rec{g.level, st.result, st.human.accuracy};
+        if (st.human.judged > 0) rec.blunders = st.firstTryBlunders;   // no judged move of the player: unknown (-1)
+        rec.markers = config.dangerMarkers;
+        history.push_back(rec);
         const int sug = suggestLevel(g.level, history);
         g.suggested = sug != g.level ? sug : 0;
-        AppraisalContext ctx;
         ctx.humanResigned = g.resigned;
         ctx.explainAccuracy = !accuracyExplained;
         ctx.opening = openingRef(game, &ctx.outOfBookMove);
         ctx.suggestedLevel = sug;
         ExType improvement = ExType::None;
         const Script s = appraisal.script(game, ctx, &improvement);
+        if (improvement != ExType::None) history.back().theme = exTypeName(improvement);
         // Levels 1-3: the challenge set that practises the theme the appraisal names.
         const std::string set = practiceChallenge(improvement);
-        if (g.level <= 3 && !set.empty() && ChallengeBook::shared().find(set)) g.practise = set;
+        if (g.level <= 3 && !set.empty() && ChallengeBook::shared().find(set)) {
+            g.practise = set;
+            g.practiseTheme = exTypeName(improvement);
+        }
         g.explainPending = hasKey(s, kAccuracyExplain);
         if (s.empty()) {
             g.done = true;
@@ -874,7 +948,8 @@ void Session::start(Stage& stage, Analyst& analyst, const chess::Game& game, con
         d.director.reset(&stage, d.config.director);
         if (!d.lesson) d.lesson.reset(new Lesson());   // why a move is illegal
         if (!d.run) d.run.reset(new ChallengeRun());
-        d.run->start(*ch, d.director, stage, analyst, config.challengePosition);
+        d.run->start(*ch, d.director, stage, analyst, config.challengePosition,
+                     themeFromName(config.practiseTheme) != ExType::None ? config.practiseTheme : std::string());
         return;
     }
     d.director.reset(&stage, d.config.director);
@@ -883,18 +958,30 @@ void Session::start(Stage& stage, Analyst& analyst, const chess::Game& game, con
         if (!d.lesson) d.lesson.reset(new Lesson());
         const int chapters = int(d.lesson->chapters().size());
         const int chapter = std::clamp(config.lessonChapter, 0, chapters - 1);
-        if (chapter > 0) d.play(lessonResumeScript(*d.lesson, chapter));
+        if (chapter > 0)
+            d.play(config.lessonChosen ? lessonStartScript(*d.lesson, chapter) : lessonResumeScript(*d.lesson, chapter));
         d.startChapter(chapter);
         return;
     }
-    d.reviewer.reset(d.g.level, d.g.human, config.offersEnabled);
+    const bool retry = !config.retryBest.empty() && d.g.level <= 3;
+    d.reviewer.reset(d.g.level, d.g.human, config.offersEnabled && !retry);   // a retry takes moves back itself
     d.appraisal.reset(d.g.level, d.g.human);
     d.announcer.newGame();
     d.announcer.setLevel(d.g.level);
     d.announcer.setHumanColor(d.g.human);
     d.announcer.setLanguages(config.director.uiLanguage, speechLanguage(config.director.uiLanguage));
     if (!game.moves().empty()) d.announcer.catchUp(game);
-    d.play(greetingScript(d.g.level, d.g.human, config.introduceLevel));
+    if (retry) {
+        d.g.retry = true;
+        d.g.retryBest = config.retryBest;
+        d.play(d.reviewer.positionRetry(game, config.retryBest, Reviewer::RetryStep::Start));
+        return;
+    }
+    // Levels 1-3 greet with the theme the last game's appraisal named, when there was one.
+    std::string lastTheme;
+    if (d.g.level <= 3 && !config.history.empty() && themeFromName(config.history.back().theme) != ExType::None)
+        lastTheme = config.history.back().theme;
+    d.play(greetingScript(d.g.level, d.g.human, config.introduceLevel, config.firstAfterLesson, lastTheme));
     d.g.chatScripts.push_back(d.director.lastScript());
 }
 
@@ -936,6 +1023,18 @@ void Session::onPlayerActive() {
     else if (d.director.offerOpen()) d.answerOffer(nullptr, false, true);   // touching a piece: play on
 }
 
+void Session::onPieceTouched(const chess::Game& game, chess::Square from) {
+    Impl& d = *d_;
+    onPlayerActive();
+    if (!d.g.started || d.g.challenge || d.g.level == 0 || d.g.over || !d.reviewer.threatAsked()) return;
+    d.play(d.reviewer.threatReveal(game, from));
+}
+
+bool Session::threatQuestionOpen() const {
+    const Impl& d = *d_;
+    return d.g.started && !d.g.challenge && d.g.level > 0 && d.reviewer.threatAsked();
+}
+
 void Session::onIllegalAttempt(const chess::Game& game, chess::Square from, chess::Square to) {
     Impl& d = *d_;
     if (!d.g.started || (d.g.level != 0 && !d.g.challenge) || d.director.pending(d.g.illegalScript)) return;
@@ -955,7 +1054,8 @@ void Session::onOfferAnswer(const chess::Game& game, bool accept) {
 
 bool Session::canTakeBack(const chess::Game& game) const {
     const Impl& d = *d_;
-    return d.g.started && d.g.level > 0 && !d.g.challenge && !d.g.over && !game.isOver() && d.lastHumanPly(game) >= 0;
+    return d.g.started && d.g.level > 0 && !d.g.challenge && !d.g.retry && !d.g.over && !game.isOver() &&
+           d.lastHumanPly(game) >= 0;
 }
 
 void Session::onTakeBackRequested(const chess::Game& game) {
@@ -1006,6 +1106,9 @@ void Session::onCoachThinking(float seconds) {
 
 bool Session::coachMayMove() const { return d_->coachMayMove(); }
 
+const RetryPoint& Session::retryPoint() const { return d_->g.retryPoint; }
+bool Session::retryFound() const { return d_->g.retryFound; }
+
 bool Session::playerMayMove(const chess::Game& game) const {
     const Impl& d = *d_;
     if (!d.g.started) return false;
@@ -1013,6 +1116,7 @@ bool Session::playerMayMove(const chess::Game& game) const {
     if (d.g.level == 0)
         return d.g.react == Impl::React::None && game.position().sideToMove() == chess::White && d.director.waitingMove() &&
                !d.director.pending(d.g.reactDemo);
+    if (d.g.retry && d.g.retryDone) return false;
     return !d.g.over && !game.isOver() && game.position().sideToMove() == d.g.human && !d.director.offerOpen();
 }
 
@@ -1021,6 +1125,7 @@ bool Session::handshakeWanted() const {
     if (!d.g.started || d.g.handshakeDone) return false;
     if (d.g.challenge) return d.run->finished();
     if (d.g.level == 0) return d.g.lessonDone && !d.director.pending(d.g.chapterScript);
+    if (d.g.retry) return d.g.retryDone && !d.director.pending(d.g.retryScript);
     return d.g.endScript != 0 && !d.director.pending(d.g.endScript);
 }
 
@@ -1030,6 +1135,7 @@ void Session::onHandshakeDone(const chess::Game& game) {
 
 bool Session::finished() const {
     const Impl& d = *d_;
+    if (d.g.retry) return d.g.retryDone && !d.director.pending(d.g.retryScript);
     if (!d.g.handshakeDone) return false;
     return d.g.done || !d.director.pending(d.g.appraisalScript);
 }
@@ -1050,6 +1156,7 @@ const std::vector<GameRecord>& Session::history() const { return d_->history; }
 bool Session::accuracyExplained() const { return d_->accuracyExplained; }
 int Session::suggestedLevel() const { return d_->g.suggested; }
 const std::string& Session::suggestedChallenge() const { return d_->g.practise; }
+const std::string& Session::practiseTheme() const { return d_->g.practiseTheme; }
 int Session::lessonChapter() const { return d_->g.lessonDone ? 0 : d_->g.chapter; }
 bool Session::lessonCompleted() const { return d_->g.lessonDone; }
 bool Session::challengeMode() const { return d_->g.challenge; }

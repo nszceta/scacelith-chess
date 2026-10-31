@@ -16,6 +16,9 @@
 # The player always has the white pieces.
 
 # ---- The start of a challenge: what it trains ({n:position}: how many positions) ------------------
+ch.practise = 来自你上一盘：{theme}。这组题就是为此准备的。
+ch.practise.2 = 你上一盘有一点需要改进：{theme}。我们来练习。
+ch.practise.3 = 上一盘的提示是：{theme}。来做些练习。
 ch.intro.mate1 = 一步杀。一共{n:position}，每次只要一步就能将死。把每一步将军都看一遍。
 ch.intro.mate2 = 两步杀。一共{n:position}：你的第一步要让我无法防守，然后将死我。
 ch.intro.mate3 = 三步杀。一共{n:position}。将军、吃子和威胁：每一步都要算出我的最佳应着。

@@ -854,6 +854,12 @@ tip.centre.b2 = Cīnies par centru: tādi lauciņi kā {sq} ir svarīgi.
 tip.centre.b2.2 = Tu atdod man centru. Paskaties uz {sq}.
 tip.centre.b3 = Tu necīnies par centru; lauciņš {sq} ir mans.
 tip.centre.b3.2 = Cīnies par centru ap lauciņu {sq}.
+# A reminder once per game at levels 1-2 when no knight or bishop has left its home square by the
+# player's fifth move ({your} = a knight to start with).
+tip.develop.b1 = Tavi zirgi un laidņi vēl ir mājās. Izved, piemēram, {your:acc}.
+tip.develop.b1.2 = Laiks attīstīties! Tavas vieglās figūras vēl ir mājās. Pamēģini ar {your:acc}.
+tip.develop.b2 = Neviena tava vieglā figūra vēl nav gājusi. Attīsti {your:acc} un pārējās figūras.
+tip.develop.b2.2 = Tavas figūras vēl guļ. Sāc ar {your:acc}.
 # Endgame technique tips.
 tip.mate_technique.b1 = Kad man ir palicis tikai karalis, piespied to pie malas un piesaki matu.
 tip.mate_technique.b1.2 = Padoms: spied manu karali uz malu. Turi arī savu karali tuvumā.
@@ -930,12 +936,49 @@ praise.excellent.b4.2 = Lieliski.
 praise.excellent.b4.3 = Labi, {move} ir precīzs.
 praise.castle.b1 = Labi! Tu veici rokādi. Tavam karalim tagad ir drošāk.
 praise.castle.b1.2 = Jauka rokāde! Tavs karalis ir paslēpts.
+praise.castle.b2 = Labi, tu veici rokādi. Karalis ir drošībā, un tornis iesaistās spēlē.
+praise.castle.b2.2 = Rokāde: drošs karalis un tornis spēlē. Labi darīts.
+praise.castle.b3 = Labi: rokāde veikta, karalis drošībā.
+praise.castle.b3.2 = Agra rokāde. Saprātīgi.
 praise.saved.b1 = Labi! Tu izglābi savu figūru.
 praise.saved.b1.2 = Labi darīts, tu aizvedi to drošībā.
+praise.saved.b2 = Labi, šai figūrai uzbruka, un tu to aizvedi prom.
+praise.saved.b2.2 = Labi pamanīts. Tu izglābi figūru.
+praise.saved.b3 = Labi: uzbrukto figūru tu aizvedi drošībā.
+praise.saved.b3.2 = Labi pamanīts. Figūra bija briesmās.
+# A habit named: the player's move dealt with what the coach attacked (the coach's last threat).
+praise.check_threat.b1 = Labi! Tu pamanīji, kam uzbrūk mans gājiens, un to novērsi.
+praise.check_threat.b1.2 = Labi darīts! Pirms gājiena tu pārbaudīji manu draudu.
+praise.check_threat.b1.3 = Jā! Tu pārbaudi, kam es uzbrūku. Tas ir lielisks ieradums.
+praise.check_threat.b2 = Labi: tu ieraudzīji manu draudu un atbildēji uz to.
+praise.check_threat.b2.2 = Tu pārbaudīji, kam uzbrūk mans gājiens. Labs ieradums.
+praise.check_threat.b2.3 = Tas novērš manu draudu. Labi pamanīts.
+praise.protect.b1 = Labi! {your} bija apdraudēt{your:adj}, un tagad tā ir aizsargāt{your:adj}.
+praise.protect.b1.2 = Labi darīts! Tu aizsargāji {your:acc}, pirms es varēju {your:pron_acc} paņemt.
+praise.protect.b2 = Labi: {your} bija apdraudēt{your:adj}, un tu {your:pron_acc} aizsargāji.
+praise.protect.b2.2 = Labi pamanīts. {your} tagad ir drošībā.
+praise.develop.b1 = Labi! Tu izvedi figūru spēlē. Tur figūras strādā vairāk.
+praise.develop.b1.2 = Jauki! Agra figūru izvešana ir labs ieradums.
+praise.develop.b2 = Labi, tu attīstīji figūru. Izved arī pārējās.
+praise.develop.b2.2 = Labi darīts: attīsti figūras laikus.
 praise.book.b1 = Labi, tas ir labi zināms atklātnes gājiens.
 praise.book.b1.2 = Jauki, tā sāk arī spēcīgi spēlētāji.
 
 # ---- The coach's own threats (levels 1-2, before the player moves) ------------------------------
+# The first threat of a game at levels 1-2 is asked about first, nothing pointed at: the player is
+# to look at the board for what my last move attacks.
+threat.ask.b1 = Mans pēdējais gājiens radīja draudus. Vai redzi, kura tava figūra ir briesmās?
+threat.ask.b1.2 = Paskaties uz galdiņu. Mans pēdējais gājiens uzbrūk kaut kam tavējam. Vai vari to atrast?
+threat.ask.b1.3 = Pagaidi, pirms gājiena: mans pēdējais gājiens ir drauds. Kura tava figūra ir briesmās?
+threat.ask.b2 = Mans pēdējais gājiens radīja draudus. Vai redzi, kādus?
+threat.ask.b2.2 = Paskaties: kam uzbrūk mans pēdējais gājiens?
+threat.ask.b2.3 = Es tikko radīju draudus. Vai vari tos atrast?
+# The same when the threat is a checkmate.
+threat.ask_mate.b1 = Mans pēdējais gājiens draud tavam karalim. Vai redzi, ko es gribu darīt?
+threat.ask_mate.b1.2 = Uzmanies: es plānoju kaut ko lielu. Vai redzi, ko es gribu darīt?
+threat.ask_mate.b1.3 = Paskaties uz manu pēdējo gājienu. Es draudu ar kaut ko nopietnu. Vai to redzi?
+threat.ask_mate.b2 = Mans pēdējais gājiens ir nopietns drauds. Vai redzi, ko es gribu darīt?
+threat.ask_mate.b2.2 = Paskaties uz manu pēdējo gājienu: tas draud ar kaut ko lielu. Vai to redzi?
 # A mate threat ({sq} = where it would mate, pointed at at level 1; {my} = the piece).
 threat.mate.b1 = Uzmanīgi! Es draudu ar matu uz {sq}.
 threat.mate.b1.2 = Uzmanies: {my} grib iet uz {sq}. Tas būtu mats.
@@ -943,6 +986,9 @@ threat.mate.b1.3 = Paskaties uz {sq}. Ja es tur nokļūšu, būs mats!
 threat.mate.b2 = Uzmanīgi, es draudu ar matu.
 threat.mate.b2.2 = Uzmanies: uz {sq} ir mata draudi.
 threat.mate.b2.3 = Paskaties vērīgi: es draudu ar matu.
+threat.mate.b3 = Uzmanies, es draudu ar matu uz {sq}.
+threat.mate.b3.2 = Ir mata draudi: {my} grib iet uz {sq}.
+threat.mate.b3.3 = Uzmanies: es draudu ar matu.
 # A threat on a piece ({my} = my attacker, pointed at at level 1; {your} = the target, pointed at).
 threat.piece.b1 = Skaties: {my} uzbrūk {your:dat}.
 threat.piece.b1.2 = Uzmanīgi! {your:dat} uzbrūk {my}.
@@ -950,6 +996,21 @@ threat.piece.b1.3 = Uzmanies, {my} grib paņemt {your:acc}.
 threat.piece.b2 = Uzmanīgi ar {your:refl_acc}.
 threat.piece.b2.2 = {your} ir apdraudēt{your:adj}.
 threat.piece.b2.3 = Uzmani {your:refl_acc}.
+threat.piece.b3 = {my} uzbrūk {your:dat}, un, {your:pron_acc} paņemot, es iegūtu materiālu.
+threat.piece.b3.2 = {your} ir briesmās: {my} draud {your:pron_acc} paņemt.
+threat.piece.b3.3 = Uzmanies: mans pēdējais gājiens uzbrūk {your:dat}.
+# A fork the coach's move sets up (level 2): {my} on {sq} attacks {t1} and {t2}.
+threat.fork.b2 = {my} uz {sq} uzbrūk gan {t1:dat}, gan {t2:dat} vienlaikus. Tā ir dakša!
+threat.fork.b2.2 = Uzmanies, tā ir dakša: {my} uzbrūk gan {t1:dat}, gan {t2:dat}.
+threat.fork.b2.3 = {my} uzbrūk gan {t1:dat}, gan {t2:dat}. Glābt abus nebūs viegli.
+# A pin the coach's move sets up (level 2).
+threat.pin.b2 = {my} uz {sq} piesien {your:acc} pie {t1:gen}. Ja {your:pron} aiziet, es paņemu {t1:acc}.
+threat.pin.b2.2 = Uzmanies: {my} piesien {your:acc}. Ja {your:pron} kustas, es paņemu {t1:acc}.
+threat.pin.b2.3 = {your} ir piesiet{your:adj}: ja {your:pron} aiziet, {my} paņem {t1:acc}.
+# Level 3: the position has one good move only (the engine's two best moves are far apart).
+threat.only.b3 = Šī ir kritiska pozīcija: tikai viens gājiens ir patiešām labs. Nesteidzies.
+threat.only.b3.2 = Uzmanies, šeit ir tikai viens labs gājiens. Vispirms apskati visu.
+threat.only.b3.3 = Palēnini: šajā pozīcijā lielākā daļa gājienu ir kļūdaini.
 threat.punish.b1 = Mans pēdējais gājiens bija kļūda. Vai vari mani sodīt?
 threat.punish.b1.2 = Hmm, šķiet, es kļūdījos. Vai vari atrast manu kļūdu?
 
@@ -965,6 +1026,8 @@ tb.hint.mate_missed.b1 = Paskaties uz manu karali. Vai vari tam pieteikt matu?
 tb.hint.mate_missed.b1.2 = Vispirms izmēģini šahus. Varbūt ir mats!
 tb.hint.general.b1 = Nesteidzies un paskaties uz visu galdiņu.
 tb.hint.general.b1.2 = Mēģini atrast drošāku gājienu.
+tb.hint.b3 = Pārbaudi, kurām tavām figūrām uzbrūk mana atbilde.
+tb.hint.b3.2 = Paskaties, kam uzbruktu mana atbilde, pirms izdari gājienu.
 # The retry.
 tb.fixed.b1 = Daudz labāk!
 tb.fixed.b1.2 = Jā, tā ir labāk!
@@ -972,6 +1035,14 @@ tb.fixed.b1.3 = Labi, tā ir daudz labāk.
 tb.fixed = Tā ir labāk.
 tb.fixed.2 = Labāk.
 tb.fixed.3 = Labs labojums.
+# After a good retry of a move taken back for a fault with a named cause (levels 1-3), one line that
+# names the habit; {theme} is a phrase from appraisal.lang (theme.*), no full stop.
+tb.why.b1 = Atceries nākamajai reizei: {theme}.
+tb.why.b1.2 = Labs ieradums: {theme}.
+tb.why.b2 = Mācība: {theme}.
+tb.why.b2.2 = Kas palīdzēja: {theme}.
+tb.why.b3 = Vērts atcerēties: {theme}.
+tb.why.b3.2 = Ieradums, ko veidot: {theme}.
 tb.same = Atkal tas pats gājiens? Labi, paskatīsimies.
 tb.same.2 = Tev patīk šis gājiens. Izspēlēsim to.
 # The retry after a hint-only offer is the move the coach had in mind.
@@ -983,3 +1054,31 @@ tb.found.2 = Tieši tā, tas ir tas.
 # where the offer would have been).
 tb.none_left = Diemžēl šajā partijā gājienu atsaukt vairs nevar.
 tb.none_left.2 = Šajā partijā tu vairs nevari atsaukt gājienus.
+
+# ---- Trying the critical position again (levels 1-3) --------------------------------------------------
+# The end card's "Try that position again": the board is set to the position before the game's biggest
+# mistake and the player looks for a better move. {best} is the better move.
+retry.task.b1 = Atgriezīsimies pie tā brīža. Vai vari atrast labāku gājienu?
+retry.task.b1.2 = Lūk, pozīcija vēlreiz. Vai vari atrast labāku gājienu?
+retry.task.b2 = Šī ir pozīcija pirms tavas lielās kļūdas. Atrodi labāku gājienu.
+retry.task.b2.2 = Paskatīsimies uz to brīdi vēlreiz. Ko tu spēlētu tā vietā?
+retry.task.b3 = Šī ir pozīcija pirms kritiskā gājiena. Atrodi labāko gājienu.
+retry.task.b3.2 = Atpakaļ pie kritiskā brīža. Kurš gājiens ir labāks?
+retry.again.b1 = Ne šis. Paskaties vēlreiz.
+retry.again.b1.2 = Tas vēl nav tas. Mēģini vēlreiz.
+retry.again.b2 = Ne šis. Paskaties uz visu galdiņu.
+retry.again.b2.2 = Vēl ne. Mēģini citu gājienu.
+retry.again.b3 = Ne šis. Paskaties, ko darītu mana atbilde.
+retry.again.b3.2 = Vēl joprojām nav tas. Padomā par manu labāko atbildi.
+retry.found.b1 = Jā! Tas ir labāks gājiens. Labi darīts!
+retry.found.b1.2 = Tu to atradi! Tas ir daudz labāk.
+retry.found.b2 = Jā, tas der. Labi darīts.
+retry.found.b2.2 = Tā ir ideja. Labs darbs.
+retry.found.b3 = Pareizi, tas turas. Labi darīts.
+retry.found.b3.2 = Tieši tā. Labs atradums.
+retry.reveal.b1 = Lūk, labākais gājiens: {best}. Skaties.
+retry.reveal.b1.2 = Parādīšu: labāks bija {best}.
+retry.reveal.b2 = Labāks gājiens bija {best}. Skaties.
+retry.reveal.b2.2 = Lūk: {best}.
+retry.reveal.b3 = Labākais gājiens bija {best}.
+retry.reveal.b3.2 = {best} bija gājiens.
